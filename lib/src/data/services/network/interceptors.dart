@@ -6,7 +6,6 @@ import 'dart:io' as io;
 import 'package:dio/dio.dart';
 import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/data.dart';
-import 'package:money_invest_app/src/utils/helper_functions.dart';
 
 class ApiInterceptor extends QueuedInterceptorsWrapper {
   ApiInterceptor({
@@ -15,8 +14,10 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
     required this.dioClient,
     required String encryptionKey,
     required String decryptionKey,
-  }) : _encryption = AesEncryption.fromUtf8(key: encryptionKey),
-       _decryption = AesEncryption.fromUtf8(key: decryptionKey);
+    required String encryptionIvKey,
+    required String decryptionIvKey,
+  }) : _encryption = AesEncryption.fromUtf8(key: encryptionKey, iv: encryptionIvKey),
+       _decryption = AesEncryption.fromUtf8(key: decryptionKey, iv: decryptionIvKey);
 
   final bool logEnabled;
   final LocalStorageService localStorageService;
@@ -61,29 +62,37 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
   Object? _decryptResponseData(Object? responseData) {
     if (responseData is String) responseData = jsonDecode(responseData);
 
-    if (responseData is Map<String, dynamic>) {
-      String decrypted = _decryption.decrypt(CipherData.fromJson(responseData));
-      dynamic decryptedData = decrypted.isEmpty ? decrypted : jsonDecode(decrypted);
-      responseData = decryptedData;
-      if (logEnabled) _printResponse(responseData, 'Decrypted Data');
+    if (responseData is Map<String, dynamic> && responseData.containsKey('mac')) {
+      try {
+        String decrypted = _decryption.decrypt(CipherData.fromJson(responseData));
+        responseData = decrypted.isEmpty ? decrypted : jsonDecode(decrypted);
+        if (logEnabled) _printResponse(responseData, 'Decrypted Data');
+      } catch (_) {}
     }
     return responseData;
   }
 
+  void _invalidateSession() {
+    localStorageService.sessionToken = null;
+    localStorageService.refreshSessionToken = null;
+  }
+
+  DioException _invalidSessionError(DioException err) {
+    _invalidateSession();
+    return err.copyWith(error: const InvalidSessionException());
+  }
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    final LocalStorageService(:sessionToken, :userIdentifier) = localStorageService;
-    if (userIdentifier == null) {
-      localStorageService.userIdentifier ??= generateUserIdentifier();
-    }
-    options.headers['uid'] = userIdentifier;
+    final LocalStorageService(:sessionToken) = localStorageService;
     options.headers['type'] = 1;
     options.headers['timezone'] = DateTime.now().timeZoneName;
 
     if (sessionToken?.isNotEmpty ?? false) {
       options.headers[io.HttpHeaders.authorizationHeader] = 'Bearer $sessionToken';
     }
-    options.headers[io.HttpHeaders.acceptLanguageHeader] = localStorageService.languageCode ?? 'en';
+    options.headers['lang'] = localStorageService.languageCode ?? 'en';
+    // options.headers['env'] = 'test';
 
     _printRequest('$_titleSeparator Request $_titleSeparator');
     _printRequest('[${options.method.toUpperCase()}] ${options.uri}');
@@ -92,7 +101,11 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
     if (options.data is Map || options.data is Iterable || options.data is String) _printRequest(options.data, 'Data');
 
     if (options.contentType?.contains(Headers.jsonContentType) ?? false) {
-      options.data = _encryptRequestData(options.data);
+      if (options.headers['env'] == 'test') {
+        options.data = options.data;
+      } else {
+        options.data = _encryptRequestData(options.data);
+      }
     }
 
     super.onRequest(options, handler);
@@ -129,12 +142,20 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
       final sessionToken = localStorageService.sessionToken;
       final requestToken = err.requestOptions.headers[io.HttpHeaders.authorizationHeader]?.toString().split(' ').last;
       if (sessionToken == requestToken) {
+        final refreshToken = localStorageService.refreshSessionToken;
+        if (refreshToken == null || refreshToken.isEmpty) {
+          return super.onError(_invalidSessionError(err), handler);
+        }
         try {
-          localStorageService.sessionToken = await _refreshToken();
+          final data = await _refreshToken();
+          localStorageService.sessionToken = data['accessToken'] as String;
+          localStorageService.refreshSessionToken = data['refreshToken'] as String;
         } on DioException catch (error) {
           if (error.response?.statusCode case 401 || 409 || 404) {
-            return super.onError(err.copyWith(error: const InvalidSessionException()), handler);
+            return super.onError(_invalidSessionError(err), handler);
           }
+        } catch (_) {
+          return super.onError(_invalidSessionError(err), handler);
         }
       }
     }
@@ -142,18 +163,18 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
     super.onError(err, handler);
   }
 
-  Future<String> _refreshToken() async {
+  Future<dynamic> _refreshToken() async {
     final headers = {
-      io.HttpHeaders.authorizationHeader: 'Bearer ${localStorageService.sessionToken}',
+      io.HttpHeaders.authorizationHeader: 'Bearer ${localStorageService.refreshSessionToken}',
       io.HttpHeaders.acceptLanguageHeader: localStorageService.languageCode ?? 'en',
       io.HttpHeaders.contentTypeHeader: Headers.jsonContentType,
       io.HttpHeaders.acceptHeader: Headers.jsonContentType,
     };
-    final response = await dioClient.put<Map<String, dynamic>>(
-      '/user/auth/refresh-sessions',
+    final response = await dioClient.get<Map<String, dynamic>>(
+      '/user/auth/refresh-token',
       options: Options(headers: headers),
     );
     dynamic responseData = _decryptResponseData(response.data);
-    return responseData['data']['sessionToken'].toString();
+    return responseData['data'];
   }
 }

@@ -458,6 +458,286 @@ class AppLocalizations {
   String get loginButtonText {
     return Intl.message('Login', name: 'loginButtonText', desc: '', args: []);
   }
+
+  /// `Forgot Password`
+  String get forgotPasswordTitle {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email or phone number to reset your password`
+  String get forgotPasswordSubtitle {
+    return Intl.message(
+      'Enter your email or phone number to reset your password',
+      name: 'forgotPasswordSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continueButtonLabel {
+    return Intl.message(
+      'Continue',
+      name: 'continueButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP Verification`
+  String get otpVerificationTitle {
+    return Intl.message(
+      'OTP Verification',
+      name: 'otpVerificationTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter OTP`
+  String get enterOtpHint {
+    return Intl.message('Enter OTP', name: 'enterOtpHint', desc: '', args: []);
+  }
+
+  /// `Resend Code`
+  String get resendCode {
+    return Intl.message('Resend Code', name: 'resendCode', desc: '', args: []);
+  }
+
+  /// `Verify`
+  String get verifyButtonLabel {
+    return Intl.message(
+      'Verify',
+      name: 'verifyButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPasswordTitle {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPasswordTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your new password`
+  String get resetPasswordSubtitle {
+    return Intl.message(
+      'Please enter your new password',
+      name: 'resetPasswordSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPasswordHint {
+    return Intl.message(
+      'New Password',
+      name: 'newPasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPasswordHint {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPasswordButtonLabel {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPasswordButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Data Not Found`
+  String get dataNotFound {
+    return Intl.message(
+      'Data Not Found',
+      name: 'dataNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Whoops ... This information is not available for a moment`
+  String get whoopsThisInformationIsNotAvailableForAMoment {
+    return Intl.message(
+      'Whoops ... This information is not available for a moment',
+      name: 'whoopsThisInformationIsNotAvailableForAMoment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search country by name or code`
+  String get searchCountryByNameOrCode {
+    return Intl.message(
+      'Search country by name or code',
+      name: 'searchCountryByNameOrCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters`
+  String get errorPasswordInvalidLength {
+    return Intl.message(
+      'Password must be at least 8 characters',
+      name: 'errorPasswordInvalidLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter valid mobile number!`
+  String get errorMobileInvalidFormat {
+    return Intl.message(
+      'Please enter valid mobile number!',
+      name: 'errorMobileInvalidFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter email address or mobile!`
+  String get errorEmailMobileRequired {
+    return Intl.message(
+      'Please enter email address or mobile!',
+      name: 'errorEmailMobileRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password Successful`
+  String get resetPasswordSuccessTitle {
+    return Intl.message(
+      'Reset Password Successful',
+      name: 'resetPasswordSuccessTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been updated securely, You can now use your new password to log in.`
+  String get resetPasswordSuccessDescription {
+    return Intl.message(
+      'Your password has been updated securely, You can now use your new password to log in.',
+      name: 'resetPasswordSuccessDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your new password must be unique from those previously used.`
+  String get resetPasswordDesc {
+    return Intl.message(
+      'Your new password must be unique from those previously used.',
+      name: 'resetPasswordDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message('Success', name: 'success', desc: '', args: []);
+  }
+
+  /// `We’ve just sent you a 6 digit code to your email`
+  String get otpVerificationScreenDescriptionEmail {
+    return Intl.message(
+      'We’ve just sent you a 6 digit code to your email',
+      name: 'otpVerificationScreenDescriptionEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We’ve just sent you a 6 digit code to your mobile number`
+  String get otpVerificationScreenDescriptionMobile {
+    return Intl.message(
+      'We’ve just sent you a 6 digit code to your mobile number',
+      name: 'otpVerificationScreenDescriptionMobile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP verified successfully`
+  String get otpVerifiedSuccessfully {
+    return Intl.message(
+      'OTP verified successfully',
+      name: 'otpVerifiedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Didn’t receive code?`
+  String get didntReceivedCode {
+    return Intl.message(
+      'Didn’t receive code?',
+      name: 'didntReceivedCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend in `
+  String get resendIn {
+    return Intl.message('Resend in ', name: 'resendIn', desc: '', args: []);
+  }
+
+  /// `Resend Code`
+  String get resendCodeLink {
+    return Intl.message(
+      'Resend Code',
+      name: 'resendCodeLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{seconds} seconds`
+  String resendTimer(Object seconds) {
+    return Intl.message(
+      '$seconds seconds',
+      name: 'resendTimer',
+      desc: '',
+      args: [seconds],
+    );
+  }
+
+  /// `Successfully resent code!`
+  String get successfullyResentCode {
+    return Intl.message(
+      'Successfully resent code!',
+      name: 'successfullyResentCode',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

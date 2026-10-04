@@ -44,7 +44,10 @@ class TextButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForeground 
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(_colorScheme.primaryFixed);
+  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
+
+  @override
+  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(_colorScheme.onSurface);
 
   @override
   WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.primary);

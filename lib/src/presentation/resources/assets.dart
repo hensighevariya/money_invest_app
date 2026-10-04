@@ -1,12 +1,15 @@
 abstract interface class SvgIcons {
   static const _path = 'assets/icons/svg_icon/';
 
-  static const String arrowDown = '${_path}arrow-down.svg';
-  static const String arrowLeft = '${_path}arrow-left.svg';
-  static const String arrowRight = '${_path}arrow-right.svg';
+  static const String arrowDown = '${_path}arrow_down.svg';
+  static const String arrowLeft = '${_path}arrow_left.svg';
+  static const String arrowRight = '${_path}arrow_right.svg';
   static const String closeCircle = '${_path}close-circle.svg';
   static const String icnEye = '${_path}eye.svg';
   static const String icnEyeSlash = '${_path}eye-slash.svg';
+  static const String icnEmail = '${_path}email.svg';
+  static const String icnLock = '${_path}lock.svg';
+  static const String icnEmptyFile = '${_path}empty_file.svg';
 }
 
 abstract interface class AppImages {
@@ -85,4 +88,7 @@ abstract interface class LottieFiles {
   static const String deleteWatchlist = '${_path}delete-watchlist.json';
   static const String notifications = '${_path}notifications.json';
   static const String download = '${_path}download.json';
+  static const String forgotPassword = '${_path}forgot_password.json';
+  static const String success = '${_path}success.json';
+  static const String otpVerification = '${_path}otp_verification.json';
 }

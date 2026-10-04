@@ -20,7 +20,7 @@ class ElevatedButtonDefaultStyle extends ButtonStyle with _ButtonExpandedForegro
 
   @override
   WidgetStateProperty<Color?>? get backgroundColor =>
-      _ElevatedButtonColor(colorScheme.primary, colorScheme.onSurfaceVariant.withValues(alpha: 0.25));
+      _ElevatedButtonColor(colorScheme.primary, colorScheme.surfaceContainerHigh.applyOpacity(0.5));
 
   @override
   WidgetStateProperty<Color?>? get foregroundColor =>
@@ -54,9 +54,11 @@ class _ElevatedButtonColor extends WidgetStateProperty<Color?> with Diagnosticab
 }
 
 class ElevatedButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForeground {
-  ElevatedButtonPrimaryStyle(this.context, {super.visualDensity, this.expanded = true});
+  ElevatedButtonPrimaryStyle(this.context, {super.visualDensity, this.expanded = true, this.buttonColor});
 
   final BuildContext context;
+  final Color? buttonColor;
+
   @override
   final bool expanded;
 
@@ -64,22 +66,38 @@ class ElevatedButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForegro
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get backgroundColor => _ElevatedButtonColor(_colorScheme.primary);
+  WidgetStateProperty<EdgeInsetsGeometry?>? get padding =>
+      const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: Spacing.normal, horizontal: Spacing.xLarge));
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _ElevatedButtonColor(_colorScheme.onPrimary);
+  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.onPrimary);
+  WidgetStateProperty<Color?>? get backgroundColor => _ElevatedButtonColor(buttonColor ?? _colorScheme.primary, Colors.grey);
+
+  @override
+  WidgetStateProperty<Color?>? get foregroundColor => _ElevatedButtonColor(_colorScheme.onPrimary, Colors.white);
+
+  @override
+  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.error);
 
   @override
   WidgetStateProperty<Color?>? get iconColor => _ElevatedButtonColor(_colorScheme.onPrimary);
 }
 
 class ElevatedButtonSecondaryStyle extends ButtonStyle with _ButtonExpandedForeground {
-  ElevatedButtonSecondaryStyle(this.context, {super.visualDensity, this.expanded = true});
+  ElevatedButtonSecondaryStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = true,
+    this.borderColor,
+    this.buttonColor,
+  });
 
   final BuildContext context;
+  final Color? borderColor;
+
+  final Color? buttonColor;
   @override
   final bool expanded;
 
@@ -87,10 +105,22 @@ class ElevatedButtonSecondaryStyle extends ButtonStyle with _ButtonExpandedForeg
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get backgroundColor => _ElevatedButtonColor(_colorScheme.secondary);
+  WidgetStateProperty<EdgeInsetsGeometry?>? get padding =>
+      const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: Spacing.medium, horizontal: Spacing.normal));
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _ElevatedButtonColor(_colorScheme.onSecondary);
+  WidgetStateProperty<BorderSide?>? get side =>
+      WidgetStatePropertyAll(BorderSide(color: borderColor ?? _colorScheme.onSurfaceVariant, width: 1));
+
+  @override
+  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
+
+  @override
+  WidgetStateProperty<Color?>? get backgroundColor =>
+      _ElevatedButtonColor(buttonColor ?? _colorScheme.surfaceContainerHighest);
+
+  @override
+  WidgetStateProperty<Color?>? get foregroundColor => _ElevatedButtonColor(_colorScheme.onSurface);
 
   @override
   WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.onSecondary);
@@ -108,6 +138,13 @@ class ElevatedButtonErrorStyle extends ButtonStyle with _ButtonExpandedForegroun
 
   late final ThemeData _theme = Theme.of(context);
   late final ColorScheme _colorScheme = _theme.colorScheme;
+
+  @override
+  WidgetStateProperty<EdgeInsetsGeometry?>? get padding =>
+      const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: Spacing.medium, horizontal: Spacing.normal));
+
+  @override
+  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
 
   @override
   WidgetStateProperty<Color?>? get backgroundColor => _ElevatedButtonColor(_colorScheme.error);
@@ -133,7 +170,18 @@ class ElevatedButtonNeutralStyle extends ButtonStyle with _ButtonExpandedForegro
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get backgroundColor => _ElevatedButtonColor(_colorScheme.surfaceContainerHigh);
+  WidgetStateProperty<EdgeInsetsGeometry?>? get padding =>
+      const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: Spacing.medium, horizontal: Spacing.normal));
+
+  @override
+  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
+
+  @override
+  WidgetStateProperty<BorderSide?>? get side =>
+      WidgetStatePropertyAll(BorderSide(color: _colorScheme.onSecondaryContainer, width: 1));
+
+  @override
+  WidgetStateProperty<Color?>? get backgroundColor => _ElevatedButtonColor(_colorScheme.onPrimary);
 
   @override
   WidgetStateProperty<Color?>? get foregroundColor => _ElevatedButtonColor(_colorScheme.onSurface);

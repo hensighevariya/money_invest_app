@@ -48,8 +48,65 @@ class ApiClientService {
     );
   }
 
-  Future<void> userLogout() async {
-    await _dioClient.put<dynamic>('/user/auth/log-out');
+  Future<void> userLogout(Map<String, dynamic> request) async {
+    await _dioClient.patch<dynamic>('/user/auth/log-out', queryParameters: request);
+  }
+
+  ///forgot-password
+  Future<ForgotPasswordResponse> forgotPassword(Map<String, dynamic> request) async {
+    final response = await _dioClient.post<dynamic>('/user/auth/forgot-password', data: request);
+    return _parseResponseData(response, (responseData) {
+      return ForgotPasswordResponse.fromJson(responseData as Map<String, dynamic>);
+    });
+  }
+
+  ///forgot-verify-otp
+  Future<ForgotPasswordVerifyResponse> verifyForgotPasswordOtp(VerifyOtpRequest request) async {
+    final response = await _dioClient.post<dynamic>('/user/auth/verify-otp', data: request.toJson());
+    return _parseResponseData(
+      response,
+      (responseData) => ForgotPasswordVerifyResponse.fromJson(responseData as Map<String, dynamic>),
+    );
+  }
+
+  Future<ForgotPasswordVerifyResponse> resendOtp(VerifyOtpRequest request) async {
+    final response = await _dioClient.post<dynamic>('/user/auth/resend-otp', data: request.toJson());
+    return _parseResponseData(
+      response,
+      (responseData) => ForgotPasswordVerifyResponse.fromJson(responseData as Map<String, dynamic>),
+    );
+  }
+
+  Future<void> resetPassword(ResetPasswordRequest request) async {
+    await _dioClient.post<dynamic>('/user/auth/reset-password', data: request.toJson());
+  }
+
+  /// Send OTP to old (current) credential before changing it.
+  /// [type]: 1 = Mobile, 2 = Email
+  Future<ForgotPasswordVerifyResponse> sendOtpToOldCredential(int type) async {
+    final response = await _dioClient.post<dynamic>('/user/send-otp-old-cred', data: {'type': type});
+    return _parseResponseData(
+      response,
+      (responseData) => ForgotPasswordVerifyResponse.fromJson(responseData as Map<String, dynamic>),
+    );
+  }
+
+  /// Change credential (email or mobile) after old-cred OTP is verified.
+  /// [type]: 1 = Mobile, 2 = Email
+  Future<ForgotPasswordVerifyResponse> changeCredential({
+    required int type,
+    required String token,
+    String? mobile,
+    String? email,
+  }) async {
+    final Map<String, dynamic> data = {'type': type, 'token': token};
+    if (mobile != null) data['mobile'] = mobile;
+    if (email != null) data['email'] = email;
+    final response = await _dioClient.post<dynamic>('/user/change-credential', data: data);
+    return _parseResponseData(
+      response,
+      (responseData) => ForgotPasswordVerifyResponse.fromJson(responseData as Map<String, dynamic>),
+    );
   }
 
   //endregion ---------------------------------------- Auth ----------------------------------------
@@ -71,17 +128,15 @@ class ApiClientService {
 
   //endregion ---------------------------------------- User ----------------------------------------
 
-
   // region ---------------------------------------- Common ----------------------------------------
 
   Future<AppVersionData> getVersionData(String platform) async {
     final response = await _dioClient.get<dynamic>('/user/auth/get-version', queryParameters: {'platform': platform});
     return _parseResponseData(
       response,
-          (responseData) => AppVersionData.fromJson(responseData as Map<String, dynamic>),
+      (responseData) => AppVersionData.fromJson(responseData as Map<String, dynamic>),
     );
   }
 
-//endregion ---------------------------------------- Common ----------------------------------------
-
+  //endregion ---------------------------------------- Common ----------------------------------------
 }

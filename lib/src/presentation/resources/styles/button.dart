@@ -1,11 +1,13 @@
-import 'package:adaptive_layout/adaptive_layout.dart';
+import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../constraints.dart';
+import 'package:money_invest_app/src/presentation/resources/constraints.dart';
+import 'package:money_invest_app/src/presentation/resources/size.dart';
 
 part 'button/elevated_button.dart';
+
 part 'button/outlined_button.dart';
+
 part 'button/text_button.dart';
 
 mixin _ButtonExpandedForeground on ButtonStyle {

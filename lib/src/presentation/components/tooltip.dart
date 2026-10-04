@@ -299,7 +299,7 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
     assert(debugCheckHasOverlay(context));
     final TooltipThemeData tooltipTheme = TooltipTheme.of(context);
 
-    _height = tooltipTheme.height ?? 24.0;
+    _height = tooltipTheme.constraints?.minHeight ?? 24.0;
     _verticalOffset = tooltipTheme.verticalOffset ?? _defaultVerticalOffset;
     _preferBelow = widget.preferBelow ?? tooltipTheme.preferBelow ?? _defaultPreferBelow;
 

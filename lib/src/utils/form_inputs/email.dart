@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-
-import '../../localization/generated/l10n.dart';
-import '../constants.dart';
+import 'package:money_invest_app/src/utils/constants.dart';
+import 'package:money_invest_app/src/localization/generated/l10n.dart';
 
 enum EmailAddressInputError { required, invalidFormat }
 

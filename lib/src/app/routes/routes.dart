@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_invest_app/src/presentation/presentation.dart';
 
+extension BuildContextExtension on BuildContext {
+  String get currentPath => GoRouterState.of(this).uri.path;
+}
+
 class AppRoutes with ChangeNotifier {
-  AppRoutes({required this.navigatorKey, bool userAuthorized = false})
-    : _userAuthorized = userAuthorized,
-      _hasForceUpdate = false,
+  AppRoutes({required this.navigatorKey, this._userAuthorized = false})
+    : _hasForceUpdate = false,
       _isUnderMaintenance = false;
 
   final GlobalKey<NavigatorState> navigatorKey;
@@ -41,7 +44,7 @@ class AppRoutes with ChangeNotifier {
 
   String? _checkUserAuthorized(BuildContext context, GoRouterState state) {
     if (_userAuthorized) return null;
-    return '/auth';
+    return '/login';
   }
 
   late final GoRouter _goRouter = GoRouter(
@@ -56,7 +59,23 @@ class AppRoutes with ChangeNotifier {
     initialLocation: '/intro',
     routes: [
       GoRoute(path: '/intro', builder: (context, state) => const SplashScreen()),
-      GoRoute(path: '/auth', builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginScreen(),
+        routes: [
+          GoRoute(
+            path: 'forgot-password',
+            builder: (context, state) => const ForgotPasswordScreen(),
+            routes: [
+              GoRoute(
+                path: 'verify-otp',
+                builder: (context, state) => const OtpVerificationScreen(),
+                routes: [GoRoute(path: 'reset-password', builder: (context, state) => const ResetPasswordScreen())],
+              ),
+            ],
+          ),
+        ],
+      ),
     ],
   );
 }

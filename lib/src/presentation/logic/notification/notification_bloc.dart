@@ -12,10 +12,8 @@ import 'package:money_invest_app/src/utils/log.dart';
 import 'package:money_invest_app/src/utils/subscription_mixin.dart';
 
 final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> with StreamSubscriptionMixin {
-  NotificationBloc({required CommonRepository commonRepository})
-    : _commonRepository = commonRepository,
-
-      super(const InitialNotificationState()) {
+  NotificationBloc({required this._commonRepository})
+    : super(const InitialNotificationState()) {
     on<NotificationInitialize>(_onNotificationInitialize);
     on<NotificationReceived>(_onNotificationReceived);
     on<NotificationOpenedApp>(_onNotificationOpenedApp);

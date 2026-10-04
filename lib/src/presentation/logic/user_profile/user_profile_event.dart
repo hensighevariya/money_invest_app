@@ -25,3 +25,7 @@ class UserLoggedIn extends UserProfileEvent {
 class UserLoggedOut extends UserProfileEvent {
   const UserLoggedOut();
 }
+
+class GetCurrentUser extends UserProfileEvent {
+  const GetCurrentUser();
+}

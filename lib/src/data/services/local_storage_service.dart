@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/user_model.dart';
@@ -12,15 +13,11 @@ class LocalStorageService {
   Future<void> clearData() async {
     final showIntro = this.showIntro;
     final languageCode = this.languageCode;
-    final notificationStatus = this.notificationStatus;
-    final preferredStreamQuality = this.preferredStreamQuality;
 
     await _preferences.clear();
 
     this.showIntro = showIntro;
     this.languageCode = languageCode;
-    this.notificationStatus = notificationStatus;
-    this.preferredStreamQuality = preferredStreamQuality;
   }
 
   bool get showIntro => _preferences.getBool('show_intro') ?? true;
@@ -32,51 +29,7 @@ class LocalStorageService {
   String? get languageCode => _preferences.getString('language_code');
 
   set languageCode(String? value) {
-    if (value == null) {
-      _preferences.remove('language_code');
-      return;
-    }
-    _preferences.setString('language_code', value);
-  }
-
-  bool get notificationStatus => _preferences.getBool('notification_status') ?? true;
-
-  set notificationStatus(bool? value) {
-    if (value == null) {
-      _preferences.remove('notification_status');
-      return;
-    }
-    _preferences.setBool('notification_status', value);
-  }
-
-  bool get autoUnlockStatus => _preferences.getBool('auto_unlock') ?? false;
-
-  set autoUnlockStatus(bool? value) {
-    if (value == null) {
-      _preferences.remove('auto_unlock');
-      return;
-    }
-    _preferences.setBool('auto_unlock', value);
-  }
-
-  String? get preferredStreamQuality => _preferences.getString('stream_quality');
-
-  set preferredStreamQuality(String? value) {
-    if (value == null) {
-      _preferences.remove('stream_quality');
-      return;
-    }
-    _preferences.setString('stream_quality', value);
-  }
-
-  String? get preferredDownloadQuality => _preferences.getString('download_quality');
-
-  set preferredDownloadQuality(String? value) {
-    if (value == null) {
-      _preferences.remove('download_quality');
-      return;
-    }
-    _preferences.setString('download_quality', value);
+    _preferences.setString('language_code', value ?? 'en');
   }
 
   String? get sessionToken => _preferences.getString('session_token');
@@ -89,14 +42,14 @@ class LocalStorageService {
     _preferences.setString('session_token', value);
   }
 
-  String? get userIdentifier => _preferences.getString('user_identifier');
+  String? get refreshSessionToken => _preferences.getString('refresh_session_token');
 
-  set userIdentifier(String? value) {
+  set refreshSessionToken(String? value) {
     if (value == null) {
-      _preferences.remove('user_identifier');
+      _preferences.remove('refresh_session_token');
       return;
     }
-    _preferences.setString('user_identifier', value);
+    _preferences.setString('refresh_session_token', value);
   }
 
   UserData? get userData {
@@ -113,5 +66,33 @@ class LocalStorageService {
       return;
     }
     _preferences.setString('user', jsonEncode(value.toJson()));
+  }
+
+  ThemeMode get themeMode {
+    final value = _preferences.getString('theme_mode');
+    switch (value) {
+      case 'dark':
+        return ThemeMode.dark;
+      case 'system':
+        return ThemeMode.system;
+      case 'light':
+      default:
+        return ThemeMode.light; // Default as light
+    }
+  }
+
+  set themeMode(ThemeMode mode) {
+    String modeString;
+    switch (mode) {
+      case ThemeMode.dark:
+        modeString = 'dark';
+        break;
+      case ThemeMode.system:
+        modeString = 'system';
+        break;
+      case ThemeMode.light:
+        modeString = 'light';
+    }
+    _preferences.setString('theme_mode', modeString);
   }
 }

@@ -1260,6 +1260,12 @@
       "rootUri": "../packages/cache_service",
       "packageUri": "lib/",
       "languageVersion": "3.7"
+    },
+    {
+      "name": "country_picker",
+      "rootUri": "../packages/country_picker",
+      "packageUri": "lib/",
+      "languageVersion": "3.7"
     }
   ],
   "generator": "pub",

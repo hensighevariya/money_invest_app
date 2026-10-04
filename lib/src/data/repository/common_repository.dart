@@ -10,13 +10,11 @@ import 'package:url_launcher/url_launcher_string.dart';
 
 final class CommonRepository extends BaseRepository {
   CommonRepository({
-    required LocalStorageService localStorageService,
-    required ApiClientService apiClientService,
-    required FirebaseService firebaseService,
+    required this._localStorageService,
+    required this._apiClientService,
+    required this._firebaseService,
     required AppEnvironment environment,
-  }) : _localStorageService = localStorageService,
-       _apiClientService = apiClientService,
-       _firebaseService = firebaseService;
+  });
 
   final LocalStorageService _localStorageService;
   final ApiClientService _apiClientService;
@@ -47,13 +45,6 @@ final class CommonRepository extends BaseRepository {
     _localStorageService.languageCode = languageCode;
   }
 
-  bool getNotificationStatus() {
-    return _localStorageService.notificationStatus;
-  }
-
-  void updateNotificationStatus(bool status) {
-    _localStorageService.notificationStatus = status;
-  }
 
   Future<AppVersionData?> getVersionData() async {
     try {

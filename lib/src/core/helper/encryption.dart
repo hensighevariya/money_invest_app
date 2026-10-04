@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math' as math;
 
 import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
@@ -30,50 +29,45 @@ class CipherData {
 }
 
 class AesEncryption {
+  late final IV _iv;
   late final Encrypter _encrypter;
   late final Hmac _hMac;
 
-  static const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
-
-  AesEncryption.fromUtf8({required String key}) {
+  AesEncryption.fromUtf8({required String key, required String iv}) {
     var encryptionKey = Key.fromUtf8(key);
+    _iv = IV.fromUtf8(iv);
     _encrypter = Encrypter(AES(encryptionKey, mode: AESMode.cbc));
     _hMac = Hmac(sha256, encryptionKey.bytes);
   }
 
-  AesEncryption.fromBase64({required String key}) {
+  AesEncryption.fromBase64({required String key, required String iv}) {
     var encryptionKey = Key.fromBase64(key);
+    _iv = IV.fromBase64(iv);
     _encrypter = Encrypter(AES(encryptionKey, mode: AESMode.cbc));
     _hMac = Hmac(sha256, encryptionKey.bytes);
   }
 
   CipherData encrypt(String plainText) {
-    final initialVector = _generateIV();
-    final iv = IV.fromUtf8(initialVector);
-    var encryptedValue = _encrypter.encrypt(plainText, iv: iv).base64.replaceAll('\n', '');
-    var mac = _hMac.convert(utf8.encode(iv.base64 + encryptedValue));
-    var encData = CipherData(mac: mac.toString(), value: initialVector + encryptedValue);
-    return encData;
+    try {
+      var encryptedValue = _encrypter.encrypt(plainText, iv: _iv).base64.replaceAll('\n', '');
+      var mac = _createMac(encryptedValue);
+      return CipherData(mac: mac.toString(), value: encryptedValue);
+    } catch (e) {
+      rethrow;
+    }
   }
 
-  String decrypt(CipherData cipher) {
-    final iv = IV.fromUtf8(cipher.value.substring(0, 16));
-    final data = cipher.value.substring(16);
-    var mac = _hMac.convert(utf8.encode(iv.base64 + data));
-    if (mac.toString() != cipher.mac) throw const InvalidMacException();
-    return _encrypter.decrypt64(data, iv: iv);
+  String decrypt(CipherData data) {
+    var valueMac = _createMac(data.value);
+    if (valueMac.toString() == data.mac) {
+      return _encrypter.decrypt64(data.value, iv: _iv);
+    } else {
+      throw const InvalidMacException();
+    }
   }
 
-  static String generateKey([int keyLength = 32]) {
-    final random = math.Random.secure();
-
-    return List.generate(keyLength, (index) => _chars[(random.nextDouble() * _chars.length).floor()]).join();
-  }
-
-  String _generateIV([int length = 16]) {
-    final random = math.Random.secure();
-
-    return List.generate(length, (index) => _chars[(random.nextDouble() * _chars.length).floor()]).join();
+  String _createMac(String value) {
+    return _hMac.convert(utf8.encode(_iv.base64 + value)).toString();
   }
 }
 

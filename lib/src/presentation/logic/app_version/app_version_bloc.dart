@@ -12,9 +12,8 @@ import 'app_version_event.dart';
 import 'app_version_state.dart';
 
 final class AppVersionBloc extends BaseBloc<AppVersionEvent, AppVersionState> with HydratedMixin {
-  AppVersionBloc({required CommonRepository commonRepository})
-    : _commonRepository = commonRepository,
-      super(const AppVersionState()) {
+  AppVersionBloc({required this._commonRepository})
+    : super(const AppVersionState()) {
     hydrate();
 
     on<FetchAppVersion>(_onFetchAppVersion, transformer: droppable());

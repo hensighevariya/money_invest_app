@@ -1,6 +1,7 @@
 import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:money_invest_app/src/presentation/components/components.dart';
 import 'package:money_invest_app/src/presentation/resources/assets.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:ui_components/ui_components.dart';
@@ -18,7 +19,7 @@ class InputFieldLabel extends StatelessWidget {
       return Text.rich(
         TextSpan(
           text: data,
-          style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimaryContainer),
+          style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary),
           children: [
             TextSpan(
               text: ' *',
@@ -28,7 +29,7 @@ class InputFieldLabel extends StatelessWidget {
         ),
       );
     }
-    return Text(data, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onPrimaryContainer));
+    return Text(data, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary));
   }
 }
 
@@ -153,8 +154,6 @@ class CommonTextField extends StatefulWidget {
 class _CommonTextFieldState extends State<CommonTextField> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Column(
       spacing: Spacing.xSmall,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,7 +168,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
           cursorColor: widget.cursorColor,
           focusNode: widget.focusNode,
           autofocus: widget.autofocus,
-          style: theme.textTheme.titleSmall,
+          style: context.textTheme.titleSmall,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           inputFormatters: widget.inputFormatters,
           onChanged: widget.onChanged,
@@ -194,7 +193,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
             fillColor: widget.fillColor,
             suffixText: widget.suffixText,
             labelText: widget.labelText,
-            suffixStyle: theme.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onTertiary),
+            suffixStyle: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onTertiary),
             hintText: widget.hintText,
             prefixIcon: widget.prefixIcon,
             enabledBorder: widget.enabledBorder,
@@ -202,7 +201,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
             disabledBorder: widget.disabledBorder,
             constraints: widget.constraints,
             errorText: widget.errorText,
-            suffixIcon: widget.suffixIcon != null ? Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: widget.suffixIcon) : null,
+            suffixIcon: widget.suffixIcon != null
+                ? Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: widget.suffixIcon)
+                : null,
             prefixIconConstraints: widget.prefixIconConstraints ?? const BoxConstraints(minWidth: 48, maxHeight: 40),
             suffixIconConstraints: widget.suffixIconConstraints ?? const BoxConstraints(minWidth: 48, maxHeight: 40),
           ),
@@ -213,3 +214,80 @@ class _CommonTextFieldState extends State<CommonTextField> {
   }
 }
 
+class PasswordTextField extends StatefulWidget {
+  const PasswordTextField({
+    super.key,
+    required this.controller,
+    this.focusNode,
+    this.autofocus = false,
+    this.validator,
+    this.autofillHints,
+    this.textInputAction,
+    this.hintText,
+    this.labelText,
+    this.errorText,
+    this.onChanged,
+    this.onFieldSubmitted,
+    this.onEditingComplete,
+    this.labelStyle,
+    this.maxLength,
+  });
+
+  final TextEditingController controller;
+  final FocusNode? focusNode;
+  final bool autofocus;
+  final FormFieldValidator<String>? validator;
+  final Iterable<String>? autofillHints;
+  final TextInputAction? textInputAction;
+  final String? hintText;
+  final String? labelText;
+  final String? errorText;
+  final int? maxLength;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
+  final void Function()? onEditingComplete;
+  final TextStyle? labelStyle;
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool _isPasswordVisible = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return CommonTextField(
+      controller: widget.controller,
+      focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
+      obscureText: !_isPasswordVisible,
+      autofillHints: widget.autofillHints,
+      validator: widget.validator,
+      textInputAction: widget.textInputAction,
+      keyboardType: TextInputType.emailAddress,
+      onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      onEditingComplete: widget.onEditingComplete,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9!@#$%^&*_,.?’:;"]')),
+        LengthLimitingTextInputFormatter(widget.maxLength ?? 20),
+      ],
+      labelText: widget.labelText,
+      hintText: widget.hintText,
+      errorText: widget.errorText,
+      prefixIcon: widget.controller.text.isNullOrEmpty
+          ? null
+          : SvgImageFromAsset.square(SvgIcons.icnLock, size: 22, color: context.colorScheme.onSurface),
+      suffixIcon: IconButton(
+        onPressed: () {
+          setState(() {
+            _isPasswordVisible = !_isPasswordVisible;
+          });
+        },
+        icon: SvgIcon(_isPasswordVisible ? SvgIcons.icnEye : SvgIcons.icnEyeSlash),
+      ),
+      suffixIconConstraints: const BoxConstraints(maxWidth: 48, maxHeight: 40),
+    );
+  }
+}

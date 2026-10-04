@@ -59,6 +59,8 @@ extension StringExtensions on String {
     if (length <= 1) return this;
     return '${this[0].toUpperCase()}${substring(1)}';
   }
+
+  String toDefaultProfile() => (isNotEmpty) ? trim().split(' ').map((l) => l[0]).take(2).join().toUpperCase() : '';
 }
 
 extension NullableStringExtensions on String? {
@@ -70,5 +72,12 @@ extension NullableStringExtensions on String? {
 
   double toDouble() {
     return this == null ? 0 : double.tryParse(this?.replaceAll(RegExp(r'[^0-9.]'), '') ?? '0') ?? 0.0;
+  }
+}
+
+extension $ColorExtension on Color {
+  Color applyOpacity(double opacity) {
+    assert(opacity >= 0.0 && opacity <= 1.0);
+    return withAlpha((255 * opacity).round());
   }
 }

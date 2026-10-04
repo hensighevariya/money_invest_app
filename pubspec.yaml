@@ -9,6 +9,7 @@ environment:
 workspace:
   - packages/common_extensions
   - packages/cache_service
+  - packages/country_picker
 
 dependencies:
   flutter:
@@ -31,6 +32,9 @@ dependencies:
 
   cache_service:
     path: packages/cache_service
+
+  country_picker:
+    path: packages/country_picker
 
   cupertino_icons: ^1.0.8
   intl: ^0.20.2
@@ -94,12 +98,12 @@ dev_dependencies:
   injectable_generator: ^2.7.0
   json_serializable: ^6.9.5
   build_runner: ^2.4.15
-
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
     - assets/icons/svg_icon/
+    - assets/lottie/
 
 flutter_intl:
   enabled: true

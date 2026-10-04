@@ -2,6 +2,7 @@
   "roots": [
     "cache_service",
     "common_extensions",
+    "country_picker",
     "money_invest_app"
   ],
   "packages": [
@@ -15,6 +16,7 @@
         "cache_service",
         "common_extensions",
         "connectivity_plus",
+        "country_picker",
         "cross_file",
         "crypto",
         "cupertino_icons",
@@ -89,6 +91,19 @@
         "flutter",
         "hive",
         "synchronized"
+      ],
+      "devDependencies": [
+        "flutter_lints"
+      ]
+    },
+    {
+      "name": "country_picker",
+      "version": "0.0.8",
+      "dependencies": [
+        "equatable",
+        "flutter",
+        "flutter_bloc",
+        "stream_transform"
       ],
       "devDependencies": [
         "flutter_lints"

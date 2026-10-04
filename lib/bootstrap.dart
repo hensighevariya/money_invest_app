@@ -83,19 +83,17 @@ Future<void> bootstrap(AsyncAppBuilder builder) async {
                     return NotificationBloc(commonRepository: RepositoryProvider.of(context));
                   },
                 ),
-
-
                 BlocProvider(
-                  create: (context) {
-                    return UserProfileBloc(userRepository: RepositoryProvider.of(context));
-                  },
+                  create: (context) => UserProfileBloc(
+                    userRepository: RepositoryProvider.of(context),
+                    localStorageService: DependencyHelper.instance.get(),
+                  )..add(const GetCurrentUser()),
                 ),
                 BlocProvider(
                   create: (context) {
                     return MainNavigationBloc();
                   },
                 ),
-
               ],
               child: app,
             ),

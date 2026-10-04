@@ -1,0 +1,25 @@
+name: country_picker
+description: Country picker widget for flutter projects.
+version: 0.0.8
+
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.5
+  flutter_bloc: ^9.0.0
+  stream_transform: ^2.1.0
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/

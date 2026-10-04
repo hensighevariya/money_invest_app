@@ -3,7 +3,7 @@ import 'package:money_invest_app/src/core/base/loading_handler.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
 
 class LoadingDialogHandler extends LoadingHandler {
-  LoadingDialogHandler({required BuildContext context}) : _context = context;
+  LoadingDialogHandler({required this._context});
 
   final BuildContext _context;
   Route<void>? _dialogRoute;

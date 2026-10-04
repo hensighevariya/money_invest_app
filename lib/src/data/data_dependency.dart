@@ -2,9 +2,9 @@ import 'package:cache_service/cache_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart' hide Environment;
-import 'package:path_provider/path_provider.dart';
 import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/data.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'services/network/interceptors.dart';
@@ -51,6 +51,8 @@ abstract class DataDependency {
         dioClient: refreshDioClient,
         encryptionKey: environment.apiEncryptionKey,
         decryptionKey: environment.apiDecryptionKey,
+        encryptionIvKey: environment.apiEncryptionIvKey,
+        decryptionIvKey: environment.apiDecryptionIvKey,
       ),
     ]);
 
@@ -62,7 +64,7 @@ abstract class DataDependency {
     return FirebaseService(/*options: DefaultFirebaseOptions.currentPlatform*/)..initialize();
   }
 
-  @injectable
+  @lazySingleton
   SocketClientService providesSocketClientService(AppEnvironment environment) {
     return SocketClientService(url: environment.socketUrl);
   }

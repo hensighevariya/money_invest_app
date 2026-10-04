@@ -26,15 +26,26 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(permissionName) =>
       "It looks like ${permissionName} access has been permanently disabled. Please go to your device settings to manually enable ${permissionName} permissions.";
 
-  static String m2(version) => "v${version} Available!";
+  static String m2(seconds) => "${seconds} seconds";
+
+  static String m3(version) => "v${version} Available!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "appName": MessageLookupByLibrary.simpleMessage("Security Saas"),
     "cameraPermissionLabel": MessageLookupByLibrary.simpleMessage("Camera"),
+    "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
+      "Confirm Password",
+    ),
+    "continueButtonLabel": MessageLookupByLibrary.simpleMessage("Continue"),
     "copiedToClipboardHint": MessageLookupByLibrary.simpleMessage(
       "Copied to Clipboard",
     ),
+    "dataNotFound": MessageLookupByLibrary.simpleMessage("Data Not Found"),
+    "didntReceivedCode": MessageLookupByLibrary.simpleMessage(
+      "Didn’t receive code?",
+    ),
+    "enterOtpHint": MessageLookupByLibrary.simpleMessage("Enter OTP"),
     "errorConfirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password and confirm password must be same!",
     ),
@@ -47,8 +58,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorEmailAddressRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter email address!",
     ),
+    "errorEmailMobileRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter email address or mobile!",
+    ),
     "errorFullNameRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter full name!",
+    ),
+    "errorMobileInvalidFormat": MessageLookupByLibrary.simpleMessage(
+      "Please enter valid mobile number!",
     ),
     "errorOtpCodeInvalid": MessageLookupByLibrary.simpleMessage(
       "Please enter valid otp code!",
@@ -56,11 +73,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorOtpCodeRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter otp code!",
     ),
+    "errorPasswordInvalidLength": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 8 characters",
+    ),
     "errorPasswordInvalidPattern": MessageLookupByLibrary.simpleMessage(
       "Password must be at least 8 characters, uppercase, lowercase, number and special characters like !@#\$%^&*_,.?’:;",
     ),
     "errorPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter password!",
+    ),
+    "forgotPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Enter your email or phone number to reset your password",
+    ),
+    "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Forgot Password",
     ),
     "internetErrorDescription": MessageLookupByLibrary.simpleMessage(
       "Looks like you are not connected to internet right now. Please check your internet connection and try again.",
@@ -81,11 +107,26 @@ class MessageLookup extends MessageLookupByLibrary {
       "Login to access your account",
     ),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Welcome,"),
+    "newPasswordHint": MessageLookupByLibrary.simpleMessage("New Password"),
     "notificationPermissionLabel": MessageLookupByLibrary.simpleMessage(
       "Notification",
     ),
     "openSettingsButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Open Settings",
+    ),
+    "otpVerificationScreenDescriptionEmail":
+        MessageLookupByLibrary.simpleMessage(
+          "We’ve just sent you a 6 digit code to your email",
+        ),
+    "otpVerificationScreenDescriptionMobile":
+        MessageLookupByLibrary.simpleMessage(
+          "We’ve just sent you a 6 digit code to your mobile number",
+        ),
+    "otpVerificationTitle": MessageLookupByLibrary.simpleMessage(
+      "OTP Verification",
+    ),
+    "otpVerifiedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "OTP verified successfully",
     ),
     "permissionDeniedDescription": m0,
     "permissionDeniedModalTitle": MessageLookupByLibrary.simpleMessage(
@@ -93,6 +134,31 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "permissionPermanentlyDeniedDescription": m1,
     "photosPermissionLabel": MessageLookupByLibrary.simpleMessage("Photos"),
+    "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
+    "resendCodeLink": MessageLookupByLibrary.simpleMessage("Resend Code"),
+    "resendIn": MessageLookupByLibrary.simpleMessage("Resend in "),
+    "resendTimer": m2,
+    "resetPasswordButtonLabel": MessageLookupByLibrary.simpleMessage(
+      "Reset Password",
+    ),
+    "resetPasswordDesc": MessageLookupByLibrary.simpleMessage(
+      "Your new password must be unique from those previously used.",
+    ),
+    "resetPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Please enter your new password",
+    ),
+    "resetPasswordSuccessDescription": MessageLookupByLibrary.simpleMessage(
+      "Your password has been updated securely, You can now use your new password to log in.",
+    ),
+    "resetPasswordSuccessTitle": MessageLookupByLibrary.simpleMessage(
+      "Reset Password Successful",
+    ),
+    "resetPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Reset Password",
+    ),
+    "searchCountryByNameOrCode": MessageLookupByLibrary.simpleMessage(
+      "Search country by name or code",
+    ),
     "serverErrorDescription": MessageLookupByLibrary.simpleMessage(
       "We are experiencing some server issues, we apologises for inconvenience. Please try again after few minutes.",
     ),
@@ -106,6 +172,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Grow Together\nInvest Smarter",
     ),
     "storagePermissionLabel": MessageLookupByLibrary.simpleMessage("Storage"),
+    "success": MessageLookupByLibrary.simpleMessage("Success"),
+    "successfullyResentCode": MessageLookupByLibrary.simpleMessage(
+      "Successfully resent code!",
+    ),
     "timeoutErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Request timeout! Please try again.",
     ),
@@ -125,10 +195,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateAvailableDescription": MessageLookupByLibrary.simpleMessage(
       "We have added lots of new feature and fixed some bugs to make your experience smooth.",
     ),
-    "updateAvailableTitle": m2,
+    "updateAvailableTitle": m3,
     "updateLaterButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Update later",
     ),
     "updateNowButtonLabel": MessageLookupByLibrary.simpleMessage("Update Now"),
+    "verifyButtonLabel": MessageLookupByLibrary.simpleMessage("Verify"),
+    "whoopsThisInformationIsNotAvailableForAMoment":
+        MessageLookupByLibrary.simpleMessage(
+          "Whoops ... This information is not available for a moment",
+        ),
   };
 }

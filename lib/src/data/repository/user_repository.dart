@@ -1,21 +1,12 @@
 import 'dart:async';
-
-import 'package:common_extensions/common_extensions.dart';
-import 'package:money_invest_app/src/core/core.dart';
+import 'package:money_invest_app/src/core/base/repository.dart';
 import 'package:money_invest_app/src/data/data.dart';
-import 'package:money_invest_app/src/utils/constants.dart';
-import 'package:money_invest_app/src/utils/helper_functions.dart';
 import 'package:money_invest_app/src/utils/log.dart';
-import '../services/network/request/user.dart';
+import 'package:money_invest_app/src/data/services/network/request/user.dart';
 
 final class UserRepository extends BaseRepository {
-  UserRepository({
-    required LocalStorageService localStorageService,
-    required ApiClientService apiClientService,
-    required FirebaseService firebaseService,
-  }) : _localStorageService = localStorageService,
-       _apiClientService = apiClientService,
-       _firebaseService = firebaseService;
+  UserRepository({required this._localStorageService, required this._apiClientService, required this._firebaseService});
+
   final LocalStorageService _localStorageService;
   final ApiClientService _apiClientService;
   final FirebaseService _firebaseService;
@@ -35,6 +26,10 @@ final class UserRepository extends BaseRepository {
     _userStreamController.add(userData);
   }
 
+  void setUserData(UserData userData) {
+    _localStorageService.userData = userData;
+  }
+
   bool isUserAuthorized() {
     return _localStorageService.sessionToken != null;
   }
@@ -48,15 +43,6 @@ final class UserRepository extends BaseRepository {
     return null;
   }
 
-  String getUserIdentifier() {
-    String? userIdentifier = _localStorageService.userIdentifier;
-    if (userIdentifier == null) {
-      userIdentifier = generateUserIdentifier();
-      _localStorageService.userIdentifier = userIdentifier;
-    }
-    return userIdentifier;
-  }
-
   Future<UserData> getProfile() async {
     try {
       final responseData = await _apiClientService.getUserProfile();
@@ -67,20 +53,20 @@ final class UserRepository extends BaseRepository {
     }
   }
 
-  Future<void> updateProfile({required String fullName, String? dateOfBirth}) async {
+  Future<bool> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
     try {
-      final effectiveDateOfBirth = dateOfBirth
-          ?.parseLocalDateTime(AppConstants.localDateFormat)
-          .toLocalString(AppConstants.dateOfBirthFormat);
-
-      await _apiClientService.updateUserProfile(
-        UpdateProfileRequest(fullName: fullName, dateOfBirth: effectiveDateOfBirth),
+      await _apiClientService.changeUserPassword(
+        ChangePasswordRequest(
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+          confirmPassword: confirmPassword,
+        ),
       );
-
-      UserData? userData = _localStorageService.userData;
-      if (userData != null) {
-        _updateUserData(userData.copyWith(fullName: fullName, dateOfBirth: effectiveDateOfBirth));
-      }
+      return true;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);
     }

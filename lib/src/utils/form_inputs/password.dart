@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+import 'package:money_invest_app/src/utils/constants.dart';
+import 'package:money_invest_app/src/localization/generated/l10n.dart';
 
-import '../../localization/generated/l10n.dart';
-import '../constants.dart';
-
-enum UserPasswordInputError { required }
+enum UserPasswordInputError { required, invalidLength }
 
 class UserPasswordInput extends FormzInput<String, UserPasswordInputError> {
   const UserPasswordInput.pure([String? initialValue]) : super.pure(initialValue ?? '');
@@ -15,6 +14,15 @@ class UserPasswordInput extends FormzInput<String, UserPasswordInputError> {
   UserPasswordInputError? validator(String value) {
     if (value.isEmpty) return UserPasswordInputError.required;
     return null;
+  }
+}
+
+extension UserPasswordInputExtension on UserPasswordInputError {
+  String getErrorMessage(BuildContext context) {
+    return switch (this) {
+      UserPasswordInputError.required => AppLocalizations.current.errorPasswordRequired,
+      UserPasswordInputError.invalidLength => AppLocalizations.current.errorPasswordInvalidLength,
+    };
   }
 }
 

@@ -7,4 +7,7 @@ export 'resources/theme.dart';
 export 'ui/common/maintenance/maintenance_screen.dart';
 export 'ui/common/update/update_screen.dart';
 export 'ui/splash/splash_screen.dart';
-export 'ui/auth/login_screen.dart';
+export 'ui/auth/login/login_screen.dart';
+export 'ui/auth/forgot_password/forgot_password_screen.dart';
+export 'ui/auth/reset_password/reset_password_screen.dart';
+export 'ui/auth/otp_verification/otp_verification_screen.dart';
