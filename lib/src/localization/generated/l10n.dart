@@ -738,6 +738,31 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Don't have an account? `
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don\'t have an account? ',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message('Sign Up', name: 'signUp', desc: '', args: []);
+  }
+
+  /// `Name can only contain alphabets and spaces!`
+  String get errorFullNameInvalidFormat {
+    return Intl.message(
+      'Name can only contain alphabets and spaces!',
+      name: 'errorFullNameInvalidFormat',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

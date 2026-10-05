@@ -128,10 +128,33 @@ class _LoginFormState extends State<LoginForm> {
             builder: (context, isValid) {
               return ElevatedButton(
                 style: ElevatedButtonPrimaryStyle(context, buttonColor: context.colorScheme.primary),
-                onPressed: !isValid ? null : _onContinue,
+                onPressed: /*!isValid ? null :*/ _onContinue,
                 child: Text(localizations.continueButtonLabel),
               );
             },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                localizations.dontHaveAccount,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: context.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  context.go('${context.currentPath}/register');
+                },
+                child: Text(
+                  localizations.signUp,
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

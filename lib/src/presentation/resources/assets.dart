@@ -10,6 +10,7 @@ abstract interface class SvgIcons {
   static const String icnEmail = '${_path}email.svg';
   static const String icnLock = '${_path}lock.svg';
   static const String icnEmptyFile = '${_path}empty_file.svg';
+  static const String icnPerson = '${_path}person.svg';
 }
 
 abstract interface class AppImages {

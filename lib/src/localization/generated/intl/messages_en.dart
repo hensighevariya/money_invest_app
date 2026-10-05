@@ -45,6 +45,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "didntReceivedCode": MessageLookupByLibrary.simpleMessage(
       "Didn’t receive code?",
     ),
+    "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account? ",
+    ),
     "enterOtpHint": MessageLookupByLibrary.simpleMessage("Enter OTP"),
     "errorConfirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password and confirm password must be same!",
@@ -60,6 +63,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorEmailMobileRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter email address or mobile!",
+    ),
+    "errorFullNameInvalidFormat": MessageLookupByLibrary.simpleMessage(
+      "Name can only contain alphabets and spaces!",
     ),
     "errorFullNameRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter full name!",
@@ -165,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "serverErrorTitle": MessageLookupByLibrary.simpleMessage(
       "Something went wrong!",
     ),
+    "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "splashSubtitle": MessageLookupByLibrary.simpleMessage(
       "Secure Investment. Transparent Trades.\nConsistent Returns.",
     ),

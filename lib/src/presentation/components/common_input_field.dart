@@ -231,6 +231,7 @@ class PasswordTextField extends StatefulWidget {
     this.onEditingComplete,
     this.labelStyle,
     this.maxLength,
+    this.isDisplayPrefix = false,
   });
 
   final TextEditingController controller;
@@ -247,6 +248,7 @@ class PasswordTextField extends StatefulWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final void Function()? onEditingComplete;
   final TextStyle? labelStyle;
+  final bool isDisplayPrefix;
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -276,7 +278,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       labelText: widget.labelText,
       hintText: widget.hintText,
       errorText: widget.errorText,
-      prefixIcon: widget.controller.text.isNullOrEmpty
+      prefixIcon: widget.controller.text.isNullOrEmpty && !widget.isDisplayPrefix
           ? null
           : SvgImageFromAsset.square(SvgIcons.icnLock, size: 22, color: context.colorScheme.onSurface),
       suffixIcon: IconButton(

@@ -71,5 +71,8 @@
   "resendIn": "Resend in ",
   "resendCodeLink": "Resend Code",
   "resendTimer": "{seconds} seconds",
-  "successfullyResentCode": "Successfully resent code!"
+  "successfullyResentCode": "Successfully resent code!",
+  "dontHaveAccount": "Don't have an account? ",
+  "signUp": "Sign Up",
+  "errorFullNameInvalidFormat": "Name can only contain alphabets and spaces!"
 }
