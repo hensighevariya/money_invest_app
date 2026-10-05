@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeader(),
+              _buildHeader(context),
               const Gap(24),
               _buildTotalInvestmentCard(context),
               const Gap(16),
@@ -30,17 +31,20 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            const CircleAvatar(
-              radius: 24,
-              backgroundColor: Color(0xFFF0F0F0),
-              // Use a generic icon if no profile image is available
-              child: Icon(Icons.person, color: Colors.grey),
+            GestureDetector(
+              onTap: () => context.go('/home/profile'),
+              child: const CircleAvatar(
+                radius: 24,
+                backgroundColor: Color(0xFFF0F0F0),
+                // Use a generic icon if no profile image is available
+                child: Icon(Icons.person, color: Colors.grey),
+              ),
             ),
             const Gap(12),
             Column(

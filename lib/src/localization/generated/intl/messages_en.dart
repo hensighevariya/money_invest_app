@@ -140,6 +140,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "permissionPermanentlyDeniedDescription": m1,
     "photosPermissionLabel": MessageLookupByLibrary.simpleMessage("Photos"),
+    "profileBankAccount": MessageLookupByLibrary.simpleMessage("Bank Account"),
+    "profileChangePassword": MessageLookupByLibrary.simpleMessage(
+      "Change Password",
+    ),
+    "profileHelpAndSupport": MessageLookupByLibrary.simpleMessage(
+      "Help & Support",
+    ),
+    "profileLanguage": MessageLookupByLibrary.simpleMessage("Language"),
+    "profileLanguageEnglish": MessageLookupByLibrary.simpleMessage("English"),
+    "profileLogout": MessageLookupByLibrary.simpleMessage("Logout"),
+    "profileNotificationSettings": MessageLookupByLibrary.simpleMessage(
+      "Notification Settings",
+    ),
+    "profilePersonalInformation": MessageLookupByLibrary.simpleMessage(
+      "Personal Information",
+    ),
+    "profileReferAndEarn": MessageLookupByLibrary.simpleMessage("Refer & Earn"),
+    "profileTitle": MessageLookupByLibrary.simpleMessage("Profile"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendCodeLink": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendIn": MessageLookupByLibrary.simpleMessage("Resend in "),

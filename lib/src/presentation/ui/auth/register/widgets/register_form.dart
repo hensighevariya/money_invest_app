@@ -2,7 +2,6 @@ import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:money_invest_app/src/presentation/components/common_input_field.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
 import 'package:money_invest_app/src/presentation/components/mobile_number_field.dart';
 import 'package:money_invest_app/src/presentation/resources/assets.dart';
@@ -107,10 +106,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                 decoration: const InputDecoration(hintText: "Select"),
                 items: ['United States', 'India', 'United Kingdom'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
+                  return DropdownMenuItem<String>(value: value, child: Text(value));
                 }).toList(),
                 onChanged: (value) => context.read<RegisterCubit>().onCountryChanged(value ?? ''),
               ),
@@ -121,10 +117,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                 decoration: const InputDecoration(hintText: "Select"),
                 items: ['State 1', 'State 2', 'State 3'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
+                  return DropdownMenuItem<String>(value: value, child: Text(value));
                 }).toList(),
                 onChanged: (value) => context.read<RegisterCubit>().onStateChanged(value ?? ''),
               ),
@@ -135,10 +128,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                 decoration: const InputDecoration(hintText: "Select"),
                 items: ['City 1', 'City 2', 'City 3'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
+                  return DropdownMenuItem<String>(value: value, child: Text(value));
                 }).toList(),
                 onChanged: (value) => context.read<RegisterCubit>().onCityChanged(value ?? ''),
               ),

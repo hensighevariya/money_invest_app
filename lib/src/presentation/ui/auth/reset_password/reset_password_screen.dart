@@ -8,8 +8,6 @@ import 'package:money_invest_app/src/data/model/auth_navigation_data_model.dart'
 import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
-import 'package:money_invest_app/src/presentation/resources/assets.dart';
-import 'package:money_invest_app/src/presentation/resources/constraints.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/utils/loading_dialog_handler.dart';

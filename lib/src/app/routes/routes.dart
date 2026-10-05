@@ -6,6 +6,7 @@ import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/register/register_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/register/register_otp_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/home/home_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/profile/profile_screen.dart';
 
 extension BuildContextExtension on BuildContext {
   String get currentPath => GoRouterState.of(this).uri.path;
@@ -98,7 +99,16 @@ class AppRoutes with ChangeNotifier {
               ),
             ],
           ),
-          GoRoute(path: 'home', builder: (context, state) => const HomeScreen()),
+          GoRoute(
+            path: 'home',
+            builder: (context, state) => const HomeScreen(),
+            routes: [
+              GoRoute(
+                path: 'profile',
+                builder: (context, state) => const ProfileScreen(),
+              ),
+            ],
+          ),
         ],
       ),
     ],

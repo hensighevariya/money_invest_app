@@ -6,8 +6,6 @@ import 'package:go_router/go_router.dart';
 import 'package:money_invest_app/src/app/routes/routes.dart';
 import 'package:money_invest_app/src/core/base/progress_status.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
-import 'package:money_invest_app/src/presentation/resources/assets.dart';
-import 'package:money_invest_app/src/presentation/resources/constraints.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/widgets/auth_title.dart';
@@ -21,10 +19,13 @@ class RegisterScreen extends StatelessWidget {
 
   void _onStatusChanged(BuildContext context, RegisterState state) {
     if (state.status case ProgressStatusSuccess<void>()) {
-      context.go('${context.currentPath}/register-verify-otp', extra: {
-        'mobile': '+${state.mobileInput.phoneDetail?.code} ${state.mobileInput.value}',
-        'email': state.emailInput.value,
-      });
+      context.go(
+        '${context.currentPath}/register-verify-otp',
+        extra: {
+          'mobile': '+${state.mobileInput.phoneDetail?.code} ${state.mobileInput.value}',
+          'email': state.emailInput.value,
+        },
+      );
     } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
       // show error
     }

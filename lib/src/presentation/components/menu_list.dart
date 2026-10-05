@@ -1,100 +1,94 @@
-import 'package:adaptive_layout/adaptive_layout.dart';
-import 'package:flutter/foundation.dart';
+import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:money_invest_app/src/presentation/resources/resources.dart';
-import 'package:ui_components/ui_components.dart';
+import 'package:gap/gap.dart';
+import 'package:money_invest_app/src/presentation/components/common_circle_icon.dart';
+import 'package:money_invest_app/src/presentation/components/components.dart';
+import 'package:money_invest_app/src/presentation/resources/assets.dart';
+import 'package:money_invest_app/src/presentation/resources/size.dart';
 
-import 'components.dart';
+class MenuListWidget extends StatelessWidget {
+  final String? icon;
+  final String title;
+  final String? svgIcon;
+  final void Function()? onTap;
+  final bool? isNotification;
+  final bool showIcon;
+  final bool showBullet;
+  final Widget? widget;
+  final int? badgeCount;
 
-class SliverMenuList extends StatelessWidget {
-  const SliverMenuList({super.key, required this.items});
-
-  final List<Widget> items;
-
-  Widget? _itemBuilder(BuildContext context, int index) {
-    final child = items[index];
-    return CompatConstrainedBox(child: child);
-  }
-
-  Widget? _separatorBuilder(BuildContext context, int index) {
-    return const CompatConstrainedBox(child: Divider(indent: Spacing.normal, endIndent: Spacing.normal));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverSafeArea(
-      top: false,
-      bottom: false,
-      sliver: SliverList.separated(
-        itemCount: items.length,
-        itemBuilder: _itemBuilder,
-        separatorBuilder: _separatorBuilder,
-      ),
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(IterableProperty<Widget>('items', items));
-  }
-}
-
-class MenuTile extends StatelessWidget {
-  const MenuTile({
+  const MenuListWidget({
     super.key,
-    required this.title,
-    required this.onPressed,
     this.icon,
-    this.trailing,
-    this.autoImplyTrailing = true,
-    this.color,
-    this.contentPadding,
+    this.svgIcon,
+    required this.title,
+    required this.onTap,
+    this.isNotification,
+    this.showIcon = true,
+    this.showBullet = false,
+    this.widget,
+    this.badgeCount,
   });
 
-  final Widget? icon;
-  final Widget title;
-  final Widget? trailing;
-  final Color? color;
-  final bool autoImplyTrailing;
-  final VoidCallback onPressed;
-  final EdgeInsetsGeometry? contentPadding;
-
   @override
   Widget build(BuildContext context) {
-    final ThemeData(:colorScheme, :textTheme) = Theme.of(context);
-
-    Widget? trailing = this.trailing;
-    if (trailing == null && autoImplyTrailing) {
-      trailing = const SvgIcon(SvgIcons.arrowRight);
-    }
-
-    if (trailing != null) {
-      trailing = IconTheme.merge(data: IconThemeData(size: 20, color: colorScheme.onSurfaceVariant), child: trailing);
-    }
-
-    return ListTile(
-      shape: Shapes.medium,
-      leadingAndTrailingTextStyle: textTheme.bodyMedium,
-      contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: Spacing.normal),
-      iconColor: color ?? colorScheme.primary,
-      textColor: color,
-      onTap: onPressed,
-      leading: icon,
-      title: title,
-      trailing: trailing,
+    final colorScheme = context.colorScheme;
+    final textTheme = context.theme.textTheme;
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: onTap,
+      child: Container(
+        margin: showBullet ? const EdgeInsets.only(bottom: 2.0) : EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(horizontal: Spacing.large, vertical: showIcon ? Spacing.none : Spacing.medium),
+        constraints: showIcon ? const BoxConstraints(minHeight: 36, maxHeight: 46) : null,
+        decoration: showBullet ? BoxDecoration(color: colorScheme.onSurface.withValues(alpha: 0.03)) : null,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (showIcon) ...[
+              CommonCircularIcon(
+                backgroundColor: colorScheme.onSurface.applyOpacity(0.1),
+                foregroundColor: colorScheme.onSurface,
+                icon: icon,
+              ),
+              const Gap(Spacing.normal),
+            ] else if (showBullet) ...[
+              Container(
+                margin: const EdgeInsetsDirectional.only(start: 20, end: Spacing.normal),
+                width: 6,
+                height: 6,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: colorScheme.onSurface.withValues(alpha: 0.4)),
+              ),
+            ],
+            Expanded(child: Text(title, style: textTheme.titleSmall)),
+            if (badgeCount != null && badgeCount! > 0)
+              Container(
+                margin: const EdgeInsetsDirectional.only(end: Spacing.small),
+                padding: const EdgeInsets.all(Spacing.xSmall),
+                decoration: BoxDecoration(color: colorScheme.error, shape: BoxShape.circle),
+                constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
+                alignment: Alignment.center,
+                child: Text(
+                  badgeCount! > 99 ? '99+' : badgeCount.toString(),
+                  style: textTheme.labelSmall?.copyWith(
+                    color: colorScheme.onError,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            if (!(isNotification ?? false))
+              SvgImageFromAsset.square(
+                svgIcon ?? SvgIcons.arrowRight,
+                size: 18,
+                color: colorScheme.onSurface,
+                matchTextDirection: true,
+              ),
+            widget ?? const SizedBox.shrink(),
+          ],
+        ),
+      ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Widget?>('icon', icon));
-    properties.add(DiagnosticsProperty<Widget>('title', title));
-    properties.add(DiagnosticsProperty<Widget?>('trailing', trailing));
-    properties.add(ColorProperty('color', color));
-    properties.add(DiagnosticsProperty<bool>('autoImplyTrailing', autoImplyTrailing));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onPressed', onPressed));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry?>('contentPadding', contentPadding));
   }
 }

@@ -16,7 +16,7 @@ class CommonDivider extends StatelessWidget {
     return Column(
       children: [
         Gap(paddingSize ?? Spacing.large),
-        Divider(color:  context.colorScheme.onPrimaryContainer.applyOpacity(0.3), indent: indent, endIndent: endIndent),
+        Divider(color:  context.colorScheme.onSurface.applyOpacity(0.3), indent: indent, endIndent: endIndent),
         Gap(paddingSize ?? Spacing.large),
       ],
     );

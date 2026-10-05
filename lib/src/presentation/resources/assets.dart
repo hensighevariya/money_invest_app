@@ -11,6 +11,11 @@ abstract interface class SvgIcons {
   static const String icnLock = '${_path}lock.svg';
   static const String icnEmptyFile = '${_path}empty_file.svg';
   static const String icnPerson = '${_path}person.svg';
+  static const String icnBank = '${_path}bank.svg';
+  static const String icnNotification = '${_path}notification.svg';
+  static const String icnLanguage = '${_path}language.svg';
+  static const String icnHelp = '${_path}help.svg';
+  static const String icnLogout= '${_path}logout.svg';
 }
 
 abstract interface class AppImages {

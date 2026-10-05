@@ -98,6 +98,7 @@ dev_dependencies:
   injectable_generator: ^2.7.0
   json_serializable: ^6.9.5
   build_runner: ^2.4.15
+  intl_utils: ^2.8.14
 flutter:
   uses-material-design: true
   assets:

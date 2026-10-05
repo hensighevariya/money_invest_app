@@ -763,6 +763,96 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Profile`
+  String get profileTitle {
+    return Intl.message('Profile', name: 'profileTitle', desc: '', args: []);
+  }
+
+  /// `Personal Information`
+  String get profilePersonalInformation {
+    return Intl.message(
+      'Personal Information',
+      name: 'profilePersonalInformation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Account`
+  String get profileBankAccount {
+    return Intl.message(
+      'Bank Account',
+      name: 'profileBankAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get profileChangePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'profileChangePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification Settings`
+  String get profileNotificationSettings {
+    return Intl.message(
+      'Notification Settings',
+      name: 'profileNotificationSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get profileLanguage {
+    return Intl.message(
+      'Language',
+      name: 'profileLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get profileLanguageEnglish {
+    return Intl.message(
+      'English',
+      name: 'profileLanguageEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refer & Earn`
+  String get profileReferAndEarn {
+    return Intl.message(
+      'Refer & Earn',
+      name: 'profileReferAndEarn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help & Support`
+  String get profileHelpAndSupport {
+    return Intl.message(
+      'Help & Support',
+      name: 'profileHelpAndSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get profileLogout {
+    return Intl.message('Logout', name: 'profileLogout', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -74,5 +74,15 @@
   "successfullyResentCode": "Successfully resent code!",
   "dontHaveAccount": "Don't have an account? ",
   "signUp": "Sign Up",
-  "errorFullNameInvalidFormat": "Name can only contain alphabets and spaces!"
+  "errorFullNameInvalidFormat": "Name can only contain alphabets and spaces!",
+  "profileTitle": "Profile",
+  "profilePersonalInformation": "Personal Information",
+  "profileBankAccount": "Bank Account",
+  "profileChangePassword": "Change Password",
+  "profileNotificationSettings": "Notification Settings",
+  "profileLanguage": "Language",
+  "profileLanguageEnglish": "English",
+  "profileReferAndEarn": "Refer & Earn",
+  "profileHelpAndSupport": "Help & Support",
+  "profileLogout": "Logout"
 }
