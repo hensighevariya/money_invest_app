@@ -1,13 +1,18 @@
 import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gap/gap.dart';
+import 'package:lottie/lottie.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/common_divider.dart';
+import 'package:money_invest_app/src/presentation/components/components.dart';
 import 'package:money_invest_app/src/presentation/components/menu_list.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
+import 'package:money_invest_app/src/presentation/ui/profile/logic/profile_bloc.dart';
+import 'package:money_invest_app/src/presentation/ui/profile/logic/profile_event.dart';
 import 'package:ui_components/ui_components.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -65,7 +70,13 @@ class ProfileScreen extends StatelessWidget {
                 MenuListWidget(
                   title: context.localizations.profilePersonalInformation,
                   icon: SvgIcons.icnPerson,
-                  onTap: () {},
+                  onTap: () => context.go('/home/profile/edit-profile'),
+                ),
+                CommonDivider(paddingSize: Spacing.xMedium),
+                MenuListWidget(
+                  title: context.localizations.profileKyc,
+                  icon: SvgIcons.icnEmptyFile, // Using empty file icon for KYC
+                  onTap: () => context.go('/home/profile/kyc'),
                 ),
                 CommonDivider(paddingSize: Spacing.xMedium),
                 MenuListWidget(title: context.localizations.profileBankAccount, icon: SvgIcons.icnBank, onTap: () {}),
@@ -111,7 +122,9 @@ class ProfileScreen extends StatelessWidget {
                 MenuListWidget(
                   title: context.localizations.profileLogout,
                   icon: SvgIcons.icnLogout,
-                  onTap: () {},
+                  onTap: () {
+                    logout(context, onTap: () => context.read<ProfileBloc>().add(UserLogoutRequested()));
+                  },
                   isNotification: true,
                 ),
               ],
@@ -122,4 +135,22 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> logout(BuildContext context, {required VoidCallback onTap}) async {
+  await showDialog<void>(
+    context: context,
+    builder: (context) {
+      return CustomAlertDialog(
+        icon: LottieBuilder.asset(LottieFiles.logout, fit: BoxFit.cover),
+        title: context.localizations.profileLogout,
+        description: context.localizations.logoutDesc,
+        action: ElevatedButton(
+          onPressed: onTap,
+          style: ElevatedButtonPrimaryStyle(context),
+          child: Text(context.localizations.profileLogout),
+        ),
+      );
+    },
+  );
 }

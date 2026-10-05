@@ -20,15 +20,17 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(permissionName) =>
-      "You have denied the ${permissionName} permission. Please go to device settings to enable ${permissionName} permissions.";
+  static String m0(documentType) => "Upload ${documentType}";
 
   static String m1(permissionName) =>
+      "You have denied the ${permissionName} permission. Please go to device settings to enable ${permissionName} permissions.";
+
+  static String m2(permissionName) =>
       "It looks like ${permissionName} access has been permanently disabled. Please go to your device settings to manually enable ${permissionName} permissions.";
 
-  static String m2(seconds) => "${seconds} seconds";
+  static String m3(seconds) => "${seconds} seconds";
 
-  static String m3(version) => "v${version} Available!";
+  static String m4(version) => "v${version} Available!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -100,6 +102,33 @@ class MessageLookup extends MessageLookupByLibrary {
     "internetErrorTitle": MessageLookupByLibrary.simpleMessage(
       "No Internet Connection!",
     ),
+    "kycChooseIdentityType": MessageLookupByLibrary.simpleMessage(
+      "Choose Your Identity Type",
+    ),
+    "kycDescription1": MessageLookupByLibrary.simpleMessage(
+      "To ensure the safety of all users, a one-time verification is required. The KYC process (Know Your Customer) guarantees that only real individuals and registered institutions can access protected features like event creation, ticket sales, sponsorships, and location rentals.",
+    ),
+    "kycDescription2": MessageLookupByLibrary.simpleMessage(
+      "Uploaded documents are reviewed only by authorized admins who are responsible for the verification process. Your data is handled with strict confidentiality and will never be shared with third parties.",
+    ),
+    "kycDescription3": MessageLookupByLibrary.simpleMessage(
+      "This helps protect the community from fake accounts, fraud, and identity misuse.",
+    ),
+    "kycDrivingLicense": MessageLookupByLibrary.simpleMessage(
+      "Driving License",
+    ),
+    "kycFirstDocument": MessageLookupByLibrary.simpleMessage("First Document"),
+    "kycIdCard": MessageLookupByLibrary.simpleMessage("ID Card"),
+    "kycPassport": MessageLookupByLibrary.simpleMessage("Passport"),
+    "kycProofOfIdentity": MessageLookupByLibrary.simpleMessage(
+      "Proof Of Identity",
+    ),
+    "kycSaveButton": MessageLookupByLibrary.simpleMessage("Save"),
+    "kycSecondDocument": MessageLookupByLibrary.simpleMessage(
+      "Second Document",
+    ),
+    "kycTitle": MessageLookupByLibrary.simpleMessage("KYC"),
+    "kycUploadIdCard": m0,
     "languageScreenTitle": MessageLookupByLibrary.simpleMessage("Language"),
     "loginButtonText": MessageLookupByLibrary.simpleMessage("Login"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage(
@@ -113,6 +142,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Login to access your account",
     ),
     "loginTitle": MessageLookupByLibrary.simpleMessage("Welcome,"),
+    "logoutDesc": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to logout?",
+    ),
     "newPasswordHint": MessageLookupByLibrary.simpleMessage("New Password"),
     "notificationPermissionLabel": MessageLookupByLibrary.simpleMessage(
       "Notification",
@@ -134,11 +166,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpVerifiedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "OTP verified successfully",
     ),
-    "permissionDeniedDescription": m0,
+    "permissionDeniedDescription": m1,
     "permissionDeniedModalTitle": MessageLookupByLibrary.simpleMessage(
       "Permission Denied",
     ),
-    "permissionPermanentlyDeniedDescription": m1,
+    "permissionPermanentlyDeniedDescription": m2,
     "photosPermissionLabel": MessageLookupByLibrary.simpleMessage("Photos"),
     "profileBankAccount": MessageLookupByLibrary.simpleMessage("Bank Account"),
     "profileChangePassword": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "profileHelpAndSupport": MessageLookupByLibrary.simpleMessage(
       "Help & Support",
     ),
+    "profileKyc": MessageLookupByLibrary.simpleMessage("KYC"),
+    "profileKycVerified": MessageLookupByLibrary.simpleMessage("Verified"),
     "profileLanguage": MessageLookupByLibrary.simpleMessage("Language"),
     "profileLanguageEnglish": MessageLookupByLibrary.simpleMessage("English"),
     "profileLogout": MessageLookupByLibrary.simpleMessage("Logout"),
@@ -161,7 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendCodeLink": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendIn": MessageLookupByLibrary.simpleMessage("Resend in "),
-    "resendTimer": m2,
+    "resendTimer": m3,
     "resetPasswordButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
     ),
@@ -220,7 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateAvailableDescription": MessageLookupByLibrary.simpleMessage(
       "We have added lots of new feature and fixed some bugs to make your experience smooth.",
     ),
-    "updateAvailableTitle": m3,
+    "updateAvailableTitle": m4,
     "updateLaterButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Update later",
     ),

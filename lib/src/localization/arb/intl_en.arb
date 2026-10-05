@@ -84,5 +84,21 @@
   "profileLanguageEnglish": "English",
   "profileReferAndEarn": "Refer & Earn",
   "profileHelpAndSupport": "Help & Support",
-  "profileLogout": "Logout"
+  "profileLogout": "Logout",
+  "logoutDesc": "Are you sure you want to logout?",
+  "profileKyc": "KYC",
+  "profileKycVerified": "Verified",
+  "kycTitle": "KYC",
+  "kycProofOfIdentity": "Proof Of Identity",
+  "kycDescription1": "To ensure the safety of all users, a one-time verification is required. The KYC process (Know Your Customer) guarantees that only real individuals and registered institutions can access protected features like event creation, ticket sales, sponsorships, and location rentals.",
+  "kycDescription2": "Uploaded documents are reviewed only by authorized admins who are responsible for the verification process. Your data is handled with strict confidentiality and will never be shared with third parties.",
+  "kycDescription3": "This helps protect the community from fake accounts, fraud, and identity misuse.",
+  "kycChooseIdentityType": "Choose Your Identity Type",
+  "kycIdCard": "ID Card",
+  "kycPassport": "Passport",
+  "kycDrivingLicense": "Driving License",
+  "kycUploadIdCard": "Upload {documentType}",
+  "kycFirstDocument": "First Document",
+  "kycSecondDocument": "Second Document",
+  "kycSaveButton": "Save"
 }

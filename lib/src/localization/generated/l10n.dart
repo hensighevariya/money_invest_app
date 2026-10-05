@@ -853,6 +853,141 @@ class AppLocalizations {
   String get profileLogout {
     return Intl.message('Logout', name: 'profileLogout', desc: '', args: []);
   }
+
+  /// `Are you sure you want to logout?`
+  String get logoutDesc {
+    return Intl.message(
+      'Are you sure you want to logout?',
+      name: 'logoutDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `KYC`
+  String get profileKyc {
+    return Intl.message('KYC', name: 'profileKyc', desc: '', args: []);
+  }
+
+  /// `Verified`
+  String get profileKycVerified {
+    return Intl.message(
+      'Verified',
+      name: 'profileKycVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `KYC`
+  String get kycTitle {
+    return Intl.message('KYC', name: 'kycTitle', desc: '', args: []);
+  }
+
+  /// `Proof Of Identity`
+  String get kycProofOfIdentity {
+    return Intl.message(
+      'Proof Of Identity',
+      name: 'kycProofOfIdentity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To ensure the safety of all users, a one-time verification is required. The KYC process (Know Your Customer) guarantees that only real individuals and registered institutions can access protected features like event creation, ticket sales, sponsorships, and location rentals.`
+  String get kycDescription1 {
+    return Intl.message(
+      'To ensure the safety of all users, a one-time verification is required. The KYC process (Know Your Customer) guarantees that only real individuals and registered institutions can access protected features like event creation, ticket sales, sponsorships, and location rentals.',
+      name: 'kycDescription1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploaded documents are reviewed only by authorized admins who are responsible for the verification process. Your data is handled with strict confidentiality and will never be shared with third parties.`
+  String get kycDescription2 {
+    return Intl.message(
+      'Uploaded documents are reviewed only by authorized admins who are responsible for the verification process. Your data is handled with strict confidentiality and will never be shared with third parties.',
+      name: 'kycDescription2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This helps protect the community from fake accounts, fraud, and identity misuse.`
+  String get kycDescription3 {
+    return Intl.message(
+      'This helps protect the community from fake accounts, fraud, and identity misuse.',
+      name: 'kycDescription3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Your Identity Type`
+  String get kycChooseIdentityType {
+    return Intl.message(
+      'Choose Your Identity Type',
+      name: 'kycChooseIdentityType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID Card`
+  String get kycIdCard {
+    return Intl.message('ID Card', name: 'kycIdCard', desc: '', args: []);
+  }
+
+  /// `Passport`
+  String get kycPassport {
+    return Intl.message('Passport', name: 'kycPassport', desc: '', args: []);
+  }
+
+  /// `Driving License`
+  String get kycDrivingLicense {
+    return Intl.message(
+      'Driving License',
+      name: 'kycDrivingLicense',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload {documentType}`
+  String kycUploadIdCard(Object documentType) {
+    return Intl.message(
+      'Upload $documentType',
+      name: 'kycUploadIdCard',
+      desc: '',
+      args: [documentType],
+    );
+  }
+
+  /// `First Document`
+  String get kycFirstDocument {
+    return Intl.message(
+      'First Document',
+      name: 'kycFirstDocument',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Second Document`
+  String get kycSecondDocument {
+    return Intl.message(
+      'Second Document',
+      name: 'kycSecondDocument',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get kycSaveButton {
+    return Intl.message('Save', name: 'kycSaveButton', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
