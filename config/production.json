@@ -1,0 +1,12 @@
+{
+  "env.baseUrl": "",
+  "env.apiBaseUrl": "",
+  "env.socketUrl": "",
+  "env.apiEncryptionKey": "",
+  "env.apiDecryptionKey": "",
+  "env.apiEncryptionIvKey": "",
+  "env.apiDecryptionIvKey": "",
+  "env.googleServerClientId": "",
+  "env.bucketName": "",
+  "env.region": ""
+}

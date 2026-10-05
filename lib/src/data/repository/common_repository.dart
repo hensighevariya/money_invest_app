@@ -45,7 +45,6 @@ final class CommonRepository extends BaseRepository {
     _localStorageService.languageCode = languageCode;
   }
 
-
   Future<AppVersionData?> getVersionData() async {
     try {
       if (kIsWeb) return null;

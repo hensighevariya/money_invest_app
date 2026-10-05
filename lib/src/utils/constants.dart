@@ -7,19 +7,14 @@ abstract interface class AppConstants {
   static final namePatternRegExp = RegExp(r'^[\p{L}\s.]+$', unicode: true);
   static final numbersOnlyRegExp = RegExp(r'^\d+$');
   static final alphabetsOnlyRegExp = RegExp(r'[a-zA-Z\s]');
-  static final dayLeaveRegex = RegExp(r'^\d+(\.[05])?$');
   static final containsAtLeastOneLetter = RegExp(r'\p{L}', unicode: true);
 
-  static final passwordPatternRegExp = RegExp(r'^.*(?=.{8,255})((?=.*[!@#$%^&*_,.?’:;"]))(?=.*\d)((?=.*[A-Z]))((?=.*[a-z])).*$');
-  static final emojiPatternRegExp = RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
+  static final passwordPatternRegExp = RegExp(
+    r'^.*(?=.{8,255})((?=.*[!@#$%^&*_,.?’:;"]))(?=.*\d)((?=.*[A-Z]))((?=.*[a-z])).*$',
+  );
   static final isOnlyDigits = RegExp(r'^-?[0-9]+$');
 
   static const pageSize = 10;
-
-  static const validOtpLength = 6;
-
-  static const googleAuthenticatorPlayStore = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
-  static const googleAuthenticatorAppStore = 'https://apps.apple.com/us/app/google-authenticator/id388497605';
 
   static const localDateFormat = 'dd/MM/yyyy';
   static const localTimeFormat = 'hh:mm a';
@@ -52,8 +47,6 @@ abstract interface class AppConstants {
     }
     return deviceIdentifier;
   }
-
-  static String googleMapKey = 'AIzaSyAA_DTZQIpCwUwf3nG6Q6VphUX7re0FuJk';
 }
 
 abstract class SupportTicketEvent {
