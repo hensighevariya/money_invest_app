@@ -13,7 +13,10 @@ class UnorderedList extends StatelessWidget {
 
       return _ListElement(
         key: Key('ul_$index'),
-        leading: Transform.scale(scale: 1.5, child: const Text('•', style: TextStyle(fontWeight: FontWeight.w900))),
+        leading: Transform.scale(
+          scale: 1.5,
+          child: const Text('•', style: TextStyle(fontWeight: FontWeight.w900)),
+        ),
         data: element,
       );
     });
@@ -32,7 +35,11 @@ class OrderedList extends StatelessWidget {
     final effectiveChildren = List.generate(elements.length, (index) {
       final element = elements.elementAt(index);
 
-      return _ListElement(key: Key('ol_$index'), leading: Text('${index + 1}.'), data: element);
+      return _ListElement(
+        key: Key('ol_$index'),
+        leading: Text('${index + 1}.'),
+        data: element,
+      );
     });
 
     return Column(spacing: Spacing.xSmall, children: effectiveChildren);

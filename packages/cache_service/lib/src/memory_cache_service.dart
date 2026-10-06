@@ -14,7 +14,9 @@ final class MemoryCacheService extends CacheService {
   @override
   FutureOr<CacheData?> get(String key) {
     final value = _cache[key];
-    return value != null ? CacheData.fromJson(value as Map<String, dynamic>) : null;
+    return value != null
+        ? CacheData.fromJson(value as Map<String, dynamic>)
+        : null;
   }
 
   @override

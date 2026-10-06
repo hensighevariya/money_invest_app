@@ -22,15 +22,29 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(documentType) => "Upload ${documentType}";
 
-  static String m1(permissionName) =>
+  static String m1(method) => "Paid (${method})";
+
+  static String m2(percent) => "${percent}% Monthly Return";
+
+  static String m3(permissionName) =>
       "You have denied the ${permissionName} permission. Please go to device settings to enable ${permissionName} permissions.";
 
-  static String m2(permissionName) =>
+  static String m4(permissionName) =>
       "It looks like ${permissionName} access has been permanently disabled. Please go to your device settings to manually enable ${permissionName} permissions.";
 
-  static String m3(seconds) => "${seconds} seconds";
+  static String m5(seconds) => "${seconds} seconds";
 
-  static String m4(version) => "v${version} Available!";
+  static String m6(qty, price) => "BUY ${qty} @ ${price}";
+
+  static String m7(price) => "₹ ${price} / month";
+
+  static String m8(percent) => "Save ${percent}%";
+
+  static String m9(qty, price) => "SELL ${qty} @ ${price}";
+
+  static String m10(price) => "₹ ${price} / year";
+
+  static String m11(version) => "v${version} Available!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -96,12 +110,102 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "Forgot Password",
     ),
+    "homeActiveInvestments": MessageLookupByLibrary.simpleMessage(
+      "Active Investments",
+    ),
+    "homeHello": MessageLookupByLibrary.simpleMessage("Hello,"),
+    "homeInvestNow": MessageLookupByLibrary.simpleMessage("Invest Now"),
+    "homeMonthlyReturn": MessageLookupByLibrary.simpleMessage("Monthly Return"),
+    "homeMyBonds": MessageLookupByLibrary.simpleMessage("My Bonds"),
+    "homePerMonth": MessageLookupByLibrary.simpleMessage("Per Month"),
+    "homeRealTradesProof": MessageLookupByLibrary.simpleMessage(
+      "Real Trades. Real Proof.",
+    ),
+    "homeReferAndEarn": MessageLookupByLibrary.simpleMessage("Refer & Earn"),
+    "homeSubscribeNow": MessageLookupByLibrary.simpleMessage("Subscribe Now"),
+    "homeTotalInvestment": MessageLookupByLibrary.simpleMessage(
+      "Total Investment",
+    ),
+    "homeTotalReturnsReceived": MessageLookupByLibrary.simpleMessage(
+      "Total Returns Received",
+    ),
+    "homeTradeDiary": MessageLookupByLibrary.simpleMessage("Trade Diary"),
+    "homeTransparentTrading": MessageLookupByLibrary.simpleMessage(
+      "Transparent Trading",
+    ),
+    "homeViewDetails": MessageLookupByLibrary.simpleMessage("View Details >"),
     "internetErrorDescription": MessageLookupByLibrary.simpleMessage(
       "Looks like you are not connected to internet right now. Please check your internet connection and try again.",
     ),
     "internetErrorTitle": MessageLookupByLibrary.simpleMessage(
       "No Internet Connection!",
     ),
+    "investAmount": MessageLookupByLibrary.simpleMessage("Investment Amount"),
+    "investAsPerAgreement": MessageLookupByLibrary.simpleMessage(
+      "As per agreement",
+    ),
+    "investCompletePayment": MessageLookupByLibrary.simpleMessage(
+      "Complete Payment",
+    ),
+    "investCustom": MessageLookupByLibrary.simpleMessage("Custom"),
+    "investDebitCreditCard": MessageLookupByLibrary.simpleMessage(
+      "Debit/Credit Card",
+    ),
+    "investDownloadPdf": MessageLookupByLibrary.simpleMessage("Download PDF"),
+    "investGPay": MessageLookupByLibrary.simpleMessage("GPay"),
+    "investImpsNeft": MessageLookupByLibrary.simpleMessage(
+      "IMPS / NEFT (Virtual Account)",
+    ),
+    "investInvestmentAgreement": MessageLookupByLibrary.simpleMessage(
+      "INVESTMENT AGREEMENT",
+    ),
+    "investInvestmentBond": MessageLookupByLibrary.simpleMessage(
+      "Investment Bond",
+    ),
+    "investInvestorName": MessageLookupByLibrary.simpleMessage("Investor Name"),
+    "investMaturityTerms": MessageLookupByLibrary.simpleMessage(
+      "Maturity Terms",
+    ),
+    "investMonthlyReturnRate": MessageLookupByLibrary.simpleMessage(
+      "Monthly Return Rate",
+    ),
+    "investNetBanking": MessageLookupByLibrary.simpleMessage("Net Banking"),
+    "investNewInvestment": MessageLookupByLibrary.simpleMessage(
+      "New Investment",
+    ),
+    "investOr": MessageLookupByLibrary.simpleMessage("OR"),
+    "investOthers": MessageLookupByLibrary.simpleMessage("Others"),
+    "investPaymentMethod": MessageLookupByLibrary.simpleMessage(
+      "Payment Method",
+    ),
+    "investPaymentSuccessful": MessageLookupByLibrary.simpleMessage(
+      "Payment Successful!",
+    ),
+    "investPaytm": MessageLookupByLibrary.simpleMessage("Paytm"),
+    "investPhonePe": MessageLookupByLibrary.simpleMessage("PhonePe"),
+    "investProceedToPay": MessageLookupByLibrary.simpleMessage(
+      "Proceed to Pay",
+    ),
+    "investSecuredByRazorpay": MessageLookupByLibrary.simpleMessage(
+      "Secured by Razorpay",
+    ),
+    "investSelectUpiApp": MessageLookupByLibrary.simpleMessage(
+      "Select UPI App",
+    ),
+    "investStartDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+    "investTransactionId": MessageLookupByLibrary.simpleMessage(
+      "Transaction ID",
+    ),
+    "investUpi": MessageLookupByLibrary.simpleMessage("UPI (Recommended)"),
+    "investViewInvestmentDetails": MessageLookupByLibrary.simpleMessage(
+      "View Investment Details",
+    ),
+    "kycAadhaarCard": MessageLookupByLibrary.simpleMessage("Aadhaar Card"),
+    "kycAccountHolderName": MessageLookupByLibrary.simpleMessage(
+      "Account Holder Name",
+    ),
+    "kycBackImage": MessageLookupByLibrary.simpleMessage("Back Image"),
+    "kycBankDetails": MessageLookupByLibrary.simpleMessage("Bank Details"),
     "kycChooseIdentityType": MessageLookupByLibrary.simpleMessage(
       "Choose Your Identity Type",
     ),
@@ -114,11 +218,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "kycDescription3": MessageLookupByLibrary.simpleMessage(
       "This helps protect the community from fake accounts, fraud, and identity misuse.",
     ),
+    "kycDocumentNumber": MessageLookupByLibrary.simpleMessage(
+      "Document Number",
+    ),
+    "kycDocumentType": MessageLookupByLibrary.simpleMessage("Document Type"),
     "kycDrivingLicense": MessageLookupByLibrary.simpleMessage(
       "Driving License",
     ),
     "kycFirstDocument": MessageLookupByLibrary.simpleMessage("First Document"),
+    "kycFrontImage": MessageLookupByLibrary.simpleMessage("Front Image"),
+    "kycHintDocNumber": MessageLookupByLibrary.simpleMessage("1234 5678 9012"),
+    "kycHintName": MessageLookupByLibrary.simpleMessage("John Doe"),
     "kycIdCard": MessageLookupByLibrary.simpleMessage("ID Card"),
+    "kycPanCard": MessageLookupByLibrary.simpleMessage("PAN Card"),
     "kycPassport": MessageLookupByLibrary.simpleMessage("Passport"),
     "kycProofOfIdentity": MessageLookupByLibrary.simpleMessage(
       "Proof Of Identity",
@@ -127,8 +239,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "kycSecondDocument": MessageLookupByLibrary.simpleMessage(
       "Second Document",
     ),
+    "kycSubmitForVerification": MessageLookupByLibrary.simpleMessage(
+      "Submit for Verification",
+    ),
+    "kycSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Complete your KYC to start investing",
+    ),
     "kycTitle": MessageLookupByLibrary.simpleMessage("KYC"),
     "kycUploadIdCard": m0,
+    "kycVerification": MessageLookupByLibrary.simpleMessage("KYC Verification"),
+    "kycVoterId": MessageLookupByLibrary.simpleMessage("Voter ID"),
     "languageScreenTitle": MessageLookupByLibrary.simpleMessage("Language"),
     "loginButtonText": MessageLookupByLibrary.simpleMessage("Login"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage(
@@ -144,6 +264,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginTitle": MessageLookupByLibrary.simpleMessage("Welcome,"),
     "logoutDesc": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to logout?",
+    ),
+    "monthlyReturnsPaid": MessageLookupByLibrary.simpleMessage("Paid"),
+    "monthlyReturnsPaidVia": m1,
+    "monthlyReturnsTitle": MessageLookupByLibrary.simpleMessage(
+      "Monthly Returns",
+    ),
+    "myInvestmentsActive": MessageLookupByLibrary.simpleMessage("Active"),
+    "myInvestmentsMonthlyReturn": m2,
+    "myInvestmentsTitle": MessageLookupByLibrary.simpleMessage(
+      "My Investments",
     ),
     "newPasswordHint": MessageLookupByLibrary.simpleMessage("New Password"),
     "notificationPermissionLabel": MessageLookupByLibrary.simpleMessage(
@@ -166,11 +296,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpVerifiedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "OTP verified successfully",
     ),
-    "permissionDeniedDescription": m1,
+    "permissionDeniedDescription": m3,
     "permissionDeniedModalTitle": MessageLookupByLibrary.simpleMessage(
       "Permission Denied",
     ),
-    "permissionPermanentlyDeniedDescription": m2,
+    "permissionPermanentlyDeniedDescription": m4,
     "photosPermissionLabel": MessageLookupByLibrary.simpleMessage("Photos"),
     "profileBankAccount": MessageLookupByLibrary.simpleMessage("Bank Account"),
     "profileChangePassword": MessageLookupByLibrary.simpleMessage(
@@ -195,7 +325,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendCodeLink": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendIn": MessageLookupByLibrary.simpleMessage("Resend in "),
-    "resendTimer": m3,
+    "resendTimer": m5,
     "resetPasswordButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
     ),
@@ -238,6 +368,40 @@ class MessageLookup extends MessageLookupByLibrary {
     "timeoutErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Request timeout! Please try again.",
     ),
+    "tradingDiaryBuy": m6,
+    "tradingDiaryFeature1": MessageLookupByLibrary.simpleMessage(
+      "Daily F&O trade details",
+    ),
+    "tradingDiaryFeature2": MessageLookupByLibrary.simpleMessage(
+      "Entry/Exit prices & strikes",
+    ),
+    "tradingDiaryFeature3": MessageLookupByLibrary.simpleMessage(
+      "Reasoning screenshots",
+    ),
+    "tradingDiaryFeature4": MessageLookupByLibrary.simpleMessage(
+      "Live P&L tracking",
+    ),
+    "tradingDiaryMonthlyPlan": MessageLookupByLibrary.simpleMessage(
+      "Monthly Plan",
+    ),
+    "tradingDiaryMonthlyPrice": m7,
+    "tradingDiaryPremium": MessageLookupByLibrary.simpleMessage(
+      "Premium Subscription",
+    ),
+    "tradingDiaryPremiumDesc": MessageLookupByLibrary.simpleMessage(
+      "Access detailed daily trading books",
+    ),
+    "tradingDiarySavePercent": m8,
+    "tradingDiarySell": m9,
+    "tradingDiarySubscribe": MessageLookupByLibrary.simpleMessage(
+      "Subscribe Now",
+    ),
+    "tradingDiaryTitle": MessageLookupByLibrary.simpleMessage("Trading Diary"),
+    "tradingDiaryTotalPnL": MessageLookupByLibrary.simpleMessage("Total P&L"),
+    "tradingDiaryYearlyPlan": MessageLookupByLibrary.simpleMessage(
+      "Yearly Plan",
+    ),
+    "tradingDiaryYearlyPrice": m10,
     "tryAgainButtonLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
     "underMaintenanceDescription": MessageLookupByLibrary.simpleMessage(
       "Our platform is currently under maintenance to bring you a better experience. We\'ll be back shortly - thank you for your patience!",
@@ -254,7 +418,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateAvailableDescription": MessageLookupByLibrary.simpleMessage(
       "We have added lots of new feature and fixed some bugs to make your experience smooth.",
     ),
-    "updateAvailableTitle": m4,
+    "updateAvailableTitle": m11,
     "updateLaterButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Update later",
     ),

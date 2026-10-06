@@ -58,7 +58,11 @@ class _FadePageRoute<T> extends PageRouteBuilder<T> {
          reverseTransitionDuration: const Duration(milliseconds: 200),
          pageBuilder: (context, animation, secondaryAnimation) {
            final result = builder(context);
-           return Semantics(scopesRoute: true, explicitChildNodes: true, child: result);
+           return Semantics(
+             scopesRoute: true,
+             explicitChildNodes: true,
+             child: result,
+           );
          },
          transitionsBuilder: (context, animation, secondaryAnimation, child) {
            return FadeTransition(opacity: animation, child: child);

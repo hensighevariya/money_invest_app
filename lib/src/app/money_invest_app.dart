@@ -30,26 +30,35 @@ class MoneyInvestAppState extends State<MoneyInvestApp> {
     Bloc.observer = AppBlocObserver(navigatorKey);
 
     final userProfileState = context.read<UserProfileBloc>().state;
-    _appRouteGenerator = AppRoutes(navigatorKey: navigatorKey, userAuthorized: userProfileState.isUserAuthorized);
+    _appRouteGenerator = AppRoutes(
+      navigatorKey: navigatorKey,
+      userAuthorized: userProfileState.isUserAuthorized,
+    );
 
-    if(userProfileState.isUserAuthorized) {
+    if (userProfileState.isUserAuthorized) {
       context.read<UserProfileBloc>().add(const FetchUserProfile());
     }
   }
 
-  void _onUserAuthorizedStatusChanged(BuildContext context, UserProfileState state) {
+  void _onUserAuthorizedStatusChanged(
+    BuildContext context,
+    UserProfileState state,
+  ) {
     _appRouteGenerator.userAuthorized = state.isUserAuthorized;
   }
 
   @override
   Widget build(BuildContext context) {
-    final language = context.select<LocalizationBloc, Language>((value) => value.state.selectedLanguage);
+    final language = context.select<LocalizationBloc, Language>(
+      (value) => value.state.selectedLanguage,
+    );
     final themes = SecuritySaasAppTheme(context);
 
     return MultiBlocListener(
       listeners: [
         BlocListener<UserProfileBloc, UserProfileState>(
-          listenWhen: (previous, current) => previous.isUserAuthorized != current.isUserAuthorized,
+          listenWhen: (previous, current) =>
+              previous.isUserAuthorized != current.isUserAuthorized,
           listener: _onUserAuthorizedStatusChanged,
         ),
       ],

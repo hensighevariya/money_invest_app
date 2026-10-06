@@ -12,13 +12,17 @@ class LoadingIndicator extends StatefulWidget {
   State<LoadingIndicator> createState() => _LoadingIndicator();
 }
 
-class _LoadingIndicator extends State<LoadingIndicator> with SingleTickerProviderStateMixin {
+class _LoadingIndicator extends State<LoadingIndicator>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: Durations.extralong4);
+    _controller = AnimationController(
+      vsync: this,
+      duration: Durations.extralong4,
+    );
     _controller.repeat();
   }
 
@@ -39,7 +43,11 @@ class _LoadingIndicator extends State<LoadingIndicator> with SingleTickerProvide
       child: RepaintBoundary(
         child: CustomPaint(
           size: Size.square(widget.size),
-          painter: _LoadingCirclePainter(animation: _controller, strokeColor: color, color: colorScheme.onSurface),
+          painter: _LoadingCirclePainter(
+            animation: _controller,
+            strokeColor: color,
+            color: colorScheme.onSurface,
+          ),
         ),
       ),
     );
@@ -47,12 +55,15 @@ class _LoadingIndicator extends State<LoadingIndicator> with SingleTickerProvide
 }
 
 class _LoadingCirclePainter extends CustomPainter {
-  _LoadingCirclePainter({required this.animation, required this.color, required this.strokeColor})
-    : scaleAnimation = TweenSequence([
-        TweenSequenceItem(tween: Tween(begin: 0.75, end: 1.0), weight: 0.5),
-        TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.75), weight: 0.5),
-      ]).animate(animation),
-      super(repaint: animation);
+  _LoadingCirclePainter({
+    required this.animation,
+    required this.color,
+    required this.strokeColor,
+  }) : scaleAnimation = TweenSequence([
+         TweenSequenceItem(tween: Tween(begin: 0.75, end: 1.0), weight: 0.5),
+         TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.75), weight: 0.5),
+       ]).animate(animation),
+       super(repaint: animation);
 
   final Animation<double> animation;
   final Animation<double> scaleAnimation;
@@ -61,10 +72,9 @@ class _LoadingCirclePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint =
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.fill;
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
 
     final center = Offset(size.width / 2, size.height / 2);
     final outerCircleRadius = (size.shortestSide / 2) * scaleAnimation.value;
@@ -72,21 +82,25 @@ class _LoadingCirclePainter extends CustomPainter {
 
     canvas.drawCircle(center, innerCircleRadius, paint);
 
-    final strokePaint =
-        Paint()
-          ..color = strokeColor
-          ..strokeCap = StrokeCap.round
-          ..strokeWidth = size.shortestSide / 8
-          ..style = PaintingStyle.stroke;
+    final strokePaint = Paint()
+      ..color = strokeColor
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = size.shortestSide / 8
+      ..style = PaintingStyle.stroke;
 
     double sweepAngle = (pi / 180) * 120;
-    final outerCircleRect = Rect.fromCircle(center: center, radius: outerCircleRadius);
+    final outerCircleRect = Rect.fromCircle(
+      center: center,
+      radius: outerCircleRadius,
+    );
 
     double outerCircle1StartAngle = 2 * pi * animation.value;
     double outerCircle2StartAngle = outerCircle1StartAngle + pi;
 
-    final stroke1Path = Path()..addArc(outerCircleRect, outerCircle1StartAngle, sweepAngle);
-    final stroke2Path = Path()..addArc(outerCircleRect, outerCircle2StartAngle, sweepAngle);
+    final stroke1Path = Path()
+      ..addArc(outerCircleRect, outerCircle1StartAngle, sweepAngle);
+    final stroke2Path = Path()
+      ..addArc(outerCircleRect, outerCircle2StartAngle, sweepAngle);
 
     canvas.drawPath(stroke1Path, strokePaint);
     canvas.drawPath(stroke2Path, strokePaint);

@@ -19,7 +19,10 @@ class MaintenanceScreen extends StatelessWidget {
           bottom: false,
           minimum: EdgeInsets.all(margin),
           child: EmptyDataView(
-            icon: const SvgImageFromAsset.square(VectorImages.maintenance, size: 240),
+            icon: const SvgImageFromAsset.square(
+              VectorImages.maintenance,
+              size: 240,
+            ),
             title: localizations.underMaintenanceTitle,
             description: localizations.underMaintenanceDescription,
           ),

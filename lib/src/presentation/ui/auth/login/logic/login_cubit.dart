@@ -11,22 +11,31 @@ import 'package:money_invest_app/src/utils/validator.dart';
 import 'login_state.dart';
 
 base class LoginCubit extends BaseCubit<LoginState> {
-  LoginCubit({required this._authRepository, required this._userRepository, required this._loadingHandler})
-    : super(const LoginState());
+  LoginCubit({
+    required this._authRepository,
+    required this._userRepository,
+    required this._loadingHandler,
+  }) : super(const LoginState());
 
   final AuthRepository _authRepository;
   final UserRepository _userRepository;
   final LoadingHandler _loadingHandler;
 
   void onEmailAddressChanged(String value, PhoneDetail phoneDetail) {
-    emit(state.copyWith(emailMobileInput: EmailMobileInput.dirty(value, phoneDetail)));
+    emit(
+      state.copyWith(
+        emailMobileInput: EmailMobileInput.dirty(value, phoneDetail),
+      ),
+    );
   }
 
   void onPasswordChanged(String value) {
     emit(state.copyWith(passwordInput: UserPasswordInput.dirty(value)));
   }
 
-  Future<UserData?> _resolveLoggedInUser(AuthSuccessResponse? authResponse) async {
+  Future<UserData?> _resolveLoggedInUser(
+    AuthSuccessResponse? authResponse,
+  ) async {
     if (authResponse == null) return null;
 
     final loginUser = authResponse.user;
@@ -50,7 +59,8 @@ base class LoginCubit extends BaseCubit<LoginState> {
         final authResponse = mobile
             ? await _authRepository.login(
                 type: LoginType.mobile.value,
-                mobile: '+${state.emailMobileInput.phoneDetail?.code} ${state.emailMobileInput.value}',
+                mobile:
+                    '+${state.emailMobileInput.phoneDetail?.code} ${state.emailMobileInput.value}',
                 password: state.passwordInput.value,
                 emailAddress: '',
               )

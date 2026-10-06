@@ -3,7 +3,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 
 abstract interface class AppConstants {
-  static final emailPatternRegExp = RegExp(r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.(com|co|in)$', caseSensitive: false);
+  static final emailPatternRegExp = RegExp(
+    r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.(com|co|in)$',
+    caseSensitive: false,
+  );
   static final namePatternRegExp = RegExp(r'^[\p{L}\s.]+$', unicode: true);
   static final numbersOnlyRegExp = RegExp(r'^\d+$');
   static final alphabetsOnlyRegExp = RegExp(r'[a-zA-Z\s]');

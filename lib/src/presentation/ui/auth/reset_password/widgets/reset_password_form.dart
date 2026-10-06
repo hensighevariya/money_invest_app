@@ -29,8 +29,12 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
     super.initState();
 
     final state = context.read<ResetPasswordCubit>().state;
-    _passwordController = TextEditingController(text: state.passwordInput.value);
-    _confirmPasswordController = TextEditingController(text: state.confirmPasswordInput.value);
+    _passwordController = TextEditingController(
+      text: state.passwordInput.value,
+    );
+    _confirmPasswordController = TextEditingController(
+      text: state.confirmPasswordInput.value,
+    );
     _passwordFocusNode = FocusNode();
     _confirmPasswordFocusNode = FocusNode();
   }
@@ -75,55 +79,79 @@ class _ResetPasswordFormState extends State<ResetPasswordForm> {
             children: [
               InputFieldDecoration(
                 labelText: localizations.loginPasswordHint,
-                child: BlocSelector<ResetPasswordCubit, ResetPasswordState, PasswordInput>(
-                  selector: (state) => state.passwordInput,
-                  builder: (context, passwordInput) {
-                    return PasswordTextField(
-                      controller: _passwordController,
-                      focusNode: _passwordFocusNode,
-                      textInputAction: TextInputAction.next,
-                      autofillHints: {AutofillHints.newPassword},
-                      onChanged: (value) => context.read<ResetPasswordCubit>().onPasswordChanged(value),
-                      onEditingComplete: () => _confirmPasswordFocusNode.requestFocus(),
-                      onFieldSubmitted: (value) => _confirmPasswordFocusNode.requestFocus(),
-                      hintText: localizations.loginPasswordHint,
-                      maxLength: 20,
-                      errorText: passwordInput.displayError?.getErrorMessage(context),
-                    );
-                  },
-                ),
+                child:
+                    BlocSelector<
+                      ResetPasswordCubit,
+                      ResetPasswordState,
+                      PasswordInput
+                    >(
+                      selector: (state) => state.passwordInput,
+                      builder: (context, passwordInput) {
+                        return PasswordTextField(
+                          controller: _passwordController,
+                          focusNode: _passwordFocusNode,
+                          textInputAction: TextInputAction.next,
+                          autofillHints: {AutofillHints.newPassword},
+                          onChanged: (value) => context
+                              .read<ResetPasswordCubit>()
+                              .onPasswordChanged(value),
+                          onEditingComplete: () =>
+                              _confirmPasswordFocusNode.requestFocus(),
+                          onFieldSubmitted: (value) =>
+                              _confirmPasswordFocusNode.requestFocus(),
+                          hintText: localizations.loginPasswordHint,
+                          maxLength: 20,
+                          errorText: passwordInput.displayError
+                              ?.getErrorMessage(context),
+                        );
+                      },
+                    ),
               ),
               InputFieldDecoration(
                 labelText: localizations.confirmPasswordHint,
-                child: BlocSelector<ResetPasswordCubit, ResetPasswordState, ConfirmPasswordInput>(
-                  selector: (state) => state.confirmPasswordInput,
-                  builder: (context, confirmPasswordInput) {
-                    final passwordValue = context.select<ResetPasswordCubit, String>(
-                      (value) => value.state.passwordInput.value,
-                    );
+                child:
+                    BlocSelector<
+                      ResetPasswordCubit,
+                      ResetPasswordState,
+                      ConfirmPasswordInput
+                    >(
+                      selector: (state) => state.confirmPasswordInput,
+                      builder: (context, confirmPasswordInput) {
+                        final passwordValue = context
+                            .select<ResetPasswordCubit, String>(
+                              (value) => value.state.passwordInput.value,
+                            );
 
-                    return PasswordTextField(
-                      controller: _confirmPasswordController,
-                      focusNode: _confirmPasswordFocusNode,
-                      textInputAction: TextInputAction.done,
-                      autofillHints: {AutofillHints.newPassword},
-                      onChanged: (value) => context.read<ResetPasswordCubit>().onConfirmPasswordChanged(value),
-                      onFieldSubmitted: (value) => _confirmPasswordFocusNode.unfocus(),
-                      hintText: localizations.confirmPasswordHint,
-                      maxLength: 20,
-                      errorText:
-                          confirmPasswordInput.displayError?.getErrorMessage(context) ??
-                          (!confirmPasswordInput.isPure
-                              ? confirmPasswordInput.compare(passwordValue)?.getErrorMessage(context)
-                              : null),
-                    );
-                  },
-                ),
+                        return PasswordTextField(
+                          controller: _confirmPasswordController,
+                          focusNode: _confirmPasswordFocusNode,
+                          textInputAction: TextInputAction.done,
+                          autofillHints: {AutofillHints.newPassword},
+                          onChanged: (value) => context
+                              .read<ResetPasswordCubit>()
+                              .onConfirmPasswordChanged(value),
+                          onFieldSubmitted: (value) =>
+                              _confirmPasswordFocusNode.unfocus(),
+                          hintText: localizations.confirmPasswordHint,
+                          maxLength: 20,
+                          errorText:
+                              confirmPasswordInput.displayError
+                                  ?.getErrorMessage(context) ??
+                              (!confirmPasswordInput.isPure
+                                  ? confirmPasswordInput
+                                        .compare(passwordValue)
+                                        ?.getErrorMessage(context)
+                                  : null),
+                        );
+                      },
+                    ),
               ),
             ],
           ),
           BlocSelector<ResetPasswordCubit, ResetPasswordState, bool>(
-            selector: (state) => state.isValid && (state.confirmPasswordInput.value == state.passwordInput.value),
+            selector: (state) =>
+                state.isValid &&
+                (state.confirmPasswordInput.value == state.passwordInput.value),
             builder: (context, isValid) {
               return ElevatedButton(
                 style: ElevatedButtonPrimaryStyle(context),

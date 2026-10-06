@@ -10,7 +10,13 @@ import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'loading_indicator.dart';
 
 class EmptyDataView extends StatelessWidget {
-  const EmptyDataView({super.key, this.icon, required this.title, this.description, this.action});
+  const EmptyDataView({
+    super.key,
+    this.icon,
+    required this.title,
+    this.description,
+    this.action,
+  });
 
   final Widget? icon;
   final String title;
@@ -31,14 +37,25 @@ class EmptyDataView extends StatelessWidget {
             if (icon != null)
               Flexible(
                 child: Container(
-                  constraints: const BoxConstraints(maxWidth: 320, maxHeight: 320),
-                  child: Center(heightFactor: 1.0, widthFactor: 1.0, child: icon),
+                  constraints: const BoxConstraints(
+                    maxWidth: 320,
+                    maxHeight: 320,
+                  ),
+                  child: Center(
+                    heightFactor: 1.0,
+                    widthFactor: 1.0,
+                    child: icon,
+                  ),
                 ),
               ),
             Column(
               spacing: Spacing.small,
               children: [
-                DefaultTextStyle.merge(style: textTheme.titleLarge, textAlign: TextAlign.center, child: Text(title)),
+                DefaultTextStyle.merge(
+                  style: textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                  child: Text(title),
+                ),
                 if (!description.isNullOrEmpty) ...[
                   Text(
                     description ?? '',
@@ -57,7 +74,11 @@ class EmptyDataView extends StatelessWidget {
 }
 
 class EmptyViewAction extends StatelessWidget {
-  const EmptyViewAction({super.key, required this.onPressed, required this.label});
+  const EmptyViewAction({
+    super.key,
+    required this.onPressed,
+    required this.label,
+  });
 
   final VoidCallback onPressed;
   final String label;
@@ -73,7 +94,12 @@ class EmptyViewAction extends StatelessWidget {
 }
 
 class EmptyStateView<B extends BlocBase<BaseState>> extends StatelessWidget {
-  const EmptyStateView({super.key, required this.placeholder, this.loadingWidget, required this.onRetry});
+  const EmptyStateView({
+    super.key,
+    required this.placeholder,
+    this.loadingWidget,
+    required this.onRetry,
+  });
 
   final Widget placeholder;
   final Widget? loadingWidget;
@@ -135,7 +161,10 @@ class InternetErrorView extends StatelessWidget {
       icon: LottieBuilder.asset(LottieFiles.noInternet, fit: BoxFit.contain),
       title: localizations.internetErrorTitle,
       description: localizations.internetErrorDescription,
-      action: EmptyViewAction(onPressed: onRetry, label: localizations.tryAgainButtonLabel),
+      action: EmptyViewAction(
+        onPressed: onRetry,
+        label: localizations.tryAgainButtonLabel,
+      ),
     );
   }
 }
@@ -152,7 +181,10 @@ class ServerErrorView extends StatelessWidget {
       icon: LottieBuilder.asset(LottieFiles.serverError, fit: BoxFit.contain),
       title: localizations.serverErrorTitle,
       description: localizations.serverErrorDescription,
-      action: EmptyViewAction(onPressed: onRetry, label: localizations.tryAgainButtonLabel),
+      action: EmptyViewAction(
+        onPressed: onRetry,
+        label: localizations.tryAgainButtonLabel,
+      ),
     );
   }
 }
@@ -166,10 +198,16 @@ class UnknownErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = context.localizations;
     return EmptyDataView(
-      icon: LottieBuilder.asset(LottieFiles.somethingWentWrong, fit: BoxFit.contain),
+      icon: LottieBuilder.asset(
+        LottieFiles.somethingWentWrong,
+        fit: BoxFit.contain,
+      ),
       title: localizations.unknownErrorTitle,
       description: localizations.unknownErrorDescription,
-      action: EmptyViewAction(onPressed: onRetry, label: localizations.tryAgainButtonLabel),
+      action: EmptyViewAction(
+        onPressed: onRetry,
+        label: localizations.tryAgainButtonLabel,
+      ),
     );
   }
 }

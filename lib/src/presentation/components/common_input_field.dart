@@ -19,22 +19,36 @@ class InputFieldLabel extends StatelessWidget {
       return Text.rich(
         TextSpan(
           text: data,
-          style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.primary,
+          ),
           children: [
             TextSpan(
               text: ' *',
-              style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.error),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.error,
+              ),
             ),
           ],
         ),
       );
     }
-    return Text(data, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary));
+    return Text(
+      data,
+      style: theme.textTheme.bodyMedium?.copyWith(
+        color: theme.colorScheme.primary,
+      ),
+    );
   }
 }
 
 class InputFieldDecoration extends StatelessWidget {
-  const InputFieldDecoration({super.key, required this.labelText, this.isRequired = false, required this.child});
+  const InputFieldDecoration({
+    super.key,
+    required this.labelText,
+    this.isRequired = false,
+    required this.child,
+  });
 
   final String labelText;
   final Widget child;
@@ -158,7 +172,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
       spacing: Spacing.xSmall,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.inputFieldLabel != null) ...[InputFieldLabel(widget.inputFieldLabel ?? '')],
+        if (widget.inputFieldLabel != null) ...[
+          InputFieldLabel(widget.inputFieldLabel ?? ''),
+        ],
         TextFormField(
           enabled: widget.enabled,
           onEditingComplete: widget.onEditingComplete,
@@ -172,17 +188,21 @@ class _CommonTextFieldState extends State<CommonTextField> {
           keyboardType: widget.keyboardType ?? TextInputType.text,
           inputFormatters: widget.inputFormatters,
           onChanged: widget.onChanged,
-          textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
+          textCapitalization:
+              widget.textCapitalization ?? TextCapitalization.none,
           validator: widget.validator,
-          autovalidateMode: widget.autoValidateMode ?? AutovalidateMode.onUserInteraction,
+          autovalidateMode:
+              widget.autoValidateMode ?? AutovalidateMode.onUserInteraction,
           autofillHints: widget.autofillHints,
-          onTapOutside: (event) => widget.onTapOutside ?? context.hideKeyboard(),
+          onTapOutside: (event) =>
+              widget.onTapOutside ?? context.hideKeyboard(),
           textInputAction: widget.textInputAction ?? TextInputAction.next,
           obscureText: widget.obscureText,
           obscuringCharacter: widget.obscuringCharacter,
           maxLines: widget.maxLines,
           maxLength: widget.maxLength,
-          maxLengthEnforcement: MaxLengthEnforcement.truncateAfterCompositionEnds,
+          maxLengthEnforcement:
+              MaxLengthEnforcement.truncateAfterCompositionEnds,
 
           decoration: InputDecoration(
             hoverColor: widget.hoverColor,
@@ -193,7 +213,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
             fillColor: widget.fillColor,
             suffixText: widget.suffixText,
             labelText: widget.labelText,
-            suffixStyle: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onTertiary),
+            suffixStyle: context.textTheme.bodyMedium?.copyWith(
+              color: context.colorScheme.onTertiary,
+            ),
             hintText: widget.hintText,
             prefixIcon: widget.prefixIcon,
             enabledBorder: widget.enabledBorder,
@@ -202,10 +224,17 @@ class _CommonTextFieldState extends State<CommonTextField> {
             constraints: widget.constraints,
             errorText: widget.errorText,
             suffixIcon: widget.suffixIcon != null
-                ? Padding(padding: const EdgeInsets.symmetric(horizontal: 5), child: widget.suffixIcon)
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: widget.suffixIcon,
+                  )
                 : null,
-            prefixIconConstraints: widget.prefixIconConstraints ?? const BoxConstraints(minWidth: 48, maxHeight: 40),
-            suffixIconConstraints: widget.suffixIconConstraints ?? const BoxConstraints(minWidth: 48, maxHeight: 40),
+            prefixIconConstraints:
+                widget.prefixIconConstraints ??
+                const BoxConstraints(minWidth: 48, maxHeight: 40),
+            suffixIconConstraints:
+                widget.suffixIconConstraints ??
+                const BoxConstraints(minWidth: 48, maxHeight: 40),
           ),
           onFieldSubmitted: widget.onFieldSubmitted,
         ),
@@ -272,22 +301,31 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       onEditingComplete: widget.onEditingComplete,
       inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z0-9!@#$%^&*_,.?’:;"]')),
+        FilteringTextInputFormatter.allow(
+          RegExp(r'[A-Za-z0-9!@#$%^&*_,.?’:;"]'),
+        ),
         LengthLimitingTextInputFormatter(widget.maxLength ?? 20),
       ],
       labelText: widget.labelText,
       hintText: widget.hintText,
       errorText: widget.errorText,
-      prefixIcon: widget.controller.text.isNullOrEmpty && !widget.isDisplayPrefix
+      prefixIcon:
+          widget.controller.text.isNullOrEmpty && !widget.isDisplayPrefix
           ? null
-          : SvgImageFromAsset.square(SvgIcons.icnLock, size: 22, color: context.colorScheme.onSurface),
+          : SvgImageFromAsset.square(
+              SvgIcons.icnLock,
+              size: 22,
+              color: context.colorScheme.onSurface,
+            ),
       suffixIcon: IconButton(
         onPressed: () {
           setState(() {
             _isPasswordVisible = !_isPasswordVisible;
           });
         },
-        icon: SvgIcon(_isPasswordVisible ? SvgIcons.icnEye : SvgIcons.icnEyeSlash),
+        icon: SvgIcon(
+          _isPasswordVisible ? SvgIcons.icnEye : SvgIcons.icnEyeSlash,
+        ),
       ),
       suffixIconConstraints: const BoxConstraints(maxWidth: 48, maxHeight: 40),
     );

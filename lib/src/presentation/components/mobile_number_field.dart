@@ -76,7 +76,8 @@ class MobileNumberField extends StatefulWidget {
 }
 
 class _MobileNumberFieldState extends State<MobileNumberField> {
-  late MobileNumberController _controller = widget.controller ?? MobileNumberController();
+  late MobileNumberController _controller =
+      widget.controller ?? MobileNumberController();
   late Country _country = _controller.country;
   ValueNotifier<bool?> isEnterDigit = ValueNotifier(null);
 
@@ -100,7 +101,10 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
             if (widget.label != null) ...[
               Text(
                 widget.label ?? '',
-                style: context.theme.textTheme.bodyMedium?.copyWith(fontSize: TextSize.label, color: widget.labelColor ?? context.colorScheme.onSurface),
+                style: context.theme.textTheme.bodyMedium?.copyWith(
+                  fontSize: TextSize.label,
+                  color: widget.labelColor ?? context.colorScheme.onSurface,
+                ),
                 //overflow: TextOverflow.ellipsis,
               ),
               const Gap(Spacing.medium),
@@ -146,7 +150,11 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                               showCountryCode: widget.showCountryCode,
                             ),
                           )
-                        : SvgImageFromAsset.square(SvgIcons.icnEmail, size: 22, color: context.colorScheme.onSurface)
+                        : SvgImageFromAsset.square(
+                            SvgIcons.icnEmail,
+                            size: 22,
+                            color: context.colorScheme.onSurface,
+                          )
                   : widget.isMobileField ?? false
                   ? FittedBox(
                       child: _CountryPicker(
@@ -159,7 +167,11 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                         showCountryCode: widget.showCountryCode,
                       ),
                     )
-                  : SvgImageFromAsset.square(SvgIcons.icnEmail, size: 22, color: context.colorScheme.onSurface),
+                  : SvgImageFromAsset.square(
+                      SvgIcons.icnEmail,
+                      size: 22,
+                      color: context.colorScheme.onSurface,
+                    ),
               suffixIcon: widget.suffixIcon,
               hintText: widget.hintText,
               readOnly: widget.readOnly,
@@ -176,21 +188,28 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
       isScrollControlled: true,
       backgroundColor: context.colorScheme.surface,
       elevation: 0,
-      builder: (context) =>Container(
+      builder: (context) => Container(
         decoration: kIsWeb
             ? BoxDecoration(
-          border: Border.all(color: const Color(0xff06090c), width: 0),
-          color: context.colorScheme.surface,
-        )
+                border: Border.all(color: const Color(0xff06090c), width: 0),
+                color: context.colorScheme.surface,
+              )
             : null,
         child: Container(
           margin: kIsWeb ? const EdgeInsets.all(10.0) : null,
           height: MediaQuery.of(context).size.height * 0.7,
           decoration: BoxDecoration(
             color: context.colorScheme.surface,
-            borderRadius: kIsWeb ? BorderRadius.circular(24) : const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
+            borderRadius: kIsWeb
+                ? BorderRadius.circular(24)
+                : const BorderRadius.only(
+                    topLeft: Radius.circular(24),
+                    topRight: Radius.circular(24),
+                  ),
           ),
-          child: CountryPickerView(onCountrySelected: (country) => context.pop(country)),
+          child: CountryPickerView(
+            onCountrySelected: (country) => context.pop(country),
+          ),
         ),
       ),
     );
@@ -207,7 +226,11 @@ class _CountryPicker extends StatelessWidget {
   final VoidCallback onPressed;
   final bool showCountryCode;
 
-  const _CountryPicker({required this.country, required this.onPressed, required this.showCountryCode});
+  const _CountryPicker({
+    required this.country,
+    required this.onPressed,
+    required this.showCountryCode,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -228,19 +251,35 @@ class _CountryPicker extends StatelessWidget {
                     ClipRRect(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       borderRadius: ShapeBorderRadius.normal,
-                      child: CountryPickerHelper.getDefaultFlagImage(country, width: 25, height: 25),
+                      child: CountryPickerHelper.getDefaultFlagImage(
+                        country,
+                        width: 25,
+                        height: 25,
+                      ),
                     ),
                     const Gap(Spacing.medium),
                     if (showCountryCode)
-                      Text('+${country.phoneDetail.code}', style: context.theme.textTheme.titleMedium?.copyWith(color: context.colorScheme.onSurface)),
+                      Text(
+                        '+${country.phoneDetail.code}',
+                        style: context.theme.textTheme.titleMedium?.copyWith(
+                          color: context.colorScheme.onSurface,
+                        ),
+                      ),
                     const Gap(Spacing.small),
-                    SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20, color: colorScheme.onSurface),
+                    SvgImageFromAsset.square(
+                      SvgIcons.arrowDown,
+                      size: 20,
+                      color: colorScheme.onSurface,
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-          CommonVerticalDivider(height: 20, color: context.colorScheme.onSecondary),
+          CommonVerticalDivider(
+            height: 20,
+            color: context.colorScheme.onSecondary,
+          ),
         ],
       ),
     );
@@ -338,7 +377,11 @@ class CountryPickerView extends StatefulWidget {
   final void Function(Country country) onCountrySelected;
   final bool hasCountryCode;
 
-  const CountryPickerView({super.key, required this.onCountrySelected, this.hasCountryCode = true});
+  const CountryPickerView({
+    super.key,
+    required this.onCountrySelected,
+    this.hasCountryCode = true,
+  });
 
   @override
   State<CountryPickerView> createState() => _CountryPickerViewState();
@@ -346,7 +389,8 @@ class CountryPickerView extends StatefulWidget {
 
 class _CountryPickerViewState extends State<CountryPickerView> {
   final List<CountryData> listCountry = [];
-  final StreamController<Iterable<Country>> _countryListSubject = StreamController.broadcast();
+  final StreamController<Iterable<Country>> _countryListSubject =
+      StreamController.broadcast();
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -370,7 +414,9 @@ class _CountryPickerViewState extends State<CountryPickerView> {
           country.isoCode.toLowerCase().contains(query) ||
           country.iso3Code.toLowerCase().contains(query) ||
           country.phoneDetail.code.toLowerCase().contains(query) ||
-          country.translations.values.any((element) => element.contains(query))) {
+          country.translations.values.any(
+            (element) => element.contains(query),
+          )) {
         yield country;
       }
     }
@@ -405,11 +451,16 @@ class _CountryPickerViewState extends State<CountryPickerView> {
                     replacement: const Center(child: NoDataWidget()),
                     child: ListView.builder(
                       controller: _scrollController,
-                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       itemCount: listCountry.length,
                       itemBuilder: (context, index) {
                         final country = listCountry.elementAt(index);
-                        return CountryItemView(country: country, onPressed: () => widget.onCountrySelected(country), hasCountryCode: widget.hasCountryCode);
+                        return CountryItemView(
+                          country: country,
+                          onPressed: () => widget.onCountrySelected(country),
+                          hasCountryCode: widget.hasCountryCode,
+                        );
                       },
                     ),
                   );
@@ -428,7 +479,12 @@ class CountryItemView extends StatelessWidget {
   final VoidCallback onPressed;
   final bool hasCountryCode;
 
-  const CountryItemView({super.key, required this.country, required this.onPressed, this.hasCountryCode = true});
+  const CountryItemView({
+    super.key,
+    required this.country,
+    required this.onPressed,
+    this.hasCountryCode = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -437,17 +493,26 @@ class CountryItemView extends StatelessWidget {
       leading: Material(
         borderRadius: BorderRadius.circular(2),
         clipBehavior: Clip.hardEdge,
-        child: CountryPickerHelper.getDefaultFlagImage(country, width: 28, height: 20),
+        child: CountryPickerHelper.getDefaultFlagImage(
+          country,
+          width: 28,
+          height: 20,
+        ),
       ),
       visualDensity: VisualDensity.compact,
       title: Text(
         country.translations[locale.languageCode] ?? country.name,
-        style: context.theme.textTheme.titleMedium?.copyWith(color: context.colorScheme.onSurface),
+        style: context.theme.textTheme.titleMedium?.copyWith(
+          color: context.colorScheme.onSurface,
+        ),
       ),
       trailing: hasCountryCode
           ? Text(
               '+${country.phoneDetail.code}',
-              style: context.theme.textTheme.titleMedium?.copyWith(fontSize: TextSize.content, color: context.colorScheme.onSurface),
+              style: context.theme.textTheme.titleMedium?.copyWith(
+                fontSize: TextSize.content,
+                color: context.colorScheme.onSurface,
+              ),
             )
           : null,
       onTap: onPressed,

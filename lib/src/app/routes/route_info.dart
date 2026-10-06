@@ -5,7 +5,11 @@ typedef RedirectCheckCallback = RouteSettings? Function(RouteState state);
 typedef CanNavigateCheckCallback = bool Function(RouteState state);
 
 class RouteState {
-  const RouteState({required this.uri, required this.arguments, required this.pathParams});
+  const RouteState({
+    required this.uri,
+    required this.arguments,
+    required this.pathParams,
+  });
 
   final Uri uri;
   final Object? arguments;
@@ -56,7 +60,8 @@ abstract class RouteInfo<T extends Object?> {
 
     routePattern = '^$routePattern';
     if (routeName.endsWith('*')) {
-      routePattern = '${routePattern.substring(0, routePattern.length - 1)}$optionalPathSegmentPattern';
+      routePattern =
+          '${routePattern.substring(0, routePattern.length - 1)}$optionalPathSegmentPattern';
     } else {
       routePattern = '$routePattern\$';
     }

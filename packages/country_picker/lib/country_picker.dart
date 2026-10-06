@@ -14,9 +14,15 @@ Future<Country?> showCountryPicker({required BuildContext context}) {
   final colorScheme = Theme.of(context).colorScheme;
   return showModalBottomSheet<Country>(
     context: context,
-    builder: (context) => BlocProvider(create: (context) => CountryPickerBloc(), child: const CountryPickerView()),
+    builder:
+        (context) => BlocProvider(
+          create: (context) => CountryPickerBloc(),
+          child: const CountryPickerView(),
+        ),
     backgroundColor: colorScheme.surface,
-    constraints: BoxConstraints(maxHeight: mediaQuery.size.height - mediaQuery.padding.top - 8),
+    constraints: BoxConstraints(
+      maxHeight: mediaQuery.size.height - mediaQuery.padding.top - 8,
+    ),
     routeSettings: const RouteSettings(name: "/country_picker"),
     isScrollControlled: true,
   );

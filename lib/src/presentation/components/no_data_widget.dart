@@ -12,7 +12,12 @@ class NoDataWidget extends StatelessWidget {
   final bool showSubtitle;
   final String? subTitle;
 
-  const NoDataWidget({super.key, this.title, this.showSubtitle = true, this.subTitle});
+  const NoDataWidget({
+    super.key,
+    this.title,
+    this.showSubtitle = true,
+    this.subTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +28,29 @@ class NoDataWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           SvgImageFromAsset.square(SvgIcons.icnEmptyFile, size: 90, fit: BoxFit.cover),
+          SvgImageFromAsset.square(
+            SvgIcons.icnEmptyFile,
+            size: 90,
+            fit: BoxFit.cover,
+          ),
           const Gap(Spacing.large),
           Text(
             title ?? localizations.dataNotFound,
-            style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+            style: context.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
           ),
           if (showSubtitle) ...[
             const Gap(Spacing.medium),
             ConstrainedBox(
               constraints: BoxConstraints(maxWidth: context.width * 0.6),
               child: Text(
-                subTitle ?? localizations.whoopsThisInformationIsNotAvailableForAMoment,
+                subTitle ??
+                    localizations.whoopsThisInformationIsNotAvailableForAMoment,
                 textAlign: TextAlign.center,
-                style: context.textTheme.labelSmall?.copyWith(color: context.colorScheme.onSurface),
+                style: context.textTheme.labelSmall?.copyWith(
+                  color: context.colorScheme.onSurface,
+                ),
               ),
             ),
           ],

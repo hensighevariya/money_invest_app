@@ -87,7 +87,9 @@ class SvgImageFromAsset extends StatelessWidget {
     return SvgPicture.asset(
       image,
       fit: fit,
-      colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn),
+      colorFilter: color == null
+          ? null
+          : ColorFilter.mode(color!, BlendMode.srcIn),
       width: width,
       height: height,
       matchTextDirection: matchTextDirection,
@@ -160,9 +162,13 @@ class NetworkImageBuilder extends StatelessWidget {
     final imageUrl = this.imageUrl ?? '';
 
     final effectiveShape = shape ?? BoxShape.rectangle;
-    final effectiveBorderRadius = effectiveShape == BoxShape.circle ? null : borderRadius;
+    final effectiveBorderRadius = effectiveShape == BoxShape.circle
+        ? null
+        : borderRadius;
     final effectiveShapeBorder = switch (effectiveShape) {
-      BoxShape.rectangle => RoundedRectangleBorder(borderRadius: effectiveBorderRadius ?? BorderRadius.zero),
+      BoxShape.rectangle => RoundedRectangleBorder(
+        borderRadius: effectiveBorderRadius ?? BorderRadius.zero,
+      ),
       BoxShape.circle => const CircleBorder(),
     };
 
@@ -202,7 +208,11 @@ class NetworkImageBuilder extends StatelessWidget {
     );
 
     if (onPressed != null || onLongPressed != null) {
-      child = GestureDetector(onTap: onPressed, onLongPress: onLongPressed, child: child);
+      child = GestureDetector(
+        onTap: onPressed,
+        onLongPress: onLongPressed,
+        child: child,
+      );
     }
 
     return Material(

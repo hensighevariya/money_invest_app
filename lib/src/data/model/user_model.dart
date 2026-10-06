@@ -19,7 +19,8 @@ final class UserData extends BaseEntity {
     this.isGenreAdded = false,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) => _$UserDataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
 
   final String uid;
   final String fullName;

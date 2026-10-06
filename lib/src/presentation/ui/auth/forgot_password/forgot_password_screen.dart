@@ -19,7 +19,9 @@ class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
 
   void _onStatusChanged(BuildContext context, ForgotPasswordState state) {
-    if (state.status case ProgressStatusSuccess<ForgotPasswordResponse>(result: ForgotPasswordResponse response)) {
+    if (state.status case ProgressStatusSuccess<ForgotPasswordResponse>(
+      result: ForgotPasswordResponse response,
+    )) {
       context.go(
         '${context.currentPath}/verify-otp',
         extra: AuthNavigationDataModel(

@@ -2,7 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class StatusColor extends ThemeExtension<StatusColor> with Diagnosticable {
-  const StatusColor({required this.pending, required this.inProgress, required this.success, required this.warning});
+  const StatusColor({
+    required this.pending,
+    required this.inProgress,
+    required this.success,
+    required this.warning,
+  });
 
   final Color pending;
   final Color inProgress;
@@ -25,7 +30,12 @@ class StatusColor extends ThemeExtension<StatusColor> with Diagnosticable {
   }
 
   @override
-  StatusColor copyWith({Color? pending, Color? inProgress, Color? success, Color? warning}) {
+  StatusColor copyWith({
+    Color? pending,
+    Color? inProgress,
+    Color? success,
+    Color? warning,
+  }) {
     return StatusColor(
       pending: pending ?? this.pending,
       inProgress: inProgress ?? this.inProgress,
@@ -35,7 +45,10 @@ class StatusColor extends ThemeExtension<StatusColor> with Diagnosticable {
   }
 
   @override
-  ThemeExtension<StatusColor> lerp(ThemeExtension<StatusColor>? other, double t) {
+  ThemeExtension<StatusColor> lerp(
+    ThemeExtension<StatusColor>? other,
+    double t,
+  ) {
     if (other is! StatusColor) return this;
     return copyWith(
       pending: Color.lerp(pending, other.pending, t),

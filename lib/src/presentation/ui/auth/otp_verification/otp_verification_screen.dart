@@ -33,7 +33,10 @@ class OtpVerificationScreen extends StatelessWidget {
             ? context.go('${context.currentPath}/edit-profile')
             : context.go(
                 '${context.currentPath}/reset-password',
-                extra: AuthNavigationDataModel(type: statusData.type, token: statusData.token),
+                extra: AuthNavigationDataModel(
+                  type: statusData.type,
+                  token: statusData.token,
+                ),
               ),
       );
     }
@@ -112,45 +115,70 @@ class _OtpVerificationViewState extends State<_OtpVerificationView> {
                   children: [
                     SizedBox.square(
                       dimension: context.height < 650 ? 220 : 300,
-                      child: Center(child: LottieBuilder.asset(LottieFiles.otpVerification, width: 300)),
+                      child: Center(
+                        child: LottieBuilder.asset(
+                          LottieFiles.otpVerification,
+                          width: 300,
+                        ),
+                      ),
                     ),
                     Column(
                       spacing: Spacing.xxxLarge,
                       children: [
                         Builder(
                           builder: (context) {
-                            final emailAddress = context.select<OtpVerificationCubit, String>(
-                              (value) => value.state.emailAddressORMobile,
-                            );
+                            final emailAddress = context
+                                .select<OtpVerificationCubit, String>(
+                                  (value) => value.state.emailAddressORMobile,
+                                );
                             return AuthTitle(
                               title: localizations.otpVerificationTitle,
                               description: TextSpan(
-                                text: context.read<OtpVerificationCubit>().state.resetByMobile
-                                    ? localizations.otpVerificationScreenDescriptionMobile
-                                    : localizations.otpVerificationScreenDescriptionEmail,
+                                text:
+                                    context
+                                        .read<OtpVerificationCubit>()
+                                        .state
+                                        .resetByMobile
+                                    ? localizations
+                                          .otpVerificationScreenDescriptionMobile
+                                    : localizations
+                                          .otpVerificationScreenDescriptionEmail,
                                 children: [
                                   const TextSpan(text: ' '),
                                   TextSpan(
                                     text: emailAddress,
-                                    style: TextStyle(fontWeight: FontWeight.w600, color: context.colorScheme.primary),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: context.colorScheme.primary,
+                                    ),
                                   ),
                                 ],
                               ),
                             );
                           },
                         ),
-                        BlocSelector<OtpVerificationCubit, OtpVerificationState, OtpCodeInput>(
+                        BlocSelector<
+                          OtpVerificationCubit,
+                          OtpVerificationState,
+                          OtpCodeInput
+                        >(
                           selector: (state) => state.otpCodeInput,
                           builder: (context, otpCodeInput) {
                             return OtpInputField(
                               controller: _codeController,
                               focusNode: _codeFocusNode,
                               inputAction: TextInputAction.done,
-                              onChanged: (value) => context.read<OtpVerificationCubit>().onOtpCodeChanged(value),
+                              onChanged: (value) => context
+                                  .read<OtpVerificationCubit>()
+                                  .onOtpCodeChanged(value),
                             );
                           },
                         ),
-                        BlocSelector<OtpVerificationCubit, OtpVerificationState, bool>(
+                        BlocSelector<
+                          OtpVerificationCubit,
+                          OtpVerificationState,
+                          bool
+                        >(
                           selector: (state) => state.isValid,
                           builder: (context, isValid) {
                             return ElevatedButton(
@@ -163,42 +191,64 @@ class _OtpVerificationViewState extends State<_OtpVerificationView> {
                       ],
                     ),
                     Center(
-                      child: BlocSelector<OtpVerificationCubit, OtpVerificationState, Duration>(
-                        selector: (state) => state.remainingDuration,
-                        builder: (context, remainingDuration) {
-                          return LinkText(
-                            textAlign: TextAlign.center,
-                            spans: [
-                              TextSpan(
-                                text: localizations.didntReceivedCode,
-                                style: TextStyle(color: context.colorScheme.onSurface),
-                              ),
-                              if (remainingDuration > Duration.zero) ...[
-                                const TextSpan(text: ' '),
-                                TextSpan(
-                                  text: localizations.resendIn,
-                                  style: TextStyle(color: context.colorScheme.onSurface),
-                                ),
-                                TextSpan(
-                                  text: localizations.resendTimer(
-                                    remainingDuration.inSeconds.toString().padLeft(2, '0'),
+                      child:
+                          BlocSelector<
+                            OtpVerificationCubit,
+                            OtpVerificationState,
+                            Duration
+                          >(
+                            selector: (state) => state.remainingDuration,
+                            builder: (context, remainingDuration) {
+                              return LinkText(
+                                textAlign: TextAlign.center,
+                                spans: [
+                                  TextSpan(
+                                    text: localizations.didntReceivedCode,
+                                    style: TextStyle(
+                                      color: context.colorScheme.onSurface,
+                                    ),
                                   ),
-                                  style: TextStyle(fontWeight: FontWeight.w600, color: context.colorScheme.primary),
-                                ),
-                              ] else ...[
-                                LinkTextSpan(
-                                  text: localizations.resendCodeLink,
-                                  onPressed: () {
-                                    context.read<OtpVerificationCubit>().resendOtpCode();
-                                    showSuccessMessage(context: context, content: localizations.successfullyResentCode);
-                                  },
-                                  style: TextStyle(color: context.colorScheme.onSurface),
-                                ),
-                              ],
-                            ],
-                          );
-                        },
-                      ),
+                                  if (remainingDuration > Duration.zero) ...[
+                                    const TextSpan(text: ' '),
+                                    TextSpan(
+                                      text: localizations.resendIn,
+                                      style: TextStyle(
+                                        color: context.colorScheme.onSurface,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: localizations.resendTimer(
+                                        remainingDuration.inSeconds
+                                            .toString()
+                                            .padLeft(2, '0'),
+                                      ),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: context.colorScheme.primary,
+                                      ),
+                                    ),
+                                  ] else ...[
+                                    LinkTextSpan(
+                                      text: localizations.resendCodeLink,
+                                      onPressed: () {
+                                        context
+                                            .read<OtpVerificationCubit>()
+                                            .resendOtpCode();
+                                        showSuccessMessage(
+                                          context: context,
+                                          content: localizations
+                                              .successfullyResentCode,
+                                        );
+                                      },
+                                      style: TextStyle(
+                                        color: context.colorScheme.onSurface,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              );
+                            },
+                          ),
                     ),
                   ],
                 ),

@@ -38,7 +38,11 @@ final class ResponseDecryptionException extends BaseException {
 }
 
 final class InvalidResponseException extends BaseException {
-  const InvalidResponseException({required this.message, required this.statusCode, this.errors});
+  const InvalidResponseException({
+    required this.message,
+    required this.statusCode,
+    this.errors,
+  });
 
   final String? message;
   final int statusCode;

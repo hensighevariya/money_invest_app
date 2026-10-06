@@ -26,7 +26,9 @@ base class ResetPasswordCubit extends BaseCubit<ResetPasswordState> {
   }
 
   void onConfirmPasswordChanged(String value) {
-    emit(state.copyWith(confirmPasswordInput: ConfirmPasswordInput.dirty(value)));
+    emit(
+      state.copyWith(confirmPasswordInput: ConfirmPasswordInput.dirty(value)),
+    );
   }
 
   Future<void> onContinue() async {

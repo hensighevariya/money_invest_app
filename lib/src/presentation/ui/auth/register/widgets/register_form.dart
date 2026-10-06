@@ -36,9 +36,15 @@ class _RegisterFormState extends State<RegisterForm> {
     _nameController = TextEditingController(text: state.nameInput.value);
     _surnameController = TextEditingController(text: state.surnameInput.value);
     _emailController = TextEditingController(text: state.emailInput.value);
-    _mobileNumberController = MobileNumberController(text: state.mobileInput.value);
-    _passwordController = TextEditingController(text: state.passwordInput.value);
-    _confirmPasswordController = TextEditingController(text: state.confirmPasswordInput.value);
+    _mobileNumberController = MobileNumberController(
+      text: state.mobileInput.value,
+    );
+    _passwordController = TextEditingController(
+      text: state.passwordInput.value,
+    );
+    _confirmPasswordController = TextEditingController(
+      text: state.confirmPasswordInput.value,
+    );
     _passwordFocusNode = FocusNode();
     _confirmPasswordFocusNode = FocusNode();
   }
@@ -64,51 +70,66 @@ class _RegisterFormState extends State<RegisterForm> {
           children: [
             InputFieldDecoration(
               labelText: "Your Name",
-              child: BlocSelector<RegisterCubit, RegisterState, UserFullNameInput>(
-                selector: (state) => state.nameInput,
-                builder: (context, nameInput) {
-                  return CommonTextField(
-                    controller: _nameController,
-                    hintText: "Your Name",
-                    errorText: nameInput.displayError?.getErrorMessage(context),
-                    onChanged: (value) => context.read<RegisterCubit>().onNameChanged(value),
-                    prefixIcon: SvgImageFromAsset.square(
-                      SvgIcons.icnPerson,
-                      size: 22,
-                      color: context.colorScheme.onSurface,
-                    ),
-                  );
-                },
-              ),
+              child:
+                  BlocSelector<RegisterCubit, RegisterState, UserFullNameInput>(
+                    selector: (state) => state.nameInput,
+                    builder: (context, nameInput) {
+                      return CommonTextField(
+                        controller: _nameController,
+                        hintText: "Your Name",
+                        errorText: nameInput.displayError?.getErrorMessage(
+                          context,
+                        ),
+                        onChanged: (value) =>
+                            context.read<RegisterCubit>().onNameChanged(value),
+                        prefixIcon: SvgImageFromAsset.square(
+                          SvgIcons.icnPerson,
+                          size: 22,
+                          color: context.colorScheme.onSurface,
+                        ),
+                      );
+                    },
+                  ),
             ),
             InputFieldDecoration(
               labelText: "Your Surname",
-              child: BlocSelector<RegisterCubit, RegisterState, UserFullNameInput>(
-                selector: (state) => state.surnameInput,
-                builder: (context, surnameInput) {
-                  return CommonTextField(
-                    controller: _surnameController,
-                    hintText: "Your Surname",
-                    errorText: surnameInput.displayError?.getErrorMessage(context),
-                    onChanged: (value) => context.read<RegisterCubit>().onSurnameChanged(value),
-                    prefixIcon: SvgImageFromAsset.square(
-                      SvgIcons.icnPerson,
-                      size: 22,
-                      color: context.colorScheme.onSurface,
-                    ),
-                  );
-                },
-              ),
+              child:
+                  BlocSelector<RegisterCubit, RegisterState, UserFullNameInput>(
+                    selector: (state) => state.surnameInput,
+                    builder: (context, surnameInput) {
+                      return CommonTextField(
+                        controller: _surnameController,
+                        hintText: "Your Surname",
+                        errorText: surnameInput.displayError?.getErrorMessage(
+                          context,
+                        ),
+                        onChanged: (value) => context
+                            .read<RegisterCubit>()
+                            .onSurnameChanged(value),
+                        prefixIcon: SvgImageFromAsset.square(
+                          SvgIcons.icnPerson,
+                          size: 22,
+                          color: context.colorScheme.onSurface,
+                        ),
+                      );
+                    },
+                  ),
             ),
             InputFieldDecoration(
               labelText: "Country",
               child: DropdownButtonFormField<String>(
                 icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                 decoration: const InputDecoration(hintText: "Select"),
-                items: ['United States', 'India', 'United Kingdom'].map((String value) {
-                  return DropdownMenuItem<String>(value: value, child: Text(value));
+                items: ['United States', 'India', 'United Kingdom'].map((
+                  String value,
+                ) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
                 }).toList(),
-                onChanged: (value) => context.read<RegisterCubit>().onCountryChanged(value ?? ''),
+                onChanged: (value) =>
+                    context.read<RegisterCubit>().onCountryChanged(value ?? ''),
               ),
             ),
             InputFieldDecoration(
@@ -117,9 +138,13 @@ class _RegisterFormState extends State<RegisterForm> {
                 icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                 decoration: const InputDecoration(hintText: "Select"),
                 items: ['State 1', 'State 2', 'State 3'].map((String value) {
-                  return DropdownMenuItem<String>(value: value, child: Text(value));
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
                 }).toList(),
-                onChanged: (value) => context.read<RegisterCubit>().onStateChanged(value ?? ''),
+                onChanged: (value) =>
+                    context.read<RegisterCubit>().onStateChanged(value ?? ''),
               ),
             ),
             InputFieldDecoration(
@@ -128,50 +153,66 @@ class _RegisterFormState extends State<RegisterForm> {
                 icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                 decoration: const InputDecoration(hintText: "Select"),
                 items: ['City 1', 'City 2', 'City 3'].map((String value) {
-                  return DropdownMenuItem<String>(value: value, child: Text(value));
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
                 }).toList(),
-                onChanged: (value) => context.read<RegisterCubit>().onCityChanged(value ?? ''),
+                onChanged: (value) =>
+                    context.read<RegisterCubit>().onCityChanged(value ?? ''),
               ),
             ),
             InputFieldDecoration(
               labelText: "Your Email Address (Optional)",
-              child: BlocSelector<RegisterCubit, RegisterState, EmailAddressInput>(
-                selector: (state) => state.emailInput,
-                builder: (context, emailInput) {
-                  return CommonTextField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    hintText: "Your Email Address (Optional)",
-                    errorText: emailInput.displayError?.getErrorMessage(context),
-                    onChanged: (value) => context.read<RegisterCubit>().onEmailChanged(value),
-                    prefixIcon: SvgImageFromAsset.square(
-                      SvgIcons.icnEmail,
-                      size: 22,
-                      color: context.colorScheme.onSurface,
-                    ),
-                  );
-                },
-              ),
+              child:
+                  BlocSelector<RegisterCubit, RegisterState, EmailAddressInput>(
+                    selector: (state) => state.emailInput,
+                    builder: (context, emailInput) {
+                      return CommonTextField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        hintText: "Your Email Address (Optional)",
+                        errorText: emailInput.displayError?.getErrorMessage(
+                          context,
+                        ),
+                        onChanged: (value) =>
+                            context.read<RegisterCubit>().onEmailChanged(value),
+                        prefixIcon: SvgImageFromAsset.square(
+                          SvgIcons.icnEmail,
+                          size: 22,
+                          color: context.colorScheme.onSurface,
+                        ),
+                      );
+                    },
+                  ),
             ),
             InputFieldDecoration(
               labelText: "Your mobile number",
-              child: BlocSelector<RegisterCubit, RegisterState, EmailMobileInput>(
-                selector: (state) => state.mobileInput,
-                builder: (context, mobileInput) {
-                  return MobileNumberField(
-                    controller: _mobileNumberController,
-                    hintText: "Your mobile number",
-                    keyboardType: TextInputType.phone,
-                    inputFormatter: [FilteringTextInputFormatter.digitsOnly],
-                    isMobileField: true,
-                    onChanged: (value) {
-                      context.read<RegisterCubit>().onMobileChanged(value, _mobileNumberController.country.phoneDetail);
+              child:
+                  BlocSelector<RegisterCubit, RegisterState, EmailMobileInput>(
+                    selector: (state) => state.mobileInput,
+                    builder: (context, mobileInput) {
+                      return MobileNumberField(
+                        controller: _mobileNumberController,
+                        hintText: "Your mobile number",
+                        keyboardType: TextInputType.phone,
+                        inputFormatter: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        isMobileField: true,
+                        onChanged: (value) {
+                          context.read<RegisterCubit>().onMobileChanged(
+                            value,
+                            _mobileNumberController.country.phoneDetail,
+                          );
+                        },
+                        errorText: mobileInput.displayError?.getErrorMessage(
+                          context,
+                        ),
+                        isoCode: _mobileNumberController.country.isoCode,
+                      );
                     },
-                    errorText: mobileInput.displayError?.getErrorMessage(context),
-                    isoCode: _mobileNumberController.country.isoCode,
-                  );
-                },
-              ),
+                  ),
             ),
             InputFieldDecoration(
               labelText: "Enter Password",
@@ -182,10 +223,14 @@ class _RegisterFormState extends State<RegisterForm> {
                     controller: _passwordController,
                     focusNode: _passwordFocusNode,
                     textInputAction: TextInputAction.next,
-                    onChanged: (value) => context.read<RegisterCubit>().onPasswordChanged(value),
-                    onFieldSubmitted: (value) => _confirmPasswordFocusNode.requestFocus(),
+                    onChanged: (value) =>
+                        context.read<RegisterCubit>().onPasswordChanged(value),
+                    onFieldSubmitted: (value) =>
+                        _confirmPasswordFocusNode.requestFocus(),
                     hintText: "Enter Password",
-                    errorText: passwordInput.displayError?.getErrorMessage(context),
+                    errorText: passwordInput.displayError?.getErrorMessage(
+                      context,
+                    ),
                     isDisplayPrefix: true,
                   );
                 },
@@ -195,7 +240,8 @@ class _RegisterFormState extends State<RegisterForm> {
               labelText: "Confirm Password",
               child: BlocBuilder<RegisterCubit, RegisterState>(
                 buildWhen: (previous, current) =>
-                    previous.confirmPasswordInput != current.confirmPasswordInput ||
+                    previous.confirmPasswordInput !=
+                        current.confirmPasswordInput ||
                     previous.passwordInput != current.passwordInput,
                 builder: (context, state) {
                   final confirmPasswordInput = state.confirmPasswordInput;
@@ -203,14 +249,21 @@ class _RegisterFormState extends State<RegisterForm> {
                     controller: _confirmPasswordController,
                     focusNode: _confirmPasswordFocusNode,
                     textInputAction: TextInputAction.done,
-                    onChanged: (value) => context.read<RegisterCubit>().onConfirmPasswordChanged(value),
-                    onFieldSubmitted: (value) => _confirmPasswordFocusNode.unfocus(),
+                    onChanged: (value) => context
+                        .read<RegisterCubit>()
+                        .onConfirmPasswordChanged(value),
+                    onFieldSubmitted: (value) =>
+                        _confirmPasswordFocusNode.unfocus(),
                     hintText: "Confirm Password",
                     errorText:
-                        confirmPasswordInput.displayError?.getErrorMessage(context) ??
+                        confirmPasswordInput.displayError?.getErrorMessage(
+                          context,
+                        ) ??
                         (confirmPasswordInput.isPure
                             ? null
-                            : confirmPasswordInput.compare(state.passwordInput.value)?.getErrorMessage(context)),
+                            : confirmPasswordInput
+                                  .compare(state.passwordInput.value)
+                                  ?.getErrorMessage(context)),
                     isDisplayPrefix: true,
                   );
                 },
@@ -219,9 +272,15 @@ class _RegisterFormState extends State<RegisterForm> {
             Row(
               children: [
                 Checkbox(
-                  value: context.select((RegisterCubit cubit) => cubit.state.agreedToTerms),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                  onChanged: (value) => context.read<RegisterCubit>().onTermsAgreed(value ?? false),
+                  value: context.select(
+                    (RegisterCubit cubit) => cubit.state.agreedToTerms,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  onChanged: (value) => context
+                      .read<RegisterCubit>()
+                      .onTermsAgreed(value ?? false),
                 ),
                 Expanded(
                   child: Text.rich(
@@ -230,12 +289,18 @@ class _RegisterFormState extends State<RegisterForm> {
                       children: [
                         TextSpan(
                           text: "Terms of Service",
-                          style: TextStyle(fontWeight: FontWeight.bold, color: context.colorScheme.primary),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: context.colorScheme.primary,
+                          ),
                         ),
                         const TextSpan(text: " and "),
                         TextSpan(
                           text: "Privacy Policy",
-                          style: TextStyle(fontWeight: FontWeight.bold, color: context.colorScheme.primary),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: context.colorScheme.primary,
+                          ),
                         ),
                       ],
                     ),

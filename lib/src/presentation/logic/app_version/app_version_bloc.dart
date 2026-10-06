@@ -11,7 +11,8 @@ import 'package:version/version.dart';
 import 'app_version_event.dart';
 import 'app_version_state.dart';
 
-final class AppVersionBloc extends BaseBloc<AppVersionEvent, AppVersionState> with HydratedMixin {
+final class AppVersionBloc extends BaseBloc<AppVersionEvent, AppVersionState>
+    with HydratedMixin {
   AppVersionBloc({required this._commonRepository})
     : super(const AppVersionState()) {
     hydrate();
@@ -19,13 +20,18 @@ final class AppVersionBloc extends BaseBloc<AppVersionEvent, AppVersionState> wi
     on<FetchAppVersion>(_onFetchAppVersion, transformer: droppable());
     on<CheckAppVersion>(_onCheckAppVersion, transformer: restartable());
 
-    PackageInfo.fromPlatform().then(_packageInfoCompleter.complete).catchError(onError);
+    PackageInfo.fromPlatform()
+        .then(_packageInfoCompleter.complete)
+        .catchError(onError);
   }
 
   final CommonRepository _commonRepository;
   final Completer<PackageInfo> _packageInfoCompleter = Completer();
 
-  FutureOr<void> _onFetchAppVersion(FetchAppVersion event, Emitter<AppVersionState> emit) async {
+  FutureOr<void> _onFetchAppVersion(
+    FetchAppVersion event,
+    Emitter<AppVersionState> emit,
+  ) async {
     if (state.data != null) add(const CheckAppVersion());
 
     final result = await processRequestWithRetry(
@@ -41,7 +47,10 @@ final class AppVersionBloc extends BaseBloc<AppVersionEvent, AppVersionState> wi
     }
   }
 
-  FutureOr<void> _onCheckAppVersion(CheckAppVersion event, Emitter<AppVersionState> emit) async {
+  FutureOr<void> _onCheckAppVersion(
+    CheckAppVersion event,
+    Emitter<AppVersionState> emit,
+  ) async {
     final versionData = state.data;
     if (versionData == null) return;
 
@@ -53,11 +62,15 @@ final class AppVersionBloc extends BaseBloc<AppVersionEvent, AppVersionState> wi
     final supportedAppVersion = Version.parse(versionData.supportedVersion);
 
     AppUpdateStatus updateStatus = switch (currentAppVersion) {
-      _ when currentAppVersion < supportedAppVersion => AppUpdateStatus.forceUpdate,
-      _ when currentAppVersion < latestAppVersion => AppUpdateStatus.updateAvailable,
+      _ when currentAppVersion < supportedAppVersion =>
+        AppUpdateStatus.forceUpdate,
+      _ when currentAppVersion < latestAppVersion =>
+        AppUpdateStatus.updateAvailable,
       _ => switch (buildNumber) {
-        _ when buildNumber < versionData.supportedBuildNumber => AppUpdateStatus.forceUpdate,
-        _ when buildNumber < versionData.buildNumber => AppUpdateStatus.updateAvailable,
+        _ when buildNumber < versionData.supportedBuildNumber =>
+          AppUpdateStatus.forceUpdate,
+        _ when buildNumber < versionData.buildNumber =>
+          AppUpdateStatus.updateAvailable,
         _ => AppUpdateStatus.upToDate,
       },
     };

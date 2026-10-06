@@ -29,25 +29,40 @@ class DialogRouteInfo<T extends Object?> extends RouteInfo<T> {
 }
 
 class _ModalDialogRoute<T> extends RawDialogRoute<T> {
-  _ModalDialogRoute({required WidgetBuilder builder, super.settings, super.anchorPoint, super.barrierDismissible})
-    : super(
-        transitionDuration: const Duration(milliseconds: 150),
-        traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-        pageBuilder: (context, animation, secondaryAnimation) {
-          final ThemeData theme = Theme.of(context);
-          final Widget child = Builder(builder: builder);
-          return Semantics(
-            scopesRoute: true,
-            explicitChildNodes: true,
-            child: SafeArea(child: Theme(data: theme, child: child)),
-          );
-        },
-        transitionBuilder: (context, animation, secondaryAnimation, child) {
-          final opacity = CurvedAnimation(parent: animation, curve: const Interval(0.0, 1.0 / 3.0));
+  _ModalDialogRoute({
+    required WidgetBuilder builder,
+    super.settings,
+    super.anchorPoint,
+    super.barrierDismissible,
+  }) : super(
+         transitionDuration: const Duration(milliseconds: 150),
+         traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
+         pageBuilder: (context, animation, secondaryAnimation) {
+           final ThemeData theme = Theme.of(context);
+           final Widget child = Builder(builder: builder);
+           return Semantics(
+             scopesRoute: true,
+             explicitChildNodes: true,
+             child: SafeArea(
+               child: Theme(data: theme, child: child),
+             ),
+           );
+         },
+         transitionBuilder: (context, animation, secondaryAnimation, child) {
+           final opacity = CurvedAnimation(
+             parent: animation,
+             curve: const Interval(0.0, 1.0 / 3.0),
+           );
 
-          final scale = CurvedAnimation(parent: Tween(begin: 0.5, end: 1.0).animate(animation), curve: Curves.ease);
+           final scale = CurvedAnimation(
+             parent: Tween(begin: 0.5, end: 1.0).animate(animation),
+             curve: Curves.ease,
+           );
 
-          return FadeTransition(opacity: opacity, child: ScaleTransition(scale: scale, child: child));
-        },
-      );
+           return FadeTransition(
+             opacity: opacity,
+             child: ScaleTransition(scale: scale, child: child),
+           );
+         },
+       );
 }

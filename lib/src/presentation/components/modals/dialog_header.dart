@@ -37,7 +37,11 @@ class ModalDialogHeader extends StatelessWidget implements PreferredSizeWidget {
       size: preferredSize,
       child: NavigationToolbar(
         centerMiddle: centerTitle,
-        middle: DefaultTextStyle.merge(style: textTheme.titleLarge, textAlign: TextAlign.center, child: title),
+        middle: DefaultTextStyle.merge(
+          style: textTheme.titleLarge,
+          textAlign: TextAlign.center,
+          child: title,
+        ),
         trailing: IconButton(
           onPressed: () => context.navigator.pop(),
           color: colorScheme.onSurfaceVariant.withValues(alpha: 0.75),

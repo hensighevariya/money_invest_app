@@ -10,11 +10,18 @@ class OtpVerificationStatusData {
   final int type;
   final int verifyType;
 
-  OtpVerificationStatusData({this.userData, this.token, required this.verifyType, required this.type});
+  OtpVerificationStatusData({
+    this.userData,
+    this.token,
+    required this.verifyType,
+    required this.type,
+  });
 
-  OtpVerificationStatusData.userData(this.userData, this.type, this.verifyType) : token = null;
+  OtpVerificationStatusData.userData(this.userData, this.type, this.verifyType)
+    : token = null;
 
-  OtpVerificationStatusData.token(this.token, this.type, this.verifyType) : userData = null;
+  OtpVerificationStatusData.token(this.token, this.type, this.verifyType)
+    : userData = null;
 }
 
 class OtpVerificationState extends Equatable with FormzMixin {

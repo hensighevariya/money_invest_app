@@ -91,16 +91,15 @@ class SocketClientService {
   Future<void> connect({String? namespace, String? authToken}) async {
     if (connected) return;
     try {
-      final optionsBuilder =
-          OptionBuilder()
-            ..setTransports(['websocket'])
-            ..setExtraHeaders({'Connection': 'upgrade', 'Upgrade': 'websocket'})
-            ..enableAutoConnect()
-            ..setReconnectionAttempts(5)
-            ..setReconnectionDelay(500)
-            ..enableForceNew()
-            ..enableForceNewConnection()
-            ..setTimeout(60000);
+      final optionsBuilder = OptionBuilder()
+        ..setTransports(['websocket'])
+        ..setExtraHeaders({'Connection': 'upgrade', 'Upgrade': 'websocket'})
+        ..enableAutoConnect()
+        ..setReconnectionAttempts(5)
+        ..setReconnectionDelay(500)
+        ..enableForceNew()
+        ..enableForceNewConnection()
+        ..setTimeout(60000);
 
       if (authToken != null) {
         optionsBuilder.setAuth({'token': authToken});
@@ -108,14 +107,13 @@ class SocketClientService {
       String url = this.url;
       if (namespace != null) url = url + namespace;
 
-      _socket =
-          io(url, optionsBuilder.build())
-            ..onConnect(_onConnected)
-            ..onReconnect(_onReconnect)
-            ..onDisconnect(_onDisconnect)
-            ..onError(_onError)
-            ..onReconnectFailed(_onReconnectFailed)
-            ..onConnectError(_onConnectError);
+      _socket = io(url, optionsBuilder.build())
+        ..onConnect(_onConnected)
+        ..onReconnect(_onReconnect)
+        ..onDisconnect(_onDisconnect)
+        ..onError(_onError)
+        ..onReconnectFailed(_onReconnectFailed)
+        ..onConnectError(_onConnectError);
 
       _socket?.connect();
       Log.debug('SocketClientService Connecting... $url');
@@ -144,7 +142,11 @@ class SocketClientService {
     Log.debug('SocketClientService Send: $event -> $data');
   }
 
-  void listen<T>(String event, SocketListenerCallback<T> onData, {SocketDataTransformer<T>? transformData}) {
+  void listen<T>(
+    String event,
+    SocketListenerCallback<T> onData, {
+    SocketDataTransformer<T>? transformData,
+  }) {
     Log.debug('SocketClientService.listen: $event');
     _socket?.on(event, (data) {
       Log.debug('SocketClientService.onData: $event -> $data');

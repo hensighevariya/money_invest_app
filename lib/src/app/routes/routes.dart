@@ -9,6 +9,14 @@ import 'package:money_invest_app/src/presentation/ui/home/home_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/profile_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/edit_profile_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/kyc_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/investment/new_investment_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/investment/payment_gateway_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/investment/payment_success_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/investment/digital_bond_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/my_investments/my_investments_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/my_investments/monthly_returns_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/trading_diary/trading_diary_subscription_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/trading_diary/trading_diary_view_screen.dart';
 
 extension BuildContextExtension on BuildContext {
   String get currentPath => GoRouterState.of(this).uri.path;
@@ -43,7 +51,10 @@ class AppRoutes with ChangeNotifier {
 
   RouterConfig<Object> get routerConfig => _goRouter;
 
-  FutureOr<String?> _checkAuthRedirect(BuildContext context, GoRouterState state) {
+  FutureOr<String?> _checkAuthRedirect(
+    BuildContext context,
+    GoRouterState state,
+  ) {
     if (_userAuthorized) return '/';
     return null;
   }
@@ -95,7 +106,13 @@ class AppRoutes with ChangeNotifier {
                   GoRoute(
                     path: 'verify-otp',
                     builder: (context, state) => const OtpVerificationScreen(),
-                    routes: [GoRoute(path: 'reset-password', builder: (context, state) => const ResetPasswordScreen())],
+                    routes: [
+                      GoRoute(
+                        path: 'reset-password',
+                        builder: (context, state) =>
+                            const ResetPasswordScreen(),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -116,6 +133,51 @@ class AppRoutes with ChangeNotifier {
                   GoRoute(
                     path: 'kyc',
                     builder: (context, state) => const KycScreen(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'new-investment',
+                builder: (context, state) => const NewInvestmentScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'payment-gateway',
+                    builder: (context, state) => const PaymentGatewayScreen(),
+                    routes: [
+                      GoRoute(
+                        path: 'success',
+                        builder: (context, state) =>
+                            const PaymentSuccessScreen(),
+                        routes: [
+                          GoRoute(
+                            path: 'bond',
+                            builder: (context, state) =>
+                                const DigitalBondScreen(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'my-investments',
+                builder: (context, state) => const MyInvestmentsScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'monthly-returns',
+                    builder: (context, state) => const MonthlyReturnsScreen(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: 'trading-diary',
+                builder: (context, state) =>
+                    const TradingDiarySubscriptionScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'view',
+                    builder: (context, state) => const TradingDiaryViewScreen(),
                   ),
                 ],
               ),

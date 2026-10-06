@@ -10,7 +10,8 @@ class CountryData extends Equatable {
 
   const CountryData({required this.id, required this.name});
 
-  factory CountryData.fromJson(Map<String, dynamic> json) => _$CountryDataFromJson(json);
+  factory CountryData.fromJson(Map<String, dynamic> json) =>
+      _$CountryDataFromJson(json);
 
   Map<String, dynamic> toJson() => _$CountryDataToJson(this);
 

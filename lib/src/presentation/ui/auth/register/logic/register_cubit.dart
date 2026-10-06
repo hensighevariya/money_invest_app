@@ -19,9 +19,11 @@ base class RegisterCubit extends BaseCubit<RegisterState> {
   void onEmailChanged(String value) {
     emit(state.copyWith(emailInput: EmailAddressInput.dirty(value)));
   }
-  
+
   void onMobileChanged(String value, PhoneDetail phoneDetail) {
-    emit(state.copyWith(mobileInput: EmailMobileInput.dirty(value, phoneDetail)));
+    emit(
+      state.copyWith(mobileInput: EmailMobileInput.dirty(value, phoneDetail)),
+    );
   }
 
   void onPasswordChanged(String value) {
@@ -29,7 +31,9 @@ base class RegisterCubit extends BaseCubit<RegisterState> {
   }
 
   void onConfirmPasswordChanged(String value) {
-    emit(state.copyWith(confirmPasswordInput: ConfirmPasswordInput.dirty(value)));
+    emit(
+      state.copyWith(confirmPasswordInput: ConfirmPasswordInput.dirty(value)),
+    );
   }
 
   void onCountryChanged(String value) {

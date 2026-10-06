@@ -39,7 +39,9 @@ class AppToolbar extends StatefulWidget implements PreferredSizeWidget {
   State<AppToolbar> createState() => _AppToolbarState();
 
   @override
-  Size get preferredSize => Size.fromHeight((toolbarHeight ?? kToolbarHeight) + (bottom?.preferredSize.height ?? 0));
+  Size get preferredSize => Size.fromHeight(
+    (toolbarHeight ?? kToolbarHeight) + (bottom?.preferredSize.height ?? 0),
+  );
 }
 
 class _AppToolbarState extends State<AppToolbar> {
@@ -94,20 +96,33 @@ class _AppToolbarState extends State<AppToolbar> {
     final theme = context.theme;
     final appBarTheme = theme.appBarTheme;
 
-    final backgroundColor = appBarTheme.backgroundColor ?? theme.colorScheme.surface;
-    final foregroundColor = appBarTheme.foregroundColor ?? theme.colorScheme.onSurface;
-    final iconColor = appBarTheme.iconTheme?.color ?? appBarTheme.foregroundColor ?? theme.colorScheme.onSurface;
+    final backgroundColor =
+        appBarTheme.backgroundColor ?? theme.colorScheme.surface;
+    final foregroundColor =
+        appBarTheme.foregroundColor ?? theme.colorScheme.onSurface;
+    final iconColor =
+        appBarTheme.iconTheme?.color ??
+        appBarTheme.foregroundColor ??
+        theme.colorScheme.onSurface;
 
-    final effectiveTextStyle = const TextStyle().merge(theme.textTheme.titleLarge).copyWith(color: foregroundColor);
+    final effectiveTextStyle = const TextStyle()
+        .merge(theme.textTheme.titleLarge)
+        .copyWith(color: foregroundColor);
 
     Widget? leading = widget.leading;
-    if (leading == null && widget.autoImplyLeading && (ModalRoute.of(context)?.canPop ?? false)) {
+    if (leading == null &&
+        widget.autoImplyLeading &&
+        (ModalRoute.of(context)?.canPop ?? false)) {
       leading = BackIconButton(onPressed: () => context.navigator.maybePop());
     }
 
     Widget? action;
     if (widget.actions?.isNotEmpty ?? false) {
-      action = Row(spacing: Spacing.small, mainAxisSize: MainAxisSize.min, children: widget.actions!);
+      action = Row(
+        spacing: Spacing.small,
+        mainAxisSize: MainAxisSize.min,
+        children: widget.actions!,
+      );
     }
 
     return TweenAnimationBuilder(
@@ -116,7 +131,11 @@ class _AppToolbarState extends State<AppToolbar> {
       curve: Curves.ease,
       builder: (context, value, child) {
         final double blurRadius = lerpDouble(0.0, 32.0, value) ?? 0.0;
-        final effectiveBackgroundColor = Color.lerp(Colors.transparent, backgroundColor.withValues(alpha: 0.25), value);
+        final effectiveBackgroundColor = Color.lerp(
+          Colors.transparent,
+          backgroundColor.withValues(alpha: 0.25),
+          value,
+        );
 
         return Material(
           color: effectiveBackgroundColor,
@@ -133,7 +152,9 @@ class _AppToolbarState extends State<AppToolbar> {
         child: IconTheme(
           data: appBarTheme.iconTheme ?? IconThemeData(color: iconColor),
           child: IconButtonTheme(
-            data: IconButtonThemeData(style: IconButton.styleFrom(foregroundColor: iconColor)),
+            data: IconButtonThemeData(
+              style: IconButton.styleFrom(foregroundColor: iconColor),
+            ),
             child: CustomMultiChildLayout(
               delegate: _ToolbarLayout(
                 toolbarHeight: widget.toolbarHeight ?? kToolbarHeight,
@@ -142,12 +163,15 @@ class _AppToolbarState extends State<AppToolbar> {
                 titleSpacing: widget.titleSpacing ?? Spacing.normal,
                 leadingSpacing: widget.leadingSpacing ?? Spacing.xSmall,
                 trailingSpacing: widget.trailingSpacing ?? Spacing.xSmall,
-                centerTitle: widget.centerTitle ?? appBarTheme.centerTitle ?? true,
+                centerTitle:
+                    widget.centerTitle ?? appBarTheme.centerTitle ?? true,
                 bottomSize: widget.bottom?.preferredSize,
               ),
               children: [
-                if (leading != null) LayoutId(id: _ToolbarSlot.leading, child: leading),
-                if (action != null) LayoutId(id: _ToolbarSlot.action, child: action),
+                if (leading != null)
+                  LayoutId(id: _ToolbarSlot.leading, child: leading),
+                if (action != null)
+                  LayoutId(id: _ToolbarSlot.action, child: action),
                 if (widget.title != null)
                   LayoutId(
                     id: _ToolbarSlot.title,
@@ -159,7 +183,8 @@ class _AppToolbarState extends State<AppToolbar> {
                       child: widget.title!,
                     ),
                   ),
-                if (widget.bottom != null) LayoutId(id: _ToolbarSlot.bottom, child: widget.bottom!),
+                if (widget.bottom != null)
+                  LayoutId(id: _ToolbarSlot.bottom, child: widget.bottom!),
               ],
             ),
           ),
@@ -173,9 +198,15 @@ class _AppToolbarState extends State<AppToolbar> {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<Widget?>('title', widget.title));
     properties.add(DiagnosticsProperty<Widget?>('leading', widget.leading));
-    properties.add(DiagnosticsProperty<List<Widget>?>('action', widget.actions));
-    properties.add(DiagnosticsProperty<PreferredSizeWidget?>('bottom', widget.bottom));
-    properties.add(DiagnosticsProperty<bool>('autoImplyLeading', widget.autoImplyLeading));
+    properties.add(
+      DiagnosticsProperty<List<Widget>?>('action', widget.actions),
+    );
+    properties.add(
+      DiagnosticsProperty<PreferredSizeWidget?>('bottom', widget.bottom),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>('autoImplyLeading', widget.autoImplyLeading),
+    );
     properties.add(DoubleProperty('titleSpacing', widget.titleSpacing));
     properties.add(DoubleProperty('leadingSpacing', widget.leadingSpacing));
     properties.add(DoubleProperty('trailingSpacing', widget.trailingSpacing));
@@ -209,7 +240,10 @@ class _ToolbarLayout extends MultiChildLayoutDelegate {
   Size getSize(BoxConstraints constraints) {
     return Size(
       constraints.maxWidth,
-      math.min(constraints.maxHeight, mediaQueryPadding.top + toolbarHeight + (bottomSize?.height ?? 0)),
+      math.min(
+        constraints.maxHeight,
+        mediaQueryPadding.top + toolbarHeight + (bottomSize?.height ?? 0),
+      ),
     );
   }
 
@@ -237,44 +271,68 @@ class _ToolbarLayout extends MultiChildLayoutDelegate {
       final iconConstraints = BoxConstraints(maxWidth: size.width);
       final leadingSize = layoutChild(_ToolbarSlot.leading, iconConstraints);
 
-      double effectiveLeadingSpace = math.max(effectiveStartMargin, leadingSpacing);
+      double effectiveLeadingSpace = math.max(
+        effectiveStartMargin,
+        leadingSpacing,
+      );
       final double leadingX = switch (textDirection) {
-        TextDirection.rtl => size.width - leadingSize.width - effectiveLeadingSpace,
+        TextDirection.rtl =>
+          size.width - leadingSize.width - effectiveLeadingSpace,
         TextDirection.ltr => effectiveLeadingSpace,
       };
-      final double leadingY = mediaQueryPadding.top + (effectiveToolbarHeight - leadingSize.height) / 2.0;
+      final double leadingY =
+          mediaQueryPadding.top +
+          (effectiveToolbarHeight - leadingSize.height) / 2.0;
 
       leadingWidth = effectiveLeadingSpace + leadingSize.width;
       positionChild(_ToolbarSlot.leading, Offset(leadingX, leadingY));
     }
 
     if (hasChild(_ToolbarSlot.action)) {
-      final Size trailingSize = layoutChild(_ToolbarSlot.action, BoxConstraints(maxWidth: size.width));
+      final Size trailingSize = layoutChild(
+        _ToolbarSlot.action,
+        BoxConstraints(maxWidth: size.width),
+      );
 
-      double effectiveTrailingSpace = math.max(effectiveEndMargin, trailingSpacing);
+      double effectiveTrailingSpace = math.max(
+        effectiveEndMargin,
+        trailingSpacing,
+      );
       final double trailingX = switch (textDirection) {
-        TextDirection.ltr => size.width - trailingSize.width - effectiveTrailingSpace,
+        TextDirection.ltr =>
+          size.width - trailingSize.width - effectiveTrailingSpace,
         TextDirection.rtl => effectiveTrailingSpace,
       };
-      final double trailingY = mediaQueryPadding.top + (effectiveToolbarHeight - trailingSize.height) / 2.0;
+      final double trailingY =
+          mediaQueryPadding.top +
+          (effectiveToolbarHeight - trailingSize.height) / 2.0;
 
       trailingWidth = effectiveTrailingSpace + trailingSize.width;
       positionChild(_ToolbarSlot.action, Offset(trailingX, trailingY));
     }
 
     if (hasChild(_ToolbarSlot.title)) {
-      final double availableMaxWidth = math.max(size.width - leadingWidth - trailingWidth - (titleSpacing * 2), 0.0);
-      final BoxConstraints constraints = BoxConstraints(maxWidth: availableMaxWidth, maxHeight: effectiveToolbarHeight);
+      final double availableMaxWidth = math.max(
+        size.width - leadingWidth - trailingWidth - (titleSpacing * 2),
+        0.0,
+      );
+      final BoxConstraints constraints = BoxConstraints(
+        maxWidth: availableMaxWidth,
+        maxHeight: effectiveToolbarHeight,
+      );
       final Size titleSize = layoutChild(_ToolbarSlot.title, constraints);
 
       final double titleStartMargin = leadingWidth + titleSpacing;
       double titleStart = titleStartMargin;
-      final double titleY = mediaQueryPadding.top + (effectiveToolbarHeight - titleSize.height) / 2.0;
+      final double titleY =
+          mediaQueryPadding.top +
+          (effectiveToolbarHeight - titleSize.height) / 2.0;
 
       if (centerTitle) {
         titleStart = (size.width - titleSize.width) / 2.0;
         if (titleStart + titleSize.width > size.width - trailingWidth) {
-          titleStart = size.width - trailingWidth - Spacing.small - titleSize.width;
+          titleStart =
+              size.width - trailingWidth - Spacing.small - titleSize.width;
         } else if (titleStart < titleStartMargin) {
           titleStart = titleStartMargin;
         }
@@ -294,7 +352,10 @@ class _ToolbarLayout extends MultiChildLayoutDelegate {
       final bottomWidgetSize = layoutChild(_ToolbarSlot.bottom, constraints);
       positionChild(
         _ToolbarSlot.bottom,
-        Offset((size.width - bottomWidgetSize.width) / 2, effectiveToolbarHeight + mediaQueryPadding.top),
+        Offset(
+          (size.width - bottomWidgetSize.width) / 2,
+          effectiveToolbarHeight + mediaQueryPadding.top,
+        ),
       );
     }
   }

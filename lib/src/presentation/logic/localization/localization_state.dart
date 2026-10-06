@@ -9,7 +9,9 @@ class LocalizationState extends Equatable {
   List<Object?> get props => [selectedLanguage];
 
   LocalizationState copyWith({Language? selectedLanguage}) {
-    return LocalizationState(selectedLanguage: selectedLanguage ?? this.selectedLanguage);
+    return LocalizationState(
+      selectedLanguage: selectedLanguage ?? this.selectedLanguage,
+    );
   }
 }
 

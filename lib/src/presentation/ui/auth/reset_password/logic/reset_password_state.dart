@@ -18,7 +18,10 @@ class ResetPasswordState extends Equatable with FormzMixin {
   List<Object?> get props => [passwordInput, confirmPasswordInput, status];
 
   @override
-  List<FormzInput<Object, Object?>> get inputs => [passwordInput, confirmPasswordInput];
+  List<FormzInput<Object, Object?>> get inputs => [
+    passwordInput,
+    confirmPasswordInput,
+  ];
 
   ResetPasswordState copyWith({
     PasswordInput? passwordInput,

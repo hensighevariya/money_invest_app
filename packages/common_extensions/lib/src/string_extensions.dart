@@ -3,12 +3,16 @@ import 'package:intl/intl.dart';
 
 extension StringExtensions on String {
   DateTime parseUtcDateTime([String format = 'yyyy-MM-dd HH:mm:ss']) {
-    var time = DateFormat(format).parseUTC(replaceAll('T', ' ').replaceAll('Z', ' '));
+    var time = DateFormat(
+      format,
+    ).parseUTC(replaceAll('T', ' ').replaceAll('Z', ' '));
     return time;
   }
 
   DateTime parseLocalDateTime([String format = 'yyyy-MM-dd HH:mm:ss']) {
-    var time = DateFormat(format).parse(replaceAll('T', ' ').replaceAll('Z', ' '));
+    var time = DateFormat(
+      format,
+    ).parse(replaceAll('T', ' ').replaceAll('Z', ' '));
     return time;
   }
 
@@ -24,7 +28,8 @@ extension StringExtensions on String {
   String obscureMobileNumber() {
     if (isEmpty) return this;
     if (length > 6) {
-      return substring(0, 3).padRight(length - 3, '*') + substring(length - 3, length);
+      return substring(0, 3).padRight(length - 3, '*') +
+          substring(length - 3, length);
     }
     return this;
   }
@@ -37,7 +42,10 @@ extension StringExtensions on String {
     int skipNumberCharacter = 0;
     for (final String character in formatCharacters) {
       if (character == '#') {
-        final String numberCharacter = numberCharacters.skip(skipNumberCharacter).take(1).first;
+        final String numberCharacter = numberCharacters
+            .skip(skipNumberCharacter)
+            .take(1)
+            .first;
         buffer.write(numberCharacter);
         skipNumberCharacter++;
       } else {
@@ -60,7 +68,9 @@ extension StringExtensions on String {
     return '${this[0].toUpperCase()}${substring(1)}';
   }
 
-  String toDefaultProfile() => (isNotEmpty) ? trim().split(' ').map((l) => l[0]).take(2).join().toUpperCase() : '';
+  String toDefaultProfile() => (isNotEmpty)
+      ? trim().split(' ').map((l) => l[0]).take(2).join().toUpperCase()
+      : '';
 }
 
 extension NullableStringExtensions on String? {
@@ -71,7 +81,10 @@ extension NullableStringExtensions on String? {
   }
 
   double toDouble() {
-    return this == null ? 0 : double.tryParse(this?.replaceAll(RegExp(r'[^0-9.]'), '') ?? '0') ?? 0.0;
+    return this == null
+        ? 0
+        : double.tryParse(this?.replaceAll(RegExp(r'[^0-9.]'), '') ?? '0') ??
+              0.0;
   }
 }
 

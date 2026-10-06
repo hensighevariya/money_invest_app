@@ -28,7 +28,7 @@ const List<Country> countryList = [
       "ar": "أفغانستان",
       "fa": "افغانستان",
       "yue": "阿富汗",
-      "el": "Αφγανιστάν"
+      "el": "Αφγανιστάν",
     },
   ),
   Country(
@@ -58,7 +58,7 @@ const List<Country> countryList = [
       "ar": "جزر أولاند",
       "fa": "جزیره اولاند",
       "yue": "奧蘭群島",
-      "el": "Νησιά Άαλαντ"
+      "el": "Νησιά Άαλαντ",
     },
   ),
   Country(
@@ -88,7 +88,7 @@ const List<Country> countryList = [
       "ar": "ألبانيا",
       "fa": "آلبانی",
       "yue": "阿爾巴尼亞",
-      "el": "Αλβανία"
+      "el": "Αλβανία",
     },
   ),
   Country(
@@ -118,7 +118,7 @@ const List<Country> countryList = [
       "ar": "الجزائر",
       "fa": "الجزیره",
       "yue": "阿爾及利亞",
-      "el": "Αλγερία"
+      "el": "Αλγερία",
     },
   ),
   Country(
@@ -148,7 +148,7 @@ const List<Country> countryList = [
       "ar": "ساموا الأمريكية",
       "fa": "ساموا آمریکا",
       "yue": "美屬薩摩亞",
-      "el": "Αμερικάνικη Σαμόα"
+      "el": "Αμερικάνικη Σαμόα",
     },
   ),
   Country(
@@ -177,7 +177,7 @@ const List<Country> countryList = [
       "ro": "Andorra",
       "ar": "أندورا",
       "fa": "آندورا",
-      "el": "Ανδόρα"
+      "el": "Ανδόρα",
     },
   ),
   Country(
@@ -207,7 +207,7 @@ const List<Country> countryList = [
       "ar": "أنغولا",
       "fa": "آنگولا",
       "yue": "安哥拉",
-      "el": "Αγκόλα"
+      "el": "Αγκόλα",
     },
   ),
   Country(
@@ -236,7 +236,7 @@ const List<Country> countryList = [
       "ro": "Anguilla",
       "ar": "أنغويلا",
       "fa": "آنگولیا",
-      "el": "Ανγκουίλα"
+      "el": "Ανγκουίλα",
     },
   ),
   Country(
@@ -266,7 +266,7 @@ const List<Country> countryList = [
       "ar": "القارة القطبية الجنوبية",
       "fa": "قطب جنوب",
       "yue": "南极洲",
-      "el": "Ανταρκτική"
+      "el": "Ανταρκτική",
     },
   ),
   Country(
@@ -296,7 +296,7 @@ const List<Country> countryList = [
       "ar": "أنتيغوا وباربودا",
       "fa": "آنتیگوآ و باربودا",
       "yue": "安提瓜同巴布达",
-      "el": "Αντίγκουα και Μπαρμπούντα"
+      "el": "Αντίγκουα και Μπαρμπούντα",
     },
   ),
   Country(
@@ -326,7 +326,7 @@ const List<Country> countryList = [
       "ar": "الأرجنتين",
       "fa": "آرژانتین",
       "yue": "阿根廷",
-      "el": "Αργεντινή"
+      "el": "Αργεντινή",
     },
   ),
   Country(
@@ -355,7 +355,7 @@ const List<Country> countryList = [
       "ro": "Armenia",
       "ar": "أرمينيا",
       "fa": "ارمنستان",
-      "el": "Αρμενία"
+      "el": "Αρμενία",
     },
   ),
   Country(
@@ -385,7 +385,7 @@ const List<Country> countryList = [
       "ar": "أروبا",
       "fa": "آروبا",
       "yue": "阿魯巴島",
-      "el": "Αρούμπα"
+      "el": "Αρούμπα",
     },
   ),
   Country(
@@ -415,7 +415,7 @@ const List<Country> countryList = [
       "ar": "أستراليا",
       "fa": "استرالیا",
       "yue": "澳洲",
-      "el": "Αυστραλία"
+      "el": "Αυστραλία",
     },
   ),
   Country(
@@ -445,7 +445,7 @@ const List<Country> countryList = [
       "ar": "النمسا",
       "fa": "اتریش",
       "yue": "奧地利",
-      "el": "Αυστρία"
+      "el": "Αυστρία",
     },
   ),
   Country(
@@ -474,7 +474,7 @@ const List<Country> countryList = [
       "ro": "Azerbaidjan",
       "ar": "أذربيجان",
       "fa": "آذربایجان",
-      "el": "Αζερμπαϊτζάν"
+      "el": "Αζερμπαϊτζάν",
     },
   ),
   Country(
@@ -504,7 +504,7 @@ const List<Country> countryList = [
       "ar": "باهاماس",
       "fa": "باهاماس",
       "yue": "巴哈馬",
-      "el": "Μπαχάμες"
+      "el": "Μπαχάμες",
     },
   ),
   Country(
@@ -534,7 +534,7 @@ const List<Country> countryList = [
       "ar": "البحرين",
       "fa": "بحرین",
       "yue": "巴林",
-      "el": "Μπαχρέιν"
+      "el": "Μπαχρέιν",
     },
   ),
   Country(
@@ -564,7 +564,7 @@ const List<Country> countryList = [
       "ar": "بنغلاديش",
       "fa": "بنگلادش",
       "yue": "孟加拉囯",
-      "el": "Μπαγκλαντές"
+      "el": "Μπαγκλαντές",
     },
   ),
   Country(
@@ -594,7 +594,7 @@ const List<Country> countryList = [
       "ar": "باربادوس",
       "fa": "باربادوس",
       "yue": "巴巴多斯",
-      "el": "Μπαρμπέιντος"
+      "el": "Μπαρμπέιντος",
     },
   ),
   Country(
@@ -624,7 +624,7 @@ const List<Country> countryList = [
       "ar": "بيلاروس",
       "fa": "بلاروس",
       "yue": "白俄羅斯",
-      "el": "Λευκορωσία"
+      "el": "Λευκορωσία",
     },
   ),
   Country(
@@ -654,7 +654,7 @@ const List<Country> countryList = [
       "ar": "بلجيكا",
       "fa": "بلژیک",
       "yue": "比利時",
-      "el": "Βέλγιο"
+      "el": "Βέλγιο",
     },
   ),
   Country(
@@ -684,7 +684,7 @@ const List<Country> countryList = [
       "ar": "بليز",
       "fa": "بليز",
       "yue": "伯利茲",
-      "el": "Μπελίζ"
+      "el": "Μπελίζ",
     },
   ),
   Country(
@@ -714,7 +714,7 @@ const List<Country> countryList = [
       "ar": "بنين",
       "fa": "بنين",
       "yue": "貝寧",
-      "el": "Μπενίν"
+      "el": "Μπενίν",
     },
   ),
   Country(
@@ -744,7 +744,7 @@ const List<Country> countryList = [
       "ar": "برمودا",
       "fa": "برمودا",
       "yue": "百慕大",
-      "el": "Βερμούδες"
+      "el": "Βερμούδες",
     },
   ),
   Country(
@@ -774,7 +774,7 @@ const List<Country> countryList = [
       "ar": "بوتان",
       "fa": "بوتان",
       "yue": "不丹",
-      "el": "Μπουτάν"
+      "el": "Μπουτάν",
     },
   ),
   Country(
@@ -804,7 +804,7 @@ const List<Country> countryList = [
       "ar": "بوليفيا",
       "fa": "بولیوی",
       "yue": "玻利維亞（多民族國家）",
-      "el": "Βολιβία (Πολυεθνοτικό Κράτος της Βολιβίας)"
+      "el": "Βολιβία (Πολυεθνοτικό Κράτος της Βολιβίας)",
     },
   ),
   Country(
@@ -834,7 +834,7 @@ const List<Country> countryList = [
       "ar": "البوسنة والهرسك",
       "fa": "بوسنی و هرزگوین",
       "yue": "波斯尼亞黑塞哥維那",
-      "el": "Βοσνία και Ερζεγοβίνη"
+      "el": "Βοσνία και Ερζεγοβίνη",
     },
   ),
   Country(
@@ -864,7 +864,7 @@ const List<Country> countryList = [
       "ar": "بوتسوانا",
       "fa": "بوتسوانا",
       "yue": "博茨瓦納",
-      "el": "Μποτσουάνα"
+      "el": "Μποτσουάνα",
     },
   ),
   Country(
@@ -894,7 +894,7 @@ const List<Country> countryList = [
       "ar": "جزيرة بوفيه",
       "fa": "جزیره بووه",
       "yue": "布维特岛",
-      "el": "Νησί Μπουβέ"
+      "el": "Νησί Μπουβέ",
     },
   ),
   Country(
@@ -924,7 +924,7 @@ const List<Country> countryList = [
       "ar": "البرازيل",
       "fa": "برزیل",
       "yue": "巴西",
-      "el": "Βραζιλία"
+      "el": "Βραζιλία",
     },
   ),
   Country(
@@ -954,7 +954,7 @@ const List<Country> countryList = [
       "ar": "إقليم المحيط الهندي البريطاني",
       "fa": "سرزمین دریایی هند - بریتانیا",
       "yue": "英屬印度洋領土",
-      "el": "Βρετανικά Εδάφη Ινδικού Ωκεανού"
+      "el": "Βρετανικά Εδάφη Ινδικού Ωκεανού",
     },
   ),
   Country(
@@ -984,7 +984,7 @@ const List<Country> countryList = [
       "ar": "بروناي",
       "fa": "برونئی",
       "yue": "文萊達魯薩蘭國",
-      "el": "Σουλτανάτο του Μπρουνέι"
+      "el": "Σουλτανάτο του Μπρουνέι",
     },
   ),
   Country(
@@ -1014,7 +1014,7 @@ const List<Country> countryList = [
       "ar": "بلغاريا",
       "fa": "بلغارستان",
       "yue": "保加利亞",
-      "el": "Βουλγαρία"
+      "el": "Βουλγαρία",
     },
   ),
   Country(
@@ -1044,7 +1044,7 @@ const List<Country> countryList = [
       "ar": "بوركينا فاسو",
       "fa": "بورکینافاسو",
       "yue": "布基納法索",
-      "el": "Μπουρκίνα Φάσο"
+      "el": "Μπουρκίνα Φάσο",
     },
   ),
   Country(
@@ -1074,7 +1074,7 @@ const List<Country> countryList = [
       "ar": "بوروندي",
       "fa": "بوروندی",
       "yue": "蒲隆地",
-      "el": "Μπουρούντι"
+      "el": "Μπουρούντι",
     },
   ),
   Country(
@@ -1104,7 +1104,7 @@ const List<Country> countryList = [
       "ar": "الرأس الأخضر",
       "fa": "دماغه سبز",
       "yue": "卡波维德",
-      "el": "Πράσινο Ακρωτήρι"
+      "el": "Πράσινο Ακρωτήρι",
     },
   ),
   Country(
@@ -1134,7 +1134,7 @@ const List<Country> countryList = [
       "ar": "كمبوديا",
       "fa": "کامبوج",
       "yue": "柬埔寨",
-      "el": "Καμπότζη"
+      "el": "Καμπότζη",
     },
   ),
   Country(
@@ -1164,7 +1164,7 @@ const List<Country> countryList = [
       "ar": "الكاميرون",
       "fa": "کامرون",
       "yue": "喀 麥 隆",
-      "el": "Καμερούν"
+      "el": "Καμερούν",
     },
   ),
   Country(
@@ -1194,7 +1194,7 @@ const List<Country> countryList = [
       "ar": "كندا",
       "fa": "کانادا",
       "yue": "加拿大",
-      "el": "Καναδάς"
+      "el": "Καναδάς",
     },
   ),
   Country(
@@ -1224,7 +1224,7 @@ const List<Country> countryList = [
       "ar": "جزر كايمان",
       "fa": "جزایر کیمن",
       "yue": "開曼群島",
-      "el": "Νήσοι Κέιμαν"
+      "el": "Νήσοι Κέιμαν",
     },
   ),
   Country(
@@ -1254,7 +1254,7 @@ const List<Country> countryList = [
       "ar": "جمهورية أفريقيا الوسطى",
       "fa": "جمهوری افریقای مرکزی",
       "yue": "中非共和國",
-      "el": "Κεντροαφρικανική Δημοκρατία"
+      "el": "Κεντροαφρικανική Δημοκρατία",
     },
   ),
   Country(
@@ -1284,7 +1284,7 @@ const List<Country> countryList = [
       "ar": "تشاد",
       "fa": "چاد",
       "yue": "乍得",
-      "el": "Τσαντ"
+      "el": "Τσαντ",
     },
   ),
   Country(
@@ -1314,7 +1314,7 @@ const List<Country> countryList = [
       "ar": "تشيلي",
       "fa": "شیلی",
       "yue": "智利",
-      "el": "Χιλή"
+      "el": "Χιλή",
     },
   ),
   Country(
@@ -1344,7 +1344,7 @@ const List<Country> countryList = [
       "ar": "الصين",
       "fa": "چین",
       "yue": "中國",
-      "el": "Κίνα"
+      "el": "Κίνα",
     },
   ),
   Country(
@@ -1374,7 +1374,7 @@ const List<Country> countryList = [
       "ar": "جزيرة عيد الميلاد",
       "fa": "جزیره کریسمس",
       "yue": "聖誕島",
-      "el": "Νήσος των Χριστουγέννων"
+      "el": "Νήσος των Χριστουγέννων",
     },
   ),
   Country(
@@ -1404,7 +1404,7 @@ const List<Country> countryList = [
       "ar": "جزر كوكوس",
       "fa": "جزایر کوکوس",
       "yue": "可可島（基林）群島",
-      "el": "Νησιά Κόκος (Κήλινγκ)"
+      "el": "Νησιά Κόκος (Κήλινγκ)",
     },
   ),
   Country(
@@ -1434,7 +1434,7 @@ const List<Country> countryList = [
       "ar": "كولومبيا",
       "fa": "کلمبیا",
       "yue": "哥倫比亞",
-      "el": "Κολομβία"
+      "el": "Κολομβία",
     },
   ),
   Country(
@@ -1464,7 +1464,7 @@ const List<Country> countryList = [
       "ar": "جزر القمر",
       "fa": "جزیره کومور",
       "yue": "科摩羅",
-      "el": "Κομόρες"
+      "el": "Κομόρες",
     },
   ),
   Country(
@@ -1494,7 +1494,7 @@ const List<Country> countryList = [
       "ar": "جمهورية الكونغو",
       "fa": "جمهوری کنگو",
       "yue": "剛果（共和國）",
-      "el": "Κονγκό (Δημοκρατία του Κονγκό)"
+      "el": "Κονγκό (Δημοκρατία του Κονγκό)",
     },
   ),
   Country(
@@ -1524,7 +1524,7 @@ const List<Country> countryList = [
       "ar": "جمهورية الكونغو الديمقراطية",
       "fa": "جمهوری دموکراتیک کنگو",
       "yue": "剛果（金）",
-      "el": "Κονγκό (Λαϊκή Δημοκρατία του Κονγκό)"
+      "el": "Κονγκό (Λαϊκή Δημοκρατία του Κονγκό)",
     },
   ),
   Country(
@@ -1554,7 +1554,7 @@ const List<Country> countryList = [
       "ar": "جزر كوك",
       "fa": "جزایر کوک",
       "yue": "庫克群島",
-      "el": "Νήσοι Κουκ"
+      "el": "Νήσοι Κουκ",
     },
   ),
   Country(
@@ -1584,7 +1584,7 @@ const List<Country> countryList = [
       "ar": "كوستاريكا",
       "fa": "کاستاریکا",
       "yue": "哥斯達黎加",
-      "el": "Κόστα Ρίκα"
+      "el": "Κόστα Ρίκα",
     },
   ),
   Country(
@@ -1614,7 +1614,7 @@ const List<Country> countryList = [
       "ar": "ساحل العاج",
       "fa": "ساحل عاج",
       "yue": "科特迪瓦",
-      "el": "Ακτή Ελεφαντοστού"
+      "el": "Ακτή Ελεφαντοστού",
     },
   ),
   Country(
@@ -1644,7 +1644,7 @@ const List<Country> countryList = [
       "ar": "كرواتيا",
       "fa": "کرواسی",
       "yue": "克羅地亞",
-      "el": "Κροατία"
+      "el": "Κροατία",
     },
   ),
   Country(
@@ -1674,7 +1674,7 @@ const List<Country> countryList = [
       "ar": "كوبا",
       "fa": "كوبا",
       "yue": "古巴",
-      "el": "Κούβα"
+      "el": "Κούβα",
     },
   ),
   Country(
@@ -1704,7 +1704,7 @@ const List<Country> countryList = [
       "ar": "قبرص",
       "fa": "قبرس",
       "yue": "塞浦路斯",
-      "el": "Κύπρος"
+      "el": "Κύπρος",
     },
   ),
   Country(
@@ -1734,7 +1734,7 @@ const List<Country> countryList = [
       "ar": "جمهورية التشيك",
       "fa": "جمهوری چک",
       "yue": "捷克共和國",
-      "el": "Τσεχική Δημοκρατία"
+      "el": "Τσεχική Δημοκρατία",
     },
   ),
   Country(
@@ -1764,7 +1764,7 @@ const List<Country> countryList = [
       "ar": "الدنمارك",
       "fa": "دانمارک",
       "yue": "丹麥",
-      "el": "Δανία"
+      "el": "Δανία",
     },
   ),
   Country(
@@ -1794,7 +1794,7 @@ const List<Country> countryList = [
       "ar": "جيبوتي",
       "fa": "جیبوتی",
       "yue": "吉布提",
-      "el": "Τζιμπουτί"
+      "el": "Τζιμπουτί",
     },
   ),
   Country(
@@ -1824,7 +1824,7 @@ const List<Country> countryList = [
       "ar": "دومينيكا",
       "fa": "دومينيكا",
       "yue": "多米尼加",
-      "el": "Ντομίνικα"
+      "el": "Ντομίνικα",
     },
   ),
   Country(
@@ -1854,7 +1854,7 @@ const List<Country> countryList = [
       "ar": "جمهورية الدومينيكان",
       "fa": "جمهوری دومنیکن",
       "yue": "多明尼加共和國",
-      "el": "Δομινικανή Δημοκρατία"
+      "el": "Δομινικανή Δημοκρατία",
     },
   ),
   Country(
@@ -1884,7 +1884,7 @@ const List<Country> countryList = [
       "ar": "الإكوادور",
       "fa": "اكوادور",
       "yue": "厄瓜多爾",
-      "el": "Ισημερινός - Εκουαδόρ"
+      "el": "Ισημερινός - Εκουαδόρ",
     },
   ),
   Country(
@@ -1914,7 +1914,7 @@ const List<Country> countryList = [
       "ar": "مصر",
       "fa": "مصر",
       "yue": "埃及",
-      "el": "Αίγυπτος"
+      "el": "Αίγυπτος",
     },
   ),
   Country(
@@ -1944,7 +1944,7 @@ const List<Country> countryList = [
       "ar": "السلفادور",
       "fa": "ال سالوادور",
       "yue": "薩爾瓦多",
-      "el": "Ελ Σαλβαδόρ"
+      "el": "Ελ Σαλβαδόρ",
     },
   ),
   Country(
@@ -1974,7 +1974,7 @@ const List<Country> countryList = [
       "ar": "غينيا الاستوائية",
       "fa": "گینه استوایی",
       "yue": "赤道幾內亞",
-      "el": "Ισημερινή Γουινέα"
+      "el": "Ισημερινή Γουινέα",
     },
   ),
   Country(
@@ -2004,7 +2004,7 @@ const List<Country> countryList = [
       "ar": "إريتريا",
       "fa": "اریتره",
       "yue": "厄立特里亞",
-      "el": "Ερυθραία"
+      "el": "Ερυθραία",
     },
   ),
   Country(
@@ -2034,7 +2034,7 @@ const List<Country> countryList = [
       "ar": "إستونيا",
       "fa": "استونی",
       "yue": "愛沙尼亞",
-      "el": "Εσθονία"
+      "el": "Εσθονία",
     },
   ),
   Country(
@@ -2064,7 +2064,7 @@ const List<Country> countryList = [
       "ar": "إثيوبيا",
       "fa": "اتیوپی",
       "yue": "埃塞俄比亞",
-      "el": "Αιθιοπία"
+      "el": "Αιθιοπία",
     },
   ),
   Country(
@@ -2094,7 +2094,7 @@ const List<Country> countryList = [
       "ar": "جزر فوكلاند",
       "fa": "جزایر فالکلند",
       "yue": "福克蘭群島（馬爾維納斯群島）",
-      "el": "Νήσοι Φώκλαντ (Μαλβίνας)"
+      "el": "Νήσοι Φώκλαντ (Μαλβίνας)",
     },
   ),
   Country(
@@ -2124,7 +2124,7 @@ const List<Country> countryList = [
       "ar": "جزر فارو",
       "fa": "جزایر فارو",
       "yue": "法羅群島",
-      "el": "Νήσοι Φερόες"
+      "el": "Νήσοι Φερόες",
     },
   ),
   Country(
@@ -2154,7 +2154,7 @@ const List<Country> countryList = [
       "ar": "فيجي",
       "fa": "فيجي",
       "yue": "斐濟",
-      "el": "Φίτζι"
+      "el": "Φίτζι",
     },
   ),
   Country(
@@ -2184,7 +2184,7 @@ const List<Country> countryList = [
       "ar": "فنلندا",
       "fa": "فنلاند",
       "yue": "芬蘭",
-      "el": "Φινλανδία"
+      "el": "Φινλανδία",
     },
   ),
   Country(
@@ -2214,7 +2214,7 @@ const List<Country> countryList = [
       "ar": "فرنسا",
       "fa": "فرانسه",
       "yue": "法國",
-      "el": "Γαλλία"
+      "el": "Γαλλία",
     },
   ),
   Country(
@@ -2244,7 +2244,7 @@ const List<Country> countryList = [
       "ar": "غويانا الفرنسية",
       "fa": "گویان فرانسه",
       "yue": "法屬圭亞那",
-      "el": "Γαλλική Γουιάνα"
+      "el": "Γαλλική Γουιάνα",
     },
   ),
   Country(
@@ -2274,7 +2274,7 @@ const List<Country> countryList = [
       "ar": "بولينزيا الفرنسية",
       "fa": "پلی‌نزی فرانسه",
       "yue": "法屬波利尼西亞",
-      "el": "Γαλλική Πολυνησία"
+      "el": "Γαλλική Πολυνησία",
     },
   ),
   Country(
@@ -2304,7 +2304,7 @@ const List<Country> countryList = [
       "ar": "أراض فرنسية جنوبية وأنتارتيكية",
       "fa": "سرزمین‌های جنوبی فرانسه",
       "yue": "法國南部領土",
-      "el": "Γαλλικά νότια και ανταρκτικά νησιά"
+      "el": "Γαλλικά νότια και ανταρκτικά νησιά",
     },
   ),
   Country(
@@ -2334,7 +2334,7 @@ const List<Country> countryList = [
       "ar": "الغابون",
       "fa": "گابن",
       "yue": "加蓬",
-      "el": "Γκαμπόν"
+      "el": "Γκαμπόν",
     },
   ),
   Country(
@@ -2364,7 +2364,7 @@ const List<Country> countryList = [
       "ar": "غامبيا",
       "fa": "گامبیا",
       "yue": "岡比亞",
-      "el": "Γκάμπια"
+      "el": "Γκάμπια",
     },
   ),
   Country(
@@ -2394,7 +2394,7 @@ const List<Country> countryList = [
       "ar": "جورجيا",
       "fa": "گرجستان",
       "yue": "格魯吉亞",
-      "el": "Γεωργία"
+      "el": "Γεωργία",
     },
   ),
   Country(
@@ -2424,7 +2424,7 @@ const List<Country> countryList = [
       "ar": "ألمانيا",
       "fa": "آلمان",
       "yue": "德國",
-      "el": "Γερμανία"
+      "el": "Γερμανία",
     },
   ),
   Country(
@@ -2454,7 +2454,7 @@ const List<Country> countryList = [
       "ar": "غانا",
       "fa": "غنا",
       "yue": "加納",
-      "el": "Γκάνα"
+      "el": "Γκάνα",
     },
   ),
   Country(
@@ -2484,7 +2484,7 @@ const List<Country> countryList = [
       "ar": "جبل طارق",
       "fa": "جبل الطارق",
       "yue": "直布羅陀",
-      "el": "Γιβραλτάρ"
+      "el": "Γιβραλτάρ",
     },
   ),
   Country(
@@ -2514,7 +2514,7 @@ const List<Country> countryList = [
       "ar": "اليونان",
       "fa": "یونان",
       "yue": "希臘",
-      "el": "Ελλάδα"
+      "el": "Ελλάδα",
     },
   ),
   Country(
@@ -2544,7 +2544,7 @@ const List<Country> countryList = [
       "ar": "جرينلاند",
       "fa": "گرینلند",
       "yue": "格陵蘭",
-      "el": "Γροιλανδία"
+      "el": "Γροιλανδία",
     },
   ),
   Country(
@@ -2574,7 +2574,7 @@ const List<Country> countryList = [
       "ar": "غرينادا",
       "fa": "گرنادا",
       "yue": "格林納達",
-      "el": "Γρενάδα"
+      "el": "Γρενάδα",
     },
   ),
   Country(
@@ -2604,7 +2604,7 @@ const List<Country> countryList = [
       "ar": "غوادلوب",
       "fa": "گوادلوپ",
       "yue": "瓜德罗普",
-      "el": "Γουαδελούπη"
+      "el": "Γουαδελούπη",
     },
   ),
   Country(
@@ -2634,7 +2634,7 @@ const List<Country> countryList = [
       "ar": "غوام",
       "fa": "گوام",
       "yue": "關島",
-      "el": "Γκουάμ"
+      "el": "Γκουάμ",
     },
   ),
   Country(
@@ -2664,7 +2664,7 @@ const List<Country> countryList = [
       "ar": "غواتيمالا",
       "fa": "گواتمالا",
       "yue": "危地馬拉",
-      "el": "Γουατεμάλα"
+      "el": "Γουατεμάλα",
     },
   ),
   Country(
@@ -2694,7 +2694,7 @@ const List<Country> countryList = [
       "ar": "غيرنزي",
       "fa": "گرنزی",
       "yue": "格恩西島",
-      "el": "Γκέρνσεϊ"
+      "el": "Γκέρνσεϊ",
     },
   ),
   Country(
@@ -2724,7 +2724,7 @@ const List<Country> countryList = [
       "ar": "غينيا",
       "fa": "گینه",
       "yue": "幾內亞",
-      "el": "Γουινέα"
+      "el": "Γουινέα",
     },
   ),
   Country(
@@ -2754,7 +2754,7 @@ const List<Country> countryList = [
       "ar": "غينيا بيساو",
       "fa": "گینه بیسائو",
       "yue": "幾內亞比紹",
-      "el": "Γουινέα Μπισάου"
+      "el": "Γουινέα Μπισάου",
     },
   ),
   Country(
@@ -2784,7 +2784,7 @@ const List<Country> countryList = [
       "ar": "غيانا",
       "fa": "گویان",
       "yue": "圭亞那",
-      "el": "Γουιάνα"
+      "el": "Γουιάνα",
     },
   ),
   Country(
@@ -2814,7 +2814,7 @@ const List<Country> countryList = [
       "ar": "هايتي",
       "fa": "هائیتی",
       "yue": "海地",
-      "el": "Αϊτή"
+      "el": "Αϊτή",
     },
   ),
   Country(
@@ -2844,7 +2844,7 @@ const List<Country> countryList = [
       "ar": "جزيرة هيرد وجزر ماكدونالد",
       "fa": "جزیره هرد و جزایر مک‌دونالد",
       "yue": "赫德岛同麦克唐纳群岛",
-      "el": "Νήσοι Χερντ και Μακ Ντόναλντ"
+      "el": "Νήσοι Χερντ και Μακ Ντόναλντ",
     },
   ),
   Country(
@@ -2874,7 +2874,7 @@ const List<Country> countryList = [
       "ar": "الفاتيكان",
       "fa": "واتیکان",
       "yue": "梵蒂岡城國",
-      "el": "Βατικανό"
+      "el": "Βατικανό",
     },
   ),
   Country(
@@ -2904,7 +2904,7 @@ const List<Country> countryList = [
       "ar": "هندوراس",
       "fa": "هندوراس",
       "yue": "洪都拉斯",
-      "el": "Ονδούρα"
+      "el": "Ονδούρα",
     },
   ),
   Country(
@@ -2934,7 +2934,7 @@ const List<Country> countryList = [
       "ar": "هونغ كونغ",
       "fa": "هنگ کنگ",
       "yue": "香港",
-      "el": "Χονγκ Κονγκ"
+      "el": "Χονγκ Κονγκ",
     },
   ),
   Country(
@@ -2964,7 +2964,7 @@ const List<Country> countryList = [
       "ar": "المجر",
       "fa": "مجارستان",
       "yue": "匈牙利",
-      "el": "Ουγγαρία"
+      "el": "Ουγγαρία",
     },
   ),
   Country(
@@ -2994,7 +2994,7 @@ const List<Country> countryList = [
       "ar": "آيسلندا",
       "fa": "ایسلند",
       "yue": "冰島",
-      "el": "Ισλανδία"
+      "el": "Ισλανδία",
     },
   ),
   Country(
@@ -3024,7 +3024,7 @@ const List<Country> countryList = [
       "ar": "الهند",
       "fa": "هند",
       "yue": "印度",
-      "el": "Ινδία"
+      "el": "Ινδία",
     },
   ),
   Country(
@@ -3054,7 +3054,7 @@ const List<Country> countryList = [
       "ar": "إندونيسيا",
       "fa": "اندونزی",
       "yue": "印尼",
-      "el": "Ινδονησία"
+      "el": "Ινδονησία",
     },
   ),
   Country(
@@ -3084,7 +3084,7 @@ const List<Country> countryList = [
       "ar": "إيران",
       "fa": "ایران",
       "yue": "伊朗",
-      "el": "Ιράν"
+      "el": "Ιράν",
     },
   ),
   Country(
@@ -3114,7 +3114,7 @@ const List<Country> countryList = [
       "ar": "العراق",
       "fa": "عراق",
       "yue": "伊拉克",
-      "el": "Ιράκ"
+      "el": "Ιράκ",
     },
   ),
   Country(
@@ -3144,7 +3144,7 @@ const List<Country> countryList = [
       "ar": "أيرلندا",
       "fa": "ایرلند",
       "yue": "愛爾蘭",
-      "el": "Ιρλανδία"
+      "el": "Ιρλανδία",
     },
   ),
   Country(
@@ -3174,7 +3174,7 @@ const List<Country> countryList = [
       "ar": "جزيرة مان",
       "fa": "جزیره مان",
       "yue": "马伊岛",
-      "el": "Νήσος Μαν"
+      "el": "Νήσος Μαν",
     },
   ),
   Country(
@@ -3204,7 +3204,7 @@ const List<Country> countryList = [
       "ar": "إسرائيل",
       "fa": "إسرائيل",
       "yue": "以色列",
-      "el": "Ισραήλ"
+      "el": "Ισραήλ",
     },
   ),
   Country(
@@ -3234,7 +3234,7 @@ const List<Country> countryList = [
       "ar": "إيطاليا",
       "fa": "ایتالیا",
       "yue": "意大利",
-      "el": "Ιταλία"
+      "el": "Ιταλία",
     },
   ),
   Country(
@@ -3264,7 +3264,7 @@ const List<Country> countryList = [
       "ar": "جامايكا",
       "fa": "جامائیکا",
       "yue": "牙買加",
-      "el": "Τζαμάικα"
+      "el": "Τζαμάικα",
     },
   ),
   Country(
@@ -3294,7 +3294,7 @@ const List<Country> countryList = [
       "ar": "اليابان",
       "fa": "ژاپن",
       "yue": "日本",
-      "el": "Ιαπωνία"
+      "el": "Ιαπωνία",
     },
   ),
   Country(
@@ -3324,7 +3324,7 @@ const List<Country> countryList = [
       "ar": "جيرزي",
       "fa": "جرزی",
       "yue": "澤西",
-      "el": "Τζέρσεϊ"
+      "el": "Τζέρσεϊ",
     },
   ),
   Country(
@@ -3354,7 +3354,7 @@ const List<Country> countryList = [
       "ar": "الأردن",
       "fa": "اردن",
       "yue": "約旦",
-      "el": "Ιορδανία"
+      "el": "Ιορδανία",
     },
   ),
   Country(
@@ -3384,7 +3384,7 @@ const List<Country> countryList = [
       "ar": "كازاخستان",
       "fa": "قزاقستان",
       "yue": "哈薩克斯坦",
-      "el": "Καζακστάν"
+      "el": "Καζακστάν",
     },
   ),
   Country(
@@ -3414,7 +3414,7 @@ const List<Country> countryList = [
       "ar": "كينيا",
       "fa": "كنيا",
       "yue": "肯雅",
-      "el": "Κένυα"
+      "el": "Κένυα",
     },
   ),
   Country(
@@ -3444,7 +3444,7 @@ const List<Country> countryList = [
       "ar": "كيريباتي",
       "fa": "کیریباتی",
       "yue": "基里巴斯",
-      "el": "Κιριμπάτι"
+      "el": "Κιριμπάτι",
     },
   ),
   Country(
@@ -3473,7 +3473,7 @@ const List<Country> countryList = [
       "ro": "Kosovo",
       "ar": "كوسوفو",
       "fa": "کوسوو",
-      "yue": "科索沃"
+      "yue": "科索沃",
     },
   ),
   Country(
@@ -3503,7 +3503,7 @@ const List<Country> countryList = [
       "ar": "كوريا الشمالية",
       "fa": "کره شمالی",
       "yue": "朝鮮（朝鮮民主主義人民共咊囯）",
-      "el": "Βόρεια Κορέα (Λαοκρατική Δημοκρατία της Κορέας)"
+      "el": "Βόρεια Κορέα (Λαοκρατική Δημοκρατία της Κορέας)",
     },
   ),
   Country(
@@ -3533,7 +3533,7 @@ const List<Country> countryList = [
       "ar": "كوريا الجنوبية",
       "fa": "کره جنوبی",
       "yue": "韓國（大韓民國）",
-      "el": "Νότια Κορέα (Δημοκρατία της Κορέας)"
+      "el": "Νότια Κορέα (Δημοκρατία της Κορέας)",
     },
   ),
   Country(
@@ -3563,7 +3563,7 @@ const List<Country> countryList = [
       "ar": "الكويت",
       "fa": "کویت",
       "yue": "科威特",
-      "el": "Κουβέιτ"
+      "el": "Κουβέιτ",
     },
   ),
   Country(
@@ -3593,7 +3593,7 @@ const List<Country> countryList = [
       "ar": "قيرغيزستان",
       "fa": "قرقیزستان",
       "yue": "吉爾吉斯斯坦",
-      "el": "Κιργιζία"
+      "el": "Κιργιζία",
     },
   ),
   Country(
@@ -3623,7 +3623,7 @@ const List<Country> countryList = [
       "ar": "لاوس",
       "fa": "لائوس",
       "yue": "老撾人民民主共和國",
-      "el": "Λαϊκή Δημοκρατία του Λάος"
+      "el": "Λαϊκή Δημοκρατία του Λάος",
     },
   ),
   Country(
@@ -3653,7 +3653,7 @@ const List<Country> countryList = [
       "ar": "لاتفيا",
       "fa": "لتونی",
       "yue": "拉脫維亞",
-      "el": "Λετονία"
+      "el": "Λετονία",
     },
   ),
   Country(
@@ -3683,7 +3683,7 @@ const List<Country> countryList = [
       "ar": "لبنان",
       "fa": "لبنان",
       "yue": "黎巴嫩",
-      "el": "Λίβανος"
+      "el": "Λίβανος",
     },
   ),
   Country(
@@ -3713,7 +3713,7 @@ const List<Country> countryList = [
       "ar": "ليسوتو",
       "fa": "لسوتو",
       "yue": "萊索托",
-      "el": "Λεσότο"
+      "el": "Λεσότο",
     },
   ),
   Country(
@@ -3743,7 +3743,7 @@ const List<Country> countryList = [
       "ar": "ليبيريا",
       "fa": "لیبریا",
       "yue": "利比里亞",
-      "el": "Λιβερία"
+      "el": "Λιβερία",
     },
   ),
   Country(
@@ -3773,7 +3773,7 @@ const List<Country> countryList = [
       "ar": "ليبيا",
       "fa": "لیبی",
       "yue": "利比亞",
-      "el": "Λιβύη"
+      "el": "Λιβύη",
     },
   ),
   Country(
@@ -3803,7 +3803,7 @@ const List<Country> countryList = [
       "ar": "ليختنشتاين",
       "fa": "لیختن‌اشتاین",
       "yue": "列支敦士登",
-      "el": "Λίχτενσταϊν"
+      "el": "Λίχτενσταϊν",
     },
   ),
   Country(
@@ -3833,7 +3833,7 @@ const List<Country> countryList = [
       "ar": "ليتوانيا",
       "fa": "لیتوانی",
       "yue": "立陶宛",
-      "el": "Λιθουανία"
+      "el": "Λιθουανία",
     },
   ),
   Country(
@@ -3863,7 +3863,7 @@ const List<Country> countryList = [
       "ar": "لوكسمبورغ",
       "fa": "لوکزامبورگ",
       "yue": "盧森堡",
-      "el": "Λουξεμβούργο"
+      "el": "Λουξεμβούργο",
     },
   ),
   Country(
@@ -3893,7 +3893,7 @@ const List<Country> countryList = [
       "ar": "ماكاو",
       "fa": "ماكائو",
       "yue": "澳門",
-      "el": "Μακάου"
+      "el": "Μακάου",
     },
   ),
   Country(
@@ -3923,7 +3923,7 @@ const List<Country> countryList = [
       "ar": "مقدونيا",
       "fa": "مقدونیه",
       "yue": "馬其頓（前南斯拉夫共和國）",
-      "el": "Βόρεια Μακεδονία (πρώην Γιουγκοσλαβική Δημοκρατία της Μακεδονίας)"
+      "el": "Βόρεια Μακεδονία (πρώην Γιουγκοσλαβική Δημοκρατία της Μακεδονίας)",
     },
   ),
   Country(
@@ -3953,7 +3953,7 @@ const List<Country> countryList = [
       "ar": "مدغشقر",
       "fa": "ماداگاسکار",
       "yue": "馬達加斯加",
-      "el": "Μαδαγασκάρη"
+      "el": "Μαδαγασκάρη",
     },
   ),
   Country(
@@ -3983,7 +3983,7 @@ const List<Country> countryList = [
       "ar": "مالاوي",
       "fa": "مالاوی",
       "yue": "馬拉維",
-      "el": "Μαλάουι"
+      "el": "Μαλάουι",
     },
   ),
   Country(
@@ -4013,7 +4013,7 @@ const List<Country> countryList = [
       "ar": "ماليزيا",
       "fa": "مالزی",
       "yue": "馬來西亞",
-      "el": "Μαλαισία"
+      "el": "Μαλαισία",
     },
   ),
   Country(
@@ -4043,7 +4043,7 @@ const List<Country> countryList = [
       "ar": "جزر المالديف",
       "fa": "مالدیو",
       "yue": "馬爾代夫",
-      "el": "Μαλδίβες"
+      "el": "Μαλδίβες",
     },
   ),
   Country(
@@ -4073,7 +4073,7 @@ const List<Country> countryList = [
       "ar": "مالي",
       "fa": "مالی",
       "yue": "馬里",
-      "el": "Μάλι"
+      "el": "Μάλι",
     },
   ),
   Country(
@@ -4103,7 +4103,7 @@ const List<Country> countryList = [
       "ar": "مالطا",
       "fa": "مالت",
       "yue": "馬耳他",
-      "el": "Μάλτα"
+      "el": "Μάλτα",
     },
   ),
   Country(
@@ -4133,7 +4133,7 @@ const List<Country> countryList = [
       "ar": "جزر مارشال",
       "fa": "جزایر مارشال",
       "yue": "馬紹爾群島",
-      "el": "Νήσοι Μάρσαλ"
+      "el": "Νήσοι Μάρσαλ",
     },
   ),
   Country(
@@ -4163,7 +4163,7 @@ const List<Country> countryList = [
       "ar": "مارتينيك",
       "fa": "مارتینیک",
       "yue": "马提尼克",
-      "el": "Μαρτινίκα"
+      "el": "Μαρτινίκα",
     },
   ),
   Country(
@@ -4193,7 +4193,7 @@ const List<Country> countryList = [
       "ar": "موريتانيا",
       "fa": "موریتانی",
       "yue": "毛里塔尼亞",
-      "el": "Μαυριτανία"
+      "el": "Μαυριτανία",
     },
   ),
   Country(
@@ -4223,7 +4223,7 @@ const List<Country> countryList = [
       "ar": "موريشيوس",
       "fa": "موریس",
       "yue": "毛里求斯",
-      "el": "Μαυρίκιος"
+      "el": "Μαυρίκιος",
     },
   ),
   Country(
@@ -4253,7 +4253,7 @@ const List<Country> countryList = [
       "ar": "مايوت",
       "fa": "مایوت",
       "yue": "馬約特",
-      "el": "Μαγιότ"
+      "el": "Μαγιότ",
     },
   ),
   Country(
@@ -4283,7 +4283,7 @@ const List<Country> countryList = [
       "ar": "المكسيك",
       "fa": "مکزیک",
       "yue": "墨西哥",
-      "el": "Μεξικό"
+      "el": "Μεξικό",
     },
   ),
   Country(
@@ -4313,7 +4313,7 @@ const List<Country> countryList = [
       "ar": "ولايات ميكرونيسيا المتحدة",
       "fa": "ایالات فدرال میکرونزی",
       "yue": "密克罗尼西亚（聯邦）",
-      "el": "Μικρονησία (Ομόσπονδες Πολιτείες της Μικρονησίας)"
+      "el": "Μικρονησία (Ομόσπονδες Πολιτείες της Μικρονησίας)",
     },
   ),
   Country(
@@ -4343,7 +4343,7 @@ const List<Country> countryList = [
       "ar": "مولدوفا",
       "fa": "مولداوی",
       "yue": "摩爾多瓦（共和國）",
-      "el": "Μολδαβία"
+      "el": "Μολδαβία",
     },
   ),
   Country(
@@ -4373,7 +4373,7 @@ const List<Country> countryList = [
       "ar": "موناكو",
       "fa": "موناكو",
       "yue": "摩納哥",
-      "el": "Μονακό"
+      "el": "Μονακό",
     },
   ),
   Country(
@@ -4403,7 +4403,7 @@ const List<Country> countryList = [
       "ar": "منغوليا",
       "fa": "مغولستان",
       "yue": "蒙古",
-      "el": "Μογγολία"
+      "el": "Μογγολία",
     },
   ),
   Country(
@@ -4433,7 +4433,7 @@ const List<Country> countryList = [
       "ar": "الجبل الأسود",
       "fa": "مونته‌نگرو",
       "yue": "黑山",
-      "el": "Μαυροβούνιο"
+      "el": "Μαυροβούνιο",
     },
   ),
   Country(
@@ -4463,7 +4463,7 @@ const List<Country> countryList = [
       "ar": "مونتسرات",
       "fa": "مونتسرات",
       "yue": "蒙特塞拉特",
-      "el": "Μοντσερά"
+      "el": "Μοντσερά",
     },
   ),
   Country(
@@ -4493,7 +4493,7 @@ const List<Country> countryList = [
       "ar": "المغرب",
       "fa": "مراکش",
       "yue": "摩洛哥",
-      "el": "Μαρόκο"
+      "el": "Μαρόκο",
     },
   ),
   Country(
@@ -4523,7 +4523,7 @@ const List<Country> countryList = [
       "ar": "موزمبيق",
       "fa": "موزامبیک",
       "yue": "莫桑比克",
-      "el": "Μοζαμβίκη"
+      "el": "Μοζαμβίκη",
     },
   ),
   Country(
@@ -4553,7 +4553,7 @@ const List<Country> countryList = [
       "ar": "ميانمار",
       "fa": "میانمار",
       "yue": "緬甸",
-      "el": "Μιανμάρ"
+      "el": "Μιανμάρ",
     },
   ),
   Country(
@@ -4583,7 +4583,7 @@ const List<Country> countryList = [
       "ar": "ناميبيا",
       "fa": "نامیبیا",
       "yue": "納米比亞",
-      "el": "Ναμίμπια"
+      "el": "Ναμίμπια",
     },
   ),
   Country(
@@ -4613,7 +4613,7 @@ const List<Country> countryList = [
       "ar": "ناورو",
       "fa": "نائورو",
       "yue": "瑙魯",
-      "el": "Ναουρού"
+      "el": "Ναουρού",
     },
   ),
   Country(
@@ -4643,7 +4643,7 @@ const List<Country> countryList = [
       "ar": "نيبال",
       "fa": "نپال",
       "yue": "尼泊爾",
-      "el": "Νεπάλ"
+      "el": "Νεπάλ",
     },
   ),
   Country(
@@ -4673,7 +4673,7 @@ const List<Country> countryList = [
       "ar": "هولندا",
       "fa": "هلند",
       "yue": "荷蘭",
-      "el": "Ολλανδία"
+      "el": "Ολλανδία",
     },
   ),
   Country(
@@ -4703,7 +4703,7 @@ const List<Country> countryList = [
       "ar": "كاليدونيا الجديدة",
       "fa": "کالدونیای جدید",
       "yue": "新喀里多尼亚",
-      "el": "Νέα Καληδονία"
+      "el": "Νέα Καληδονία",
     },
   ),
   Country(
@@ -4733,7 +4733,7 @@ const List<Country> countryList = [
       "ar": "نيوزيلندا",
       "fa": "نیوزلند",
       "yue": "紐西蘭",
-      "el": "Νέα Ζηλανδία"
+      "el": "Νέα Ζηλανδία",
     },
   ),
   Country(
@@ -4763,7 +4763,7 @@ const List<Country> countryList = [
       "ar": "نيكاراغوا",
       "fa": "نیکاراگوئه",
       "yue": "尼加拉瓜",
-      "el": "Νικαράγουα"
+      "el": "Νικαράγουα",
     },
   ),
   Country(
@@ -4793,7 +4793,7 @@ const List<Country> countryList = [
       "ar": "النيجر",
       "fa": "نیجر",
       "yue": "尼日爾",
-      "el": "Νίγηρας"
+      "el": "Νίγηρας",
     },
   ),
   Country(
@@ -4823,7 +4823,7 @@ const List<Country> countryList = [
       "ar": "نيجيريا",
       "fa": "نیجریه",
       "yue": "尼日利亞",
-      "el": "Νιγηρία"
+      "el": "Νιγηρία",
     },
   ),
   Country(
@@ -4853,7 +4853,7 @@ const List<Country> countryList = [
       "ar": "نييوي",
       "fa": "نیووی",
       "yue": "紐埃",
-      "el": "Νίουε"
+      "el": "Νίουε",
     },
   ),
   Country(
@@ -4883,7 +4883,7 @@ const List<Country> countryList = [
       "ar": "جزيرة نورفولك",
       "fa": "جزیره نورفک",
       "yue": "诺福克岛",
-      "el": "Νησί Νόρφολκ"
+      "el": "Νησί Νόρφολκ",
     },
   ),
   Country(
@@ -4913,7 +4913,7 @@ const List<Country> countryList = [
       "ar": "جزر ماريانا الشمالية",
       "fa": "جزایر ماریانای شمالی",
       "yue": "北馬里亞納群島",
-      "el": "Βόρειες Μαριάνες Νήσοι"
+      "el": "Βόρειες Μαριάνες Νήσοι",
     },
   ),
   Country(
@@ -4943,7 +4943,7 @@ const List<Country> countryList = [
       "ar": "النرويج",
       "fa": "نروژ",
       "yue": "挪威",
-      "el": "Νορβηγία"
+      "el": "Νορβηγία",
     },
   ),
   Country(
@@ -4973,7 +4973,7 @@ const List<Country> countryList = [
       "ar": "عمان",
       "fa": "عمان",
       "yue": "阿曼",
-      "el": "Ομάν"
+      "el": "Ομάν",
     },
   ),
   Country(
@@ -5003,7 +5003,7 @@ const List<Country> countryList = [
       "ar": "باكستان",
       "fa": "پاکستان",
       "yue": "巴基斯坦",
-      "el": "Πακιστάν"
+      "el": "Πακιστάν",
     },
   ),
   Country(
@@ -5033,7 +5033,7 @@ const List<Country> countryList = [
       "ar": "بالاو",
       "fa": "پالائو",
       "yue": "帕劳",
-      "el": "Παλάου"
+      "el": "Παλάου",
     },
   ),
   Country(
@@ -5063,7 +5063,7 @@ const List<Country> countryList = [
       "ar": "فلسطين",
       "fa": "فلسطین",
       "yue": "巴勒斯坦，国",
-      "el": "Παλαιστίνη, Κράτος της Παλαιστίνης"
+      "el": "Παλαιστίνη, Κράτος της Παλαιστίνης",
     },
   ),
   Country(
@@ -5093,7 +5093,7 @@ const List<Country> countryList = [
       "ar": "بنما",
       "fa": "پاناما",
       "yue": "巴拿馬",
-      "el": "Παναμάς"
+      "el": "Παναμάς",
     },
   ),
   Country(
@@ -5123,7 +5123,7 @@ const List<Country> countryList = [
       "ar": "بابوا غينيا الجديدة",
       "fa": "پاپوآ گینه نو",
       "yue": "巴布亚新几内亚",
-      "el": "Παπούα Νέα Γουινέα"
+      "el": "Παπούα Νέα Γουινέα",
     },
   ),
   Country(
@@ -5153,7 +5153,7 @@ const List<Country> countryList = [
       "ar": "باراغواي",
       "fa": "پاراگوئه",
       "yue": "巴拉圭",
-      "el": "Παραγουάη"
+      "el": "Παραγουάη",
     },
   ),
   Country(
@@ -5183,7 +5183,7 @@ const List<Country> countryList = [
       "ar": "بيرو",
       "fa": "پرو",
       "yue": "秘魯",
-      "el": "Περού"
+      "el": "Περού",
     },
   ),
   Country(
@@ -5213,7 +5213,7 @@ const List<Country> countryList = [
       "ar": "الفلبين",
       "fa": "فیلیپین",
       "yue": "菲律賓",
-      "el": "Φιλιππίνες"
+      "el": "Φιλιππίνες",
     },
   ),
   Country(
@@ -5243,7 +5243,7 @@ const List<Country> countryList = [
       "ar": "جزر بيتكيرن",
       "fa": "جزایر پیت‌کرن",
       "yue": "皮特凱恩",
-      "el": "Νήσοι Πίτκαιρν"
+      "el": "Νήσοι Πίτκαιρν",
     },
   ),
   Country(
@@ -5273,7 +5273,7 @@ const List<Country> countryList = [
       "ar": "بولندا",
       "fa": "لهستان",
       "yue": "波蘭",
-      "el": "Πολωνία"
+      "el": "Πολωνία",
     },
   ),
   Country(
@@ -5303,7 +5303,7 @@ const List<Country> countryList = [
       "ar": "البرتغال",
       "fa": "پرتغال",
       "yue": "葡萄牙",
-      "el": "Πορτογαλλία"
+      "el": "Πορτογαλλία",
     },
   ),
   Country(
@@ -5333,7 +5333,7 @@ const List<Country> countryList = [
       "ar": "بورتوريكو",
       "fa": "پورتوریکو",
       "yue": "波多黎各",
-      "el": "Πουέρτο Ρίκο"
+      "el": "Πουέρτο Ρίκο",
     },
   ),
   Country(
@@ -5363,7 +5363,7 @@ const List<Country> countryList = [
       "ar": "قطر",
       "fa": "قطر",
       "yue": "卡塔爾",
-      "el": "Κατάρ"
+      "el": "Κατάρ",
     },
   ),
   Country(
@@ -5393,7 +5393,7 @@ const List<Country> countryList = [
       "ar": "لا ريونيون",
       "fa": "رئونیون",
       "yue": "留尼汪",
-      "el": "Ρεουνιόν"
+      "el": "Ρεουνιόν",
     },
   ),
   Country(
@@ -5423,7 +5423,7 @@ const List<Country> countryList = [
       "ar": "رومانيا",
       "fa": "رومانی",
       "yue": "羅馬尼亞",
-      "el": "Ρουμανία"
+      "el": "Ρουμανία",
     },
   ),
   Country(
@@ -5453,7 +5453,7 @@ const List<Country> countryList = [
       "ar": "روسيا",
       "fa": "روسیه",
       "yue": "俄儸斯聯邦",
-      "el": "Ρωσική Ομοσπονδία"
+      "el": "Ρωσική Ομοσπονδία",
     },
   ),
   Country(
@@ -5483,7 +5483,7 @@ const List<Country> countryList = [
       "ar": "رواندا",
       "fa": "رواندا",
       "yue": "盧旺達",
-      "el": "Ρουάντα"
+      "el": "Ρουάντα",
     },
   ),
   Country(
@@ -5513,7 +5513,7 @@ const List<Country> countryList = [
       "ar": "سان بارتيلمي",
       "fa": "سن بارتلمی",
       "yue": "聖巴泰勒米",
-      "el": "Άγιος Βαρθολομαίος"
+      "el": "Άγιος Βαρθολομαίος",
     },
   ),
   Country(
@@ -5543,7 +5543,7 @@ const List<Country> countryList = [
       "ar": "سانت هيلانة وأسينشين وتريستان دا كونا",
       "fa": "سنت هلن",
       "yue": "圣赫勒拿、阿森松同特里斯坦·达库尼亚",
-      "el": "Αγία Ελένη, Ασενσιόν και Τριστάν ντα Κούνια"
+      "el": "Αγία Ελένη, Ασενσιόν και Τριστάν ντα Κούνια",
     },
   ),
   Country(
@@ -5573,7 +5573,7 @@ const List<Country> countryList = [
       "ar": "سانت كيتس ونيفيس",
       "fa": "سنت کیتس و نویس",
       "yue": "圣基茨同尼维斯",
-      "el": "Άγιος Χριστόφορος και Νέβις"
+      "el": "Άγιος Χριστόφορος και Νέβις",
     },
   ),
   Country(
@@ -5603,7 +5603,7 @@ const List<Country> countryList = [
       "ar": "سانت لوسيا",
       "fa": "سنت لوسیا",
       "yue": "聖盧西亞",
-      "el": "Αγία Λουκία"
+      "el": "Αγία Λουκία",
     },
   ),
   Country(
@@ -5633,7 +5633,7 @@ const List<Country> countryList = [
       "ar": "تجمع سان مارتين",
       "fa": "سن مارتن",
       "yue": "聖馬丁（法國部分）",
-      "el": "Άγιος Μαρτίνος"
+      "el": "Άγιος Μαρτίνος",
     },
   ),
   Country(
@@ -5663,7 +5663,7 @@ const List<Country> countryList = [
       "ar": "سان بيير وميكلون",
       "fa": "سن-پیر و میکلون",
       "yue": "聖皮埃尔同米克隆",
-      "el": "Σεντ Πιέρ και Μικελόν"
+      "el": "Σεντ Πιέρ και Μικελόν",
     },
   ),
   Country(
@@ -5693,7 +5693,7 @@ const List<Country> countryList = [
       "ar": "سانت فينسنت والغرينادين",
       "fa": "سنت وینسنت و گرنادین‌ها",
       "yue": "聖文森特同格林纳丁斯",
-      "el": "Άγιος Βικέντιος και Γρεναδίνες"
+      "el": "Άγιος Βικέντιος και Γρεναδίνες",
     },
   ),
   Country(
@@ -5723,7 +5723,7 @@ const List<Country> countryList = [
       "ar": "ساموا",
       "fa": "ساموآ",
       "yue": "薩摩亞",
-      "el": "Σαμόα"
+      "el": "Σαμόα",
     },
   ),
   Country(
@@ -5753,7 +5753,7 @@ const List<Country> countryList = [
       "ar": "سان مارينو",
       "fa": "سان مارینو",
       "yue": "聖馬力諾",
-      "el": "Άγιος Μαρίνος"
+      "el": "Άγιος Μαρίνος",
     },
   ),
   Country(
@@ -5783,7 +5783,7 @@ const List<Country> countryList = [
       "ar": "ساو تومي وبرينسيب",
       "fa": "سائوتومه و پرنسیپ",
       "yue": "聖多美和普林西比",
-      "el": "Σάο Τομέ και Πρινσίπε"
+      "el": "Σάο Τομέ και Πρινσίπε",
     },
   ),
   Country(
@@ -5813,7 +5813,7 @@ const List<Country> countryList = [
       "ar": "السعودية",
       "fa": "عربستان سعودی",
       "yue": "沙地阿拉伯",
-      "el": "Σαουδική Αραβία"
+      "el": "Σαουδική Αραβία",
     },
   ),
   Country(
@@ -5843,7 +5843,7 @@ const List<Country> countryList = [
       "ar": "السنغال",
       "fa": "سنگال",
       "yue": "塞內加爾",
-      "el": "Σενεγάλη"
+      "el": "Σενεγάλη",
     },
   ),
   Country(
@@ -5873,7 +5873,7 @@ const List<Country> countryList = [
       "ar": "صربيا",
       "fa": "صربستان",
       "yue": "塞爾維亞",
-      "el": "Σερβία"
+      "el": "Σερβία",
     },
   ),
   Country(
@@ -5903,7 +5903,7 @@ const List<Country> countryList = [
       "ar": "سيشل",
       "fa": "سیشل",
       "yue": "塞舌爾",
-      "el": "Σεϋχέλλες"
+      "el": "Σεϋχέλλες",
     },
   ),
   Country(
@@ -5933,7 +5933,7 @@ const List<Country> countryList = [
       "ar": "سيراليون",
       "fa": "سیرالئون",
       "yue": "塞拉利昂",
-      "el": "Σιέρρα Λεόνε"
+      "el": "Σιέρρα Λεόνε",
     },
   ),
   Country(
@@ -5963,7 +5963,7 @@ const List<Country> countryList = [
       "ar": "سنغافورة",
       "fa": "سنگاپور",
       "yue": "星架坡",
-      "el": "Σιγκαπούρη"
+      "el": "Σιγκαπούρη",
     },
   ),
   Country(
@@ -5993,7 +5993,7 @@ const List<Country> countryList = [
       "ar": "سلوفاكيا",
       "fa": "اسلواکی",
       "yue": "斯洛伐克",
-      "el": "Σλοβακία"
+      "el": "Σλοβακία",
     },
   ),
   Country(
@@ -6023,7 +6023,7 @@ const List<Country> countryList = [
       "ar": "سلوفينيا",
       "fa": "اسلوونی",
       "yue": "斯洛文尼亞",
-      "el": "Σλοβενία"
+      "el": "Σλοβενία",
     },
   ),
   Country(
@@ -6053,7 +6053,7 @@ const List<Country> countryList = [
       "ar": "جزر سليمان",
       "fa": "جزایر سلیمان",
       "yue": "所羅門群島",
-      "el": "Νησιά Σολομώντα"
+      "el": "Νησιά Σολομώντα",
     },
   ),
   Country(
@@ -6083,7 +6083,7 @@ const List<Country> countryList = [
       "ar": "الصومال",
       "fa": "سومالی",
       "yue": "索馬里",
-      "el": "Σομαλία"
+      "el": "Σομαλία",
     },
   ),
   Country(
@@ -6113,7 +6113,7 @@ const List<Country> countryList = [
       "ar": "جنوب أفريقيا",
       "fa": "آفریقای جنوبی",
       "yue": "南非",
-      "el": "Νότια Αφρική"
+      "el": "Νότια Αφρική",
     },
   ),
   Country(
@@ -6143,7 +6143,7 @@ const List<Country> countryList = [
       "ar": "جورجيا الجنوبية وجزر ساندويتش الجنوبية",
       "fa": "جزایر جورجیای جنوبی و ساندویچ جنوبی",
       "yue": "南喬治亞州同南桑威奇群島",
-      "el": "Νότιος Γεωργία και Νότιοι Νήσοι Σάντουιτς"
+      "el": "Νότιος Γεωργία και Νότιοι Νήσοι Σάντουιτς",
     },
   ),
   Country(
@@ -6173,7 +6173,7 @@ const List<Country> countryList = [
       "ar": "جنوب السودان",
       "fa": "سودان جنوبی",
       "yue": "南蘇丹",
-      "el": "Νότιο Σουδάν"
+      "el": "Νότιο Σουδάν",
     },
   ),
   Country(
@@ -6203,7 +6203,7 @@ const List<Country> countryList = [
       "ar": "إسبانيا",
       "fa": "اسپانیا",
       "yue": "西班牙",
-      "el": "Ισπανία"
+      "el": "Ισπανία",
     },
   ),
   Country(
@@ -6233,7 +6233,7 @@ const List<Country> countryList = [
       "ar": "سريلانكا",
       "fa": "سریلانکا",
       "yue": "斯里蘭卡",
-      "el": "Σρι Λάνκα"
+      "el": "Σρι Λάνκα",
     },
   ),
   Country(
@@ -6263,7 +6263,7 @@ const List<Country> countryList = [
       "ar": "السودان",
       "fa": "سودان",
       "yue": "蘇丹",
-      "el": "Σουδάν"
+      "el": "Σουδάν",
     },
   ),
   Country(
@@ -6293,7 +6293,7 @@ const List<Country> countryList = [
       "ar": "سورينام",
       "fa": "سورینام",
       "yue": "蘇里南",
-      "el": "Σουρινάμ"
+      "el": "Σουρινάμ",
     },
   ),
   Country(
@@ -6323,7 +6323,7 @@ const List<Country> countryList = [
       "ar": "سفالبارد ويان ماين",
       "fa": "سوالبارد و یان ماین",
       "yue": "斯瓦尔巴德同扬·马延",
-      "el": "Σβάλμπαρντ και Γιαν Μάγεν"
+      "el": "Σβάλμπαρντ και Γιαν Μάγεν",
     },
   ),
   Country(
@@ -6353,7 +6353,7 @@ const List<Country> countryList = [
       "ar": "إسواتيني",
       "fa": "اسواتینی",
       "yue": "斯威士蘭",
-      "el": "Σουαζιλάνδη"
+      "el": "Σουαζιλάνδη",
     },
   ),
   Country(
@@ -6383,7 +6383,7 @@ const List<Country> countryList = [
       "ar": "السويد",
       "fa": "سوئد",
       "yue": "瑞典",
-      "el": "Σουηδία"
+      "el": "Σουηδία",
     },
   ),
   Country(
@@ -6413,7 +6413,7 @@ const List<Country> countryList = [
       "ar": "سويسرا",
       "fa": "سوئیس",
       "yue": "瑞士",
-      "el": "Ελβετία"
+      "el": "Ελβετία",
     },
   ),
   Country(
@@ -6443,7 +6443,7 @@ const List<Country> countryList = [
       "ar": "سوريا",
       "fa": "سوریه",
       "yue": "阿拉伯敘利亞共和國",
-      "el": "Αραβική Δημοκρατία της Συρίας"
+      "el": "Αραβική Δημοκρατία της Συρίας",
     },
   ),
   Country(
@@ -6473,7 +6473,7 @@ const List<Country> countryList = [
       "ar": "تايوان",
       "fa": "تایوان",
       "yue": "台灣",
-      "el": "Ταϊβάν"
+      "el": "Ταϊβάν",
     },
   ),
   Country(
@@ -6503,7 +6503,7 @@ const List<Country> countryList = [
       "ar": "طاجيكستان",
       "fa": "تاجیکستان",
       "yue": "塔吉克斯坦",
-      "el": "Τατζικιστάν"
+      "el": "Τατζικιστάν",
     },
   ),
   Country(
@@ -6533,7 +6533,7 @@ const List<Country> countryList = [
       "ar": "تنزانيا",
       "fa": "تانزانیا",
       "yue": "坦桑尼亞，聯合共和國",
-      "el": "Τανζανία, Ηνωμένη Δημοκρατία της Τανζανίας"
+      "el": "Τανζανία, Ηνωμένη Δημοκρατία της Τανζανίας",
     },
   ),
   Country(
@@ -6563,7 +6563,7 @@ const List<Country> countryList = [
       "ar": "تايلاند",
       "fa": "تایلند",
       "yue": "泰國",
-      "el": "Ταϊλάνδη"
+      "el": "Ταϊλάνδη",
     },
   ),
   Country(
@@ -6593,7 +6593,7 @@ const List<Country> countryList = [
       "ar": "تيمور الشرقية",
       "fa": "تیمور شرقی",
       "yue": "東帝汶",
-      "el": "Ανατολικό Τιμόρ"
+      "el": "Ανατολικό Τιμόρ",
     },
   ),
   Country(
@@ -6623,7 +6623,7 @@ const List<Country> countryList = [
       "ar": "توغو",
       "fa": "توگو",
       "yue": "多哥",
-      "el": "Τόγκο"
+      "el": "Τόγκο",
     },
   ),
   Country(
@@ -6653,7 +6653,7 @@ const List<Country> countryList = [
       "ar": "توكيلاو",
       "fa": "توکلائو",
       "yue": "托克劳",
-      "el": "Τοκελάου"
+      "el": "Τοκελάου",
     },
   ),
   Country(
@@ -6683,7 +6683,7 @@ const List<Country> countryList = [
       "ar": "تونغا",
       "fa": "تونگا",
       "yue": "湯加",
-      "el": "Τόνγκα"
+      "el": "Τόνγκα",
     },
   ),
   Country(
@@ -6713,7 +6713,7 @@ const List<Country> countryList = [
       "ar": "ترينيداد وتوباغو",
       "fa": "ترینیداد و توباگو",
       "yue": "特立尼達和多巴哥",
-      "el": "Τρινιντάντ και Τομπάγκο"
+      "el": "Τρινιντάντ και Τομπάγκο",
     },
   ),
   Country(
@@ -6743,7 +6743,7 @@ const List<Country> countryList = [
       "ar": "تونس",
       "fa": "تونس",
       "yue": "突尼斯",
-      "el": "Τυνησία"
+      "el": "Τυνησία",
     },
   ),
   Country(
@@ -6773,7 +6773,7 @@ const List<Country> countryList = [
       "ar": "تركيا",
       "fa": "ترکیه",
       "yue": "土耳其",
-      "el": "Τουρκία"
+      "el": "Τουρκία",
     },
   ),
   Country(
@@ -6803,7 +6803,7 @@ const List<Country> countryList = [
       "ar": "تركمانستان",
       "fa": "ترکمنستان",
       "yue": "土庫曼斯坦",
-      "el": "Τουρκμενιστάν"
+      "el": "Τουρκμενιστάν",
     },
   ),
   Country(
@@ -6833,7 +6833,7 @@ const List<Country> countryList = [
       "ar": "جزر توركس وكايكوس",
       "fa": "جزایر تورکس و کایکوس",
       "yue": "特克斯同凯科斯群岛",
-      "el": "Νήσοι Τουρκ και Κάικος"
+      "el": "Νήσοι Τουρκ και Κάικος",
     },
   ),
   Country(
@@ -6863,7 +6863,7 @@ const List<Country> countryList = [
       "ar": "توفالو",
       "fa": "تووالو",
       "yue": "圖瓦盧",
-      "el": "Τουβαλού"
+      "el": "Τουβαλού",
     },
   ),
   Country(
@@ -6893,7 +6893,7 @@ const List<Country> countryList = [
       "ar": "أوغندا",
       "fa": "اوگاندا",
       "yue": "烏干達",
-      "el": "Ουγκάντα"
+      "el": "Ουγκάντα",
     },
   ),
   Country(
@@ -6923,7 +6923,7 @@ const List<Country> countryList = [
       "ar": "أوكرانيا",
       "fa": "اوکراین",
       "yue": "烏克蘭",
-      "el": "Ουκρανία"
+      "el": "Ουκρανία",
     },
   ),
   Country(
@@ -6953,7 +6953,7 @@ const List<Country> countryList = [
       "ar": "الإمارات العربية المتحدة",
       "fa": "امارات متحده عربی",
       "yue": "阿拉伯聯合酋長國",
-      "el": "Ηνωµένα Αραβικά Εµιράτα"
+      "el": "Ηνωµένα Αραβικά Εµιράτα",
     },
   ),
   Country(
@@ -6983,7 +6983,7 @@ const List<Country> countryList = [
       "ar": "المملكة المتحدة",
       "fa": "بریتانیا",
       "yue": "大不列顛及北愛爾蘭聯合王國",
-      "el": "Ηνωμένο Βασίλειο της Μεγάλης Βρετανίας και της Βόρειας Ιρλανδίας"
+      "el": "Ηνωμένο Βασίλειο της Μεγάλης Βρετανίας και της Βόρειας Ιρλανδίας",
     },
   ),
   Country(
@@ -7013,7 +7013,7 @@ const List<Country> countryList = [
       "ar": "الولايات المتحدة",
       "fa": "ایالات متحده آمریکا",
       "yue": "美利堅郃眾囯",
-      "el": "Ηνωμένες Πολιτείες Αμερικής"
+      "el": "Ηνωμένες Πολιτείες Αμερικής",
     },
   ),
   Country(
@@ -7043,7 +7043,7 @@ const List<Country> countryList = [
       "ar": "الأوروغواي",
       "fa": "اروگوئه",
       "yue": "烏拉圭",
-      "el": "Ουρουγουάη"
+      "el": "Ουρουγουάη",
     },
   ),
   Country(
@@ -7073,7 +7073,7 @@ const List<Country> countryList = [
       "ar": "أوزبكستان",
       "fa": "ازبکستان",
       "yue": "月即別",
-      "el": "Ουζμπεκιστάν"
+      "el": "Ουζμπεκιστάν",
     },
   ),
   Country(
@@ -7103,7 +7103,7 @@ const List<Country> countryList = [
       "ar": "فانواتو",
       "fa": "وانواتو",
       "yue": "瓦努阿圖",
-      "el": "Βανουάτου"
+      "el": "Βανουάτου",
     },
   ),
   Country(
@@ -7133,7 +7133,7 @@ const List<Country> countryList = [
       "ar": "فنزويلا",
       "fa": "ونزوئلا",
       "yue": "委內瑞拉（玻利瓦爾共和國）",
-      "el": "Βενεζουέλα (Βολιβαριανή Δημοκρατία της Βενεζουέλας)"
+      "el": "Βενεζουέλα (Βολιβαριανή Δημοκρατία της Βενεζουέλας)",
     },
   ),
   Country(
@@ -7163,7 +7163,7 @@ const List<Country> countryList = [
       "ar": "فيتنام",
       "fa": "ویتنام",
       "yue": "越南",
-      "el": "Βιετνάμ"
+      "el": "Βιετνάμ",
     },
   ),
   Country(
@@ -7193,7 +7193,7 @@ const List<Country> countryList = [
       "ar": "جزر العذراء البريطانية",
       "fa": "جزایر ویرجین بریتانیا",
       "yue": "維爾京群島（英國）",
-      "el": "Παρθένοι Νήσοι (Βρετανία)"
+      "el": "Παρθένοι Νήσοι (Βρετανία)",
     },
   ),
   Country(
@@ -7223,7 +7223,7 @@ const List<Country> countryList = [
       "ar": "جزر العذراء الأمريكية",
       "fa": "جزایر ویرجین ایالات متحده آمریکا",
       "yue": "維爾京群島（美國）",
-      "el": "Παρθένοι Νήσοι (ΗΠΑ)"
+      "el": "Παρθένοι Νήσοι (ΗΠΑ)",
     },
   ),
   Country(
@@ -7253,7 +7253,7 @@ const List<Country> countryList = [
       "ar": "والس وفوتونا",
       "fa": "والیس و فوتونا",
       "yue": "瓦利斯同富图纳",
-      "el": "Νήσοι Ουώλις και Φουτούνα"
+      "el": "Νήσοι Ουώλις και Φουτούνα",
     },
   ),
   Country(
@@ -7283,7 +7283,7 @@ const List<Country> countryList = [
       "ar": "اليمن",
       "fa": "یمن",
       "yue": "也門",
-      "el": "Υεμένη"
+      "el": "Υεμένη",
     },
   ),
   Country(
@@ -7313,7 +7313,7 @@ const List<Country> countryList = [
       "ar": "زامبيا",
       "fa": "زامبیا",
       "yue": "贊比亞",
-      "el": "Ζάμπια"
+      "el": "Ζάμπια",
     },
   ),
   Country(
@@ -7343,7 +7343,7 @@ const List<Country> countryList = [
       "ar": "زيمبابوي",
       "fa": "زیمبابوه",
       "yue": "津巴布韋",
-      "el": "Ζιμπάμπουε"
+      "el": "Ζιμπάμπουε",
     },
   ),
 ];

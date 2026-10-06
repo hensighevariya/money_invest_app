@@ -26,7 +26,8 @@ final class LoginRequest extends BaseLoginRequest {
     this.otp,
   });
 
-  factory LoginRequest.fromJson(Map<String, dynamic> json) => _$LoginRequestFromJson(json);
+  factory LoginRequest.fromJson(Map<String, dynamic> json) =>
+      _$LoginRequestFromJson(json);
 
   final int type; // 1: Mobile, 2: Email
   final String? email;
@@ -36,7 +37,15 @@ final class LoginRequest extends BaseLoginRequest {
   final String? otp;
 
   @override
-  List<Object?> get props => [type, email, password, pushToken, deviceId, deviceType, otp];
+  List<Object?> get props => [
+    type,
+    email,
+    password,
+    pushToken,
+    deviceId,
+    deviceType,
+    otp,
+  ];
 
   Map<String, dynamic> toJson() => _$LoginRequestToJson(this);
 }
@@ -45,7 +54,8 @@ final class LoginRequest extends BaseLoginRequest {
 class ForgotPasswordRequest extends Equatable {
   const ForgotPasswordRequest({this.email, this.type = 1, this.mobile});
 
-  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) => _$ForgotPasswordRequestFromJson(json);
+  factory ForgotPasswordRequest.fromJson(Map<String, dynamic> json) =>
+      _$ForgotPasswordRequestFromJson(json);
 
   final String? email;
   final String? mobile;

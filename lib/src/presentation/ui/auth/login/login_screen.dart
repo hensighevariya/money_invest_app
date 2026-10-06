@@ -23,7 +23,9 @@ class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   void _onStatusChanged(BuildContext context, LoginState state) {
-    if (state.status case ProgressStatusSuccess<UserData>(result: UserData userData)) {
+    if (state.status case ProgressStatusSuccess<UserData>(
+      result: UserData userData,
+    )) {
       context.read<UserProfileBloc>().add(UserLoggedIn(userData));
       context.go('/home');
     } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
@@ -65,7 +67,10 @@ class _LoginView extends StatelessWidget {
       onPopInvokedWithResult: (didPop, result) => SystemNavigator.pop(),
       child: Scaffold(
         backgroundColor: context.colorScheme.surface,
-        appBar: CustomAppBar(showLeading: false, color: context.colorScheme.surface),
+        appBar: CustomAppBar(
+          showLeading: false,
+          color: context.colorScheme.surface,
+        ),
         body: CustomScrollView(
           slivers: [
             SliverSafeArea(
@@ -83,7 +88,11 @@ class _LoginView extends StatelessWidget {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Gap(context.height < 650 ? Spacing.xxxLarge : (Spacing.xxxLarge + Spacing.xxxLarge)),
+                    Gap(
+                      context.height < 650
+                          ? Spacing.xxxLarge
+                          : (Spacing.xxxLarge + Spacing.xxxLarge),
+                    ),
                     AuthTitle(
                       title: localizations.loginTitle,
                       description: TextSpan(text: localizations.loginSubtitle),

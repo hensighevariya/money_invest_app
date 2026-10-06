@@ -93,7 +93,9 @@ base class OtpVerificationCubit extends BaseCubit<OtpVerificationState> {
         ),
         loadingHandler: _loadingHandler.handleLoading,
       );
-      if (result != null) statusData = OtpVerificationStatusData.token(result, type, verifyType);
+      if (result != null) {
+        statusData = OtpVerificationStatusData.token(result, type, verifyType);
+      }
       if (statusData != null) {
         emit(state.copyWith(status: ProgressStatus.success(statusData)));
       }

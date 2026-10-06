@@ -24,14 +24,25 @@ class UpdateDetailView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Flexible(child: SvgImageFromAsset.square(VectorImages.appUpdate, size: 360)),
+            const Flexible(
+              child: SvgImageFromAsset.square(
+                VectorImages.appUpdate,
+                size: 360,
+              ),
+            ),
             DefaultTextStyle.merge(
               textAlign: TextAlign.center,
               child: Column(
                 spacing: Spacing.medium,
                 children: [
-                  Text(localizations.updateAvailableTitle(versionData.version), style: textTheme.titleLarge),
-                  Text(localizations.updateAvailableDescription, style: textTheme.bodyLarge),
+                  Text(
+                    localizations.updateAvailableTitle(versionData.version),
+                    style: textTheme.titleLarge,
+                  ),
+                  Text(
+                    localizations.updateAvailableDescription,
+                    style: textTheme.bodyLarge,
+                  ),
                 ],
               ),
             ),

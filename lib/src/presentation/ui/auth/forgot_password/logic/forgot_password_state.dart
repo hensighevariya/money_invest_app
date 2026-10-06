@@ -19,7 +19,10 @@ class ForgotPasswordState extends Equatable with FormzMixin {
   @override
   List<FormzInput<Object, Object?>> get inputs => [emailMobileInput];
 
-  ForgotPasswordState copyWith({EmailMobileInput? emailMobileInput, ProgressStatus<ForgotPasswordResponse>? status}) {
+  ForgotPasswordState copyWith({
+    EmailMobileInput? emailMobileInput,
+    ProgressStatus<ForgotPasswordResponse>? status,
+  }) {
     return ForgotPasswordState(
       emailMobileInput: emailMobileInput ?? this.emailMobileInput,
       status: status ?? this.status,

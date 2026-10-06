@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 
 class DateInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     // Allow input to be empty
     if (newValue.text.isEmpty) return newValue;
 
@@ -16,7 +19,9 @@ class DateInputFormatter extends TextInputFormatter {
     }
 
     String datePart = text.substring(0, text.length > 2 ? 2 : null);
-    String monthPart = text.length >= 3 ? text.substring(2, text.length > 4 ? 4 : null) : '';
+    String monthPart = text.length >= 3
+        ? text.substring(2, text.length > 4 ? 4 : null)
+        : '';
     String yearPart = text.length > 4 ? text.substring(4) : '';
 
     if (datePart.isNotEmpty && datePart.toInt() > 31) {
@@ -32,7 +37,10 @@ class DateInputFormatter extends TextInputFormatter {
       if (yearPart.isNotEmpty) yearPart,
     ].join('/');
 
-    return newValue.copyWith(text: value, selection: TextSelection.collapsed(offset: value.length));
+    return newValue.copyWith(
+      text: value,
+      selection: TextSelection.collapsed(offset: value.length),
+    );
   }
 }
 
@@ -40,12 +48,19 @@ class CardNumberInputFormatter extends TextInputFormatter {
   static const _separator = ' ';
 
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     var newText = newValue.text.replaceAll(' ', '').trim();
     if (newValue.text.length < oldValue.text.length) {
       var text = newValue.text.trim();
-      return newValue.copyWith(text: text, selection: TextSelection.collapsed(offset: text.length));
-    } else if (newText.isNotEmpty && int.tryParse(newValue.text.split(' ').last) == null) {
+      return newValue.copyWith(
+        text: text,
+        selection: TextSelection.collapsed(offset: text.length),
+      );
+    } else if (newText.isNotEmpty &&
+        int.tryParse(newValue.text.split(' ').last) == null) {
       return oldValue;
     } else if (newText.length < 4) {
       return newValue;
@@ -53,7 +68,10 @@ class CardNumberInputFormatter extends TextInputFormatter {
       return oldValue;
     }
     var string = _getFormattedCardNumber(newText);
-    return newValue.copyWith(text: string, selection: TextSelection.collapsed(offset: string.length));
+    return newValue.copyWith(
+      text: string,
+      selection: TextSelection.collapsed(offset: string.length),
+    );
   }
 
   String _getFormattedCardNumber(String cardNumber) {
@@ -68,7 +86,10 @@ class CardNumberInputFormatter extends TextInputFormatter {
 
 class CardExpiryDateInputFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     // Allow input to be empty
     if (newValue.text.isEmpty) return newValue;
 
@@ -84,8 +105,14 @@ class CardExpiryDateInputFormatter extends TextInputFormatter {
       monthPart = '01';
     }
 
-    final value = [if (monthPart.isNotEmpty) monthPart, if (yearPart.isNotEmpty) yearPart].join('/');
+    final value = [
+      if (monthPart.isNotEmpty) monthPart,
+      if (yearPart.isNotEmpty) yearPart,
+    ].join('/');
 
-    return newValue.copyWith(text: value, selection: TextSelection.collapsed(offset: value.length));
+    return newValue.copyWith(
+      text: value,
+      selection: TextSelection.collapsed(offset: value.length),
+    );
   }
 }

@@ -6,7 +6,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:money_invest_app/src/utils/log.dart';
 
 class FirebaseService {
-  FirebaseService({ this.options, this.vapidKey});
+  FirebaseService({this.options, this.vapidKey});
 
   final FirebaseOptions? options;
   final String? vapidKey;
@@ -23,7 +23,10 @@ class FirebaseService {
           minimumFetchInterval: const Duration(minutes: 5),
         ),
       );
-      await FirebaseRemoteConfig.instance.fetchAndActivate().catchError((Object? error, StackTrace? stackTrace) {
+      await FirebaseRemoteConfig.instance.fetchAndActivate().catchError((
+        Object? error,
+        StackTrace? stackTrace,
+      ) {
         Log.error(error);
         Log.error(stackTrace);
         return false;

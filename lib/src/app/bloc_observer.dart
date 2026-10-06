@@ -34,7 +34,10 @@ class AppBlocObserver extends BlocObserver {
   }
 
   @override
-  void onTransition(Bloc<dynamic, dynamic> bloc, Transition<dynamic, dynamic> transition) {
+  void onTransition(
+    Bloc<dynamic, dynamic> bloc,
+    Transition<dynamic, dynamic> transition,
+  ) {
     super.onTransition(bloc, transition);
     _log(
       'onTransition: ${bloc.runtimeType} { event: ${transition.event}, currentState: ${transition.currentState}, nextState: ${transition.nextState} }',
@@ -44,7 +47,9 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
-    _log('onChange: ${bloc.runtimeType} { currentState: ${change.currentState}, nextState: ${change.nextState} }');
+    _log(
+      'onChange: ${bloc.runtimeType} { currentState: ${change.currentState}, nextState: ${change.nextState} }',
+    );
   }
 
   @override
@@ -56,7 +61,9 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
-    _log('onError: ${bloc.runtimeType} { error: $error, stackTrace:$stackTrace }');
+    _log(
+      'onError: ${bloc.runtimeType} { error: $error, stackTrace:$stackTrace }',
+    );
 
     if (error is BaseException) {
       _handleApiRequestException(error);
@@ -69,20 +76,32 @@ class AppBlocObserver extends BlocObserver {
     final localizations = AppLocalizations.current;
 
     final overlayContext = navigatorKey.currentState?.overlay?.context;
-    assert(overlayContext != null, 'Navigator key is not assigned with any `Navigator` widget!');
+    assert(
+      overlayContext != null,
+      'Navigator key is not assigned with any `Navigator` widget!',
+    );
 
     // Check that context contains material widget to properly show error widgets.
     debugCheckHasMaterialLocalizations(overlayContext!);
 
     switch (error) {
       case NetworkConnectionException():
-        showErrorMessage(context: overlayContext, content: localizations.internetErrorDescription);
+        showErrorMessage(
+          context: overlayContext,
+          content: localizations.internetErrorDescription,
+        );
         break;
       case InternalServerException():
-        showErrorMessage(context: overlayContext, content: localizations.serverErrorDescription);
+        showErrorMessage(
+          context: overlayContext,
+          content: localizations.serverErrorDescription,
+        );
         break;
       case RequestTimeoutException():
-        showErrorMessage(context: overlayContext, content: localizations.timeoutErrorMessage);
+        showErrorMessage(
+          context: overlayContext,
+          content: localizations.timeoutErrorMessage,
+        );
         break;
       case SessionExpiredException():
         break;
@@ -91,7 +110,10 @@ class AppBlocObserver extends BlocObserver {
         break;
       case ResponseDecryptionException():
         break;
-      case InvalidResponseException(errors: Map<String, dynamic>? errors, message: String? message):
+      case InvalidResponseException(
+        errors: Map<String, dynamic>? errors,
+        message: String? message,
+      ):
         if (errors != null && errors.isNotEmpty) {
           /*String error = errors.entries.fold('', (previousValue, element) => '$previousValue• ${element.value}\n');
           showErrorDialog(
@@ -103,11 +125,17 @@ class AppBlocObserver extends BlocObserver {
         } else if (message != null && message.isNotEmpty) {
           showErrorMessage(context: overlayContext, content: message);
         } else {
-          showErrorMessage(context: overlayContext, content: 'Something went wrong!');
+          showErrorMessage(
+            context: overlayContext,
+            content: 'Something went wrong!',
+          );
         }
         break;
       case RequestFailedException():
-        showErrorMessage(context: overlayContext, content: localizations.unknownErrorDescription);
+        showErrorMessage(
+          context: overlayContext,
+          content: localizations.unknownErrorDescription,
+        );
         break;
       case RequestCancelledException():
         break;

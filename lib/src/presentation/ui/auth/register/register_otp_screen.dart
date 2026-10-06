@@ -9,7 +9,11 @@ import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/widgets/auth_title.dart';
 
 class RegisterOtpScreen extends StatefulWidget {
-  const RegisterOtpScreen({super.key, required this.mobile, required this.email});
+  const RegisterOtpScreen({
+    super.key,
+    required this.mobile,
+    required this.email,
+  });
 
   final String mobile;
   final String email;
@@ -51,7 +55,10 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
-      appBar: CustomAppBar(showLeading: true, color: context.colorScheme.surface),
+      appBar: CustomAppBar(
+        showLeading: true,
+        color: context.colorScheme.surface,
+      ),
       body: CustomScrollView(
         slivers: [
           SliverSafeArea(
@@ -61,19 +68,26 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const AuthTitle(
-                    title: "OTP Verification",
-                  ),
+                  const AuthTitle(title: "OTP Verification"),
                   const Gap(Spacing.xxxLarge),
                   Text("Code will be sent to ${widget.mobile}"),
                   const Gap(Spacing.small),
                   TextField(
                     decoration: InputDecoration(
                       hintText: "Mobile verification code",
-                      suffixText: _remainingSeconds > 0 ? "$_remainingSeconds Sec" : null,
-                      suffixIcon: _remainingSeconds == 0 
-                        ? TextButton(onPressed: () { setState(() { _startTimer(); }); }, child: const Text("Resend"))
-                        : null,
+                      suffixText: _remainingSeconds > 0
+                          ? "$_remainingSeconds Sec"
+                          : null,
+                      suffixIcon: _remainingSeconds == 0
+                          ? TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _startTimer();
+                                });
+                              },
+                              child: const Text("Resend"),
+                            )
+                          : null,
                     ),
                   ),
                   const Gap(Spacing.large),
@@ -82,23 +96,37 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                   TextField(
                     decoration: InputDecoration(
                       hintText: "Email verification code",
-                      suffixText: _remainingSeconds > 0 ? "$_remainingSeconds Sec" : null,
-                      suffixIcon: _remainingSeconds == 0 
-                        ? TextButton(onPressed: () { setState(() { _startTimer(); }); }, child: const Text("Resend"))
-                        : null,
+                      suffixText: _remainingSeconds > 0
+                          ? "$_remainingSeconds Sec"
+                          : null,
+                      suffixIcon: _remainingSeconds == 0
+                          ? TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _startTimer();
+                                });
+                              },
+                              child: const Text("Resend"),
+                            )
+                          : null,
                     ),
                   ),
                   const Gap(Spacing.xxLarge),
                   Center(
                     child: ElevatedButton(
-                      style: ElevatedButtonPrimaryStyle(context, buttonColor: context.colorScheme.primary),
+                      style: ElevatedButtonPrimaryStyle(
+                        context,
+                        buttonColor: context.colorScheme.primary,
+                      ),
                       onPressed: () {
                         // show success dialog and navigate to home
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
                             title: const Text("Success"),
-                            content: const Text("Account created successfully!"),
+                            content: const Text(
+                              "Account created successfully!",
+                            ),
                             actions: [
                               TextButton(
                                 onPressed: () {
@@ -106,7 +134,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                                   context.go('/home');
                                 },
                                 child: const Text("OK"),
-                              )
+                              ),
                             ],
                           ),
                         );

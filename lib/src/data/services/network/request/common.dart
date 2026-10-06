@@ -6,9 +6,13 @@ part 'common.g.dart';
 
 @JsonSerializable()
 class PaginationRequest extends Equatable {
-  const PaginationRequest({required this.page, this.limit = AppConstants.pageSize});
+  const PaginationRequest({
+    required this.page,
+    this.limit = AppConstants.pageSize,
+  });
 
-  factory PaginationRequest.fromJson(Map<String, dynamic> json) => _$PaginationRequestFromJson(json);
+  factory PaginationRequest.fromJson(Map<String, dynamic> json) =>
+      _$PaginationRequestFromJson(json);
 
   final int page;
   final int limit;
@@ -18,4 +22,3 @@ class PaginationRequest extends Equatable {
 
   Map<String, dynamic> toJson() => _$PaginationRequestToJson(this);
 }
-

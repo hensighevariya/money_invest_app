@@ -5,9 +5,11 @@ import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:ui_components/ui_components.dart';
 
 class BackIconButton extends StatelessWidget {
-  const BackIconButton({super.key, required this.onPressed, this.color}) : _isFilled = false;
+  const BackIconButton({super.key, required this.onPressed, this.color})
+    : _isFilled = false;
 
-  const BackIconButton.filled({super.key, this.onPressed, this.color}) : _isFilled = true;
+  const BackIconButton.filled({super.key, this.onPressed, this.color})
+    : _isFilled = true;
 
   final VoidCallback? onPressed;
   final Color? color;
@@ -19,7 +21,9 @@ class BackIconButton extends StatelessWidget {
     if (_isFilled) {
       final colorScheme = context.colorScheme;
       buttonStyle = IconButton.styleFrom(
-        backgroundColor: colorScheme.surfaceContainerHigh.withValues(alpha: 0.75),
+        backgroundColor: colorScheme.surfaceContainerHigh.withValues(
+          alpha: 0.75,
+        ),
         foregroundColor: colorScheme.onSurface,
       );
     }
@@ -36,11 +40,21 @@ class BackIconButton extends StatelessWidget {
 }
 
 class ToolbarActionButton extends StatelessWidget {
-  const ToolbarActionButton({super.key, required this.icon, required this.onPressed, this.color, this.tooltip})
-    : _isFilled = false;
+  const ToolbarActionButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    this.color,
+    this.tooltip,
+  }) : _isFilled = false;
 
-  const ToolbarActionButton.filled({super.key, required this.icon, this.onPressed, this.color, this.tooltip})
-    : _isFilled = true;
+  const ToolbarActionButton.filled({
+    super.key,
+    required this.icon,
+    this.onPressed,
+    this.color,
+    this.tooltip,
+  }) : _isFilled = true;
 
   final Widget icon;
   final VoidCallback? onPressed;
@@ -54,7 +68,9 @@ class ToolbarActionButton extends StatelessWidget {
     if (_isFilled) {
       final colorScheme = context.colorScheme;
       buttonStyle = IconButton.styleFrom(
-        backgroundColor: colorScheme.surfaceContainerHigh.withValues(alpha: 0.75),
+        backgroundColor: colorScheme.surfaceContainerHigh.withValues(
+          alpha: 0.75,
+        ),
         foregroundColor: colorScheme.onSurfaceVariant,
       );
     }

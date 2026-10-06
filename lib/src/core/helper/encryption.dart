@@ -10,7 +10,10 @@ class CipherData {
   CipherData({required this.mac, required this.value});
 
   factory CipherData.fromJson(Map<String, dynamic> json) {
-    return CipherData(mac: json['mac'].toString(), value: json['value'].toString());
+    return CipherData(
+      mac: json['mac'].toString(),
+      value: json['value'].toString(),
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -19,7 +22,8 @@ class CipherData {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is CipherData && other.mac == mac && other.value == value);
+      identical(this, other) ||
+      (other is CipherData && other.mac == mac && other.value == value);
 
   @override
   String toString() => 'CipherData(mac: $mac, value: $value)';
@@ -49,7 +53,10 @@ class AesEncryption {
 
   CipherData encrypt(String plainText) {
     try {
-      var encryptedValue = _encrypter.encrypt(plainText, iv: _iv).base64.replaceAll('\n', '');
+      var encryptedValue = _encrypter
+          .encrypt(plainText, iv: _iv)
+          .base64
+          .replaceAll('\n', '');
       var mac = _createMac(encryptedValue);
       return CipherData(mac: mac.toString(), value: encryptedValue);
     } catch (e) {

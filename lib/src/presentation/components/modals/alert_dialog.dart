@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 
 class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog({super.key, this.icon, required this.title, required this.description, required this.action});
+  const CustomAlertDialog({
+    super.key,
+    this.icon,
+    required this.title,
+    required this.description,
+    required this.action,
+  });
 
   final Widget? icon;
   final String title;
@@ -26,7 +32,11 @@ class CustomAlertDialog extends StatelessWidget {
               spacing: Spacing.xLarge,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (icon != null) ConstrainedBox(constraints: const BoxConstraints(maxHeight: 160), child: icon!),
+                if (icon != null)
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxHeight: 160),
+                    child: icon!,
+                  ),
                 Column(
                   spacing: Spacing.small,
                   children: [
@@ -36,7 +46,10 @@ class CustomAlertDialog extends StatelessWidget {
                       child: Text(title),
                     ),
                     if (description != null)
-                      DefaultTextStyle.merge(textAlign: TextAlign.center, child: Text(description!)),
+                      DefaultTextStyle.merge(
+                        textAlign: TextAlign.center,
+                        child: Text(description!),
+                      ),
                   ],
                 ),
                 action,

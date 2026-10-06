@@ -37,21 +37,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
-  Size get preferredSize => Size.fromHeight(height + (bottom?.preferredSize.height ?? 0.0));
+  Size get preferredSize =>
+      Size.fromHeight(height + (bottom?.preferredSize.height ?? 0.0));
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       surfaceTintColor: Colors.transparent,
       leading: showLeading
-          ? leadingWidget ?? BackIcon(onPressed: onPressed ?? context.navigator.pop, color: backIconColor)
+          ? leadingWidget ??
+                BackIcon(
+                  onPressed: onPressed ?? context.navigator.pop,
+                  color: backIconColor,
+                )
           : const SizedBox.shrink(),
       centerTitle: centerTitle,
-      leadingWidth: leadingWidth ?? (showLeading || centerTitle ? 56 : Spacing.large),
+      leadingWidth:
+          leadingWidth ?? (showLeading || centerTitle ? 56 : Spacing.large),
       backgroundColor: color ?? context.colorScheme.surfaceContainerHighest,
       title:
           titleWidget ??
-          Text(title ?? '', style: context.theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            title ?? '',
+            style: context.theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
       actions: action,
       titleSpacing: 0,
       foregroundColor: foregroundColor,
@@ -127,7 +138,8 @@ class CommonIcon extends StatelessWidget {
         ),
         clipBehavior: Clip.hardEdge,
         child: Container(
-          decoration: decoration ?? BoxDecoration(shape: BoxShape.circle, color: color),
+          decoration:
+              decoration ?? BoxDecoration(shape: BoxShape.circle, color: color),
           clipBehavior: Clip.hardEdge,
           child: Material(
             color: Colors.transparent,

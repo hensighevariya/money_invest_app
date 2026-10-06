@@ -6,9 +6,15 @@ part 'auth.g.dart';
 
 @JsonSerializable()
 class AuthSuccessResponse extends Equatable {
-  const AuthSuccessResponse({this.message, this.accessToken, this.refreshToken, this.user});
+  const AuthSuccessResponse({
+    this.message,
+    this.accessToken,
+    this.refreshToken,
+    this.user,
+  });
 
-  factory AuthSuccessResponse.fromJson(Map<String, dynamic> json) => _$AuthSuccessResponseFromJson(json);
+  factory AuthSuccessResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthSuccessResponseFromJson(json);
 
   final String? message;
   final String? accessToken;
@@ -23,9 +29,14 @@ class AuthSuccessResponse extends Equatable {
 
 @JsonSerializable()
 class ForgotPasswordResponse extends Equatable {
-  const ForgotPasswordResponse({required this.token, required this.verifyType, required this.type});
+  const ForgotPasswordResponse({
+    required this.token,
+    required this.verifyType,
+    required this.type,
+  });
 
-  factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) => _$ForgotPasswordResponseFromJson(json);
+  factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$ForgotPasswordResponseFromJson(json);
 
   final String token;
   final int verifyType;
@@ -54,9 +65,17 @@ class ForgotPasswordVerifyResponse extends Equatable {
 
 @JsonSerializable(includeIfNull: false)
 class VerifyOtpRequest extends Equatable {
-  const VerifyOtpRequest({this.otp, this.token, this.verifyType, this.type, this.preToken, this.loginUserType});
+  const VerifyOtpRequest({
+    this.otp,
+    this.token,
+    this.verifyType,
+    this.type,
+    this.preToken,
+    this.loginUserType,
+  });
 
-  factory VerifyOtpRequest.fromJson(Map<String, dynamic> json) => _$VerifyOtpRequestFromJson(json);
+  factory VerifyOtpRequest.fromJson(Map<String, dynamic> json) =>
+      _$VerifyOtpRequestFromJson(json);
 
   final String? otp;
   final String? token;
@@ -66,7 +85,14 @@ class VerifyOtpRequest extends Equatable {
   final int? loginUserType;
 
   @override
-  List<Object?> get props => [otp, token, verifyType, type, preToken, loginUserType];
+  List<Object?> get props => [
+    otp,
+    token,
+    verifyType,
+    type,
+    preToken,
+    loginUserType,
+  ];
 
   Map<String, dynamic> toJson() => _$VerifyOtpRequestToJson(this);
 }
@@ -80,7 +106,8 @@ class ResetPasswordRequest extends Equatable {
     required this.confirmPassword,
   });
 
-  factory ResetPasswordRequest.fromJson(Map<String, dynamic> json) => _$ResetPasswordRequestFromJson(json);
+  factory ResetPasswordRequest.fromJson(Map<String, dynamic> json) =>
+      _$ResetPasswordRequestFromJson(json);
 
   final int type;
   final String token;

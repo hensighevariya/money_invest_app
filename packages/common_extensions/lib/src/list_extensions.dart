@@ -7,16 +7,13 @@ extension IterableExtensions<E> on Iterable<E> {
   }
 
   Map<K, List<E>> groupBy<K>(K Function(E) keyFunction) {
-    return fold(
-      <K, List<E>>{},
-      (previousValue, element) {
-        final key = keyFunction(element);
-        final list = previousValue[key] ?? [];
-        list.add(element);
-        previousValue[key] = list;
-        return previousValue;
-      },
-    );
+    return fold(<K, List<E>>{}, (previousValue, element) {
+      final key = keyFunction(element);
+      final list = previousValue[key] ?? [];
+      list.add(element);
+      previousValue[key] = list;
+      return previousValue;
+    });
   }
 
   Iterable<T> mapIndexed<T>(T Function(E element, int index) f) {

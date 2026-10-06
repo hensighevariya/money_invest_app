@@ -11,7 +11,8 @@ import 'package:money_invest_app/src/presentation/logic/notification.dart';
 import 'package:money_invest_app/src/utils/log.dart';
 import 'package:money_invest_app/src/utils/subscription_mixin.dart';
 
-final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> with StreamSubscriptionMixin {
+final class NotificationBloc extends Bloc<NotificationEvent, NotificationState>
+    with StreamSubscriptionMixin {
   NotificationBloc({required this._commonRepository})
     : super(const InitialNotificationState()) {
     on<NotificationInitialize>(_onNotificationInitialize);
@@ -20,7 +21,9 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
 
     addAllSubscriptions([
       _commonRepository.onRemoveMessage.listen(_onRemoveMessage),
-      _commonRepository.onRemoteMessageOpenedApp.listen(_onRemoteMessageOpenedApp),
+      _commonRepository.onRemoteMessageOpenedApp.listen(
+        _onRemoteMessageOpenedApp,
+      ),
     ]);
   }
 
@@ -28,7 +31,8 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
   static const _androidNotificationIcon = '@drawable/ic_notifications';
 
   final CommonRepository _commonRepository;
-  late final FlutterLocalNotificationsPlugin _notificationsPlugin = FlutterLocalNotificationsPlugin();
+  late final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   @override
   Future<void> close() {
@@ -41,7 +45,11 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
     if (Platform.isAndroid) imageUrl = notification.android?.imageUrl;
     if (Platform.isIOS) imageUrl = notification.apple?.imageUrl;
 
-    return PushNotificationData(title: notification.title, body: notification.body, imageUrl: imageUrl);
+    return PushNotificationData(
+      title: notification.title,
+      body: notification.body,
+      imageUrl: imageUrl,
+    );
   }
 
   void _onRemoveMessage(RemoteMessage message) {
@@ -51,7 +59,9 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
 
     add(
       NotificationReceived(
-        notificationData: message.notification != null ? _getPushNotification(message.notification!) : null,
+        notificationData: message.notification != null
+            ? _getPushNotification(message.notification!)
+            : null,
         payloadData: message.data,
       ),
     );
@@ -64,22 +74,29 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
 
     add(
       NotificationOpenedApp(
-        notificationData: message.notification != null ? _getPushNotification(message.notification!) : null,
+        notificationData: message.notification != null
+            ? _getPushNotification(message.notification!)
+            : null,
         payloadData: message.data,
       ),
     );
   }
 
   void _onDidReceiveNotificationResponse(NotificationResponse event) {
-    Log.debug('_onDidReceiveNotificationResponse -> $event -> ${event.payload}');
+    Log.debug(
+      '_onDidReceiveNotificationResponse -> $event -> ${event.payload}',
+    );
     if (event.payload == null) return;
     final payloadData = jsonDecode(event.payload!);
 
-    add(NotificationOpenedApp(payloadData: payloadData as Map<String, dynamic>));
+    add(
+      NotificationOpenedApp(payloadData: payloadData as Map<String, dynamic>),
+    );
   }
 
   Future<bool> _resolveNotificationPermission() async {
-    final permissionResult = await PermissionHelper.notification.requestPermission();
+    final permissionResult = await PermissionHelper.notification
+        .requestPermission();
     return permissionResult == PermissionResult.granted;
   }
 
@@ -100,17 +117,33 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
       icon: _androidNotificationIcon,
       groupKey: notificationType,
     );
-    const iosDetails = DarwinNotificationDetails(categoryIdentifier: _categoryGeneralNotification);
-    final notificationDetails = NotificationDetails(android: androidDetails, iOS: iosDetails);
+    const iosDetails = DarwinNotificationDetails(
+      categoryIdentifier: _categoryGeneralNotification,
+    );
+    final notificationDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iosDetails,
+    );
 
-    return _notificationsPlugin.show(notificationId, title, body, notificationDetails, payload: jsonEncode(payload));
+    return _notificationsPlugin.show(
+      notificationId,
+      title,
+      body,
+      notificationDetails,
+      payload: jsonEncode(payload),
+    );
   }
 
-  FutureOr<void> _onNotificationInitialize(NotificationInitialize event, Emitter<NotificationState> emit) async {
+  FutureOr<void> _onNotificationInitialize(
+    NotificationInitialize event,
+    Emitter<NotificationState> emit,
+  ) async {
     _commonRepository.initialMessage.then((value) {
       if (value != null) _onRemoteMessageOpenedApp(value);
     });
-    const androidSettings = AndroidInitializationSettings(_androidNotificationIcon);
+    const androidSettings = AndroidInitializationSettings(
+      _androidNotificationIcon,
+    );
     const iosSettings = DarwinInitializationSettings(
       notificationCategories: [
         DarwinNotificationCategory(
@@ -119,24 +152,37 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
         ),
       ],
     );
-    const settings = InitializationSettings(android: androidSettings, iOS: iosSettings);
+    const settings = InitializationSettings(
+      android: androidSettings,
+      iOS: iosSettings,
+    );
     await _notificationsPlugin.initialize(
       settings,
       onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
     );
     _notificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(
-          const AndroidNotificationChannel(_categoryGeneralNotification, 'General Notifications'),
+          const AndroidNotificationChannel(
+            _categoryGeneralNotification,
+            'General Notifications',
+          ),
         );
     _notificationsPlugin.getNotificationAppLaunchDetails().then((value) {
-      if (value != null && value.didNotificationLaunchApp && value.notificationResponse != null) {
+      if (value != null &&
+          value.didNotificationLaunchApp &&
+          value.notificationResponse != null) {
         _onDidReceiveNotificationResponse(value.notificationResponse!);
       }
     });
   }
 
-  void _onNotificationReceived(NotificationReceived event, Emitter<NotificationState> emit) {
+  void _onNotificationReceived(
+    NotificationReceived event,
+    Emitter<NotificationState> emit,
+  ) {
     if (event.notificationData?.title != null) {
       _showGeneralNotification(
         title: event.notificationData?.title ?? '-',
@@ -162,5 +208,8 @@ final class NotificationBloc extends Bloc<NotificationEvent, NotificationState> 
     emit(const InitialNotificationState());
   }
 
-  FutureOr<void> _onNotificationOpenedApp(NotificationOpenedApp event, Emitter<NotificationState> emit) {}
+  FutureOr<void> _onNotificationOpenedApp(
+    NotificationOpenedApp event,
+    Emitter<NotificationState> emit,
+  ) {}
 }

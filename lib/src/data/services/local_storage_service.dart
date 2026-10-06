@@ -42,7 +42,8 @@ class LocalStorageService {
     _preferences.setString('session_token', value);
   }
 
-  String? get refreshSessionToken => _preferences.getString('refresh_session_token');
+  String? get refreshSessionToken =>
+      _preferences.getString('refresh_session_token');
 
   set refreshSessionToken(String? value) {
     if (value == null) {
@@ -55,7 +56,9 @@ class LocalStorageService {
   UserData? get userData {
     String? userDataJson = _preferences.getString('user');
     if (userDataJson != null) {
-      return UserData.fromJson(jsonDecode(userDataJson) as Map<String, dynamic>);
+      return UserData.fromJson(
+        jsonDecode(userDataJson) as Map<String, dynamic>,
+      );
     }
     return null;
   }

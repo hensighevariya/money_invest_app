@@ -39,7 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
           // Main Content
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 20.0,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -53,7 +56,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   Text(
                     l10n.splashTitle,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(color: colorScheme.onPrimary),
+                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: colorScheme.onPrimary,
+                    ),
                   ),
                   const SizedBox(height: Spacing.xLarge),
 
@@ -61,7 +66,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   Text(
                     l10n.splashSubtitle,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onPrimary.withValues(alpha: 0.8),
+                    ),
                   ),
                   const Spacer(flex: 4),
                 ],

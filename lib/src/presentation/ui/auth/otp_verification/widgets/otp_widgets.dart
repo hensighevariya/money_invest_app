@@ -35,9 +35,17 @@ class OtpInputField extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     final decoration = PinTheme(
-      textStyle: TextStyle(fontSize: 20, color: colorScheme.onSurface, fontWeight: FontWeight.w600, height: 1.5),
+      textStyle: TextStyle(
+        fontSize: 20,
+        color: colorScheme.onSurface,
+        fontWeight: FontWeight.w600,
+        height: 1.5,
+      ),
       constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-      decoration: BoxDecoration(color: colorScheme.surfaceContainerHighest, borderRadius: ShapeBorderRadius.small),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: ShapeBorderRadius.small,
+      ),
     );
 
     return Pinput(
@@ -51,11 +59,21 @@ class OtpInputField extends StatelessWidget {
       length: 4,
       autofillHints: const {AutofillHints.oneTimeCode},
       separatorBuilder: (index) => const Gap(Spacing.normal),
-      defaultPinTheme: decoration.copyBorderWith(border: Border.all(color: colorScheme.primary, width: 2)),
-      errorPinTheme: decoration.copyBorderWith(border: Border.all(color: colorScheme.error, width: 2)),
-      disabledPinTheme: decoration.copyBorderWith(border: Border.all(color: colorScheme.primary, width: 2)),
-      focusedPinTheme: decoration.copyBorderWith(border: Border.all(color: colorScheme.primary, width: 2)),
-      submittedPinTheme: decoration.copyBorderWith(border: Border.all(color: colorScheme.primary, width: 2)),
+      defaultPinTheme: decoration.copyBorderWith(
+        border: Border.all(color: colorScheme.primary, width: 2),
+      ),
+      errorPinTheme: decoration.copyBorderWith(
+        border: Border.all(color: colorScheme.error, width: 2),
+      ),
+      disabledPinTheme: decoration.copyBorderWith(
+        border: Border.all(color: colorScheme.primary, width: 2),
+      ),
+      focusedPinTheme: decoration.copyBorderWith(
+        border: Border.all(color: colorScheme.primary, width: 2),
+      ),
+      submittedPinTheme: decoration.copyBorderWith(
+        border: Border.all(color: colorScheme.primary, width: 2),
+      ),
       closeKeyboardWhenCompleted: true,
       pinAnimationType: PinAnimationType.scale,
       onCompleted: onCompleted,
@@ -64,7 +82,10 @@ class OtpInputField extends StatelessWidget {
   }
 }
 
-Future<void> onOtpVerified(BuildContext context, {required VoidCallback onTap}) async {
+Future<void> onOtpVerified(
+  BuildContext context, {
+  required VoidCallback onTap,
+}) async {
   await showDialog<void>(
     context: context,
     barrierDismissible: false,

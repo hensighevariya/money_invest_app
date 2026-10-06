@@ -26,7 +26,9 @@ class ForceUpdateScreen extends StatelessWidget {
           constraints: LayoutConstraints.compat,
           children: [
             ElevatedButton(
-              onPressed: () => RepositoryProvider.of<CommonRepository>(context).redirectToStore(),
+              onPressed: () => RepositoryProvider.of<CommonRepository>(
+                context,
+              ).redirectToStore(),
               style: ElevatedButtonPrimaryStyle(context),
               child: Text(localizations.updateNowButtonLabel),
             ),
@@ -54,11 +56,16 @@ class UpdateAvailableBottomSheet extends StatelessWidget {
           spacing: Spacing.small,
           children: [
             ElevatedButton(
-              onPressed: () => RepositoryProvider.of<CommonRepository>(context).redirectToStore(),
+              onPressed: () => RepositoryProvider.of<CommonRepository>(
+                context,
+              ).redirectToStore(),
               style: ElevatedButtonPrimaryStyle(context),
               child: Text(localizations.updateNowButtonLabel),
             ),
-            TextButton(onPressed: () => context.navigator.pop(), child: Text(localizations.updateLaterButtonLabel)),
+            TextButton(
+              onPressed: () => context.navigator.pop(),
+              child: Text(localizations.updateLaterButtonLabel),
+            ),
           ],
         ),
       ],

@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 
 class BlurredDialog extends StatelessWidget {
-  const BlurredDialog({super.key, required this.child, this.alignment, this.insetPadding});
+  const BlurredDialog({
+    super.key,
+    required this.child,
+    this.alignment,
+    this.insetPadding,
+  });
 
   final Widget child;
   final AlignmentGeometry? alignment;
@@ -25,7 +30,10 @@ class BlurredDialog extends StatelessWidget {
           color: dialogTheme.backgroundColor?.withValues(alpha: 0.8),
           shape: dialogTheme.shape,
           clipBehavior: Clip.antiAlias,
-          child: ConstrainedBox(constraints: LayoutConstraints.modalDialog, child: child),
+          child: ConstrainedBox(
+            constraints: LayoutConstraints.modalDialog,
+            child: child,
+          ),
         ),
       ),
     );

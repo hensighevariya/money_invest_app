@@ -8,7 +8,6 @@ import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/common_divider.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
-import 'package:money_invest_app/src/presentation/components/menu_list.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/logic/profile_bloc.dart';
@@ -49,12 +48,16 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Text(
                           "Rahul Patel",
-                          style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                          style: context.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const Gap(Spacing.xSmall),
                         Text(
                           "+91 98765 43210",
-                          style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceVariant),
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ],
                     ),
@@ -75,11 +78,15 @@ class ProfileScreen extends StatelessWidget {
                 CommonDivider(paddingSize: Spacing.xMedium),
                 MenuListWidget(
                   title: context.localizations.profileKyc,
-                  icon: SvgIcons.icnEmptyFile, // Using empty file icon for KYC
+                  icon: SvgIcons.icnKyc, // Using empty file icon for KYC
                   onTap: () => context.go('/home/profile/kyc'),
                 ),
                 CommonDivider(paddingSize: Spacing.xMedium),
-                MenuListWidget(title: context.localizations.profileBankAccount, icon: SvgIcons.icnBank, onTap: () {}),
+                MenuListWidget(
+                  title: context.localizations.profileBankAccount,
+                  icon: SvgIcons.icnBank,
+                  onTap: () {},
+                ),
                 CommonDivider(paddingSize: Spacing.xMedium),
                 MenuListWidget(
                   title: context.localizations.profileChangePassword,
@@ -105,7 +112,9 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Text(
                         context.localizations.profileLanguageEnglish,
-                        style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceVariant),
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
+                        ),
                       ),
                       const Gap(Spacing.xSmall),
                       const SvgIcon(SvgIcons.arrowRight, size: 20),
@@ -123,7 +132,12 @@ class ProfileScreen extends StatelessWidget {
                   title: context.localizations.profileLogout,
                   icon: SvgIcons.icnLogout,
                   onTap: () {
-                    logout(context, onTap: () => context.read<ProfileBloc>().add(UserLogoutRequested()));
+                    logout(
+                      context,
+                      onTap: () => context.read<ProfileBloc>().add(
+                        UserLogoutRequested(),
+                      ),
+                    );
                   },
                   isNotification: true,
                 ),

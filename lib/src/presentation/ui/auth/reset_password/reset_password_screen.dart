@@ -21,9 +21,15 @@ class ResetPasswordScreen extends StatelessWidget {
 
   final AuthNavigationDataModel? data;
 
-  Future<void> _onStatusChanged(BuildContext context, ResetPasswordState state) async {
+  Future<void> _onStatusChanged(
+    BuildContext context,
+    ResetPasswordState state,
+  ) async {
     if (state.status case ProgressStatusSuccess<bool>()) {
-      await showDialog<void>(context: context, builder: (context) => const ResetPasswordSuccessModal());
+      await showDialog<void>(
+        context: context,
+        builder: (context) => const ResetPasswordSuccessModal(),
+      );
       if (context.mounted) {
         context.go('/login');
       }
@@ -85,7 +91,12 @@ class ResetPasswordSuccessModal extends StatelessWidget {
     final localizations = context.localizations;
 
     return CustomAlertDialog(
-      icon: LottieBuilder.asset(LottieFiles.password, height: 120, fit: BoxFit.contain, repeat: true),
+      icon: LottieBuilder.asset(
+        LottieFiles.password,
+        height: 120,
+        fit: BoxFit.contain,
+        repeat: true,
+      ),
       title: localizations.resetPasswordSuccessTitle,
       description: localizations.resetPasswordSuccessDescription,
       action: ElevatedButton(

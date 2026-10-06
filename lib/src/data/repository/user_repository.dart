@@ -5,13 +5,18 @@ import 'package:money_invest_app/src/utils/log.dart';
 import 'package:money_invest_app/src/data/services/network/request/user.dart';
 
 final class UserRepository extends BaseRepository {
-  UserRepository({required this._localStorageService, required this._apiClientService, required this._firebaseService});
+  UserRepository({
+    required this._localStorageService,
+    required this._apiClientService,
+    required this._firebaseService,
+  });
 
   final LocalStorageService _localStorageService;
   final ApiClientService _apiClientService;
   final FirebaseService _firebaseService;
 
-  final StreamController<UserData?> _userStreamController = StreamController.broadcast();
+  final StreamController<UserData?> _userStreamController =
+      StreamController.broadcast();
 
   @override
   void dispose() {
@@ -73,7 +78,10 @@ final class UserRepository extends BaseRepository {
   }
 
   Future<void> userUnauthorized() async {
-    await Future.wait<void>([_firebaseService.deleteToken(), _localStorageService.clearData()]);
+    await Future.wait<void>([
+      _firebaseService.deleteToken(),
+      _localStorageService.clearData(),
+    ]);
     _userStreamController.add(null);
   }
 }

@@ -16,7 +16,8 @@ abstract base class PermissionDelegate {
   Future<bool> get hasPermission;
 
   Future<bool> _resolvePermission(PermissionHelper permissionHelper) async {
-    PermissionResult permissionResult = await permissionHelper.checkPermission();
+    PermissionResult permissionResult = await permissionHelper
+        .checkPermission();
     switch (permissionResult) {
       case PermissionResult.denied:
         break;
@@ -32,8 +33,12 @@ abstract base class PermissionDelegate {
 
   void showPermissionDeniedAlert();
 
-  Future<void> _shouldShowPermissionDeniedAlert(PermissionHelper permissionHelper, String permissionName) async {
-    PermissionResult permissionResult = await permissionHelper.checkPermission();
+  Future<void> _shouldShowPermissionDeniedAlert(
+    PermissionHelper permissionHelper,
+    String permissionName,
+  ) async {
+    PermissionResult permissionResult = await permissionHelper
+        .checkPermission();
     switch (permissionResult) {
       case PermissionResult.granted:
         break;
@@ -52,7 +57,9 @@ abstract base class PermissionDelegate {
 
         return PermissionAlertDialog(
           title: localizations.permissionDeniedModalTitle,
-          description: localizations.permissionDeniedDescription(permissionName),
+          description: localizations.permissionDeniedDescription(
+            permissionName,
+          ),
           action: ElevatedButton(
             style: ElevatedButtonPrimaryStyle(context),
             onPressed: () {
@@ -74,7 +81,9 @@ abstract base class PermissionDelegate {
 
         return PermissionAlertDialog(
           title: localizations.permissionDeniedModalTitle,
-          description: localizations.permissionPermanentlyDeniedDescription(permissionName),
+          description: localizations.permissionPermanentlyDeniedDescription(
+            permissionName,
+          ),
           action: ElevatedButton(
             style: ElevatedButtonPrimaryStyle(context),
             onPressed: () {
@@ -99,7 +108,10 @@ final class CameraPermissionDelegate extends PermissionDelegate {
 
   @override
   void showPermissionDeniedAlert() {
-    _shouldShowPermissionDeniedAlert(PermissionHelper.camera, AppLocalizations.current.cameraPermissionLabel);
+    _shouldShowPermissionDeniedAlert(
+      PermissionHelper.camera,
+      AppLocalizations.current.cameraPermissionLabel,
+    );
   }
 }
 
@@ -130,7 +142,10 @@ final class StoragePermissionDelegate extends PermissionDelegate {
     bool isPermissionRequired = await _isPermissionRequired();
     if (!isPermissionRequired) return;
 
-    _shouldShowPermissionDeniedAlert(PermissionHelper.storage, AppLocalizations.current.storagePermissionLabel);
+    _shouldShowPermissionDeniedAlert(
+      PermissionHelper.storage,
+      AppLocalizations.current.storagePermissionLabel,
+    );
   }
 }
 
@@ -186,6 +201,8 @@ final class NotificationPermissionDelegate extends PermissionDelegate {
   @override
   void showPermissionDeniedAlert() {
     _shouldShowPermissionDeniedAlert(
-        PermissionHelper.notification, AppLocalizations.current.notificationPermissionLabel);
+      PermissionHelper.notification,
+      AppLocalizations.current.notificationPermissionLabel,
+    );
   }
 }

@@ -10,10 +10,12 @@ import '../../localization/generated/l10n.dart';
 enum EmailMobileInputError { required, invalidMobileFormat, invalidEmailFormat }
 
 /// Class for validating a form field that accepts either an email or a phone number.
-class EmailMobileInput extends FormzInput<String, EmailMobileInputError> with EquatableMixin {
+class EmailMobileInput extends FormzInput<String, EmailMobileInputError>
+    with EquatableMixin {
   final PhoneDetail? phoneDetail;
 
-  const EmailMobileInput.pure([super.value = '', this.phoneDetail]) : super.pure();
+  const EmailMobileInput.pure([super.value = '', this.phoneDetail])
+    : super.pure();
 
   const EmailMobileInput.dirty(super.value, this.phoneDetail) : super.dirty();
 
@@ -32,7 +34,8 @@ class EmailMobileInput extends FormzInput<String, EmailMobileInputError> with Eq
       if (phone.startsWith('0')) {
         phone = phone.substring(1);
       }
-      if (phone.length < phoneDetail.minLength || phone.length > phoneDetail.maxLength) {
+      if (phone.length < phoneDetail.minLength ||
+          phone.length > phoneDetail.maxLength) {
         return EmailMobileInputError.invalidMobileFormat;
       }
       return null;
@@ -52,9 +55,12 @@ class EmailMobileInput extends FormzInput<String, EmailMobileInputError> with Eq
 extension EmailMobileInputExtension on EmailMobileInputError {
   String getErrorMessage(BuildContext context) {
     return switch (this) {
-      EmailMobileInputError.required => AppLocalizations.current.errorEmailMobileRequired,
-      EmailMobileInputError.invalidMobileFormat => AppLocalizations.current.errorMobileInvalidFormat,
-      EmailMobileInputError.invalidEmailFormat => AppLocalizations.current.errorEmailAddressInvalidFormat,
+      EmailMobileInputError.required =>
+        AppLocalizations.current.errorEmailMobileRequired,
+      EmailMobileInputError.invalidMobileFormat =>
+        AppLocalizations.current.errorMobileInvalidFormat,
+      EmailMobileInputError.invalidEmailFormat =>
+        AppLocalizations.current.errorEmailAddressInvalidFormat,
     };
   }
 }

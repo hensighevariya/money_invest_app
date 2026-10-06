@@ -16,9 +16,15 @@ class AuthTitle extends StatelessWidget {
       spacing: Spacing.xSmall,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: textTheme.headlineMedium?.copyWith(color: colorScheme.primary)),
+        Text(
+          title,
+          style: textTheme.headlineMedium?.copyWith(color: colorScheme.primary),
+        ),
         if (description != null)
-          Text.rich(description!, style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400)),
+          Text.rich(
+            description!,
+            style: textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w400),
+          ),
       ],
     );
   }

@@ -6,7 +6,8 @@ import 'package:money_invest_app/src/localization/generated/l10n.dart';
 enum UserPasswordInputError { required, invalidLength }
 
 class UserPasswordInput extends FormzInput<String, UserPasswordInputError> {
-  const UserPasswordInput.pure([String? initialValue]) : super.pure(initialValue ?? '');
+  const UserPasswordInput.pure([String? initialValue])
+    : super.pure(initialValue ?? '');
 
   const UserPasswordInput.dirty(super.value) : super.dirty();
 
@@ -20,8 +21,10 @@ class UserPasswordInput extends FormzInput<String, UserPasswordInputError> {
 extension UserPasswordInputExtension on UserPasswordInputError {
   String getErrorMessage(BuildContext context) {
     return switch (this) {
-      UserPasswordInputError.required => AppLocalizations.current.errorPasswordRequired,
-      UserPasswordInputError.invalidLength => AppLocalizations.current.errorPasswordInvalidLength,
+      UserPasswordInputError.required =>
+        AppLocalizations.current.errorPasswordRequired,
+      UserPasswordInputError.invalidLength =>
+        AppLocalizations.current.errorPasswordInvalidLength,
     };
   }
 }
@@ -29,14 +32,17 @@ extension UserPasswordInputExtension on UserPasswordInputError {
 enum PasswordInputError { required, invalidPattern }
 
 class PasswordInput extends FormzInput<String, PasswordInputError> {
-  const PasswordInput.pure([String? initialValue]) : super.pure(initialValue ?? '');
+  const PasswordInput.pure([String? initialValue])
+    : super.pure(initialValue ?? '');
 
   const PasswordInput.dirty(super.value) : super.dirty();
 
   @override
   PasswordInputError? validator(String value) {
     if (value.isEmpty) return PasswordInputError.required;
-    if (!AppConstants.passwordPatternRegExp.hasMatch(value)) return PasswordInputError.invalidPattern;
+    if (!AppConstants.passwordPatternRegExp.hasMatch(value)) {
+      return PasswordInputError.invalidPattern;
+    }
     return null;
   }
 }
@@ -44,16 +50,20 @@ class PasswordInput extends FormzInput<String, PasswordInputError> {
 extension PasswordInputExtension on PasswordInputError {
   String getErrorMessage(BuildContext context) {
     return switch (this) {
-      PasswordInputError.required => AppLocalizations.current.errorPasswordRequired,
-      PasswordInputError.invalidPattern => AppLocalizations.current.errorPasswordInvalidPattern,
+      PasswordInputError.required =>
+        AppLocalizations.current.errorPasswordRequired,
+      PasswordInputError.invalidPattern =>
+        AppLocalizations.current.errorPasswordInvalidPattern,
     };
   }
 }
 
 enum ConfirmPasswordInputError { required, notMatch }
 
-class ConfirmPasswordInput extends FormzInput<String, ConfirmPasswordInputError> {
-  const ConfirmPasswordInput.pure([String? initialValue]) : super.pure(initialValue ?? '');
+class ConfirmPasswordInput
+    extends FormzInput<String, ConfirmPasswordInputError> {
+  const ConfirmPasswordInput.pure([String? initialValue])
+    : super.pure(initialValue ?? '');
 
   const ConfirmPasswordInput.dirty(super.value) : super.dirty();
 
@@ -72,8 +82,10 @@ class ConfirmPasswordInput extends FormzInput<String, ConfirmPasswordInputError>
 extension ConfirmPasswordInputExtension on ConfirmPasswordInputError {
   String? getErrorMessage(BuildContext context) {
     return switch (this) {
-      ConfirmPasswordInputError.required => AppLocalizations.current.errorConfirmPasswordRequired,
-      ConfirmPasswordInputError.notMatch => AppLocalizations.current.errorConfirmPasswordNotMatch,
+      ConfirmPasswordInputError.required =>
+        AppLocalizations.current.errorConfirmPasswordRequired,
+      ConfirmPasswordInputError.notMatch =>
+        AppLocalizations.current.errorConfirmPasswordNotMatch,
     };
   }
 }

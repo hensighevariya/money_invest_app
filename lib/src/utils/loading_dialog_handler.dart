@@ -9,7 +9,10 @@ class LoadingDialogHandler extends LoadingHandler {
   Route<void>? _dialogRoute;
 
   Widget _buildDialog(BuildContext context) {
-    return const PopScope(canPop: false, child: Center(child: LoadingIndicator()));
+    return const PopScope(
+      canPop: false,
+      child: Center(child: LoadingIndicator()),
+    );
   }
 
   Route<void> _buildDialogRoute() {
@@ -22,7 +25,10 @@ class LoadingDialogHandler extends LoadingHandler {
       },
       transitionDuration: const Duration(milliseconds: 150),
       transitionBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut), child: child);
+        return FadeTransition(
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+          child: child,
+        );
       },
     );
   }
@@ -34,7 +40,9 @@ class LoadingDialogHandler extends LoadingHandler {
       _dialogRoute = _buildDialogRoute();
       Navigator.maybeOf(_context)?.push(_dialogRoute!);
     } else {
-      if (_dialogRoute != null) Navigator.maybeOf(_context)?.removeRoute(_dialogRoute!);
+      if (_dialogRoute != null) {
+        Navigator.maybeOf(_context)?.removeRoute(_dialogRoute!);
+      }
       _dialogRoute = null;
     }
   }

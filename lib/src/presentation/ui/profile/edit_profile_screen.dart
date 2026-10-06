@@ -21,11 +21,20 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController _nameController = TextEditingController(text: 'hensi');
-  final TextEditingController _surnameController = TextEditingController(text: 'patel');
-  final TextEditingController _dobController = TextEditingController(text: '2000-05-07');
-  final TextEditingController _emailController = TextEditingController(text: 'hensi.g@elaunchinfotech.in');
-  final MobileNumberController _mobileNumberController = MobileNumberController();
+  final TextEditingController _nameController = TextEditingController(
+    text: 'hensi',
+  );
+  final TextEditingController _surnameController = TextEditingController(
+    text: 'patel',
+  );
+  final TextEditingController _dobController = TextEditingController(
+    text: '2000-05-07',
+  );
+  final TextEditingController _emailController = TextEditingController(
+    text: 'hensi.g@elaunchinfotech.in',
+  );
+  final MobileNumberController _mobileNumberController =
+      MobileNumberController();
 
   String? _selectedCountry;
   String? _selectedState;
@@ -93,7 +102,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
-      appBar: CustomAppBar(showLeading: true, title: "Edit Profile", color: context.colorScheme.surface),
+      appBar: CustomAppBar(
+        showLeading: true,
+        title: "Edit Profile",
+        color: context.colorScheme.surface,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(Spacing.large),
@@ -113,8 +126,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         shape: BoxShape.circle,
                       ),
                       child: _profileImage != null
-                          ? Image.file(_profileImage!, fit: BoxFit.cover, width: 120, height: 120)
-                          : const Center(child: SvgIcon(VectorImages.userPlaceholder, size: 80)),
+                          ? Image.file(
+                              _profileImage!,
+                              fit: BoxFit.cover,
+                              width: 120,
+                              height: 120,
+                            )
+                          : const Center(
+                              child: SvgIcon(
+                                VectorImages.userPlaceholder,
+                                size: 80,
+                              ),
+                            ),
                     ),
                     Positioned(
                       bottom: 0,
@@ -126,9 +149,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           decoration: BoxDecoration(
                             color: context.colorScheme.primary,
                             shape: BoxShape.circle,
-                            border: Border.all(color: context.colorScheme.surface, width: 2),
+                            border: Border.all(
+                              color: context.colorScheme.surface,
+                              width: 2,
+                            ),
                           ),
-                          child: Icon(Icons.camera_alt, color: context.colorScheme.onPrimary, size: 20),
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: context.colorScheme.onPrimary,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
@@ -138,12 +168,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const Gap(Spacing.xLarge),
               InputFieldDecoration(
                 labelText: "Name",
-                child: CommonTextField(controller: _nameController, prefixIcon: const Icon(Icons.person_outline)),
+                child: CommonTextField(
+                  controller: _nameController,
+                  prefixIcon: const Icon(Icons.person_outline),
+                ),
               ),
               const Gap(Spacing.normal),
               InputFieldDecoration(
                 labelText: "Surname",
-                child: CommonTextField(controller: _surnameController, prefixIcon: const Icon(Icons.person_outline)),
+                child: CommonTextField(
+                  controller: _surnameController,
+                  prefixIcon: const Icon(Icons.person_outline),
+                ),
               ),
               const Gap(Spacing.normal),
               InputFieldDecoration(
@@ -206,10 +242,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   icon: SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
                   decoration: const InputDecoration(hintText: "Select Country"),
                   initialValue: _selectedCountry,
-                  items: ['United States', 'India', 'United Kingdom'].map((String value) {
-                    return DropdownMenuItem<String>(value: value, child: Text(value));
+                  items: ['United States', 'India', 'United Kingdom'].map((
+                    String value,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
                   }).toList(),
-                  onChanged: (value) => setState(() => _selectedCountry = value),
+                  onChanged: (value) =>
+                      setState(() => _selectedCountry = value),
                 ),
               ),
               const Gap(Spacing.normal),
@@ -220,7 +262,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   decoration: const InputDecoration(hintText: "Select State"),
                   initialValue: _selectedState,
                   items: ['State 1', 'State 2', 'State 3'].map((String value) {
-                    return DropdownMenuItem<String>(value: value, child: Text(value));
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
                   }).toList(),
                   onChanged: (value) => setState(() => _selectedState = value),
                 ),
@@ -233,7 +278,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   decoration: const InputDecoration(hintText: "Select City"),
                   initialValue: _selectedCity,
                   items: ['City 1', 'City 2', 'City 3'].map((String value) {
-                    return DropdownMenuItem<String>(value: value, child: Text(value));
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
                   }).toList(),
                   onChanged: (value) => setState(() => _selectedCity = value),
                 ),
@@ -245,7 +293,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       bottomNavigationBar: SafeArea(
         minimum: const EdgeInsets.all(Spacing.large),
         child: ElevatedButton(
-          style: ElevatedButtonPrimaryStyle(context, buttonColor: context.colorScheme.primary),
+          style: ElevatedButtonPrimaryStyle(
+            context,
+            buttonColor: context.colorScheme.primary,
+          ),
           onPressed: () {},
           child: const Text("Save"),
         ),

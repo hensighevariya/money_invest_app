@@ -24,7 +24,9 @@ base class BaseRepository {
         }
 
         switch (error.type) {
-          case DioExceptionType.connectionTimeout || DioExceptionType.receiveTimeout || DioExceptionType.sendTimeout:
+          case DioExceptionType.connectionTimeout ||
+              DioExceptionType.receiveTimeout ||
+              DioExceptionType.sendTimeout:
             return const RequestTimeoutException();
 
           case DioExceptionType.badResponse:
@@ -40,8 +42,13 @@ base class BaseRepository {
                   if (responseData is Map<String, dynamic>) {
                     return InvalidResponseException(
                       statusCode: statusCode,
-                      message: (responseData['message'] as Object?)?.also((message) => message is String ? message : null),
-                      errors: (responseData['errors'] as Object?)?.also((errors) => errors is Map<String, dynamic> ? errors : null),
+                      message: (responseData['message'] as Object?)?.also(
+                        (message) => message is String ? message : null,
+                      ),
+                      errors: (responseData['errors'] as Object?)?.also(
+                        (errors) =>
+                            errors is Map<String, dynamic> ? errors : null,
+                      ),
                     );
                   }
                 case >= 500 && <= 599:
@@ -59,7 +66,8 @@ base class BaseRepository {
           case DioExceptionType.badCertificate:
             break;
           case DioExceptionType.unknown:
-            if (error.error is HttpException || error.error is SocketException) {
+            if (error.error is HttpException ||
+                error.error is SocketException) {
               return const NetworkConnectionException();
             }
             break;

@@ -1,4 +1,5 @@
-import 'package:permission_handler/permission_handler.dart' as permission_handler;
+import 'package:permission_handler/permission_handler.dart'
+    as permission_handler;
 import 'package:permission_handler/permission_handler.dart';
 
 import 'permission_status.dart';
@@ -17,8 +18,11 @@ enum PermissionHelper {
   PermissionResult _getPermissionResult(PermissionStatus status) {
     return switch (status) {
       PermissionStatus.denied => PermissionResult.denied,
-      PermissionStatus.granted || PermissionStatus.provisional || PermissionStatus.limited => PermissionResult.granted,
-      PermissionStatus.restricted || PermissionStatus.permanentlyDenied => PermissionResult.permanentlyDenied,
+      PermissionStatus.granted ||
+      PermissionStatus.provisional ||
+      PermissionStatus.limited => PermissionResult.granted,
+      PermissionStatus.restricted ||
+      PermissionStatus.permanentlyDenied => PermissionResult.permanentlyDenied,
     };
   }
 

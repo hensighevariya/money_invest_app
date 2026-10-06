@@ -8,12 +8,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 
-void showGeneralMessage({required BuildContext context, required String content}) {
-  final alertMessage = AlertMessage(content: content, leading: const Icon(Icons.info_outline_rounded));
+void showGeneralMessage({
+  required BuildContext context,
+  required String content,
+}) {
+  final alertMessage = AlertMessage(
+    content: content,
+    leading: const Icon(Icons.info_outline_rounded),
+  );
   showAlertMessage(context, alertMessage);
 }
 
-void showSuccessMessage({required BuildContext context, required String content}) {
+void showSuccessMessage({
+  required BuildContext context,
+  required String content,
+}) {
   final alertMessage = AlertMessage(
     content: content,
     leading: const Icon(Icons.check_circle_outline_rounded),
@@ -22,7 +31,10 @@ void showSuccessMessage({required BuildContext context, required String content}
   showAlertMessage(context, alertMessage);
 }
 
-void showErrorMessage({required BuildContext context, required String content}) {
+void showErrorMessage({
+  required BuildContext context,
+  required String content,
+}) {
   final alertMessage = AlertMessage(
     content: content,
     leading: const Icon(Icons.error_outline_rounded),
@@ -32,7 +44,10 @@ void showErrorMessage({required BuildContext context, required String content}) 
 }
 
 void showAlertMessage(BuildContext context, AlertMessage alertMessage) {
-  OverlayState? overlayState = Navigator.of(context, rootNavigator: true).overlay;
+  OverlayState? overlayState = Navigator.of(
+    context,
+    rootNavigator: true,
+  ).overlay;
   if (overlayState == null) return;
 
   OverlayEntry? overlayEntry;
@@ -43,10 +58,18 @@ void showAlertMessage(BuildContext context, AlertMessage alertMessage) {
       builder: (context) {
         final mediaQuery = MediaQuery.of(context);
         return Positioned.fill(
-          top: math.max(mediaQuery.padding.top + Spacing.normal, Spacing.normal),
+          top: math.max(
+            mediaQuery.padding.top + Spacing.normal,
+            Spacing.normal,
+          ),
           left: math.max(mediaQuery.padding.left, Spacing.normal),
           right: math.max(mediaQuery.padding.right, Spacing.normal),
-          bottom: math.max(mediaQuery.padding.bottom, mediaQuery.viewInsets.bottom) + Spacing.normal,
+          bottom:
+              math.max(
+                mediaQuery.padding.bottom,
+                mediaQuery.viewInsets.bottom,
+              ) +
+              Spacing.normal,
           child: Align(
             alignment: AlignmentDirectional.topCenter,
             heightFactor: 1.0,
@@ -70,7 +93,11 @@ void showAlertMessage(BuildContext context, AlertMessage alertMessage) {
 enum AlertMessageStyle { general, success, error }
 
 class AlertMessage {
-  const AlertMessage({required this.content, this.leading, this.style = AlertMessageStyle.general});
+  const AlertMessage({
+    required this.content,
+    this.leading,
+    this.style = AlertMessageStyle.general,
+  });
 
   final String content;
   final Widget? leading;
@@ -86,7 +113,8 @@ class AlertMessage {
           style == other.style;
 
   @override
-  int get hashCode => content.hashCode ^ leading.hashCode ^ style.hashCode ^ style.hashCode;
+  int get hashCode =>
+      content.hashCode ^ leading.hashCode ^ style.hashCode ^ style.hashCode;
 }
 
 class _AlertMessageView extends StatefulWidget {
@@ -114,11 +142,14 @@ class _AlertMessageView extends StatefulWidget {
     properties.add(DiagnosticsProperty<Widget?>('leading', leading));
     properties.add(EnumProperty<AlertMessageStyle>('style', style));
     properties.add(DiagnosticsProperty<Duration>('duration', duration));
-    properties.add(ObjectFlagProperty<VoidCallback>.has('onRemoved', onRemoved));
+    properties.add(
+      ObjectFlagProperty<VoidCallback>.has('onRemoved', onRemoved),
+    );
   }
 }
 
-class _AlertMessageViewState extends State<_AlertMessageView> with SingleTickerProviderStateMixin {
+class _AlertMessageViewState extends State<_AlertMessageView>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<Offset> _slideAnimation;
   final GlobalKey _dismissibleKey = GlobalKey();
@@ -133,7 +164,10 @@ class _AlertMessageViewState extends State<_AlertMessageView> with SingleTickerP
       vsync: this,
     );
     _slideAnimation = _controller.drive(
-      Tween(begin: const Offset(0, -0.5), end: Offset.zero).chain(CurveTween(curve: Curves.fastOutSlowIn)),
+      Tween(
+        begin: const Offset(0, -0.5),
+        end: Offset.zero,
+      ).chain(CurveTween(curve: Curves.fastOutSlowIn)),
     );
 
     _timer = Timer(widget.duration, _dismiss);
@@ -168,28 +202,43 @@ class _AlertMessageViewState extends State<_AlertMessageView> with SingleTickerP
       AlertMessageStyle.error => colorScheme.error,
     };
 
-    final contentTextStyle = DefaultTextStyle.of(
-      context,
-    ).style.merge(theme.textTheme.bodyMedium).copyWith(color: effectiveForegroundColor);
+    final contentTextStyle = DefaultTextStyle.of(context).style
+        .merge(theme.textTheme.bodyMedium)
+        .copyWith(color: effectiveForegroundColor);
 
     Widget child = Row(
       spacing: Spacing.medium,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (widget.leading != null)
-          IconTheme(data: IconThemeData(color: effectiveForegroundColor), child: widget.leading!),
-        Flexible(child: Text(widget.content, textAlign: TextAlign.start, maxLines: 6, overflow: TextOverflow.ellipsis)),
+          IconTheme(
+            data: IconThemeData(color: effectiveForegroundColor),
+            child: widget.leading!,
+          ),
+        Flexible(
+          child: Text(
+            widget.content,
+            textAlign: TextAlign.start,
+            maxLines: 6,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
 
     child = Material(
       clipBehavior: Clip.antiAlias,
       color: colorScheme.surfaceContainerLow,
-      shape: Shapes.medium.copyWith(side: BorderSide(color: colorScheme.outlineVariant)),
+      shape: Shapes.medium.copyWith(
+        side: BorderSide(color: colorScheme.outlineVariant),
+      ),
       textStyle: contentTextStyle,
       child: Container(
         constraints: const BoxConstraints(minHeight: 48, maxWidth: 600),
-        padding: const EdgeInsets.symmetric(horizontal: Spacing.medium, vertical: Spacing.medium),
+        padding: const EdgeInsets.symmetric(
+          horizontal: Spacing.medium,
+          vertical: Spacing.medium,
+        ),
         child: child,
       ),
     );

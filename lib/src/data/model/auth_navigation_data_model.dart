@@ -21,10 +21,16 @@ class AuthNavigationDataModel extends Equatable {
     this.type,
   });
 
-  factory AuthNavigationDataModel.fromJson(Map<String, dynamic> json) => _$AuthNavigationDataModelFromJson(json);
+  factory AuthNavigationDataModel.fromJson(Map<String, dynamic> json) =>
+      _$AuthNavigationDataModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuthNavigationDataModelToJson(this);
 
   @override
-  List<Object?> get props => [resetByMobile, emailMobileInput, token, isFromEditProfile];
+  List<Object?> get props => [
+    resetByMobile,
+    emailMobileInput,
+    token,
+    isFromEditProfile,
+  ];
 }

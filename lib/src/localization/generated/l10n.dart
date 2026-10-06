@@ -988,6 +988,716 @@ class AppLocalizations {
   String get kycSaveButton {
     return Intl.message('Save', name: 'kycSaveButton', desc: '', args: []);
   }
+
+  /// `KYC Verification`
+  String get kycVerification {
+    return Intl.message(
+      'KYC Verification',
+      name: 'kycVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete your KYC to start investing`
+  String get kycSubtitle {
+    return Intl.message(
+      'Complete your KYC to start investing',
+      name: 'kycSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Document Type`
+  String get kycDocumentType {
+    return Intl.message(
+      'Document Type',
+      name: 'kycDocumentType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aadhaar Card`
+  String get kycAadhaarCard {
+    return Intl.message(
+      'Aadhaar Card',
+      name: 'kycAadhaarCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Document Number`
+  String get kycDocumentNumber {
+    return Intl.message(
+      'Document Number',
+      name: 'kycDocumentNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Front Image`
+  String get kycFrontImage {
+    return Intl.message(
+      'Front Image',
+      name: 'kycFrontImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back Image`
+  String get kycBackImage {
+    return Intl.message('Back Image', name: 'kycBackImage', desc: '', args: []);
+  }
+
+  /// `Bank Details`
+  String get kycBankDetails {
+    return Intl.message(
+      'Bank Details',
+      name: 'kycBankDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Holder Name`
+  String get kycAccountHolderName {
+    return Intl.message(
+      'Account Holder Name',
+      name: 'kycAccountHolderName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit for Verification`
+  String get kycSubmitForVerification {
+    return Intl.message(
+      'Submit for Verification',
+      name: 'kycSubmitForVerification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Investment`
+  String get investNewInvestment {
+    return Intl.message(
+      'New Investment',
+      name: 'investNewInvestment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Amount`
+  String get investAmount {
+    return Intl.message(
+      'Investment Amount',
+      name: 'investAmount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Custom`
+  String get investCustom {
+    return Intl.message('Custom', name: 'investCustom', desc: '', args: []);
+  }
+
+  /// `Payment Method`
+  String get investPaymentMethod {
+    return Intl.message(
+      'Payment Method',
+      name: 'investPaymentMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `UPI (Recommended)`
+  String get investUpi {
+    return Intl.message(
+      'UPI (Recommended)',
+      name: 'investUpi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Net Banking`
+  String get investNetBanking {
+    return Intl.message(
+      'Net Banking',
+      name: 'investNetBanking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IMPS / NEFT (Virtual Account)`
+  String get investImpsNeft {
+    return Intl.message(
+      'IMPS / NEFT (Virtual Account)',
+      name: 'investImpsNeft',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Proceed to Pay`
+  String get investProceedToPay {
+    return Intl.message(
+      'Proceed to Pay',
+      name: 'investProceedToPay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Complete Payment`
+  String get investCompletePayment {
+    return Intl.message(
+      'Complete Payment',
+      name: 'investCompletePayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select UPI App`
+  String get investSelectUpiApp {
+    return Intl.message(
+      'Select UPI App',
+      name: 'investSelectUpiApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `GPay`
+  String get investGPay {
+    return Intl.message('GPay', name: 'investGPay', desc: '', args: []);
+  }
+
+  /// `PhonePe`
+  String get investPhonePe {
+    return Intl.message('PhonePe', name: 'investPhonePe', desc: '', args: []);
+  }
+
+  /// `Paytm`
+  String get investPaytm {
+    return Intl.message('Paytm', name: 'investPaytm', desc: '', args: []);
+  }
+
+  /// `Others`
+  String get investOthers {
+    return Intl.message('Others', name: 'investOthers', desc: '', args: []);
+  }
+
+  /// `OR`
+  String get investOr {
+    return Intl.message('OR', name: 'investOr', desc: '', args: []);
+  }
+
+  /// `Debit/Credit Card`
+  String get investDebitCreditCard {
+    return Intl.message(
+      'Debit/Credit Card',
+      name: 'investDebitCreditCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Secured by Razorpay`
+  String get investSecuredByRazorpay {
+    return Intl.message(
+      'Secured by Razorpay',
+      name: 'investSecuredByRazorpay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Successful!`
+  String get investPaymentSuccessful {
+    return Intl.message(
+      'Payment Successful!',
+      name: 'investPaymentSuccessful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transaction ID`
+  String get investTransactionId {
+    return Intl.message(
+      'Transaction ID',
+      name: 'investTransactionId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Investment Details`
+  String get investViewInvestmentDetails {
+    return Intl.message(
+      'View Investment Details',
+      name: 'investViewInvestmentDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment Bond`
+  String get investInvestmentBond {
+    return Intl.message(
+      'Investment Bond',
+      name: 'investInvestmentBond',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `INVESTMENT AGREEMENT`
+  String get investInvestmentAgreement {
+    return Intl.message(
+      'INVESTMENT AGREEMENT',
+      name: 'investInvestmentAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investor Name`
+  String get investInvestorName {
+    return Intl.message(
+      'Investor Name',
+      name: 'investInvestorName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Date`
+  String get investStartDate {
+    return Intl.message(
+      'Start Date',
+      name: 'investStartDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Return Rate`
+  String get investMonthlyReturnRate {
+    return Intl.message(
+      'Monthly Return Rate',
+      name: 'investMonthlyReturnRate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maturity Terms`
+  String get investMaturityTerms {
+    return Intl.message(
+      'Maturity Terms',
+      name: 'investMaturityTerms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `As per agreement`
+  String get investAsPerAgreement {
+    return Intl.message(
+      'As per agreement',
+      name: 'investAsPerAgreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download PDF`
+  String get investDownloadPdf {
+    return Intl.message(
+      'Download PDF',
+      name: 'investDownloadPdf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Investments`
+  String get myInvestmentsTitle {
+    return Intl.message(
+      'My Investments',
+      name: 'myInvestmentsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{percent}% Monthly Return`
+  String myInvestmentsMonthlyReturn(Object percent) {
+    return Intl.message(
+      '$percent% Monthly Return',
+      name: 'myInvestmentsMonthlyReturn',
+      desc: '',
+      args: [percent],
+    );
+  }
+
+  /// `Active`
+  String get myInvestmentsActive {
+    return Intl.message(
+      'Active',
+      name: 'myInvestmentsActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Returns`
+  String get monthlyReturnsTitle {
+    return Intl.message(
+      'Monthly Returns',
+      name: 'monthlyReturnsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paid ({method})`
+  String monthlyReturnsPaidVia(Object method) {
+    return Intl.message(
+      'Paid ($method)',
+      name: 'monthlyReturnsPaidVia',
+      desc: '',
+      args: [method],
+    );
+  }
+
+  /// `Paid`
+  String get monthlyReturnsPaid {
+    return Intl.message('Paid', name: 'monthlyReturnsPaid', desc: '', args: []);
+  }
+
+  /// `Trading Diary`
+  String get tradingDiaryTitle {
+    return Intl.message(
+      'Trading Diary',
+      name: 'tradingDiaryTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Premium Subscription`
+  String get tradingDiaryPremium {
+    return Intl.message(
+      'Premium Subscription',
+      name: 'tradingDiaryPremium',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Access detailed daily trading books`
+  String get tradingDiaryPremiumDesc {
+    return Intl.message(
+      'Access detailed daily trading books',
+      name: 'tradingDiaryPremiumDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Plan`
+  String get tradingDiaryMonthlyPlan {
+    return Intl.message(
+      'Monthly Plan',
+      name: 'tradingDiaryMonthlyPlan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `₹ {price} / month`
+  String tradingDiaryMonthlyPrice(Object price) {
+    return Intl.message(
+      '₹ $price / month',
+      name: 'tradingDiaryMonthlyPrice',
+      desc: '',
+      args: [price],
+    );
+  }
+
+  /// `Yearly Plan`
+  String get tradingDiaryYearlyPlan {
+    return Intl.message(
+      'Yearly Plan',
+      name: 'tradingDiaryYearlyPlan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `₹ {price} / year`
+  String tradingDiaryYearlyPrice(Object price) {
+    return Intl.message(
+      '₹ $price / year',
+      name: 'tradingDiaryYearlyPrice',
+      desc: '',
+      args: [price],
+    );
+  }
+
+  /// `Save {percent}%`
+  String tradingDiarySavePercent(Object percent) {
+    return Intl.message(
+      'Save $percent%',
+      name: 'tradingDiarySavePercent',
+      desc: '',
+      args: [percent],
+    );
+  }
+
+  /// `Subscribe Now`
+  String get tradingDiarySubscribe {
+    return Intl.message(
+      'Subscribe Now',
+      name: 'tradingDiarySubscribe',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily F&O trade details`
+  String get tradingDiaryFeature1 {
+    return Intl.message(
+      'Daily F&O trade details',
+      name: 'tradingDiaryFeature1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entry/Exit prices & strikes`
+  String get tradingDiaryFeature2 {
+    return Intl.message(
+      'Entry/Exit prices & strikes',
+      name: 'tradingDiaryFeature2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reasoning screenshots`
+  String get tradingDiaryFeature3 {
+    return Intl.message(
+      'Reasoning screenshots',
+      name: 'tradingDiaryFeature3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Live P&L tracking`
+  String get tradingDiaryFeature4 {
+    return Intl.message(
+      'Live P&L tracking',
+      name: 'tradingDiaryFeature4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total P&L`
+  String get tradingDiaryTotalPnL {
+    return Intl.message(
+      'Total P&L',
+      name: 'tradingDiaryTotalPnL',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BUY {qty} @ {price}`
+  String tradingDiaryBuy(Object qty, Object price) {
+    return Intl.message(
+      'BUY $qty @ $price',
+      name: 'tradingDiaryBuy',
+      desc: '',
+      args: [qty, price],
+    );
+  }
+
+  /// `SELL {qty} @ {price}`
+  String tradingDiarySell(Object qty, Object price) {
+    return Intl.message(
+      'SELL $qty @ $price',
+      name: 'tradingDiarySell',
+      desc: '',
+      args: [qty, price],
+    );
+  }
+
+  /// `Hello,`
+  String get homeHello {
+    return Intl.message('Hello,', name: 'homeHello', desc: '', args: []);
+  }
+
+  /// `Total Investment`
+  String get homeTotalInvestment {
+    return Intl.message(
+      'Total Investment',
+      name: 'homeTotalInvestment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Returns Received`
+  String get homeTotalReturnsReceived {
+    return Intl.message(
+      'Total Returns Received',
+      name: 'homeTotalReturnsReceived',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active Investments`
+  String get homeActiveInvestments {
+    return Intl.message(
+      'Active Investments',
+      name: 'homeActiveInvestments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Details >`
+  String get homeViewDetails {
+    return Intl.message(
+      'View Details >',
+      name: 'homeViewDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monthly Return`
+  String get homeMonthlyReturn {
+    return Intl.message(
+      'Monthly Return',
+      name: 'homeMonthlyReturn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Per Month`
+  String get homePerMonth {
+    return Intl.message('Per Month', name: 'homePerMonth', desc: '', args: []);
+  }
+
+  /// `Invest Now`
+  String get homeInvestNow {
+    return Intl.message(
+      'Invest Now',
+      name: 'homeInvestNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Bonds`
+  String get homeMyBonds {
+    return Intl.message('My Bonds', name: 'homeMyBonds', desc: '', args: []);
+  }
+
+  /// `Trade Diary`
+  String get homeTradeDiary {
+    return Intl.message(
+      'Trade Diary',
+      name: 'homeTradeDiary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refer & Earn`
+  String get homeReferAndEarn {
+    return Intl.message(
+      'Refer & Earn',
+      name: 'homeReferAndEarn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transparent Trading`
+  String get homeTransparentTrading {
+    return Intl.message(
+      'Transparent Trading',
+      name: 'homeTransparentTrading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Real Trades. Real Proof.`
+  String get homeRealTradesProof {
+    return Intl.message(
+      'Real Trades. Real Proof.',
+      name: 'homeRealTradesProof',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscribe Now`
+  String get homeSubscribeNow {
+    return Intl.message(
+      'Subscribe Now',
+      name: 'homeSubscribeNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PAN Card`
+  String get kycPanCard {
+    return Intl.message('PAN Card', name: 'kycPanCard', desc: '', args: []);
+  }
+
+  /// `Voter ID`
+  String get kycVoterId {
+    return Intl.message('Voter ID', name: 'kycVoterId', desc: '', args: []);
+  }
+
+  /// `1234 5678 9012`
+  String get kycHintDocNumber {
+    return Intl.message(
+      '1234 5678 9012',
+      name: 'kycHintDocNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `John Doe`
+  String get kycHintName {
+    return Intl.message('John Doe', name: 'kycHintName', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

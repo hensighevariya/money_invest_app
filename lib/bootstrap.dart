@@ -75,12 +75,16 @@ Future<void> bootstrap(AsyncAppBuilder builder) async {
                 ),
                 BlocProvider(
                   create: (context) {
-                    return AppVersionBloc(commonRepository: RepositoryProvider.of(context));
+                    return AppVersionBloc(
+                      commonRepository: RepositoryProvider.of(context),
+                    );
                   },
                 ),
                 BlocProvider(
                   create: (context) {
-                    return NotificationBloc(commonRepository: RepositoryProvider.of(context));
+                    return NotificationBloc(
+                      commonRepository: RepositoryProvider.of(context),
+                    );
                   },
                 ),
                 BlocProvider(

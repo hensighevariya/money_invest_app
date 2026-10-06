@@ -4,7 +4,12 @@ import 'package:money_invest_app/src/presentation/components/components.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 
 class PermissionAlertDialog extends StatelessWidget {
-  const PermissionAlertDialog({super.key, required this.title, required this.description, required this.action});
+  const PermissionAlertDialog({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.action,
+  });
 
   final String title;
   final String description;
@@ -23,10 +28,16 @@ class PermissionAlertDialog extends StatelessWidget {
               padding: const EdgeInsets.all(Spacing.large),
               child: DefaultTextStyle.merge(
                 textAlign: TextAlign.center,
-                child: DefaultTextStyle.merge(textAlign: TextAlign.center, child: Text(description)),
+                child: DefaultTextStyle.merge(
+                  textAlign: TextAlign.center,
+                  child: Text(description),
+                ),
               ),
             ),
-            Padding(padding: const EdgeInsets.all(Spacing.normal), child: action),
+            Padding(
+              padding: const EdgeInsets.all(Spacing.normal),
+              child: action,
+            ),
           ],
         ),
       ),

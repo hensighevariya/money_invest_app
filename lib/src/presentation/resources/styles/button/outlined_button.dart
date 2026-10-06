@@ -6,35 +6,48 @@ class OutlinedButtonDefaultStyle extends ButtonStyle {
   final ColorScheme colorScheme;
 
   @override
-  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
+  WidgetStateProperty<OutlinedBorder?>? get shape =>
+      const WidgetStatePropertyAll(Shapes.normal);
 
   @override
-  WidgetStateProperty<Size?>? get minimumSize => const WidgetStatePropertyAll(LayoutConstants.minimumButtonSize);
+  WidgetStateProperty<Size?>? get minimumSize =>
+      const WidgetStatePropertyAll(LayoutConstants.minimumButtonSize);
 
   @override
-  WidgetStateProperty<Size?>? get maximumSize => const WidgetStatePropertyAll(LayoutConstants.maximumButtonSize);
+  WidgetStateProperty<Size?>? get maximumSize =>
+      const WidgetStatePropertyAll(LayoutConstants.maximumButtonSize);
 
   @override
   WidgetStateProperty<EdgeInsetsGeometry?>? get padding =>
-      const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: Spacing.normal, horizontal: Spacing.xLarge));
+      const WidgetStatePropertyAll(
+        EdgeInsets.symmetric(
+          vertical: Spacing.normal,
+          horizontal: Spacing.xLarge,
+        ),
+      );
 
   @override
   WidgetStateProperty<Color?>? get foregroundColor =>
       _OutlinedButtonColor(colorScheme.primary, colorScheme.onSurfaceVariant);
 
   @override
-  WidgetStateProperty<Color?>? get iconColor => _OutlinedButtonColor(colorScheme.primary, colorScheme.onSurfaceVariant);
+  WidgetStateProperty<Color?>? get iconColor =>
+      _OutlinedButtonColor(colorScheme.primary, colorScheme.onSurfaceVariant);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(colorScheme.primary);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(colorScheme.primary);
 
   @override
-  WidgetStateProperty<BorderSide?>? get side =>
-      _OutlinedButtonBorderSide(colorScheme.primary, colorScheme.onSurface.withValues(alpha: 0.25));
+  WidgetStateProperty<BorderSide?>? get side => _OutlinedButtonBorderSide(
+    colorScheme.primary,
+    colorScheme.onSurface.withValues(alpha: 0.25),
+  );
 }
 
 @immutable
-class _OutlinedButtonColor extends WidgetStateProperty<Color?> with Diagnosticable {
+class _OutlinedButtonColor extends WidgetStateProperty<Color?>
+    with Diagnosticable {
   _OutlinedButtonColor(this.color, [this.disabled]);
 
   final Color color;
@@ -50,7 +63,8 @@ class _OutlinedButtonColor extends WidgetStateProperty<Color?> with Diagnosticab
 }
 
 @immutable
-class _OutlinedButtonBorderSide extends WidgetStateProperty<BorderSide?> with Diagnosticable {
+class _OutlinedButtonBorderSide extends WidgetStateProperty<BorderSide?>
+    with Diagnosticable {
   _OutlinedButtonBorderSide(this.color, [this.disabled]);
 
   final Color color;
@@ -71,8 +85,13 @@ class _OutlinedButtonBorderSide extends WidgetStateProperty<BorderSide?> with Di
   }
 }
 
-class OutlinedButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForeground {
-  OutlinedButtonPrimaryStyle(this.context, {super.visualDensity, this.expanded = true});
+class OutlinedButtonPrimaryStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  OutlinedButtonPrimaryStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = true,
+  });
 
   final BuildContext context;
   @override
@@ -82,20 +101,29 @@ class OutlinedButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForegro
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _OutlinedButtonColor(_colorScheme.primary);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _OutlinedButtonColor(_colorScheme.primary);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.primary);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.primary);
 
   @override
-  WidgetStateProperty<BorderSide?>? get side => _OutlinedButtonBorderSide(_colorScheme.primary);
+  WidgetStateProperty<BorderSide?>? get side =>
+      _OutlinedButtonBorderSide(_colorScheme.primary);
 
   @override
-  WidgetStateProperty<Color?>? get iconColor => _OutlinedButtonColor(_colorScheme.primary);
+  WidgetStateProperty<Color?>? get iconColor =>
+      _OutlinedButtonColor(_colorScheme.primary);
 }
 
-class OutlinedButtonSecondaryStyle extends ButtonStyle with _ButtonExpandedForeground {
-  OutlinedButtonSecondaryStyle(this.context, {super.visualDensity, this.expanded = true});
+class OutlinedButtonSecondaryStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  OutlinedButtonSecondaryStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = true,
+  });
 
   final BuildContext context;
   @override
@@ -105,20 +133,29 @@ class OutlinedButtonSecondaryStyle extends ButtonStyle with _ButtonExpandedForeg
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _OutlinedButtonColor(_colorScheme.secondary);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _OutlinedButtonColor(_colorScheme.secondary);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.secondary);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.secondary);
 
   @override
-  WidgetStateProperty<BorderSide?>? get side => _OutlinedButtonBorderSide(_colorScheme.secondary);
+  WidgetStateProperty<BorderSide?>? get side =>
+      _OutlinedButtonBorderSide(_colorScheme.secondary);
 
   @override
-  WidgetStateProperty<Color?>? get iconColor => _OutlinedButtonColor(_colorScheme.secondary);
+  WidgetStateProperty<Color?>? get iconColor =>
+      _OutlinedButtonColor(_colorScheme.secondary);
 }
 
-class OutlinedButtonErrorStyle extends ButtonStyle with _ButtonExpandedForeground {
-  OutlinedButtonErrorStyle(this.context, {super.visualDensity, this.expanded = true});
+class OutlinedButtonErrorStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  OutlinedButtonErrorStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = true,
+  });
 
   final BuildContext context;
   @override
@@ -128,20 +165,29 @@ class OutlinedButtonErrorStyle extends ButtonStyle with _ButtonExpandedForegroun
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _OutlinedButtonColor(_colorScheme.error);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _OutlinedButtonColor(_colorScheme.error);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.error);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.error);
 
   @override
-  WidgetStateProperty<BorderSide?>? get side => _OutlinedButtonBorderSide(_colorScheme.error);
+  WidgetStateProperty<BorderSide?>? get side =>
+      _OutlinedButtonBorderSide(_colorScheme.error);
 
   @override
-  WidgetStateProperty<Color?>? get iconColor => _OutlinedButtonColor(_colorScheme.error);
+  WidgetStateProperty<Color?>? get iconColor =>
+      _OutlinedButtonColor(_colorScheme.error);
 }
 
-class OutlinedButtonNeutralStyle extends ButtonStyle with _ButtonExpandedForeground {
-  OutlinedButtonNeutralStyle(this.context, {super.visualDensity, this.expanded = true});
+class OutlinedButtonNeutralStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  OutlinedButtonNeutralStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = true,
+  });
 
   final BuildContext context;
   @override
@@ -151,14 +197,18 @@ class OutlinedButtonNeutralStyle extends ButtonStyle with _ButtonExpandedForegro
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _OutlinedButtonColor(_colorScheme.onSurface);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _OutlinedButtonColor(_colorScheme.onSurface);
 
   @override
-  WidgetStateProperty<Color?>? get iconColor => _OutlinedButtonColor(_colorScheme.onSurface);
+  WidgetStateProperty<Color?>? get iconColor =>
+      _OutlinedButtonColor(_colorScheme.onSurface);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.onSurfaceVariant);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.onSurfaceVariant);
 
   @override
-  WidgetStateProperty<BorderSide?>? get side => _OutlinedButtonBorderSide(_colorScheme.onSurfaceVariant);
+  WidgetStateProperty<BorderSide?>? get side =>
+      _OutlinedButtonBorderSide(_colorScheme.onSurfaceVariant);
 }

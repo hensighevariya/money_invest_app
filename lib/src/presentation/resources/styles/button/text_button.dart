@@ -7,14 +7,22 @@ class TextButtonDefaultStyle extends ButtonStyle {
 
   @override
   WidgetStateProperty<EdgeInsetsGeometry?>? get padding =>
-      const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: Spacing.small, horizontal: Spacing.normal));
+      const WidgetStatePropertyAll(
+        EdgeInsets.symmetric(
+          vertical: Spacing.small,
+          horizontal: Spacing.normal,
+        ),
+      );
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor =>
-      _TextButtonColor(colorScheme.primaryFixed, colorScheme.onSurface.withValues(alpha: 0.25));
+  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(
+    colorScheme.primaryFixed,
+    colorScheme.onSurface.withValues(alpha: 0.25),
+  );
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(colorScheme.primary);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(colorScheme.primary);
 }
 
 @immutable
@@ -33,8 +41,13 @@ class _TextButtonColor extends WidgetStateProperty<Color?> with Diagnosticable {
   }
 }
 
-class TextButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForeground {
-  TextButtonPrimaryStyle(this.context, {super.visualDensity, this.expanded = false});
+class TextButtonPrimaryStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  TextButtonPrimaryStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = false,
+  });
 
   final BuildContext context;
   @override
@@ -44,17 +57,25 @@ class TextButtonPrimaryStyle extends ButtonStyle with _ButtonExpandedForeground 
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<OutlinedBorder?>? get shape => const WidgetStatePropertyAll(Shapes.normal);
+  WidgetStateProperty<OutlinedBorder?>? get shape =>
+      const WidgetStatePropertyAll(Shapes.normal);
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(_colorScheme.onSurface);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _TextButtonColor(_colorScheme.onSurface);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.primary);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.primary);
 }
 
-class TextButtonSecondaryStyle extends ButtonStyle with _ButtonExpandedForeground {
-  TextButtonSecondaryStyle(this.context, {super.visualDensity, this.expanded = false});
+class TextButtonSecondaryStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  TextButtonSecondaryStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = false,
+  });
 
   final BuildContext context;
   @override
@@ -64,14 +85,20 @@ class TextButtonSecondaryStyle extends ButtonStyle with _ButtonExpandedForegroun
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(_colorScheme.secondaryFixed);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _TextButtonColor(_colorScheme.secondaryFixed);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.secondary);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.secondary);
 }
 
 class TextButtonErrorStyle extends ButtonStyle with _ButtonExpandedForeground {
-  TextButtonErrorStyle(this.context, {super.visualDensity, this.expanded = false});
+  TextButtonErrorStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = false,
+  });
 
   final BuildContext context;
   @override
@@ -81,14 +108,21 @@ class TextButtonErrorStyle extends ButtonStyle with _ButtonExpandedForeground {
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(_colorScheme.error);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _TextButtonColor(_colorScheme.error);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.error);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.error);
 }
 
-class TextButtonNeutralStyle extends ButtonStyle with _ButtonExpandedForeground {
-  TextButtonNeutralStyle(this.context, {super.visualDensity, this.expanded = false});
+class TextButtonNeutralStyle extends ButtonStyle
+    with _ButtonExpandedForeground {
+  TextButtonNeutralStyle(
+    this.context, {
+    super.visualDensity,
+    this.expanded = false,
+  });
 
   final BuildContext context;
   @override
@@ -98,8 +132,10 @@ class TextButtonNeutralStyle extends ButtonStyle with _ButtonExpandedForeground 
   late final ColorScheme _colorScheme = _theme.colorScheme;
 
   @override
-  WidgetStateProperty<Color?>? get foregroundColor => _TextButtonColor(_colorScheme.onSurfaceVariant);
+  WidgetStateProperty<Color?>? get foregroundColor =>
+      _TextButtonColor(_colorScheme.onSurfaceVariant);
 
   @override
-  WidgetStateProperty<Color?>? get overlayColor => _ButtonOverlayColor(_colorScheme.onSurfaceVariant);
+  WidgetStateProperty<Color?>? get overlayColor =>
+      _ButtonOverlayColor(_colorScheme.onSurfaceVariant);
 }

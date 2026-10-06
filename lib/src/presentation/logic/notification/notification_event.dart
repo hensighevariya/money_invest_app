@@ -12,20 +12,14 @@ class NotificationInitialize extends NotificationEvent {
 }
 
 class NotificationReceived extends NotificationEvent {
-  const NotificationReceived({
-    this.notificationData,
-    this.payloadData,
-  });
+  const NotificationReceived({this.notificationData, this.payloadData});
 
   final PushNotificationData? notificationData;
   final Map<String, dynamic>? payloadData;
 }
 
 class NotificationOpenedApp extends NotificationEvent {
-  const NotificationOpenedApp({
-    this.notificationData,
-    this.payloadData,
-  });
+  const NotificationOpenedApp({this.notificationData, this.payloadData});
 
   final PushNotificationData? notificationData;
   final Map<String, dynamic>? payloadData;

@@ -1,10 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 abstract base class BaseState extends Equatable {
-  const BaseState({
-    this.loading = false,
-    this.error,
-  });
+  const BaseState({this.loading = false, this.error});
 
   final bool loading;
   final Object? error;
@@ -18,23 +15,15 @@ abstract base class BaseState extends Equatable {
 }
 
 base class DataState<T extends Object?> extends BaseState {
-  const DataState({
-    super.loading,
-    super.error,
-    this.data,
-  });
+  const DataState({super.loading, super.error, this.data});
 
-  const DataState.loading({
-    required super.loading,
-    T? initialData,
-  }) : data = initialData;
+  const DataState.loading({required super.loading, T? initialData})
+    : data = initialData;
 
   const DataState.value(T this.data);
 
-  const DataState.error({
-    required super.error,
-    T? initialData,
-  }) : data = initialData;
+  const DataState.error({required super.error, T? initialData})
+    : data = initialData;
 
   final T? data;
 
@@ -44,11 +33,7 @@ base class DataState<T extends Object?> extends BaseState {
   @override
   bool get hasData => data != null;
 
-  DataState<T> copyWith({
-    bool? loading,
-    T? data,
-    Object? error,
-  }) {
+  DataState<T> copyWith({bool? loading, T? data, Object? error}) {
     return DataState(
       loading: loading ?? this.loading,
       data: data ?? this.data,
@@ -58,25 +43,15 @@ base class DataState<T extends Object?> extends BaseState {
 }
 
 base class ListState<T extends Object?> extends BaseState {
-  const ListState({
-    super.loading,
-    super.error,
-    this.data = const [],
-  });
+  const ListState({super.loading, super.error, this.data = const []});
 
-  const ListState.loading({
-    required super.loading,
-    List<T>? initialData,
-  }) : data = initialData ?? const [];
+  const ListState.loading({required super.loading, List<T>? initialData})
+    : data = initialData ?? const [];
 
-  const ListState.value({
-    required this.data,
-  });
+  const ListState.value({required this.data});
 
-  const ListState.error({
-    required super.error,
-    List<T>? initialData,
-  }) : data = initialData ?? const [];
+  const ListState.error({required super.error, List<T>? initialData})
+    : data = initialData ?? const [];
 
   final List<T> data;
 
@@ -86,11 +61,7 @@ base class ListState<T extends Object?> extends BaseState {
   @override
   bool get hasData => data.isNotEmpty;
 
-  ListState<T> copyWith({
-    bool? loading,
-    List<T>? data,
-    Object? error,
-  }) {
+  ListState<T> copyWith({bool? loading, List<T>? data, Object? error}) {
     return ListState(
       loading: loading ?? this.loading,
       data: data ?? this.data,
@@ -99,7 +70,8 @@ base class ListState<T extends Object?> extends BaseState {
   }
 }
 
-base class SelectionListState<T extends Object?, S extends Object?> extends ListState<T> {
+base class SelectionListState<T extends Object?, S extends Object?>
+    extends ListState<T> {
   const SelectionListState({
     super.loading,
     super.error,
@@ -113,10 +85,7 @@ base class SelectionListState<T extends Object?, S extends Object?> extends List
     this.selected,
   }) : super(data: initialData ?? const []);
 
-  const SelectionListState.value({
-    required super.data,
-    this.selected,
-  });
+  const SelectionListState.value({required super.data, this.selected});
 
   const SelectionListState.error({
     required super.error,
@@ -157,8 +126,8 @@ base class PaginationListState<T extends Object?> extends ListState<T> {
     required super.loading,
     List<T>? initialData,
     bool? reachAtEnd,
-  })  : reachAtEnd = reachAtEnd ?? false,
-        super(data: initialData ?? const []);
+  }) : reachAtEnd = reachAtEnd ?? false,
+       super(data: initialData ?? const []);
 
   const PaginationListState.value({
     required super.data,
@@ -169,8 +138,8 @@ base class PaginationListState<T extends Object?> extends ListState<T> {
     required super.error,
     List<T>? initialData,
     bool? reachAtEnd,
-  })  : reachAtEnd = reachAtEnd ?? false,
-        super(data: initialData ?? const []);
+  }) : reachAtEnd = reachAtEnd ?? false,
+       super(data: initialData ?? const []);
 
   final bool reachAtEnd;
 

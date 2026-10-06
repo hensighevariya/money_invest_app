@@ -24,7 +24,10 @@ base class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> {
   final LoadingHandler _loadingHandler;
   final UserData? userData;
 
-  Future<void> _onUserLogoutRequested(UserLogoutRequested event, Emitter<ProfileState> emit) async {
+  Future<void> _onUserLogoutRequested(
+    UserLogoutRequested event,
+    Emitter<ProfileState> emit,
+  ) async {
     try {
       emit(state.copyWith(logoutStatus: const ProgressStatus.processing()));
       await processRequest(

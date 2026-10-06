@@ -37,7 +37,10 @@ class CommonCircularIcon extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor ?? colorScheme.onPrimary,
           borderRadius: borderRadius ?? ShapeBorderRadius.xxxLarge,
-          border: Border.all(color: borderColor ?? colorScheme.onSurfaceVariant.applyOpacity(0.35)),
+          border: Border.all(
+            color:
+                borderColor ?? colorScheme.onSurfaceVariant.applyOpacity(0.35),
+          ),
         ),
         alignment: Alignment.center,
         child: SvgImageFromAsset.square(

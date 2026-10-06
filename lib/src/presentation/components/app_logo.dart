@@ -12,9 +12,11 @@ enum _SecuritySaasLogoVariant {
 }
 
 class SecuritySaasLogo extends StatelessWidget {
-  const SecuritySaasLogo({super.key, this.height, this.width}) : _variant = _SecuritySaasLogoVariant.logo;
+  const SecuritySaasLogo({super.key, this.height, this.width})
+    : _variant = _SecuritySaasLogoVariant.logo;
 
-  const SecuritySaasLogo.full({super.key, this.height, this.width}) : _variant = _SecuritySaasLogoVariant.fullLogo;
+  const SecuritySaasLogo.full({super.key, this.height, this.width})
+    : _variant = _SecuritySaasLogoVariant.fullLogo;
 
   final double? height;
   final double? width;
@@ -24,7 +26,12 @@ class SecuritySaasLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(_assetPath + _variant.fileName, width: width, height: height, fit: BoxFit.contain);
+    return SvgPicture.asset(
+      _assetPath + _variant.fileName,
+      width: width,
+      height: height,
+      fit: BoxFit.contain,
+    );
   }
 
   @override
@@ -32,6 +39,8 @@ class SecuritySaasLogo extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(DoubleProperty('height', height));
     properties.add(DoubleProperty('width', width));
-    properties.add(EnumProperty<_SecuritySaasLogoVariant>('_variant', _variant));
+    properties.add(
+      EnumProperty<_SecuritySaasLogoVariant>('_variant', _variant),
+    );
   }
 }

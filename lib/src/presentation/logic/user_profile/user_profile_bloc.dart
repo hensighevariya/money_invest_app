@@ -11,11 +11,16 @@ import 'user_profile_state.dart';
 
 final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     with HydratedMixin, StreamSubscriptionMixin {
-  UserProfileBloc({required UserRepository userRepository, required this._localStorageService})
-    : _userRepository = userRepository,
-      super(
-        UserProfileState(isUserAuthorized: userRepository.isUserAuthorized(), data: userRepository.getCurrentUser()),
-      ) {
+  UserProfileBloc({
+    required UserRepository userRepository,
+    required this._localStorageService,
+  }) : _userRepository = userRepository,
+       super(
+         UserProfileState(
+           isUserAuthorized: userRepository.isUserAuthorized(),
+           data: userRepository.getCurrentUser(),
+         ),
+       ) {
     hydrate();
     on<FetchUserProfile>(_onFetchUserProfile, transformer: droppable());
     on<UserProfileUpdated>(_onUserProfileUpdated, transformer: sequential());
@@ -43,26 +48,45 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     emit(state.copyWith(data: _userRepository.getCurrentUser()));
   }
 
-  FutureOr<void> _onFetchUserProfile(FetchUserProfile event, Emitter<UserProfileState> emit) async {
+  FutureOr<void> _onFetchUserProfile(
+    FetchUserProfile event,
+    Emitter<UserProfileState> emit,
+  ) async {
     final result = await processRequest(
       _userRepository.getProfile,
       loadingHandler: (value) => emit(state.copyWith(loading: value)),
-      errorHandler: (error, [stackTrace]) => emit(state.copyWith(loading: false, error: error)),
+      errorHandler: (error, [stackTrace]) =>
+          emit(state.copyWith(loading: false, error: error)),
     );
     if (result != null) {
       emit(state.copyWith(data: result, loading: false));
     }
   }
 
-  FutureOr<void> _onUserProfileUpdated(UserProfileUpdated event, Emitter<UserProfileState> emit) async {
+  FutureOr<void> _onUserProfileUpdated(
+    UserProfileUpdated event,
+    Emitter<UserProfileState> emit,
+  ) async {
     emit(state.copyWith(data: event.userData, loading: false));
   }
 
-  FutureOr<void> _onUserLoggedIn(UserLoggedIn event, Emitter<UserProfileState> emit) async {
-    emit(state.copyWith(isUserAuthorized: true, data: event.userData, loading: false));
+  FutureOr<void> _onUserLoggedIn(
+    UserLoggedIn event,
+    Emitter<UserProfileState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isUserAuthorized: true,
+        data: event.userData,
+        loading: false,
+      ),
+    );
   }
 
-  FutureOr<void> _onUserLoggedOut(UserLoggedOut event, Emitter<UserProfileState> emit) async {
+  FutureOr<void> _onUserLoggedOut(
+    UserLoggedOut event,
+    Emitter<UserProfileState> emit,
+  ) async {
     HydratedBloc.storage.clear();
     await processRequest<void>(_userRepository.userUnauthorized);
     emit(const UserProfileState(isUserAuthorized: false));
@@ -71,13 +95,17 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
   @override
   UserProfileState? fromJson(Map<String, dynamic> json) {
     try {
-      if (json.containsKey('userIdentifier') && json.containsKey('isUserAuthorized')) {
+      if (json.containsKey('userIdentifier') &&
+          json.containsKey('isUserAuthorized')) {
         UserData? userData;
         if (json case {'user': Map<String, dynamic> userJson}) {
           userData = UserData.fromJson(userJson);
         }
 
-        return UserProfileState(isUserAuthorized: json['isUserAuthorized'] == true, data: userData);
+        return UserProfileState(
+          isUserAuthorized: json['isUserAuthorized'] == true,
+          data: userData,
+        );
       }
       return null;
     } catch (_) {
@@ -87,6 +115,9 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
 
   @override
   Map<String, dynamic>? toJson(UserProfileState state) {
-    return {'isUserAuthorized': state.isUserAuthorized, 'user': state.data?.toJson()};
+    return {
+      'isUserAuthorized': state.isUserAuthorized,
+      'user': state.data?.toJson(),
+    };
   }
 }

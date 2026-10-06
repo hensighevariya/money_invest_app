@@ -25,12 +25,15 @@ final class CommonRepository extends BaseRepository {
     return _firebaseService.getOnMessageStream();
   }
 
-  Stream<RemoteMessage> get onRemoteMessageOpenedApp => _firebaseService.getOnMessageOpenedAppStream();
+  Stream<RemoteMessage> get onRemoteMessageOpenedApp =>
+      _firebaseService.getOnMessageOpenedAppStream();
 
-  Future<RemoteMessage?> get initialMessage => _firebaseService.getInitialMessage();
+  Future<RemoteMessage?> get initialMessage =>
+      _firebaseService.getInitialMessage();
 
   bool shouldShowIntro() {
-    return _localStorageService.sessionToken == null && _localStorageService.showIntro;
+    return _localStorageService.sessionToken == null &&
+        _localStorageService.showIntro;
   }
 
   void introCompleted() {
@@ -48,7 +51,9 @@ final class CommonRepository extends BaseRepository {
   Future<AppVersionData?> getVersionData() async {
     try {
       if (kIsWeb) return null;
-      final responseData = await _apiClientService.getVersionData(Platform.operatingSystem);
+      final responseData = await _apiClientService.getVersionData(
+        Platform.operatingSystem,
+      );
       return responseData;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);
@@ -71,7 +76,10 @@ final class CommonRepository extends BaseRepository {
 
     bool canLaunchUrl = await canLaunchUrlString(storeDeeplinkUrl);
     if (canLaunchUrl) {
-      launchUrlString(storeDeeplinkUrl, mode: LaunchMode.externalNonBrowserApplication);
+      launchUrlString(
+        storeDeeplinkUrl,
+        mode: LaunchMode.externalNonBrowserApplication,
+      );
     } else {
       launchUrlString(storeUniversalUrl, mode: LaunchMode.externalApplication);
     }

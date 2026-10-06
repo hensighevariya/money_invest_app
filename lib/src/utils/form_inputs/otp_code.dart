@@ -6,7 +6,8 @@ import '../../localization/generated/l10n.dart';
 enum OtpCodeInputError { required, invalidLength }
 
 class OtpCodeInput extends FormzInput<String, OtpCodeInputError> {
-  const OtpCodeInput.pure([String? initialValue]) : super.pure(initialValue ?? '');
+  const OtpCodeInput.pure([String? initialValue])
+    : super.pure(initialValue ?? '');
 
   const OtpCodeInput.dirty(super.value) : super.dirty();
 
@@ -21,8 +22,10 @@ class OtpCodeInput extends FormzInput<String, OtpCodeInputError> {
 extension OtpCodeInputExtension on OtpCodeInputError {
   String getErrorMessage(BuildContext context) {
     return switch (this) {
-      OtpCodeInputError.required => AppLocalizations.current.errorOtpCodeRequired,
-      OtpCodeInputError.invalidLength => AppLocalizations.current.errorOtpCodeInvalid,
+      OtpCodeInputError.required =>
+        AppLocalizations.current.errorOtpCodeRequired,
+      OtpCodeInputError.invalidLength =>
+        AppLocalizations.current.errorOtpCodeInvalid,
     };
   }
 }

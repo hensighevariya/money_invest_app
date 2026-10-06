@@ -14,15 +14,21 @@ mixin _ButtonExpandedForeground on ButtonStyle {
   bool get expanded;
 
   @override
-  ButtonLayerBuilder? get foregroundBuilder => expanded ? _expandedChildBuilder : null;
+  ButtonLayerBuilder? get foregroundBuilder =>
+      expanded ? _expandedChildBuilder : null;
 
-  Widget _expandedChildBuilder(BuildContext context, Set<WidgetState> states, Widget? child) {
+  Widget _expandedChildBuilder(
+    BuildContext context,
+    Set<WidgetState> states,
+    Widget? child,
+  ) {
     return Center(heightFactor: 1.0, child: child);
   }
 }
 
 @immutable
-class _ButtonOverlayColor extends WidgetStateProperty<Color?> with Diagnosticable {
+class _ButtonOverlayColor extends WidgetStateProperty<Color?>
+    with Diagnosticable {
   _ButtonOverlayColor(this.color);
 
   final Color color;

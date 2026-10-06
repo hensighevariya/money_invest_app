@@ -20,9 +20,16 @@ class LoginState extends Equatable with FormzMixin {
   List<Object?> get props => [emailMobileInput, passwordInput, status];
 
   @override
-  List<FormzInput<Object, Object?>> get inputs => [emailMobileInput, passwordInput];
+  List<FormzInput<Object, Object?>> get inputs => [
+    emailMobileInput,
+    passwordInput,
+  ];
 
-  LoginState copyWith({EmailMobileInput? emailMobileInput, UserPasswordInput? passwordInput, ProgressStatus<UserData>? status}) {
+  LoginState copyWith({
+    EmailMobileInput? emailMobileInput,
+    UserPasswordInput? passwordInput,
+    ProgressStatus<UserData>? status,
+  }) {
     return LoginState(
       emailMobileInput: emailMobileInput ?? this.emailMobileInput,
       passwordInput: passwordInput ?? this.passwordInput,

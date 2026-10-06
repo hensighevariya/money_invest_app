@@ -9,10 +9,16 @@ import 'package:stream_transform/stream_transform.dart';
 
 class CountryPickerBloc extends Bloc<CountryPickerEvent, CountryPickerState> {
   CountryPickerBloc() : super(const ResultState(countryList)) {
-    on<SearchCountry>(_onSearchCountry, transformer: (events, mapper) => events.switchMap(mapper));
+    on<SearchCountry>(
+      _onSearchCountry,
+      transformer: (events, mapper) => events.switchMap(mapper),
+    );
   }
 
-  FutureOr<void> _onSearchCountry(SearchCountry event, Emitter<CountryPickerState> emit) async {
+  FutureOr<void> _onSearchCountry(
+    SearchCountry event,
+    Emitter<CountryPickerState> emit,
+  ) async {
     var state = this.state;
     if (state is ResultState && state.query == event.query) return;
     var query = event.query.trim().toLowerCase();
@@ -35,7 +41,9 @@ class CountryPickerBloc extends Bloc<CountryPickerEvent, CountryPickerState> {
           country.isoCode.toLowerCase().contains(query) ||
           country.iso3Code.toLowerCase().contains(query) ||
           country.phoneDetail.code.toLowerCase().contains(query) ||
-          country.translations.values.any((element) => element.contains(query))) {
+          country.translations.values.any(
+            (element) => element.contains(query),
+          )) {
         yield country;
       }
     }

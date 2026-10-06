@@ -8,9 +8,15 @@ class ProfileState extends Equatable {
   @override
   List<Object?> get props => [isNotification, logoutStatus];
 
-  const ProfileState({this.isNotification = false, this.logoutStatus = const ProgressStatus.initial()});
+  const ProfileState({
+    this.isNotification = false,
+    this.logoutStatus = const ProgressStatus.initial(),
+  });
 
-  ProfileState copyWith({bool? isNotification, ProgressStatus<bool>? logoutStatus}) {
+  ProfileState copyWith({
+    bool? isNotification,
+    ProgressStatus<bool>? logoutStatus,
+  }) {
     return ProfileState(
       isNotification: isNotification ?? this.isNotification,
       logoutStatus: logoutStatus ?? this.logoutStatus,

@@ -2,7 +2,12 @@ import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 
 class TransparentCard extends StatelessWidget {
-  const TransparentCard({super.key, required this.child, this.clipBehavior, this.shape});
+  const TransparentCard({
+    super.key,
+    required this.child,
+    this.clipBehavior,
+    this.shape,
+  });
 
   final Widget child;
   final Clip? clipBehavior;

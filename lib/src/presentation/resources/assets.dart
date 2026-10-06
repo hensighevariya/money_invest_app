@@ -15,7 +15,8 @@ abstract interface class SvgIcons {
   static const String icnNotification = '${_path}notification.svg';
   static const String icnLanguage = '${_path}language.svg';
   static const String icnHelp = '${_path}help.svg';
-  static const String icnLogout= '${_path}logout.svg';
+  static const String icnLogout = '${_path}logout.svg';
+  static const String icnKyc = '${_path}kyc.svg';
 }
 
 abstract interface class AppImages {

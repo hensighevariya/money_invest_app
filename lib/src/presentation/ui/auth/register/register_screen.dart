@@ -22,7 +22,8 @@ class RegisterScreen extends StatelessWidget {
       context.go(
         '${context.currentPath}/register-verify-otp',
         extra: {
-          'mobile': '+${state.mobileInput.phoneDetail?.code} ${state.mobileInput.value}',
+          'mobile':
+              '+${state.mobileInput.phoneDetail?.code} ${state.mobileInput.value}',
           'email': state.emailInput.value,
         },
       );
@@ -51,7 +52,10 @@ class _RegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
-      appBar: CustomAppBar(showLeading: true, color: context.colorScheme.surface),
+      appBar: CustomAppBar(
+        showLeading: true,
+        color: context.colorScheme.surface,
+      ),
       body: CustomScrollView(
         slivers: [
           SliverSafeArea(
@@ -96,8 +100,13 @@ class _RegisterView extends StatelessWidget {
               selector: (state) => state.isFormValid,
               builder: (context, isValid) {
                 return ElevatedButton(
-                  style: ElevatedButtonPrimaryStyle(context, buttonColor: context.colorScheme.primary),
-                  onPressed: !isValid ? null : () => context.read<RegisterCubit>().onContinue(),
+                  style: ElevatedButtonPrimaryStyle(
+                    context,
+                    buttonColor: context.colorScheme.primary,
+                  ),
+                  onPressed: !isValid
+                      ? null
+                      : () => context.read<RegisterCubit>().onContinue(),
                   child: const Text("Sign Up"),
                 );
               },
@@ -108,7 +117,9 @@ class _RegisterView extends StatelessWidget {
               children: [
                 Text(
                   "Already have an account? ",
-                  style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceVariant),
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 GestureDetector(
                   onTap: () => context.go('/login'),

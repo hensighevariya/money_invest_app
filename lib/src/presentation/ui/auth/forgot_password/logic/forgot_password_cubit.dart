@@ -8,14 +8,20 @@ import 'package:money_invest_app/src/utils/validator.dart';
 import 'forgot_password_state.dart';
 
 base class ForgotPasswordCubit extends BaseCubit<ForgotPasswordState> {
-  ForgotPasswordCubit({required this._authRepository, required this._loadingHandler})
-    : super(const ForgotPasswordState());
+  ForgotPasswordCubit({
+    required this._authRepository,
+    required this._loadingHandler,
+  }) : super(const ForgotPasswordState());
 
   final AuthRepository _authRepository;
   final LoadingHandler _loadingHandler;
 
   void onEmailAddressChanged(String value, PhoneDetail phoneDetail) {
-    emit(state.copyWith(emailMobileInput: EmailMobileInput.dirty(value, phoneDetail)));
+    emit(
+      state.copyWith(
+        emailMobileInput: EmailMobileInput.dirty(value, phoneDetail),
+      ),
+    );
   }
 
   Future<void> onContinue() async {
@@ -25,7 +31,9 @@ base class ForgotPasswordCubit extends BaseCubit<ForgotPasswordState> {
     try {
       final result = await processRequest(
         () => _authRepository.forgotPassword(
-          emailAddress: (!isOnlyDigit(state.emailMobileInput.value)) ? state.emailMobileInput.value : null,
+          emailAddress: (!isOnlyDigit(state.emailMobileInput.value))
+              ? state.emailMobileInput.value
+              : null,
           mobile: isOnlyDigit(state.emailMobileInput.value)
               ? '+${state.emailMobileInput.phoneDetail?.code} ${state.emailMobileInput.value}'
               : null,

@@ -40,7 +40,9 @@ final class AuthRepository extends BaseRepository {
       final iosInfo = await deviceInfoPlugin.iosInfo;
       return iosInfo.identifierForVendor ?? iosInfo.modelName;
     } else {
-      throw UnimplementedError('This method is not implemented for other platforms.');
+      throw UnimplementedError(
+        'This method is not implemented for other platforms.',
+      );
     }
   }
 
@@ -57,8 +59,13 @@ final class AuthRepository extends BaseRepository {
     required String password,
   }) async {
     try {
-      if (type != LoginType.mobile.value && type != LoginType.email.value) return null;
-      final [pushToken, deviceId] = await Future.wait([_getFirebaseToken(), _getDeviceId()]);
+      if (type != LoginType.mobile.value && type != LoginType.email.value) {
+        return null;
+      }
+      final [pushToken, deviceId] = await Future.wait([
+        _getFirebaseToken(),
+        _getDeviceId(),
+      ]);
       final request = LoginRequest(
         type: type,
         email: type == LoginType.email.value ? emailAddress : null,
@@ -87,7 +94,11 @@ final class AuthRepository extends BaseRepository {
     }
   }
 
-  Future<ForgotPasswordResponse> forgotPassword({String? emailAddress, String? mobile, required int type}) async {
+  Future<ForgotPasswordResponse> forgotPassword({
+    String? emailAddress,
+    String? mobile,
+    required int type,
+  }) async {
     Map<String, dynamic> data = {};
 
     if (mobile != null) {
@@ -115,7 +126,13 @@ final class AuthRepository extends BaseRepository {
   }) async {
     try {
       final responseData = await _apiClientService.verifyForgotPasswordOtp(
-        VerifyOtpRequest(otp: otpCode, token: token, verifyType: verifyType, type: type, loginUserType: loginUserType),
+        VerifyOtpRequest(
+          otp: otpCode,
+          token: token,
+          verifyType: verifyType,
+          type: type,
+          loginUserType: loginUserType,
+        ),
       );
       return responseData.token;
     } catch (error, stackTrace) {
@@ -125,7 +142,9 @@ final class AuthRepository extends BaseRepository {
 
   Future<String> resendOtp({required String token, required int type}) async {
     try {
-      final responseData = await _apiClientService.resendOtp(VerifyOtpRequest(preToken: token, type: type));
+      final responseData = await _apiClientService.resendOtp(
+        VerifyOtpRequest(preToken: token, type: type),
+      );
       return responseData.token;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);
@@ -140,7 +159,12 @@ final class AuthRepository extends BaseRepository {
   }) async {
     try {
       await _apiClientService.resetPassword(
-        ResetPasswordRequest(password: password, confirmPassword: confirmPassword, token: token, type: type),
+        ResetPasswordRequest(
+          password: password,
+          confirmPassword: confirmPassword,
+          token: token,
+          type: type,
+        ),
       );
       return true;
     } catch (error, stackTrace) {
@@ -161,9 +185,19 @@ final class AuthRepository extends BaseRepository {
 
   /// Step 3: Submit the new email or mobile. Returns a token for step 4 (new cred OTP).
   /// [type]: 1 = Mobile, 2 = Email
-  Future<String> changeCredential({required int type, required String token, String? mobile, String? email}) async {
+  Future<String> changeCredential({
+    required int type,
+    required String token,
+    String? mobile,
+    String? email,
+  }) async {
     try {
-      final response = await _apiClientService.changeCredential(type: type, token: token, mobile: mobile, email: email);
+      final response = await _apiClientService.changeCredential(
+        type: type,
+        token: token,
+        mobile: mobile,
+        email: email,
+      );
       return response.token;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);

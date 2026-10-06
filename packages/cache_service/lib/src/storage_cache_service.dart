@@ -17,7 +17,10 @@ final class StorageCacheService extends CacheService {
   @override
   FutureOr<void> init() async {
     Hive.registerAdapter(CacheDataAdapter());
-    final hiveBox = await Hive.openLazyBox<CacheData>(storageKey ?? 'storage_cache_service', path: storagePath);
+    final hiveBox = await Hive.openLazyBox<CacheData>(
+      storageKey ?? 'storage_cache_service',
+      path: storagePath,
+    );
     _hiveBoxCompleter.complete(hiveBox);
   }
 

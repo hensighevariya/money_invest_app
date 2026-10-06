@@ -32,8 +32,14 @@ class CountryPickerView extends StatelessWidget {
           bottom: false,
           minimum: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: SearchField(
-            onChanged: (value) => context.read<CountryPickerBloc>().add(SearchCountry(query: value)),
-            onSubmitted: (value) => context.read<CountryPickerBloc>().add(SearchCountry(query: value)),
+            onChanged:
+                (value) => context.read<CountryPickerBloc>().add(
+                  SearchCountry(query: value),
+                ),
+            onSubmitted:
+                (value) => context.read<CountryPickerBloc>().add(
+                  SearchCountry(query: value),
+                ),
           ),
         ),
         Expanded(
@@ -42,7 +48,8 @@ class CountryPickerView extends StatelessWidget {
               if (state is ResultState) {
                 return CountryList(
                   listCountry: state.listCountry,
-                  onCountrySelected: (country) => Navigator.of(context).pop(country),
+                  onCountrySelected:
+                      (country) => Navigator.of(context).pop(country),
                 );
               }
               return const SizedBox.shrink();
@@ -58,11 +65,7 @@ class SearchField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
 
-  const SearchField({
-    super.key,
-    this.onChanged,
-    this.onSubmitted,
-  });
+  const SearchField({super.key, this.onChanged, this.onSubmitted});
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -132,11 +135,19 @@ class CountryList extends StatelessWidget {
       leading: Material(
         borderRadius: BorderRadius.circular(2),
         clipBehavior: Clip.hardEdge,
-        child: CountryPickerHelper.getDefaultFlagImage(country, width: 32, height: 24),
+        child: CountryPickerHelper.getDefaultFlagImage(
+          country,
+          width: 32,
+          height: 24,
+        ),
       ),
       visualDensity: VisualDensity.compact,
-      leadingAndTrailingTextStyle: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
-      title: Text("${country.translations[locale.languageCode] ?? country.name} (${country.isoCode})"),
+      leadingAndTrailingTextStyle: theme.textTheme.bodyMedium?.copyWith(
+        fontWeight: FontWeight.w500,
+      ),
+      title: Text(
+        "${country.translations[locale.languageCode] ?? country.name} (${country.isoCode})",
+      ),
       trailing: Text("+${country.phoneDetail.code}"),
       onTap: () => onCountrySelected(country),
     );

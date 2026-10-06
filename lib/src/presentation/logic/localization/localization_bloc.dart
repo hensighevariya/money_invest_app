@@ -6,7 +6,11 @@ import 'localization_event.dart';
 import 'localization_state.dart';
 
 class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
-  LocalizationBloc(super.initialState, {required this.localizationsDelegate, required this.commonRepository}) {
+  LocalizationBloc(
+    super.initialState, {
+    required this.localizationsDelegate,
+    required this.commonRepository,
+  }) {
     on<LocalizationUpdated>(_onLocalizationUpdated);
   }
 
@@ -16,7 +20,10 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
   }) {
     Locale? effectiveLocale;
 
-    final languageCodes = [commonRepository.getLanguageCode(), PlatformDispatcher.instance.locale.languageCode];
+    final languageCodes = [
+      commonRepository.getLanguageCode(),
+      PlatformDispatcher.instance.locale.languageCode,
+    ];
 
     for (final languageCode in languageCodes) {
       if (languageCode != null) {
@@ -48,8 +55,13 @@ class LocalizationBloc extends Bloc<LocalizationEvent, LocalizationState> {
     return BlocProvider.of<LocalizationBloc>(context, listen: listen);
   }
 
-  void _onLocalizationUpdated(LocalizationUpdated event, Emitter<LocalizationState> emit) {
-    final locale = Locale.fromSubtags(languageCode: event.language.languageCode);
+  void _onLocalizationUpdated(
+    LocalizationUpdated event,
+    Emitter<LocalizationState> emit,
+  ) {
+    final locale = Locale.fromSubtags(
+      languageCode: event.language.languageCode,
+    );
     bool isSupported = localizationsDelegate.isSupported(locale);
     if (!isSupported) return;
     emit(state.copyWith(selectedLanguage: event.language));

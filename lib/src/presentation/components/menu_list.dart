@@ -39,10 +39,21 @@ class MenuListWidget extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: onTap,
       child: Container(
-        margin: showBullet ? const EdgeInsets.only(bottom: 2.0) : EdgeInsets.zero,
-        padding: EdgeInsets.symmetric(horizontal: Spacing.large, vertical: showIcon ? Spacing.none : Spacing.medium),
-        constraints: showIcon ? const BoxConstraints(minHeight: 36, maxHeight: 46) : null,
-        decoration: showBullet ? BoxDecoration(color: colorScheme.onSurface.withValues(alpha: 0.03)) : null,
+        margin: showBullet
+            ? const EdgeInsets.only(bottom: 2.0)
+            : EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(
+          horizontal: Spacing.large,
+          vertical: showIcon ? Spacing.none : Spacing.medium,
+        ),
+        constraints: showIcon
+            ? const BoxConstraints(minHeight: 36, maxHeight: 46)
+            : null,
+        decoration: showBullet
+            ? BoxDecoration(
+                color: colorScheme.onSurface.withValues(alpha: 0.03),
+              )
+            : null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -55,10 +66,16 @@ class MenuListWidget extends StatelessWidget {
               const Gap(Spacing.normal),
             ] else if (showBullet) ...[
               Container(
-                margin: const EdgeInsetsDirectional.only(start: 20, end: Spacing.normal),
+                margin: const EdgeInsetsDirectional.only(
+                  start: 20,
+                  end: Spacing.normal,
+                ),
                 width: 6,
                 height: 6,
-                decoration: BoxDecoration(shape: BoxShape.circle, color: colorScheme.onSurface.withValues(alpha: 0.4)),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: colorScheme.onSurface.withValues(alpha: 0.4),
+                ),
               ),
             ],
             Expanded(child: Text(title, style: textTheme.titleSmall)),
@@ -66,7 +83,10 @@ class MenuListWidget extends StatelessWidget {
               Container(
                 margin: const EdgeInsetsDirectional.only(end: Spacing.small),
                 padding: const EdgeInsets.all(Spacing.xSmall),
-                decoration: BoxDecoration(color: colorScheme.error, shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                  color: colorScheme.error,
+                  shape: BoxShape.circle,
+                ),
                 constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
                 alignment: Alignment.center,
                 child: Text(

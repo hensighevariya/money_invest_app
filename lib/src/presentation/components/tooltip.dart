@@ -5,20 +5,27 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 class FloatingTooltip extends StatefulWidget {
-  const FloatingTooltip({super.key, required this.message, this.preferBelow, this.child});
+  const FloatingTooltip({
+    super.key,
+    required this.message,
+    this.preferBelow,
+    this.child,
+  });
 
   final String message;
   final bool? preferBelow;
   final Widget? child;
 
-  static final List<FloatingTooltipState> _openedTooltips = <FloatingTooltipState>[];
+  static final List<FloatingTooltipState> _openedTooltips =
+      <FloatingTooltipState>[];
 
   // Causes any current tooltips to be concealed. Only called for mouse hover enter
   // detections. Won't conceal the supplied tooltip.
   static void _concealOtherTooltips(FloatingTooltipState current) {
     if (_openedTooltips.isNotEmpty) {
       // Avoid concurrent modification.
-      final List<FloatingTooltipState> openedTooltips = _openedTooltips.toList();
+      final List<FloatingTooltipState> openedTooltips = _openedTooltips
+          .toList();
       for (final FloatingTooltipState state in openedTooltips) {
         if (state == current) {
           continue;
@@ -39,7 +46,8 @@ class FloatingTooltip extends StatefulWidget {
   static bool dismissAllToolTips() {
     if (_openedTooltips.isNotEmpty) {
       // Avoid concurrent modification.
-      final List<FloatingTooltipState> openedTooltips = _openedTooltips.toList();
+      final List<FloatingTooltipState> openedTooltips = _openedTooltips
+          .toList();
       for (final FloatingTooltipState state in openedTooltips) {
         state._dismissTooltip(immediately: true);
       }
@@ -54,12 +62,28 @@ class FloatingTooltip extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty('message', message, showName: false, defaultValue: kNoDefaultValue));
-    properties.add(FlagProperty('position', value: preferBelow, ifTrue: 'below', ifFalse: 'above', showName: true));
+    properties.add(
+      StringProperty(
+        'message',
+        message,
+        showName: false,
+        defaultValue: kNoDefaultValue,
+      ),
+    );
+    properties.add(
+      FlagProperty(
+        'position',
+        value: preferBelow,
+        ifTrue: 'below',
+        ifFalse: 'above',
+        showName: true,
+      ),
+    );
   }
 }
 
-class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProviderStateMixin {
+class FloatingTooltipState extends State<FloatingTooltip>
+    with SingleTickerProviderStateMixin {
   static const double _defaultVerticalOffset = 24.0;
   static const bool _defaultPreferBelow = true;
   static const Duration _fadeInDuration = Duration(milliseconds: 150);
@@ -83,10 +107,15 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
     _isConcealed = false;
     _forceRemoval = false;
     _mouseIsConnected = RendererBinding.instance.mouseTracker.mouseIsConnected;
-    _controller = AnimationController(duration: _fadeInDuration, reverseDuration: _fadeOutDuration, vsync: this)
-      ..addStatusListener(_handleStatusChanged);
+    _controller = AnimationController(
+      duration: _fadeInDuration,
+      reverseDuration: _fadeOutDuration,
+      vsync: this,
+    )..addStatusListener(_handleStatusChanged);
     // Listen to see when a mouse is added.
-    RendererBinding.instance.mouseTracker.addListener(_handleMouseTrackerChange);
+    RendererBinding.instance.mouseTracker.addListener(
+      _handleMouseTrackerChange,
+    );
     // Listen to global pointer events so that we can hide a tooltip immediately
     // if some other control is clicked on.
     GestureBinding.instance.pointerRouter.addGlobalRoute(_handlePointerEvent);
@@ -97,7 +126,8 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
     if (!mounted) {
       return;
     }
-    final bool mouseIsConnected = RendererBinding.instance.mouseTracker.mouseIsConnected;
+    final bool mouseIsConnected =
+        RendererBinding.instance.mouseTracker.mouseIsConnected;
     if (mouseIsConnected != _mouseIsConnected) {
       setState(() {
         _mouseIsConnected = mouseIsConnected;
@@ -108,7 +138,8 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
   void _handleStatusChanged(AnimationStatus status) {
     // If this tip is concealed, don't remove it, even if it is dismissed, so that we can
     // reveal it later, unless it has explicitly been hidden with _dismissTooltip.
-    if (status == AnimationStatus.dismissed && (_forceRemoval || !_isConcealed)) {
+    if (status == AnimationStatus.dismissed &&
+        (_forceRemoval || !_isConcealed)) {
       _removeEntry();
     }
   }
@@ -150,7 +181,10 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
     _isConcealed = false;
 
     if (!_entry!.mounted) {
-      final OverlayState overlayState = Overlay.of(context, debugRequiredFor: widget);
+      final OverlayState overlayState = Overlay.of(
+        context,
+        debugRequiredFor: widget,
+      );
       overlayState.insert(_entry!);
     }
     SemanticsService.tooltip(_tooltipMessage);
@@ -195,7 +229,10 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
   }
 
   void _createNewEntry() {
-    final OverlayState overlayState = Overlay.of(context, debugRequiredFor: widget);
+    final OverlayState overlayState = Overlay.of(
+      context,
+      debugRequiredFor: widget,
+    );
 
     final RenderBox box = context.findRenderObject()! as RenderBox;
     final Offset target = box.localToGlobal(
@@ -213,7 +250,10 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
         height: _height,
         onEnter: _mouseIsConnected ? (_) => _handleMouseEnter() : null,
         onExit: _mouseIsConnected ? (_) => _handleMouseExit() : null,
-        animation: CurvedAnimation(parent: _controller, curve: Curves.fastOutSlowIn),
+        animation: CurvedAnimation(
+          parent: _controller,
+          curve: Curves.fastOutSlowIn,
+        ),
         target: target,
         verticalOffset: _verticalOffset,
         preferBelow: _preferBelow,
@@ -269,8 +309,12 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
 
   @override
   void dispose() {
-    GestureBinding.instance.pointerRouter.removeGlobalRoute(_handlePointerEvent);
-    RendererBinding.instance.mouseTracker.removeListener(_handleMouseTrackerChange);
+    GestureBinding.instance.pointerRouter.removeGlobalRoute(
+      _handlePointerEvent,
+    );
+    RendererBinding.instance.mouseTracker.removeListener(
+      _handleMouseTrackerChange,
+    );
     _removeEntry();
     _controller.dispose();
     super.dispose();
@@ -301,7 +345,8 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
 
     _height = tooltipTheme.constraints?.minHeight ?? 24.0;
     _verticalOffset = tooltipTheme.verticalOffset ?? _defaultVerticalOffset;
-    _preferBelow = widget.preferBelow ?? tooltipTheme.preferBelow ?? _defaultPreferBelow;
+    _preferBelow =
+        widget.preferBelow ?? tooltipTheme.preferBelow ?? _defaultPreferBelow;
 
     Widget result = Semantics(tooltip: _tooltipMessage, child: widget.child);
 
@@ -313,14 +358,22 @@ class FloatingTooltipState extends State<FloatingTooltip> with SingleTickerProvi
     );
     // Only check for hovering if there is a mouse connected.
     if (_mouseIsConnected) {
-      result = MouseRegion(onEnter: (_) => _handleMouseEnter(), onExit: (_) => _handleMouseExit(), child: result);
+      result = MouseRegion(
+        onEnter: (_) => _handleMouseEnter(),
+        onExit: (_) => _handleMouseExit(),
+        child: result,
+      );
     }
     return result;
   }
 }
 
 class _TooltipPositionDelegate extends SingleChildLayoutDelegate {
-  _TooltipPositionDelegate({required this.target, required this.verticalOffset, required this.preferBelow});
+  _TooltipPositionDelegate({
+    required this.target,
+    required this.verticalOffset,
+    required this.preferBelow,
+  });
 
   final Offset target;
 
@@ -329,7 +382,8 @@ class _TooltipPositionDelegate extends SingleChildLayoutDelegate {
   final bool preferBelow;
 
   @override
-  BoxConstraints getConstraintsForChild(BoxConstraints constraints) => constraints.loosen();
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+      constraints.loosen();
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
@@ -386,9 +440,15 @@ class _TooltipOverlay extends StatelessWidget {
             decoration: theme.tooltipTheme.decoration,
             padding: theme.tooltipTheme.padding,
             child: DefaultTextStyle(
-              style: theme.textTheme.bodyMedium!.merge(theme.tooltipTheme.textStyle),
+              style: theme.textTheme.bodyMedium!.merge(
+                theme.tooltipTheme.textStyle,
+              ),
               textAlign: theme.tooltipTheme.textAlign,
-              child: Center(widthFactor: 1.0, heightFactor: 1.0, child: Text.rich(richMessage)),
+              child: Center(
+                widthFactor: 1.0,
+                heightFactor: 1.0,
+                child: Text.rich(richMessage),
+              ),
             ),
           ),
         ),
@@ -400,7 +460,11 @@ class _TooltipOverlay extends StatelessWidget {
     return Positioned.fill(
       bottom: MediaQuery.maybeViewInsetsOf(context)?.bottom ?? 0.0,
       child: CustomSingleChildLayout(
-        delegate: _TooltipPositionDelegate(target: target, verticalOffset: verticalOffset, preferBelow: preferBelow),
+        delegate: _TooltipPositionDelegate(
+          target: target,
+          verticalOffset: verticalOffset,
+          preferBelow: preferBelow,
+        ),
         child: result,
       ),
     );

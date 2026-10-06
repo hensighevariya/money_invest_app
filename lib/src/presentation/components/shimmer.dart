@@ -38,7 +38,9 @@ class TextShimmer extends StatelessWidget {
     final textHeight = textScaler.scale(effectiveStyle.fontSize ?? 14);
     final lineHeight = textHeight * (effectiveStyle.height ?? 1.2);
 
-    final alignment = switch (defaultTextStyle.textAlign ?? textAlign ?? TextAlign.start) {
+    final alignment = switch (defaultTextStyle.textAlign ??
+        textAlign ??
+        TextAlign.start) {
       TextAlign.left => Alignment.centerLeft,
       TextAlign.right => Alignment.centerRight,
       TextAlign.center => Alignment.center,
@@ -55,7 +57,10 @@ class TextShimmer extends StatelessWidget {
         child: CommonShimmer(
           child: Material(
             borderRadius: ShapeBorderRadius.extraLarge,
-            child: SizedBox(height: textHeight, width: width ?? double.maxFinite),
+            child: SizedBox(
+              height: textHeight,
+              width: width ?? double.maxFinite,
+            ),
           ),
         ),
       ),

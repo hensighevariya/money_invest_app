@@ -29,8 +29,12 @@ class _LoginFormState extends State<LoginForm> {
   void initState() {
     super.initState();
     final state = context.read<LoginCubit>().state;
-    _mobileNumberController = MobileNumberController(text: state.emailMobileInput.value);
-    _passwordController = TextEditingController(text: state.passwordInput.value);
+    _mobileNumberController = MobileNumberController(
+      text: state.emailMobileInput.value,
+    );
+    _passwordController = TextEditingController(
+      text: state.passwordInput.value,
+    );
     _passwordFocusNode = FocusNode();
   }
 
@@ -65,50 +69,67 @@ class _LoginFormState extends State<LoginForm> {
                 children: [
                   InputFieldDecoration(
                     labelText: localizations.loginEmailHint,
-                    child: BlocSelector<LoginCubit, LoginState, EmailMobileInput>(
-                      selector: (state) => state.emailMobileInput,
-                      builder: (context, emailAddressInput) {
-                        return MobileNumberField(
-                          controller: _mobileNumberController,
-                          hintText: localizations.loginEmailHint,
-                          keyboardType: TextInputType.emailAddress,
-                          onEditingComplete: () => _passwordFocusNode.requestFocus(),
-                          onFieldSubmitted: (value) => _passwordFocusNode.requestFocus(),
-                          onChanged: (value) {
-                            context.read<LoginCubit>().onEmailAddressChanged(
-                              value,
-                              _mobileNumberController.country.phoneDetail,
+                    child:
+                        BlocSelector<LoginCubit, LoginState, EmailMobileInput>(
+                          selector: (state) => state.emailMobileInput,
+                          builder: (context, emailAddressInput) {
+                            return MobileNumberField(
+                              controller: _mobileNumberController,
+                              hintText: localizations.loginEmailHint,
+                              keyboardType: TextInputType.emailAddress,
+                              onEditingComplete: () =>
+                                  _passwordFocusNode.requestFocus(),
+                              onFieldSubmitted: (value) =>
+                                  _passwordFocusNode.requestFocus(),
+                              onChanged: (value) {
+                                context
+                                    .read<LoginCubit>()
+                                    .onEmailAddressChanged(
+                                      value,
+                                      _mobileNumberController
+                                          .country
+                                          .phoneDetail,
+                                    );
+                              },
+                              errorText: emailAddressInput.displayError
+                                  ?.getErrorMessage(context),
+                              isoCode: _mobileNumberController.country.isoCode,
                             );
                           },
-                          errorText: emailAddressInput.displayError?.getErrorMessage(context),
-                          isoCode: _mobileNumberController.country.isoCode,
-                        );
-                      },
-                    ),
+                        ),
                   ),
                   InputFieldDecoration(
                     labelText: localizations.loginPasswordHint,
-                    child: BlocSelector<LoginCubit, LoginState, UserPasswordInput>(
-                      selector: (state) => state.passwordInput,
-                      builder: (context, passwordInput) {
-                        return PasswordTextField(
-                          controller: _passwordController,
-                          focusNode: _passwordFocusNode,
-                          textInputAction: TextInputAction.done,
-                          autofillHints: {AutofillHints.password},
-                          onChanged: (value) => context.read<LoginCubit>().onPasswordChanged(value),
-                          onFieldSubmitted: (value) => _passwordFocusNode.unfocus(),
-                          hintText: localizations.loginPasswordHint,
-                          errorText: passwordInput.displayError?.getErrorMessage(context),
-                        );
-                      },
-                    ),
+                    child:
+                        BlocSelector<LoginCubit, LoginState, UserPasswordInput>(
+                          selector: (state) => state.passwordInput,
+                          builder: (context, passwordInput) {
+                            return PasswordTextField(
+                              controller: _passwordController,
+                              focusNode: _passwordFocusNode,
+                              textInputAction: TextInputAction.done,
+                              autofillHints: {AutofillHints.password},
+                              onChanged: (value) => context
+                                  .read<LoginCubit>()
+                                  .onPasswordChanged(value),
+                              onFieldSubmitted: (value) =>
+                                  _passwordFocusNode.unfocus(),
+                              hintText: localizations.loginPasswordHint,
+                              errorText: passwordInput.displayError
+                                  ?.getErrorMessage(context),
+                            );
+                          },
+                        ),
                   ),
                   Align(
                     alignment: AlignmentDirectional.centerEnd,
                     child: TextButton(
-                      style: TextButton.styleFrom(padding: PaddingValue.small, visualDensity: VisualDensity.compact),
-                      onPressed: () => context.go('${context.currentPath}/forgot-password'),
+                      style: TextButton.styleFrom(
+                        padding: PaddingValue.small,
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      onPressed: () =>
+                          context.go('${context.currentPath}/forgot-password'),
                       child: Text(
                         localizations.loginForgotPassword,
                         style: TextStyle(
@@ -127,7 +148,10 @@ class _LoginFormState extends State<LoginForm> {
             selector: (state) => state.isValid,
             builder: (context, isValid) {
               return ElevatedButton(
-                style: ElevatedButtonPrimaryStyle(context, buttonColor: context.colorScheme.primary),
+                style: ElevatedButtonPrimaryStyle(
+                  context,
+                  buttonColor: context.colorScheme.primary,
+                ),
                 onPressed: /*!isValid ? null :*/ _onContinue,
                 child: Text(localizations.continueButtonLabel),
               );

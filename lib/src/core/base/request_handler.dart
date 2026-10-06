@@ -5,7 +5,8 @@ import 'package:retry/retry.dart';
 import 'package:money_invest_app/src/core/core.dart';
 
 typedef RequestCallback<T> = FutureOr<T> Function();
-typedef ErrorHandlerCallback = void Function(Object error, StackTrace? stackTrace);
+typedef ErrorHandlerCallback =
+    void Function(Object error, StackTrace? stackTrace);
 typedef LoadingHandlerCallback = void Function(bool loading);
 
 abstract mixin class RequestHandler {
@@ -26,7 +27,9 @@ abstract mixin class RequestHandler {
         request,
         delayFactor: Durations.short2,
         maxAttempts: 3,
-        retryIf: (exception) => exception is SessionExpiredException || exception is NetworkConnectionException,
+        retryIf: (exception) =>
+            exception is SessionExpiredException ||
+            exception is NetworkConnectionException,
         maxDelay: Durations.medium2,
       );
     } catch (error, stackTrace) {

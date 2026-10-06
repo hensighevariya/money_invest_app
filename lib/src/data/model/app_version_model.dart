@@ -12,7 +12,8 @@ class AppVersionData extends Equatable {
     required this.supportedBuildNumber,
   });
 
-  factory AppVersionData.fromJson(Map<String, dynamic> json) => _$AppVersionDataFromJson(json);
+  factory AppVersionData.fromJson(Map<String, dynamic> json) =>
+      _$AppVersionDataFromJson(json);
 
   final String version;
   final String supportedVersion;
@@ -20,7 +21,12 @@ class AppVersionData extends Equatable {
   final int supportedBuildNumber;
 
   @override
-  List<Object?> get props => [version, supportedVersion, buildNumber, supportedBuildNumber];
+  List<Object?> get props => [
+    version,
+    supportedVersion,
+    buildNumber,
+    supportedBuildNumber,
+  ];
 
   Map<String, dynamic> toJson() => _$AppVersionDataToJson(this);
 }

@@ -32,7 +32,10 @@ class Log {
       if (object is num || object is String || object is bool) {
         log(object.toString(), logLevel);
       } else {
-        _encoder.convert(object).split('\n').forEach((element) => log(element, logLevel));
+        _encoder
+            .convert(object)
+            .split('\n')
+            .forEach((element) => log(element, logLevel));
       }
     } catch (_) {
       log(object.toString(), logLevel);

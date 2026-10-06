@@ -13,7 +13,8 @@ class DependencyHelper {
     return DependencyHelper._private(instance ?? GetIt.asNewInstance());
   }
 
-  static DependencyHelper get instance => _instance ??= DependencyHelper.createInstance();
+  static DependencyHelper get instance =>
+      _instance ??= DependencyHelper.createInstance();
 
   static DependencyHelper? _instance;
   final Completer<bool> _initializeCompleter = Completer();
@@ -38,8 +39,10 @@ class DependencyHelper {
     return _getItInstance<T>(instanceName: instanceName);
   }
 
-  T get<T extends Object>({String? instanceName}) => this<T>(instanceName: instanceName);
+  T get<T extends Object>({String? instanceName}) =>
+      this<T>(instanceName: instanceName);
 }
 
 @InjectableInit(initializerName: r'$initializeDependencies', asExtension: false)
-FutureOr<GetIt> _initializeDependencies(GetIt getInstance) => $initializeDependencies(getInstance);
+FutureOr<GetIt> _initializeDependencies(GetIt getInstance) =>
+    $initializeDependencies(getInstance);

@@ -14,34 +14,48 @@ abstract class DataDependency {
   @preResolve
   @lazySingleton
   Future<LocalStorageService> providesLocalStorageService() async {
-    SharedPreferencesWithCache preferences = await SharedPreferencesWithCache.create(
-      cacheOptions: const SharedPreferencesWithCacheOptions(),
-    );
+    SharedPreferencesWithCache preferences =
+        await SharedPreferencesWithCache.create(
+          cacheOptions: const SharedPreferencesWithCacheOptions(),
+        );
     return LocalStorageService(preferences);
   }
 
   @preResolve
   @lazySingleton
   Future<CacheService> providesCacheService() async {
-    String? storagePath = await getTemporaryDirectory().then((value) => value.path);
-    CacheService service = StorageCacheService(storagePath: storagePath, storageKey: 'security-saas-cache');
+    String? storagePath = await getTemporaryDirectory().then(
+      (value) => value.path,
+    );
+    CacheService service = StorageCacheService(
+      storagePath: storagePath,
+      storageKey: 'security-saas-cache',
+    );
     return service..init();
   }
 
   @lazySingleton
-  ApiClientService providesApiClientService(AppEnvironment environment, LocalStorageService localStorageService) {
+  ApiClientService providesApiClientService(
+    AppEnvironment environment,
+    LocalStorageService localStorageService,
+  ) {
     final BaseOptions baseOptions = BaseOptions(
       baseUrl: environment.apiBaseUrl,
       connectTimeout: const Duration(minutes: 1),
       receiveTimeout: const Duration(minutes: 1),
       sendTimeout: const Duration(minutes: 1),
-      headers: {Headers.acceptHeader: Headers.jsonContentType, Headers.contentTypeHeader: Headers.jsonContentType},
+      headers: {
+        Headers.acceptHeader: Headers.jsonContentType,
+        Headers.contentTypeHeader: Headers.jsonContentType,
+      },
     );
 
     final dioClient = Dio(baseOptions);
     final refreshDioClient = Dio(baseOptions);
     if (kDebugMode) {
-      refreshDioClient.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+      refreshDioClient.interceptors.add(
+        LogInterceptor(requestBody: true, responseBody: true),
+      );
     }
 
     dioClient.interceptors.addAll([
@@ -61,7 +75,8 @@ abstract class DataDependency {
 
   @lazySingleton
   FirebaseService providesFirebaseService() {
-    return FirebaseService(/*options: DefaultFirebaseOptions.currentPlatform*/)..initialize();
+    return FirebaseService(/*options: DefaultFirebaseOptions.currentPlatform*/)
+      ..initialize();
   }
 
   @lazySingleton

@@ -41,15 +41,33 @@ abstract interface class ShapeBorderRadius {
 
 abstract class PaddingValue {
   static const EdgeInsetsDirectional zero = EdgeInsetsDirectional.zero;
-  static const EdgeInsetsDirectional xSmall = EdgeInsetsDirectional.all(Spacing.xSmall);
-  static const EdgeInsetsDirectional small = EdgeInsetsDirectional.all(Spacing.small);
-  static const EdgeInsetsDirectional medium = EdgeInsetsDirectional.all(Spacing.medium);
-  static const EdgeInsetsDirectional xMedium = EdgeInsetsDirectional.all(Spacing.xMedium);
-  static const EdgeInsetsDirectional normal = EdgeInsetsDirectional.all(Spacing.normal);
-  static const EdgeInsetsDirectional large = EdgeInsetsDirectional.all(Spacing.large);
-  static const EdgeInsetsDirectional xLarge = EdgeInsetsDirectional.all(Spacing.xLarge);
-  static const EdgeInsetsDirectional xxLarge = EdgeInsetsDirectional.all(Spacing.xxLarge);
-  static const EdgeInsetsDirectional xxxLarge = EdgeInsetsDirectional.all(Spacing.xxxLarge);
+  static const EdgeInsetsDirectional xSmall = EdgeInsetsDirectional.all(
+    Spacing.xSmall,
+  );
+  static const EdgeInsetsDirectional small = EdgeInsetsDirectional.all(
+    Spacing.small,
+  );
+  static const EdgeInsetsDirectional medium = EdgeInsetsDirectional.all(
+    Spacing.medium,
+  );
+  static const EdgeInsetsDirectional xMedium = EdgeInsetsDirectional.all(
+    Spacing.xMedium,
+  );
+  static const EdgeInsetsDirectional normal = EdgeInsetsDirectional.all(
+    Spacing.normal,
+  );
+  static const EdgeInsetsDirectional large = EdgeInsetsDirectional.all(
+    Spacing.large,
+  );
+  static const EdgeInsetsDirectional xLarge = EdgeInsetsDirectional.all(
+    Spacing.xLarge,
+  );
+  static const EdgeInsetsDirectional xxLarge = EdgeInsetsDirectional.all(
+    Spacing.xxLarge,
+  );
+  static const EdgeInsetsDirectional xxxLarge = EdgeInsetsDirectional.all(
+    Spacing.xxxLarge,
+  );
 }
 
 abstract class TextSize {
@@ -67,17 +85,29 @@ abstract class TextSize {
 abstract interface class Shapes {
   static const OutlinedBorder none = RoundedRectangleBorder();
 
-  static const OutlinedBorder extraSmall = RoundedRectangleBorder(borderRadius: ShapeBorderRadius.xSmall);
+  static const OutlinedBorder extraSmall = RoundedRectangleBorder(
+    borderRadius: ShapeBorderRadius.xSmall,
+  );
 
-  static const OutlinedBorder small = RoundedRectangleBorder(borderRadius: ShapeBorderRadius.small);
+  static const OutlinedBorder small = RoundedRectangleBorder(
+    borderRadius: ShapeBorderRadius.small,
+  );
 
-  static const OutlinedBorder medium = RoundedRectangleBorder(borderRadius: ShapeBorderRadius.medium);
+  static const OutlinedBorder medium = RoundedRectangleBorder(
+    borderRadius: ShapeBorderRadius.medium,
+  );
 
-  static const OutlinedBorder normal = RoundedRectangleBorder(borderRadius: ShapeBorderRadius.normal);
+  static const OutlinedBorder normal = RoundedRectangleBorder(
+    borderRadius: ShapeBorderRadius.normal,
+  );
 
-  static const OutlinedBorder large = RoundedRectangleBorder(borderRadius: ShapeBorderRadius.large);
+  static const OutlinedBorder large = RoundedRectangleBorder(
+    borderRadius: ShapeBorderRadius.large,
+  );
 
-  static const OutlinedBorder extraLarge = RoundedRectangleBorder(borderRadius: ShapeBorderRadius.xLarge);
+  static const OutlinedBorder extraLarge = RoundedRectangleBorder(
+    borderRadius: ShapeBorderRadius.xLarge,
+  );
 
   static const OutlinedBorder full = StadiumBorder();
 }

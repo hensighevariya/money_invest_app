@@ -17,7 +17,9 @@ extension DateTimeExtensions on DateTime {
   }
 
   bool isSameDay(DateTime dateTime) {
-    return day == dateTime.day && month == dateTime.month && year == dateTime.year;
+    return day == dateTime.day &&
+        month == dateTime.month &&
+        year == dateTime.year;
   }
 
   DateTime toDate() {

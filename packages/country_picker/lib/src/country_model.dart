@@ -18,7 +18,13 @@ class Country extends Equatable {
   final Map<String, String> translations;
 
   @override
-  List<Object?> get props => [name, isoCode, iso3Code, phoneDetail, translations];
+  List<Object?> get props => [
+    name,
+    isoCode,
+    iso3Code,
+    phoneDetail,
+    translations,
+  ];
 
   Map<String, dynamic> toMap() {
     return {

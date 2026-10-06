@@ -27,7 +27,9 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
   void initState() {
     super.initState();
     final state = context.read<ForgotPasswordCubit>().state;
-    _mobileNumberController = MobileNumberController(text: state.emailMobileInput.value);
+    _mobileNumberController = MobileNumberController(
+      text: state.emailMobileInput.value,
+    );
     _emailFocusNode = FocusNode();
   }
 
@@ -56,7 +58,12 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
             padding: const EdgeInsets.all(Spacing.xLarge),
             child: SizedBox.square(
               dimension: context.height < 650 ? 220 : 300,
-              child: Center(child: LottieBuilder.asset(LottieFiles.forgotPassword, width: 300)),
+              child: Center(
+                child: LottieBuilder.asset(
+                  LottieFiles.forgotPassword,
+                  width: 300,
+                ),
+              ),
             ),
           ),
           AuthTitle(
@@ -65,23 +72,31 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           ),
           InputFieldDecoration(
             labelText: localizations.loginEmailHint,
-            child: BlocSelector<ForgotPasswordCubit, ForgotPasswordState, EmailMobileInput>(
-              selector: (state) => state.emailMobileInput,
-              builder: (context, emailAddressInput) {
-                return MobileNumberField(
-                  controller: _mobileNumberController,
-                  hintText: localizations.loginEmailHint,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.done,
-                  onChanged: (value) => context.read<ForgotPasswordCubit>().onEmailAddressChanged(
-                    value,
-                    _mobileNumberController.country.phoneDetail,
-                  ),
-                  errorText: emailAddressInput.displayError?.getErrorMessage(context),
-                  isoCode: _mobileNumberController.country.isoCode,
-                );
-              },
-            ),
+            child:
+                BlocSelector<
+                  ForgotPasswordCubit,
+                  ForgotPasswordState,
+                  EmailMobileInput
+                >(
+                  selector: (state) => state.emailMobileInput,
+                  builder: (context, emailAddressInput) {
+                    return MobileNumberField(
+                      controller: _mobileNumberController,
+                      hintText: localizations.loginEmailHint,
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.done,
+                      onChanged: (value) => context
+                          .read<ForgotPasswordCubit>()
+                          .onEmailAddressChanged(
+                            value,
+                            _mobileNumberController.country.phoneDetail,
+                          ),
+                      errorText: emailAddressInput.displayError
+                          ?.getErrorMessage(context),
+                      isoCode: _mobileNumberController.country.isoCode,
+                    );
+                  },
+                ),
           ),
           BlocSelector<ForgotPasswordCubit, ForgotPasswordState, bool>(
             selector: (state) => state.isValid,

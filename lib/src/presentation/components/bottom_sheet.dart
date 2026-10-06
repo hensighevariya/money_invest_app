@@ -26,7 +26,11 @@ Future<T?> showCommonBottomSheet<T>({
 }
 
 class _CommonBottomSheet extends StatelessWidget {
-  const _CommonBottomSheet({required this.builder, this.showDragHandle = true, this.isScrollControlled = true});
+  const _CommonBottomSheet({
+    required this.builder,
+    this.showDragHandle = true,
+    this.isScrollControlled = true,
+  });
 
   final WidgetBuilder builder;
   final bool showDragHandle;
@@ -35,7 +39,8 @@ class _CommonBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData mediaQuery = MediaQueryData.fromView(View.of(context));
-    final double maxHeight = mediaQuery.size.height - mediaQuery.viewPadding.top - 24;
+    final double maxHeight =
+        mediaQuery.size.height - mediaQuery.viewPadding.top - 24;
 
     Widget content;
     if (isScrollControlled) {
@@ -65,7 +70,10 @@ class _CommonBottomSheet extends StatelessWidget {
       ],
     );
 
-    return ConstrainedBox(constraints: BoxConstraints(maxHeight: maxHeight), child: content);
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: maxHeight),
+      child: content,
+    );
   }
 }
 
@@ -75,22 +83,29 @@ class _DragHandle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Size handleSize = theme.bottomSheetTheme.dragHandleSize ?? const Size(32, 4);
+    final Size handleSize =
+        theme.bottomSheetTheme.dragHandleSize ?? const Size(32, 4);
     final Color handleColor =
-        theme.bottomSheetTheme.dragHandleColor ?? theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5);
+        theme.bottomSheetTheme.dragHandleColor ??
+        theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5);
 
     return Semantics(
       label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       container: true,
       child: Material(
-        color: theme.bottomSheetTheme.backgroundColor ?? theme.colorScheme.surfaceContainerLow,
+        color:
+            theme.bottomSheetTheme.backgroundColor ??
+            theme.colorScheme.surfaceContainerLow,
         child: SizedBox(
           height: 24,
           child: Center(
             child: Container(
               height: handleSize.height,
               width: handleSize.width,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(handleSize.height / 2), color: handleColor),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(handleSize.height / 2),
+                color: handleColor,
+              ),
             ),
           ),
         ),
@@ -100,7 +115,12 @@ class _DragHandle extends StatelessWidget {
 }
 
 class BottomSheetLayout extends StatelessWidget {
-  const BottomSheetLayout({super.key, required this.content, this.header, this.bottom});
+  const BottomSheetLayout({
+    super.key,
+    required this.content,
+    this.header,
+    this.bottom,
+  });
 
   final Widget? header;
   final Widget content;
@@ -111,7 +131,10 @@ class BottomSheetLayout extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (header != null) ...[header!, const Divider(height: 1, endIndent: 0, indent: 0)],
+        if (header != null) ...[
+          header!,
+          const Divider(height: 1, endIndent: 0, indent: 0),
+        ],
         Flexible(child: content),
         if (bottom != null) bottom!,
       ],
@@ -120,7 +143,12 @@ class BottomSheetLayout extends StatelessWidget {
 }
 
 class BottomSheetHeader extends StatelessWidget implements PreferredSizeWidget {
-  const BottomSheetHeader({super.key, required this.title, this.action, this.autoImplyTrailing = true});
+  const BottomSheetHeader({
+    super.key,
+    required this.title,
+    this.action,
+    this.autoImplyTrailing = true,
+  });
 
   final Widget? title;
   final Widget? action;
@@ -135,7 +163,11 @@ class BottomSheetHeader extends StatelessWidget implements PreferredSizeWidget {
 
     Widget? middle;
     if (title != null) {
-      middle = DefaultTextStyle.merge(style: theme.textTheme.titleLarge, textAlign: TextAlign.center, child: title!);
+      middle = DefaultTextStyle.merge(
+        style: theme.textTheme.titleLarge,
+        textAlign: TextAlign.center,
+        child: title!,
+      );
     }
 
     Widget? trailing = action;
@@ -149,13 +181,23 @@ class BottomSheetHeader extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return Material(
-      color: theme.bottomSheetTheme.backgroundColor ?? theme.colorScheme.surfaceContainerLow,
+      color:
+          theme.bottomSheetTheme.backgroundColor ??
+          theme.colorScheme.surfaceContainerLow,
       child: SafeAreaDirectional(
         bottom: false,
-        minimum: const EdgeInsetsDirectional.only(start: Spacing.normal, end: Spacing.small),
+        minimum: const EdgeInsetsDirectional.only(
+          start: Spacing.normal,
+          end: Spacing.small,
+        ),
         child: SizedBox(
           height: kToolbarHeight,
-          child: NavigationToolbar(centerMiddle: false, middleSpacing: 0, middle: middle, trailing: trailing),
+          child: NavigationToolbar(
+            centerMiddle: false,
+            middleSpacing: 0,
+            middle: middle,
+            trailing: trailing,
+          ),
         ),
       ),
     );

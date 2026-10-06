@@ -1,6 +1,9 @@
+import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_invest_app/src/app/routes/routes.dart';
+import 'package:money_invest_app/src/localization/localization.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,9 +24,9 @@ class HomeScreen extends StatelessWidget {
               const Gap(16),
               _buildMiniCards(context),
               const Gap(24),
-              _buildActionGrid(),
+              _buildActionGrid(context),
               const Gap(24),
-              _buildBanner(),
+              _buildBanner(context),
             ],
           ),
         ),
@@ -32,6 +35,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context) {
+    final colorScheme = context.colorScheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -49,51 +54,48 @@ class HomeScreen extends StatelessWidget {
             const Gap(12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  'Hello,',
-                  style: TextStyle(
-                    color: Color(0xFF333333),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  context.localizations.homeHello,
+                  style: const TextStyle(color: Color(0xFF333333), fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 Text(
                   'Rahul Patel',
-                  style: TextStyle(
-                    color: Color(0xFF1A1A1A),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: TextStyle(color: Color(0xFF1A1A1A), fontSize: 20, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
           ],
         ),
-        Stack(
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.notifications_outlined,
-                color: Color(0xFF1A1A1A),
-                size: 28,
+        GestureDetector(
+          onTap: () {},
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1A5BBB).withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.notifications, color: Color(0xFF1A5BBB), size: 24),
               ),
-            ),
-            Positioned(
-              right: 10,
-              top: 10,
-              child: Container(
-                width: 10,
-                height: 10,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
+              Positioned(
+                right: 0,
+                top: 0,
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    color: colorScheme.error,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white, width: 2),
+                  ),
                 ),
               ),
-            )
-          ],
-        )
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -110,52 +112,32 @@ class HomeScreen extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF1A5BBB).withOpacity(0.3),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
+          BoxShadow(color: const Color(0xFF1A5BBB).withValues(alpha: 0.3), blurRadius: 10, offset: const Offset(0, 5)),
         ],
       ),
       child: Stack(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                'Total Investment',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+                context.localizations.homeTotalInvestment,
+                style: const TextStyle(color: Colors.white70, fontSize: 14, fontWeight: FontWeight.w500),
               ),
               Gap(8),
               Text(
                 '₹ 5,00,000',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),
               ),
               Gap(24),
               Text(
-                'Total Returns Received',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
+                context.localizations.homeTotalReturnsReceived,
+                style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w500),
               ),
               Gap(4),
               Text(
                 '₹ 80,000',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ],
           ),
@@ -174,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                 _buildBar(55),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -184,10 +166,7 @@ class HomeScreen extends StatelessWidget {
     return Container(
       width: 10,
       height: height,
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(10),
-      ),
+      decoration: BoxDecoration(color: Colors.white.withValues(alpha: 0.3), borderRadius: BorderRadius.circular(10)),
     );
   }
 
@@ -196,30 +175,22 @@ class HomeScreen extends StatelessWidget {
       children: [
         Expanded(
           child: _buildMiniCard(
-            title: 'Active Investments',
+            title: context.localizations.homeActiveInvestments,
             value: '3',
-            bottomWidget: const Text(
-              'View Details >',
-              style: TextStyle(
-                color: Color(0xFF1A5BBB),
-                fontSize: 12,
-                fontWeight: FontWeight.w600,
-              ),
+            bottomWidget: Text(
+              context.localizations.homeViewDetails,
+              style: const TextStyle(color: Color(0xFF1A5BBB), fontSize: 12, fontWeight: FontWeight.w600),
             ),
           ),
         ),
         const Gap(16),
         Expanded(
           child: _buildMiniCard(
-            title: 'Monthly Return',
+            title: context.localizations.homeMonthlyReturn,
             value: '8%',
-            bottomWidget: const Text(
-              'Per Month',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
+            bottomWidget: Text(
+              context.localizations.homePerMonth,
+              style: const TextStyle(color: Colors.grey, fontSize: 12, fontWeight: FontWeight.w500),
             ),
           ),
         ),
@@ -227,11 +198,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMiniCard({
-    required String title,
-    required String value,
-    required Widget bottomWidget,
-  }) {
+  Widget _buildMiniCard({required String title, required String value, required Widget bottomWidget}) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -244,20 +211,12 @@ class HomeScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: Color(0xFF4A4A4A),
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ),
+            style: const TextStyle(color: Color(0xFF4A4A4A), fontSize: 12, fontWeight: FontWeight.w500),
           ),
           const Gap(12),
           Text(
             value,
-            style: const TextStyle(
-              color: Color(0xFF1A1A1A),
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(color: Color(0xFF1A1A1A), fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const Gap(12),
           bottomWidget,
@@ -266,29 +225,33 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActionGrid() {
+  Widget _buildActionGrid(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _buildActionButton(
-          title: 'Invest Now',
+          title: context.localizations.homeInvestNow,
           icon: Icons.check_circle_outline,
           color: const Color(0xFF1A5BBB),
+          onTap: () {
+            context.go('${context.currentPath}/new-investment');
+          },
         ),
         _buildActionButton(
-          title: 'My Bonds',
+          title: context.localizations.homeMyBonds,
           icon: Icons.calculate_outlined,
           color: const Color(0xFF38B2AC),
+          onTap: () {
+            context.go('${context.currentPath}/my-investments');
+          },
         ),
         _buildActionButton(
-          title: 'Trade Diary',
+          title: context.localizations.homeTradeDiary,
           icon: Icons.menu_book_outlined,
           color: const Color(0xFF805AD5),
-        ),
-        _buildActionButton(
-          title: 'Refer & Earn',
-          icon: Icons.card_giftcard_outlined,
-          color: const Color(0xFFED8936),
+          onTap: () {
+            context.go('${context.currentPath}/trading-diary');
+          },
         ),
       ],
     );
@@ -298,36 +261,29 @@ class HomeScreen extends StatelessWidget {
     required String title,
     required IconData icon,
     required Color color,
+    VoidCallback? onTap,
   }) {
-    return Column(
-      children: [
-        Container(
-          width: 56,
-          height: 56,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(16),
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(16)),
+            child: Icon(icon, color: Colors.white, size: 28),
           ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-            size: 28,
+          const Gap(8),
+          Text(
+            title,
+            style: const TextStyle(color: Color(0xFF4A4A4A), fontSize: 12, fontWeight: FontWeight.w500),
           ),
-        ),
-        const Gap(8),
-        Text(
-          title,
-          style: const TextStyle(
-            color: Color(0xFF4A4A4A),
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildBanner() {
+  Widget _buildBanner(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -344,42 +300,26 @@ class HomeScreen extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Transparent Trading',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+              Text(
+                context.localizations.homeTransparentTrading,
+                style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const Gap(4),
-              const Text(
-                'Real Trades. Real Proof.',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 12,
-                ),
+              Text(
+                context.localizations.homeRealTradesProof,
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
               ),
               const Gap(16),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.3),
-                  ),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.3)),
                 ),
-                child: const Text(
-                  'Subscribe Now',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Text(
+                  context.localizations.homeSubscribeNow,
+                  style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               ),
             ],
@@ -388,12 +328,8 @@ class HomeScreen extends StatelessWidget {
           Positioned(
             right: -10,
             bottom: -10,
-            child: Icon(
-              Icons.show_chart,
-              color: Colors.white.withOpacity(0.2),
-              size: 80,
-            ),
-          )
+            child: Icon(Icons.show_chart, color: Colors.white.withValues(alpha: 0.2), size: 80),
+          ),
         ],
       ),
     );

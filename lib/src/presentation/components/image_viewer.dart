@@ -9,16 +9,23 @@ import 'components.dart';
 void showFullScreenNetworkImage(BuildContext context, String imageUrl) {
   showGeneralDialog(
     context: context,
-    pageBuilder: (context, animation, secondaryAnimation) => _ImageViewer(image: imageUrl),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        _ImageViewer(image: imageUrl),
     transitionBuilder: (context, animation, secondaryAnimation, child) {
-      final opacity = CurvedAnimation(parent: animation, curve: const Interval(0.0, 1.0 / 3.0));
+      final opacity = CurvedAnimation(
+        parent: animation,
+        curve: const Interval(0.0, 1.0 / 3.0),
+      );
 
       final position = Tween(
         begin: const Offset(0, 0.2),
         end: Offset.zero,
       ).animate(CurvedAnimation(parent: animation, curve: Curves.ease));
 
-      return FadeTransition(opacity: opacity, child: SlideTransition(position: position, child: child));
+      return FadeTransition(
+        opacity: opacity,
+        child: SlideTransition(position: position, child: child),
+      );
     },
   );
 }
@@ -26,16 +33,23 @@ void showFullScreenNetworkImage(BuildContext context, String imageUrl) {
 void showFullScreenLocalImage(BuildContext context, String imagePath) {
   showGeneralDialog(
     context: context,
-    pageBuilder: (context, animation, secondaryAnimation) => _ImageViewer.local(image: imagePath),
+    pageBuilder: (context, animation, secondaryAnimation) =>
+        _ImageViewer.local(image: imagePath),
     transitionBuilder: (context, animation, secondaryAnimation, child) {
-      final opacity = CurvedAnimation(parent: animation, curve: const Interval(0.0, 1.0 / 3.0));
+      final opacity = CurvedAnimation(
+        parent: animation,
+        curve: const Interval(0.0, 1.0 / 3.0),
+      );
 
       final position = Tween(
         begin: const Offset(0, 0.2),
         end: Offset.zero,
       ).animate(CurvedAnimation(parent: animation, curve: Curves.ease));
 
-      return FadeTransition(opacity: opacity, child: SlideTransition(position: position, child: child));
+      return FadeTransition(
+        opacity: opacity,
+        child: SlideTransition(position: position, child: child),
+      );
     },
   );
 }
@@ -54,7 +68,11 @@ class _ImageViewer extends StatelessWidget {
   Widget build(BuildContext context) {
     ImageProvider imageProvider = switch (_type) {
       _FileType.local => ExtendedFileImageProvider(File(image)),
-      _FileType.network => ExtendedNetworkImageProvider(image, cache: true, cacheMaxAge: const Duration(days: 7)),
+      _FileType.network => ExtendedNetworkImageProvider(
+        image,
+        cache: true,
+        cacheMaxAge: const Duration(days: 7),
+      ),
     };
 
     Widget child = ExtendedImage(
@@ -83,7 +101,8 @@ class _ImageViewer extends StatelessWidget {
                 child: EmptyDataView(
                   icon: Icon(Icons.error_outline_outlined, size: 64),
                   title: 'Unable to load file',
-                  description: 'We couldn’t load the file. Please check again later.',
+                  description:
+                      'We couldn’t load the file. Please check again later.',
                 ),
               ),
             );
@@ -95,7 +114,10 @@ class _ImageViewer extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.black54, leading: const CloseButton()),
+      appBar: AppBar(
+        backgroundColor: Colors.black54,
+        leading: const CloseButton(),
+      ),
       body: SafeArea(child: SizedBox.expand(child: child)),
     );
   }

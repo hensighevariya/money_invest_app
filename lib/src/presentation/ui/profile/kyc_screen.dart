@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:common_extensions/common_extensions.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,20 +16,23 @@ class KycScreen extends StatefulWidget {
 }
 
 class _KycScreenState extends State<KycScreen> {
-  String _selectedIdentityType = 'ID Card';
-  File? _firstDocument;
-  File? _secondDocument;
+  String _selectedDocumentType = 'Aadhaar Card';
+  File? _frontImage;
+  File? _backImage;
+  final TextEditingController _docNumberController = TextEditingController();
+  final TextEditingController _accountHolderController =
+      TextEditingController();
 
-  Future<void> _pickDocument(bool isFirst) async {
+  Future<void> _pickDocument(bool isFront) async {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
         setState(() {
-          if (isFirst) {
-            _firstDocument = File(image.path);
+          if (isFront) {
+            _frontImage = File(image.path);
           } else {
-            _secondDocument = File(image.path);
+            _backImage = File(image.path);
           }
         });
       }
@@ -39,81 +41,66 @@ class _KycScreenState extends State<KycScreen> {
     }
   }
 
-  Widget _buildIdentityTypeRadio(String type, BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Radio<String>(
-          value: type,
-          groupValue: _selectedIdentityType,
-          onChanged: (String? value) {
-            if (value != null) {
-              setState(() {
-                _selectedIdentityType = value;
-              });
-            }
-          },
-          activeColor: context.colorScheme.primary,
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+  Widget _buildImageUploader(BuildContext context, String label, bool isFront) {
+    final File? currentImage = isFront ? _frontImage : _backImage;
+
+    return GestureDetector(
+      onTap: () => _pickDocument(isFront),
+      child: Container(
+        height: 140,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: context.colorScheme.primary.withValues(alpha: 0.05),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: context.colorScheme.primary.withValues(alpha: 0.1),
+          ),
         ),
-        const Gap(Spacing.xSmall),
-        Text(type, style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500)),
-        const Gap(Spacing.small),
-      ],
+        padding: const EdgeInsets.all(Spacing.small),
+        child: currentImage != null
+            ? ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.file(currentImage, fit: BoxFit.cover),
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: context.textTheme.labelMedium?.copyWith(
+                      color: context.colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(Spacing.medium),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: context.colorScheme.primary.withValues(
+                            alpha: 0.1,
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.person_outline,
+                          color: context.colorScheme.primary,
+                          size: 32,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+      ),
     );
   }
 
-  Widget _buildDocumentUploadBox(BuildContext context, bool isFirst) {
-    final File? currentDocument = isFirst ? _firstDocument : _secondDocument;
-    final String label = context.localizations.kycUploadIdCard(_selectedIdentityType);
-    final String subLabel = isFirst ? context.localizations.kycFirstDocument : context.localizations.kycSecondDocument;
-
-    return GestureDetector(
-      onTap: () => _pickDocument(isFirst),
-      child: DottedBorder(
-        color: Colors.grey.shade400,
-        strokeWidth: 1.5,
-        dashPattern: const [8, 4],
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(16),
-        child: Container(
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            color: context.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: currentDocument != null
-              ? ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.file(currentDocument, fit: BoxFit.cover),
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Stack(
-                      children: [
-                        const Icon(Icons.image, size: 50, color: Colors.grey),
-                        Positioned(
-                          bottom: 0,
-                          right: -4,
-                          child: Container(
-                            decoration: const BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
-                            child: const Icon(Icons.arrow_upward, size: 16, color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Gap(Spacing.small),
-                    Text(label, style: context.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600)),
-                    const Gap(Spacing.xSmall),
-                    Text(subLabel, style: context.textTheme.labelMedium?.copyWith(color: Colors.grey)),
-                  ],
-                ),
-        ),
-      ),
-    );
+  @override
+  void dispose() {
+    _docNumberController.dispose();
+    _accountHolderController.dispose();
+    super.dispose();
   }
 
   @override
@@ -122,51 +109,125 @@ class _KycScreenState extends State<KycScreen> {
       backgroundColor: context.colorScheme.surface,
       appBar: CustomAppBar(
         showLeading: true,
-        title: context.localizations.kycTitle,
+        title: '',
         color: context.colorScheme.surface,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(Spacing.large),
+          padding: const EdgeInsets.symmetric(horizontal: Spacing.large),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                context.localizations.kycProofOfIdentity,
-                style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                context.localizations.kycVerification,
+                style: context.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: context.colorScheme.onSurface,
+                ),
               ),
               const Gap(Spacing.small),
               Text(
-                context.localizations.kycDescription1,
-                style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey.shade400, height: 1.4),
-              ),
-              const Gap(Spacing.small),
-              Text(
-                context.localizations.kycDescription2,
-                style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey.shade400, height: 1.4),
-              ),
-              const Gap(Spacing.small),
-              Text(
-                context.localizations.kycDescription3,
-                style: context.textTheme.bodyMedium?.copyWith(color: Colors.grey.shade400, height: 1.4),
+                context.localizations.kycSubtitle,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: context.colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
               ),
               const Gap(Spacing.xLarge),
+
               Text(
-                context.localizations.kycChooseIdentityType,
-                style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                context.localizations.kycDocumentType,
+                style: context.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               const Gap(Spacing.small),
-              Wrap(
+              DropdownButtonFormField<String>(
+                initialValue: _selectedDocumentType,
+                icon: const Icon(Icons.keyboard_arrow_down),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.medium,
+                    vertical: Spacing.small,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                ),
+                items:
+                    [
+                          context.localizations.kycAadhaarCard,
+                          context.localizations.kycPanCard,
+                          context.localizations.kycVoterId,
+                        ]
+                        .map(
+                          (type) =>
+                              DropdownMenuItem(value: type, child: Text(type)),
+                        )
+                        .toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    setState(() {
+                      _selectedDocumentType = value;
+                    });
+                  }
+                },
+              ),
+              const Gap(Spacing.large),
+
+              Text(
+                context.localizations.kycDocumentNumber,
+                style: context.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Gap(Spacing.small),
+              TextFormField(
+                controller: _docNumberController,
+                decoration: InputDecoration(
+                  hintText: context.localizations.kycHintDocNumber,
+                  hintStyle: context.textTheme.bodyMedium?.copyWith(
+                    color: Colors.grey.shade500,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: Spacing.medium,
+                    vertical: Spacing.medium,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(color: Colors.grey.shade300),
+                  ),
+                ),
+              ),
+              const Gap(Spacing.large),
+
+              Row(
                 children: [
-                  _buildIdentityTypeRadio(context.localizations.kycIdCard, context),
-                  _buildIdentityTypeRadio(context.localizations.kycPassport, context),
-                  _buildIdentityTypeRadio(context.localizations.kycDrivingLicense, context),
+                  Expanded(
+                    child: _buildImageUploader(
+                      context,
+                      context.localizations.kycFrontImage,
+                      true,
+                    ),
+                  ),
+                  const Gap(Spacing.medium),
+                  Expanded(
+                    child: _buildImageUploader(
+                      context,
+                      context.localizations.kycBackImage,
+                      false,
+                    ),
+                  ),
                 ],
               ),
-              const Gap(Spacing.xLarge),
-              _buildDocumentUploadBox(context, true),
-              const Gap(Spacing.large),
-              _buildDocumentUploadBox(context, false),
               const Gap(Spacing.xLarge),
             ],
           ),
@@ -180,9 +241,22 @@ class _KycScreenState extends State<KycScreen> {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                // TODO: Implement Save action
+                // TODO: Implement verification submit
               },
-              child: Text(context.localizations.kycSaveButton),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: context.colorScheme.primary,
+                foregroundColor: context.colorScheme.onPrimary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                context.localizations.kycSubmitForVerification,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                ),
+              ),
             ),
           ),
         ),
