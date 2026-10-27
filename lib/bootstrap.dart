@@ -15,7 +15,13 @@ import 'src/utils/log.dart';
 
 typedef AsyncAppBuilder = FutureOr<Widget> Function();
 
-Future<void> bootstrap(AsyncAppBuilder builder) async {
+Future<void> bootstrap(
+  AsyncAppBuilder builder, {
+  AppEnvironment? environment,
+}) async {
+  if (environment != null) {
+    AppEnvironment.current = environment;
+  }
   return runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();

@@ -48,9 +48,7 @@ class _LoginFormState extends State<LoginForm> {
 
   Future<void> _onContinue() async {
     FocusScope.of(context).unfocus();
-    context.go('/home');
-
-    // await context.read<LoginCubit>().onContinue();
+    await context.read<LoginCubit>().onContinue();
   }
 
   @override

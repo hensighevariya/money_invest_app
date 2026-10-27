@@ -94,6 +94,10 @@ class AppRoutes with ChangeNotifier {
                       return RegisterOtpScreen(
                         mobile: extra['mobile'] as String? ?? '',
                         email: extra['email'] as String? ?? '',
+                        emailToken: extra['emailToken'] as String? ??
+                            (extra['token'] as String? ?? ''),
+                        mobileToken: extra['mobileToken'] as String? ??
+                            (extra['token'] as String? ?? ''),
                       );
                     },
                   ),

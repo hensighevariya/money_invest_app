@@ -5,10 +5,14 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_invest_app/src/app/routes/routes.dart';
 import 'package:money_invest_app/src/core/base/progress_status.dart';
+import 'package:money_invest_app/src/data/data.dart';
+import 'package:money_invest_app/src/localization/localization.dart';
+import 'package:money_invest_app/src/presentation/components/alert_message.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/widgets/auth_title.dart';
+import 'package:money_invest_app/src/utils/loading_dialog_handler.dart';
 
 import 'logic/register_cubit.dart';
 import 'logic/register_state.dart';
@@ -18,24 +22,38 @@ class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   void _onStatusChanged(BuildContext context, RegisterState state) {
-    if (state.status case ProgressStatusSuccess<void>()) {
+    if (state.status case ProgressStatusSuccess<dynamic>(:final result)) {
+      final registerResponse = result is RegisterResponse ? result : null;
       context.go(
         '${context.currentPath}/register-verify-otp',
         extra: {
           'mobile':
-              '+${state.mobileInput.phoneDetail?.code} ${state.mobileInput.value}',
+              '+${state.mobileInput.phoneDetail?.code ?? '91'} ${state.mobileInput.value}',
           'email': state.emailInput.value,
+          'emailToken': registerResponse?.emailVerificationToken ??
+              registerResponse?.token ??
+              '',
+          'mobileToken': registerResponse?.mobileVerificationToken ??
+              registerResponse?.token ??
+              '',
         },
       );
     } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
-      // show error
+      if (error is String) {
+        showErrorMessage(context: context, content: error);
+      } else {
+        showErrorMessage(context: context, content: error.toString());
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(),
+      create: (context) => RegisterCubit(
+        authRepository: RepositoryProvider.of(context),
+        loadingHandler: LoadingDialogHandler(context: context),
+      )..loadCountries(),
       child: BlocListener<RegisterCubit, RegisterState>(
         listenWhen: (previous, current) => previous.status != current.status,
         listener: _onStatusChanged,
@@ -50,6 +68,8 @@ class _RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = context.localizations;
+
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
       appBar: CustomAppBar(
@@ -73,9 +93,11 @@ class _RegisterView extends StatelessWidget {
                     ),
                   ),
                   const Gap(Spacing.xxxLarge),
-                  const AuthTitle(
-                    title: "Register",
-                    description: TextSpan(text: "Create a new account"),
+                  AuthTitle(
+                    title: localizations.registerTitle,
+                    description: TextSpan(
+                      text: localizations.registerSubtitle,
+                    ),
                   ),
                   const Gap(Spacing.xxxLarge),
                   Center(
@@ -107,7 +129,7 @@ class _RegisterView extends StatelessWidget {
                   onPressed: !isValid
                       ? null
                       : () => context.read<RegisterCubit>().onContinue(),
-                  child: const Text("Sign Up"),
+                  child: Text(localizations.registerButtonLabel),
                 );
               },
             ),
@@ -116,7 +138,7 @@ class _RegisterView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Already have an account? ",
+                  localizations.alreadyHaveAccount,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -124,7 +146,7 @@ class _RegisterView extends StatelessWidget {
                 GestureDetector(
                   onTap: () => context.go('/login'),
                   child: Text(
-                    "Sign In",
+                    localizations.signIn,
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: context.colorScheme.primary,
                       fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 export 'model/app_version_model.dart';
+export 'model/location_model.dart';
 export 'model/user_model.dart';
 export 'repository/auth_repository.dart';
 export 'repository/common_repository.dart';
@@ -6,6 +7,10 @@ export 'repository/user_repository.dart';
 export 'services/api_client_service.dart';
 export 'services/firebase_service.dart';
 export 'services/local_storage_service.dart';
+export 'services/network/api_logger_interceptor.dart';
 export 'services/network/request/auth.dart';
+export 'services/network/request/register_request.dart';
 export 'services/network/response/auth.dart';
+export 'services/network/response/register_response.dart';
+export 'services/network/response/verify_otp_response.dart';
 export 'services/socket_client_service.dart';

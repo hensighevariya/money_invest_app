@@ -17,10 +17,26 @@ final class UserData extends BaseEntity {
     this.isSubscriptions = false,
     this.isEmailVerified = false,
     this.isGenreAdded = false,
+    this.clientId,
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.isNotification = false,
+    this.role,
+    this.isKyc = 0,
+    this.monthlyReturn = 0,
+    this.walletBalance = 0,
+    this.createdAt,
   });
 
-  factory UserData.fromJson(Map<String, dynamic> json) =>
-      _$UserDataFromJson(json);
+  factory UserData.fromJson(Map<String, dynamic> json) {
+    final id = (json['_id'] ?? json['id'] ?? '').toString();
+    final map = {
+      ...json,
+      '_id': id,
+    };
+    return _$UserDataFromJson(map);
+  }
 
   final String uid;
   final String fullName;
@@ -33,6 +49,16 @@ final class UserData extends BaseEntity {
   final bool isSubscriptions;
   final bool isEmailVerified;
   final bool isGenreAdded;
+  final String? clientId;
+  final String? firstName;
+  final String? lastName;
+  final String? phoneNumber;
+  final bool isNotification;
+  final String? role;
+  final num isKyc;
+  final num monthlyReturn;
+  final num walletBalance;
+  final String? createdAt;
 
   @override
   List<Object?> get props => [
@@ -46,6 +72,16 @@ final class UserData extends BaseEntity {
     isSubscriptions,
     isEmailVerified,
     isGenreAdded,
+    clientId,
+    firstName,
+    lastName,
+    phoneNumber,
+    isNotification,
+    role,
+    isKyc,
+    monthlyReturn,
+    walletBalance,
+    createdAt,
   ];
 
   Map<String, dynamic> toJson() => _$UserDataToJson(this);
@@ -60,6 +96,16 @@ final class UserData extends BaseEntity {
     bool? isSubscriptions,
     bool? isEmailVerified,
     bool? isGenreAdded,
+    String? clientId,
+    String? firstName,
+    String? lastName,
+    String? phoneNumber,
+    bool? isNotification,
+    String? role,
+    num? isKyc,
+    num? monthlyReturn,
+    num? walletBalance,
+    String? createdAt,
   }) {
     return UserData(
       id: id,
@@ -72,6 +118,16 @@ final class UserData extends BaseEntity {
       isSubscriptions: isSubscriptions ?? this.isSubscriptions,
       isEmailVerified: isEmailVerified ?? this.isEmailVerified,
       isGenreAdded: isGenreAdded ?? this.isGenreAdded,
+      clientId: clientId ?? this.clientId,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      isNotification: isNotification ?? this.isNotification,
+      role: role ?? this.role,
+      isKyc: isKyc ?? this.isKyc,
+      monthlyReturn: monthlyReturn ?? this.monthlyReturn,
+      walletBalance: walletBalance ?? this.walletBalance,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 }

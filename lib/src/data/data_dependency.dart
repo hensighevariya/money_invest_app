@@ -54,19 +54,31 @@ abstract class DataDependency {
     final refreshDioClient = Dio(baseOptions);
     if (kDebugMode) {
       refreshDioClient.interceptors.add(
-        LogInterceptor(requestBody: true, responseBody: true),
+        ApiLoggerInterceptor(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+        ),
       );
     }
 
     dioClient.interceptors.addAll([
       ApiInterceptor(
-        logEnabled: kDebugMode,
+        logEnabled: false,
         localStorageService: localStorageService,
         dioClient: refreshDioClient,
         encryptionKey: environment.apiEncryptionKey,
         decryptionKey: environment.apiDecryptionKey,
         encryptionIvKey: environment.apiEncryptionIvKey,
         decryptionIvKey: environment.apiDecryptionIvKey,
+      ),
+      ApiLoggerInterceptor(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+        responseBody: true,
+        error: true,
       ),
     ]);
 

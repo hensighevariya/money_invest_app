@@ -1698,6 +1698,471 @@ class AppLocalizations {
   String get kycHintName {
     return Intl.message('John Doe', name: 'kycHintName', desc: '', args: []);
   }
+
+  /// `Register`
+  String get registerTitle {
+    return Intl.message('Register', name: 'registerTitle', desc: '', args: []);
+  }
+
+  /// `Create a new account`
+  String get registerSubtitle {
+    return Intl.message(
+      'Create a new account',
+      name: 'registerSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Name`
+  String get registerNameHint {
+    return Intl.message(
+      'Your Name',
+      name: 'registerNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Surname`
+  String get registerSurnameHint {
+    return Intl.message(
+      'Your Surname',
+      name: 'registerSurnameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Country`
+  String get registerCountryHint {
+    return Intl.message(
+      'Select Country',
+      name: 'registerCountryHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select State`
+  String get registerStateHint {
+    return Intl.message(
+      'Select State',
+      name: 'registerStateHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select City`
+  String get registerCityHint {
+    return Intl.message(
+      'Select City',
+      name: 'registerCityHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Address`
+  String get registerAddressHint {
+    return Intl.message(
+      'Address',
+      name: 'registerAddressHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pincode`
+  String get registerPincodeHint {
+    return Intl.message(
+      'Pincode',
+      name: 'registerPincodeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Email Address`
+  String get registerEmailHint {
+    return Intl.message(
+      'Your Email Address',
+      name: 'registerEmailHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your mobile number`
+  String get registerMobileHint {
+    return Intl.message(
+      'Your mobile number',
+      name: 'registerMobileHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Password`
+  String get registerPasswordHint {
+    return Intl.message(
+      'Enter Password',
+      name: 'registerPasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get registerConfirmPasswordHint {
+    return Intl.message(
+      'Confirm Password',
+      name: 'registerConfirmPasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select country!`
+  String get errorCountryRequired {
+    return Intl.message(
+      'Please select country!',
+      name: 'errorCountryRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select state!`
+  String get errorStateRequired {
+    return Intl.message(
+      'Please select state!',
+      name: 'errorStateRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select city!`
+  String get errorCityRequired {
+    return Intl.message(
+      'Please select city!',
+      name: 'errorCityRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter address!`
+  String get errorAddressRequired {
+    return Intl.message(
+      'Please enter address!',
+      name: 'errorAddressRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter pincode!`
+  String get errorPincodeRequired {
+    return Intl.message(
+      'Please enter pincode!',
+      name: 'errorPincodeRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get registerButtonLabel {
+    return Intl.message(
+      'Sign Up',
+      name: 'registerButtonLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account? `
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account? ',
+      name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get signIn {
+    return Intl.message('Sign In', name: 'signIn', desc: '', args: []);
+  }
+
+  /// `By creating an account, you agree to our `
+  String get agreeTermsPrefix {
+    return Intl.message(
+      'By creating an account, you agree to our ',
+      name: 'agreeTermsPrefix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms of Service`
+  String get termsOfService {
+    return Intl.message(
+      'Terms of Service',
+      name: 'termsOfService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` and `
+  String get andLabel {
+    return Intl.message(' and ', name: 'andLabel', desc: '', args: []);
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Country`
+  String get searchCountry {
+    return Intl.message(
+      'Search Country',
+      name: 'searchCountry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search State`
+  String get searchState {
+    return Intl.message(
+      'Search State',
+      name: 'searchState',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search City`
+  String get searchCity {
+    return Intl.message('Search City', name: 'searchCity', desc: '', args: []);
+  }
+
+  /// `Loading countries...`
+  String get loadingCountries {
+    return Intl.message(
+      'Loading countries...',
+      name: 'loadingCountries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading states...`
+  String get loadingStates {
+    return Intl.message(
+      'Loading states...',
+      name: 'loadingStates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading cities...`
+  String get loadingCities {
+    return Intl.message(
+      'Loading cities...',
+      name: 'loadingCities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Country first`
+  String get selectCountryFirst {
+    return Intl.message(
+      'Select Country first',
+      name: 'selectCountryFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select State first`
+  String get selectStateFirst {
+    return Intl.message(
+      'Select State first',
+      name: 'selectStateFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a Country first`
+  String get pleaseSelectCountryFirst {
+    return Intl.message(
+      'Please select a Country first',
+      name: 'pleaseSelectCountryFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a State first`
+  String get pleaseSelectStateFirst {
+    return Intl.message(
+      'Please select a State first',
+      name: 'pleaseSelectStateFirst',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No results found`
+  String get noResultsFound {
+    return Intl.message(
+      'No results found',
+      name: 'noResultsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Address`
+  String get registerAddressPlaceholder {
+    return Intl.message(
+      'Your Address',
+      name: 'registerAddressPlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Pincode`
+  String get registerPincodePlaceholder {
+    return Intl.message(
+      'Enter Pincode',
+      name: 'registerPincodePlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No cities available`
+  String get noCitiesAvailable {
+    return Intl.message(
+      'No cities available',
+      name: 'noCitiesAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code will be sent to {destination}`
+  String codeWillBeSentTo(Object destination) {
+    return Intl.message(
+      'Code will be sent to $destination',
+      name: 'codeWillBeSentTo',
+      desc: '',
+      args: [destination],
+    );
+  }
+
+  /// `Mobile verification code`
+  String get mobileVerificationCode {
+    return Intl.message(
+      'Mobile verification code',
+      name: 'mobileVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email verification code`
+  String get emailVerificationCode {
+    return Intl.message(
+      'Email verification code',
+      name: 'emailVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend`
+  String get resendLabel {
+    return Intl.message('Resend', name: 'resendLabel', desc: '', args: []);
+  }
+
+  /// `Please enter 6-digit verification code`
+  String get pleaseEnter6DigitOtp {
+    return Intl.message(
+      'Please enter 6-digit verification code',
+      name: 'pleaseEnter6DigitOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter 6-digit mobile verification code`
+  String get pleaseEnterMobileOtp {
+    return Intl.message(
+      'Please enter 6-digit mobile verification code',
+      name: 'pleaseEnterMobileOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter 6-digit email verification code`
+  String get pleaseEnterEmailOtp {
+    return Intl.message(
+      'Please enter 6-digit email verification code',
+      name: 'pleaseEnterEmailOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mobile number verified successfully`
+  String get mobileVerified {
+    return Intl.message(
+      'Mobile number verified successfully',
+      name: 'mobileVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email verified successfully`
+  String get emailVerified {
+    return Intl.message(
+      'Email verified successfully',
+      name: 'emailVerified',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account created successfully!`
+  String get accountCreatedSuccessfully {
+    return Intl.message(
+      'Account created successfully!',
+      name: 'accountCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

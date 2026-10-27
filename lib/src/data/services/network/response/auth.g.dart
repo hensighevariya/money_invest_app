@@ -14,6 +14,7 @@ AuthSuccessResponse _$AuthSuccessResponseFromJson(Map<String, dynamic> json) =>
       user: json['user'] == null
           ? null
           : UserData.fromJson(json['user'] as Map<String, dynamic>),
+      token: json['token'] as String?,
     );
 
 Map<String, dynamic> _$AuthSuccessResponseToJson(
@@ -23,6 +24,7 @@ Map<String, dynamic> _$AuthSuccessResponseToJson(
   'accessToken': instance.accessToken,
   'refreshToken': instance.refreshToken,
   'user': instance.user,
+  'token': instance.token,
 };
 
 ForgotPasswordResponse _$ForgotPasswordResponseFromJson(

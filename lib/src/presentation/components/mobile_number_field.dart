@@ -76,8 +76,7 @@ class MobileNumberField extends StatefulWidget {
 }
 
 class _MobileNumberFieldState extends State<MobileNumberField> {
-  late MobileNumberController _controller =
-      widget.controller ?? MobileNumberController();
+  late MobileNumberController _controller = widget.controller ?? MobileNumberController();
   late Country _country = _controller.country;
   ValueNotifier<bool?> isEnterDigit = ValueNotifier(null);
 
@@ -150,11 +149,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                               showCountryCode: widget.showCountryCode,
                             ),
                           )
-                        : SvgImageFromAsset.square(
-                            SvgIcons.icnEmail,
-                            size: 22,
-                            color: context.colorScheme.onSurface,
-                          )
+                        : SvgImageFromAsset.square(SvgIcons.icnEmail, size: 22, color: context.colorScheme.onSurface)
                   : widget.isMobileField ?? false
                   ? FittedBox(
                       child: _CountryPicker(
@@ -167,11 +162,7 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
                         showCountryCode: widget.showCountryCode,
                       ),
                     )
-                  : SvgImageFromAsset.square(
-                      SvgIcons.icnEmail,
-                      size: 22,
-                      color: context.colorScheme.onSurface,
-                    ),
+                  : SvgImageFromAsset.square(SvgIcons.icnEmail, size: 22, color: context.colorScheme.onSurface),
               suffixIcon: widget.suffixIcon,
               hintText: widget.hintText,
               readOnly: widget.readOnly,
@@ -202,14 +193,9 @@ class _MobileNumberFieldState extends State<MobileNumberField> {
             color: context.colorScheme.surface,
             borderRadius: kIsWeb
                 ? BorderRadius.circular(24)
-                : const BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                  ),
+                : const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
           ),
-          child: CountryPickerView(
-            onCountrySelected: (country) => context.pop(country),
-          ),
+          child: CountryPickerView(onCountrySelected: (country) => context.pop(country)),
         ),
       ),
     );
@@ -226,11 +212,7 @@ class _CountryPicker extends StatelessWidget {
   final VoidCallback onPressed;
   final bool showCountryCode;
 
-  const _CountryPicker({
-    required this.country,
-    required this.onPressed,
-    required this.showCountryCode,
-  });
+  const _CountryPicker({required this.country, required this.onPressed, required this.showCountryCode});
 
   @override
   Widget build(BuildContext context) {
@@ -251,35 +233,22 @@ class _CountryPicker extends StatelessWidget {
                     ClipRRect(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       borderRadius: ShapeBorderRadius.normal,
-                      child: CountryPickerHelper.getDefaultFlagImage(
-                        country,
-                        width: 25,
-                        height: 25,
-                      ),
+                      child: CountryPickerHelper.getDefaultFlagImage(country, width: 25, height: 25),
                     ),
                     const Gap(Spacing.medium),
                     if (showCountryCode)
                       Text(
                         '+${country.phoneDetail.code}',
-                        style: context.theme.textTheme.titleMedium?.copyWith(
-                          color: context.colorScheme.onSurface,
-                        ),
+                        style: context.theme.textTheme.titleMedium?.copyWith(color: context.colorScheme.onSurface),
                       ),
                     const Gap(Spacing.small),
-                    SvgImageFromAsset.square(
-                      SvgIcons.arrowDown,
-                      size: 20,
-                      color: colorScheme.onSurface,
-                    ),
+                    SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20, color: colorScheme.onSurface),
                   ],
                 ),
               ),
             ),
           ),
-          CommonVerticalDivider(
-            height: 20,
-            color: context.colorScheme.onSecondary,
-          ),
+          CommonVerticalDivider(height: 20, color: context.colorScheme.onSecondary),
         ],
       ),
     );
@@ -293,66 +262,66 @@ class MobileNumberController extends ChangeNotifier {
   MobileNumberController({String? text, String? isoCode, bool iso3Code = true})
     : controller = TextEditingController(text: text),
       _country = iso3Code
-          ? CountryPickerHelper.getCountryByIso3Code(isoCode ?? 'KWT') ??
+          ? CountryPickerHelper.getCountryByIso3Code(isoCode ?? 'IND') ??
                 const Country(
-                  isoCode: 'KW',
-                  iso3Code: 'KWT',
-                  name: 'Kuwait',
-                  phoneDetail: (code: '965', maxLength: 8, minLength: 8),
+                  isoCode: "IN",
+                  iso3Code: "IND",
+                  name: "India",
+                  phoneDetail: (code: "91", maxLength: 10, minLength: 10),
                   translations: {
-                    'sk': 'Kuvajt',
-                    'se': 'Kuwait',
-                    'pl': 'Kuwejt',
-                    'no': 'Kuwait',
-                    'ja': 'クウェート',
-                    'it': 'Kuwait',
-                    'zh': '科威特',
-                    'nl': 'Koeweit',
-                    'de': 'Kuwait',
-                    'fr': 'Koweït',
-                    'es': 'Kuwait',
-                    'en': 'Kuwait',
-                    'pt_BR': 'Kuwait',
-                    'sr-Cyrl': 'Кувајт',
-                    'sr-Latn': 'Kuvajt',
-                    'zh_TW': '科威特',
-                    'tr': 'Kuveyt',
-                    'ro': 'Kuweit',
-                    'ar': 'الكويت',
-                    'fa': 'کویت',
-                    'yue': '科威特',
-                    'el': 'Κουβέιτ',
+                    "sk": "India",
+                    "se": "India",
+                    "pl": "Indie",
+                    "no": "India",
+                    "ja": "インド",
+                    "it": "India",
+                    "zh": "印度",
+                    "nl": "India",
+                    "de": "Indien",
+                    "fr": "Inde",
+                    "es": "India",
+                    "en": "India",
+                    "pt_BR": "Índia",
+                    "sr-Cyrl": "Индија",
+                    "sr-Latn": "Indija",
+                    "zh_TW": "印度",
+                    "tr": "Hindistan",
+                    "ro": "India",
+                    "ar": "الهند",
+                    "fa": "هند",
+                    "yue": "印度",
+                    "el": "Ινδία",
                   },
                 )
-          : CountryPickerHelper.getCountryByIsoCode(isoCode ?? 'KW') ??
+          : CountryPickerHelper.getCountryByIsoCode(isoCode ?? 'IN') ??
                 const Country(
-                  isoCode: 'KW',
-                  iso3Code: 'KWT',
-                  name: 'Kuwait',
-                  phoneDetail: (code: '965', maxLength: 8, minLength: 8),
+                  isoCode: "IN",
+                  iso3Code: "IND",
+                  name: "India",
+                  phoneDetail: (code: "91", maxLength: 10, minLength: 10),
                   translations: {
-                    'sk': 'Kuvajt',
-                    'se': 'Kuwait',
-                    'pl': 'Kuwejt',
-                    'no': 'Kuwait',
-                    'ja': 'クウェート',
-                    'it': 'Kuwait',
-                    'zh': '科威特',
-                    'nl': 'Koeweit',
-                    'de': 'Kuwait',
-                    'fr': 'Koweït',
-                    'es': 'Kuwait',
-                    'en': 'Kuwait',
-                    'pt_BR': 'Kuwait',
-                    'sr-Cyrl': 'Кувајт',
-                    'sr-Latn': 'Kuvajt',
-                    'zh_TW': '科威特',
-                    'tr': 'Kuveyt',
-                    'ro': 'Kuweit',
-                    'ar': 'الكويت',
-                    'fa': 'کویت',
-                    'yue': '科威特',
-                    'el': 'Κουβέιτ',
+                    "sk": "India",
+                    "se": "India",
+                    "pl": "Indie",
+                    "no": "India",
+                    "ja": "インド",
+                    "it": "India",
+                    "zh": "印度",
+                    "nl": "India",
+                    "de": "Indien",
+                    "fr": "Inde",
+                    "es": "India",
+                    "en": "India",
+                    "pt_BR": "Índia",
+                    "sr-Cyrl": "Индија",
+                    "sr-Latn": "Indija",
+                    "zh_TW": "印度",
+                    "tr": "Hindistan",
+                    "ro": "India",
+                    "ar": "الهند",
+                    "fa": "هند",
+                    "yue": "印度",
+                    "el": "Ινδία",
                   },
                 );
 
@@ -377,11 +346,7 @@ class CountryPickerView extends StatefulWidget {
   final void Function(Country country) onCountrySelected;
   final bool hasCountryCode;
 
-  const CountryPickerView({
-    super.key,
-    required this.onCountrySelected,
-    this.hasCountryCode = true,
-  });
+  const CountryPickerView({super.key, required this.onCountrySelected, this.hasCountryCode = true});
 
   @override
   State<CountryPickerView> createState() => _CountryPickerViewState();
@@ -389,8 +354,7 @@ class CountryPickerView extends StatefulWidget {
 
 class _CountryPickerViewState extends State<CountryPickerView> {
   final List<CountryData> listCountry = [];
-  final StreamController<Iterable<Country>> _countryListSubject =
-      StreamController.broadcast();
+  final StreamController<Iterable<Country>> _countryListSubject = StreamController.broadcast();
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -414,9 +378,7 @@ class _CountryPickerViewState extends State<CountryPickerView> {
           country.isoCode.toLowerCase().contains(query) ||
           country.iso3Code.toLowerCase().contains(query) ||
           country.phoneDetail.code.toLowerCase().contains(query) ||
-          country.translations.values.any(
-            (element) => element.contains(query),
-          )) {
+          country.translations.values.any((element) => element.contains(query))) {
         yield country;
       }
     }
@@ -451,8 +413,7 @@ class _CountryPickerViewState extends State<CountryPickerView> {
                     replacement: const Center(child: NoDataWidget()),
                     child: ListView.builder(
                       controller: _scrollController,
-                      keyboardDismissBehavior:
-                          ScrollViewKeyboardDismissBehavior.onDrag,
+                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                       itemCount: listCountry.length,
                       itemBuilder: (context, index) {
                         final country = listCountry.elementAt(index);
@@ -479,12 +440,7 @@ class CountryItemView extends StatelessWidget {
   final VoidCallback onPressed;
   final bool hasCountryCode;
 
-  const CountryItemView({
-    super.key,
-    required this.country,
-    required this.onPressed,
-    this.hasCountryCode = true,
-  });
+  const CountryItemView({super.key, required this.country, required this.onPressed, this.hasCountryCode = true});
 
   @override
   Widget build(BuildContext context) {
@@ -493,18 +449,12 @@ class CountryItemView extends StatelessWidget {
       leading: Material(
         borderRadius: BorderRadius.circular(2),
         clipBehavior: Clip.hardEdge,
-        child: CountryPickerHelper.getDefaultFlagImage(
-          country,
-          width: 28,
-          height: 20,
-        ),
+        child: CountryPickerHelper.getDefaultFlagImage(country, width: 28, height: 20),
       ),
       visualDensity: VisualDensity.compact,
       title: Text(
         country.translations[locale.languageCode] ?? country.name,
-        style: context.theme.textTheme.titleMedium?.copyWith(
-          color: context.colorScheme.onSurface,
-        ),
+        style: context.theme.textTheme.titleMedium?.copyWith(color: context.colorScheme.onSurface),
       ),
       trailing: hasCountryCode
           ? Text(

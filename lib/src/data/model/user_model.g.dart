@@ -17,6 +17,16 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
   isSubscriptions: json['isSubscriptions'] as bool? ?? false,
   isEmailVerified: json['isEmailVerified'] as bool? ?? false,
   isGenreAdded: json['isGenreAdded'] as bool? ?? false,
+  clientId: json['clientId'] as String?,
+  firstName: json['firstName'] as String?,
+  lastName: json['lastName'] as String?,
+  phoneNumber: json['phoneNumber'] as String?,
+  isNotification: json['isNotification'] as bool? ?? false,
+  role: json['role'] as String?,
+  isKyc: json['isKyc'] as num? ?? 0,
+  monthlyReturn: json['monthlyReturn'] as num? ?? 0,
+  walletBalance: json['walletBalance'] as num? ?? 0,
+  createdAt: json['createdAt'] as String?,
 );
 
 Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
@@ -30,4 +40,14 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
   'isSubscriptions': instance.isSubscriptions,
   'isEmailVerified': instance.isEmailVerified,
   'isGenreAdded': instance.isGenreAdded,
+  'clientId': instance.clientId,
+  'firstName': instance.firstName,
+  'lastName': instance.lastName,
+  'phoneNumber': instance.phoneNumber,
+  'isNotification': instance.isNotification,
+  'role': instance.role,
+  'isKyc': instance.isKyc,
+  'monthlyReturn': instance.monthlyReturn,
+  'walletBalance': instance.walletBalance,
+  'createdAt': instance.createdAt,
 };

@@ -5,7 +5,7 @@ import 'package:money_invest_app/src/core/core.dart';
 abstract class CoreDependency {
   @singleton
   AppEnvironment getEnvironment() {
-    return AppEnvironment.fromDartEnvironment();
+    return AppEnvironment.current;
   }
 
   @singleton

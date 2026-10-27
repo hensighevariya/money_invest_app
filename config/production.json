@@ -1,7 +1,9 @@
 {
-  "env.baseUrl": "",
-  "env.apiBaseUrl": "",
-  "env.socketUrl": "",
+  "env.name": "production",
+  "env.baseUrl": "https://api.moneyinvest.com/",
+  "env.apiBaseUrl": "https://api.moneyinvest.com/",
+  "env.tradeUrl": "https://api.moneyinvest.com/",
+  "env.socketUrl": "https://api.moneyinvest.com/",
   "env.apiEncryptionKey": "",
   "env.apiDecryptionKey": "",
   "env.apiEncryptionIvKey": "",

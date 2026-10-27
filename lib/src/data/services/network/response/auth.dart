@@ -11,18 +11,30 @@ class AuthSuccessResponse extends Equatable {
     this.accessToken,
     this.refreshToken,
     this.user,
+    this.token,
   });
 
-  factory AuthSuccessResponse.fromJson(Map<String, dynamic> json) =>
-      _$AuthSuccessResponseFromJson(json);
+  factory AuthSuccessResponse.fromJson(Map<String, dynamic> json) {
+    final res = _$AuthSuccessResponseFromJson(json);
+    final resolvedToken =
+        res.accessToken ?? res.token ?? (json['token'] as String?);
+    return AuthSuccessResponse(
+      message: res.message,
+      accessToken: resolvedToken,
+      refreshToken: res.refreshToken,
+      user: res.user,
+      token: resolvedToken,
+    );
+  }
 
   final String? message;
   final String? accessToken;
   final String? refreshToken;
   final UserData? user;
+  final String? token;
 
   @override
-  List<Object?> get props => [message, accessToken, refreshToken, user];
+  List<Object?> get props => [message, accessToken, refreshToken, user, token];
 
   Map<String, dynamic> toJson() => _$AuthSuccessResponseToJson(this);
 }

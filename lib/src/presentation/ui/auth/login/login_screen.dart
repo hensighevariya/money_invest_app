@@ -31,6 +31,8 @@ class LoginScreen extends StatelessWidget {
     } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
       if (error is String) {
         showErrorMessage(context: context, content: error);
+      } else {
+        showErrorMessage(context: context, content: error.toString());
       }
     }
   }

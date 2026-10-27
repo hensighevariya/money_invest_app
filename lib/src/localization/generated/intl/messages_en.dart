@@ -20,36 +20,49 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(documentType) => "Upload ${documentType}";
+  static String m0(destination) => "Code will be sent to ${destination}";
 
-  static String m1(method) => "Paid (${method})";
+  static String m1(documentType) => "Upload ${documentType}";
 
-  static String m2(percent) => "${percent}% Monthly Return";
+  static String m2(method) => "Paid (${method})";
 
-  static String m3(permissionName) =>
-      "You have denied the ${permissionName} permission. Please go to device settings to enable ${permissionName} permissions.";
+  static String m3(percent) => "${percent}% Monthly Return";
 
   static String m4(permissionName) =>
+      "You have denied the ${permissionName} permission. Please go to device settings to enable ${permissionName} permissions.";
+
+  static String m5(permissionName) =>
       "It looks like ${permissionName} access has been permanently disabled. Please go to your device settings to manually enable ${permissionName} permissions.";
 
-  static String m5(seconds) => "${seconds} seconds";
+  static String m6(seconds) => "${seconds} seconds";
 
-  static String m6(qty, price) => "BUY ${qty} @ ${price}";
+  static String m7(qty, price) => "BUY ${qty} @ ${price}";
 
-  static String m7(price) => "₹ ${price} / month";
+  static String m8(price) => "₹ ${price} / month";
 
-  static String m8(percent) => "Save ${percent}%";
+  static String m9(percent) => "Save ${percent}%";
 
-  static String m9(qty, price) => "SELL ${qty} @ ${price}";
+  static String m10(qty, price) => "SELL ${qty} @ ${price}";
 
-  static String m10(price) => "₹ ${price} / year";
+  static String m11(price) => "₹ ${price} / year";
 
-  static String m11(version) => "v${version} Available!";
+  static String m12(version) => "v${version} Available!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accountCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Account created successfully!",
+    ),
+    "agreeTermsPrefix": MessageLookupByLibrary.simpleMessage(
+      "By creating an account, you agree to our ",
+    ),
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Already have an account? ",
+    ),
+    "andLabel": MessageLookupByLibrary.simpleMessage(" and "),
     "appName": MessageLookupByLibrary.simpleMessage("Security Saas"),
     "cameraPermissionLabel": MessageLookupByLibrary.simpleMessage("Camera"),
+    "codeWillBeSentTo": m0,
     "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
       "Confirm Password",
     ),
@@ -64,12 +77,27 @@ class MessageLookup extends MessageLookupByLibrary {
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account? ",
     ),
+    "emailVerificationCode": MessageLookupByLibrary.simpleMessage(
+      "Email verification code",
+    ),
+    "emailVerified": MessageLookupByLibrary.simpleMessage(
+      "Email verified successfully",
+    ),
     "enterOtpHint": MessageLookupByLibrary.simpleMessage("Enter OTP"),
+    "errorAddressRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter address!",
+    ),
+    "errorCityRequired": MessageLookupByLibrary.simpleMessage(
+      "Please select city!",
+    ),
     "errorConfirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password and confirm password must be same!",
     ),
     "errorConfirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter confirm password!",
+    ),
+    "errorCountryRequired": MessageLookupByLibrary.simpleMessage(
+      "Please select country!",
     ),
     "errorEmailAddressInvalidFormat": MessageLookupByLibrary.simpleMessage(
       "Please enter valid email address!",
@@ -103,6 +131,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter password!",
+    ),
+    "errorPincodeRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter pincode!",
+    ),
+    "errorStateRequired": MessageLookupByLibrary.simpleMessage(
+      "Please select state!",
     ),
     "forgotPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
       "Enter your email or phone number to reset your password",
@@ -246,10 +280,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Complete your KYC to start investing",
     ),
     "kycTitle": MessageLookupByLibrary.simpleMessage("KYC"),
-    "kycUploadIdCard": m0,
+    "kycUploadIdCard": m1,
     "kycVerification": MessageLookupByLibrary.simpleMessage("KYC Verification"),
     "kycVoterId": MessageLookupByLibrary.simpleMessage("Voter ID"),
     "languageScreenTitle": MessageLookupByLibrary.simpleMessage("Language"),
+    "loadingCities": MessageLookupByLibrary.simpleMessage("Loading cities..."),
+    "loadingCountries": MessageLookupByLibrary.simpleMessage(
+      "Loading countries...",
+    ),
+    "loadingStates": MessageLookupByLibrary.simpleMessage("Loading states..."),
     "loginButtonText": MessageLookupByLibrary.simpleMessage("Login"),
     "loginEmailHint": MessageLookupByLibrary.simpleMessage(
       "Mobile Number / Email",
@@ -265,17 +304,27 @@ class MessageLookup extends MessageLookupByLibrary {
     "logoutDesc": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to logout?",
     ),
+    "mobileVerificationCode": MessageLookupByLibrary.simpleMessage(
+      "Mobile verification code",
+    ),
+    "mobileVerified": MessageLookupByLibrary.simpleMessage(
+      "Mobile number verified successfully",
+    ),
     "monthlyReturnsPaid": MessageLookupByLibrary.simpleMessage("Paid"),
-    "monthlyReturnsPaidVia": m1,
+    "monthlyReturnsPaidVia": m2,
     "monthlyReturnsTitle": MessageLookupByLibrary.simpleMessage(
       "Monthly Returns",
     ),
     "myInvestmentsActive": MessageLookupByLibrary.simpleMessage("Active"),
-    "myInvestmentsMonthlyReturn": m2,
+    "myInvestmentsMonthlyReturn": m3,
     "myInvestmentsTitle": MessageLookupByLibrary.simpleMessage(
       "My Investments",
     ),
     "newPasswordHint": MessageLookupByLibrary.simpleMessage("New Password"),
+    "noCitiesAvailable": MessageLookupByLibrary.simpleMessage(
+      "No cities available",
+    ),
+    "noResultsFound": MessageLookupByLibrary.simpleMessage("No results found"),
     "notificationPermissionLabel": MessageLookupByLibrary.simpleMessage(
       "Notification",
     ),
@@ -296,12 +345,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpVerifiedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "OTP verified successfully",
     ),
-    "permissionDeniedDescription": m3,
+    "permissionDeniedDescription": m4,
     "permissionDeniedModalTitle": MessageLookupByLibrary.simpleMessage(
       "Permission Denied",
     ),
-    "permissionPermanentlyDeniedDescription": m4,
+    "permissionPermanentlyDeniedDescription": m5,
     "photosPermissionLabel": MessageLookupByLibrary.simpleMessage("Photos"),
+    "pleaseEnter6DigitOtp": MessageLookupByLibrary.simpleMessage(
+      "Please enter 6-digit verification code",
+    ),
+    "pleaseEnterEmailOtp": MessageLookupByLibrary.simpleMessage(
+      "Please enter 6-digit email verification code",
+    ),
+    "pleaseEnterMobileOtp": MessageLookupByLibrary.simpleMessage(
+      "Please enter 6-digit mobile verification code",
+    ),
+    "pleaseSelectCountryFirst": MessageLookupByLibrary.simpleMessage(
+      "Please select a Country first",
+    ),
+    "pleaseSelectStateFirst": MessageLookupByLibrary.simpleMessage(
+      "Please select a State first",
+    ),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "profileBankAccount": MessageLookupByLibrary.simpleMessage("Bank Account"),
     "profileChangePassword": MessageLookupByLibrary.simpleMessage(
       "Change Password",
@@ -322,10 +387,43 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "profileReferAndEarn": MessageLookupByLibrary.simpleMessage("Refer & Earn"),
     "profileTitle": MessageLookupByLibrary.simpleMessage("Profile"),
+    "registerAddressHint": MessageLookupByLibrary.simpleMessage("Address"),
+    "registerAddressPlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Your Address",
+    ),
+    "registerButtonLabel": MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "registerCityHint": MessageLookupByLibrary.simpleMessage("Select City"),
+    "registerConfirmPasswordHint": MessageLookupByLibrary.simpleMessage(
+      "Confirm Password",
+    ),
+    "registerCountryHint": MessageLookupByLibrary.simpleMessage(
+      "Select Country",
+    ),
+    "registerEmailHint": MessageLookupByLibrary.simpleMessage(
+      "Your Email Address",
+    ),
+    "registerMobileHint": MessageLookupByLibrary.simpleMessage(
+      "Your mobile number",
+    ),
+    "registerNameHint": MessageLookupByLibrary.simpleMessage("Your Name"),
+    "registerPasswordHint": MessageLookupByLibrary.simpleMessage(
+      "Enter Password",
+    ),
+    "registerPincodeHint": MessageLookupByLibrary.simpleMessage("Pincode"),
+    "registerPincodePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Enter Pincode",
+    ),
+    "registerStateHint": MessageLookupByLibrary.simpleMessage("Select State"),
+    "registerSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Create a new account",
+    ),
+    "registerSurnameHint": MessageLookupByLibrary.simpleMessage("Your Surname"),
+    "registerTitle": MessageLookupByLibrary.simpleMessage("Register"),
     "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendCodeLink": MessageLookupByLibrary.simpleMessage("Resend Code"),
     "resendIn": MessageLookupByLibrary.simpleMessage("Resend in "),
-    "resendTimer": m5,
+    "resendLabel": MessageLookupByLibrary.simpleMessage("Resend"),
+    "resendTimer": m6,
     "resetPasswordButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
     ),
@@ -344,8 +442,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordTitle": MessageLookupByLibrary.simpleMessage(
       "Reset Password",
     ),
+    "searchCity": MessageLookupByLibrary.simpleMessage("Search City"),
+    "searchCountry": MessageLookupByLibrary.simpleMessage("Search Country"),
     "searchCountryByNameOrCode": MessageLookupByLibrary.simpleMessage(
       "Search country by name or code",
+    ),
+    "searchState": MessageLookupByLibrary.simpleMessage("Search State"),
+    "selectCountryFirst": MessageLookupByLibrary.simpleMessage(
+      "Select Country first",
+    ),
+    "selectStateFirst": MessageLookupByLibrary.simpleMessage(
+      "Select State first",
     ),
     "serverErrorDescription": MessageLookupByLibrary.simpleMessage(
       "We are experiencing some server issues, we apologises for inconvenience. Please try again after few minutes.",
@@ -353,6 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "serverErrorTitle": MessageLookupByLibrary.simpleMessage(
       "Something went wrong!",
     ),
+    "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
     "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "splashSubtitle": MessageLookupByLibrary.simpleMessage(
       "Secure Investment. Transparent Trades.\nConsistent Returns.",
@@ -365,10 +473,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "successfullyResentCode": MessageLookupByLibrary.simpleMessage(
       "Successfully resent code!",
     ),
+    "termsOfService": MessageLookupByLibrary.simpleMessage("Terms of Service"),
     "timeoutErrorMessage": MessageLookupByLibrary.simpleMessage(
       "Request timeout! Please try again.",
     ),
-    "tradingDiaryBuy": m6,
+    "tradingDiaryBuy": m7,
     "tradingDiaryFeature1": MessageLookupByLibrary.simpleMessage(
       "Daily F&O trade details",
     ),
@@ -384,15 +493,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "tradingDiaryMonthlyPlan": MessageLookupByLibrary.simpleMessage(
       "Monthly Plan",
     ),
-    "tradingDiaryMonthlyPrice": m7,
+    "tradingDiaryMonthlyPrice": m8,
     "tradingDiaryPremium": MessageLookupByLibrary.simpleMessage(
       "Premium Subscription",
     ),
     "tradingDiaryPremiumDesc": MessageLookupByLibrary.simpleMessage(
       "Access detailed daily trading books",
     ),
-    "tradingDiarySavePercent": m8,
-    "tradingDiarySell": m9,
+    "tradingDiarySavePercent": m9,
+    "tradingDiarySell": m10,
     "tradingDiarySubscribe": MessageLookupByLibrary.simpleMessage(
       "Subscribe Now",
     ),
@@ -401,7 +510,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tradingDiaryYearlyPlan": MessageLookupByLibrary.simpleMessage(
       "Yearly Plan",
     ),
-    "tradingDiaryYearlyPrice": m10,
+    "tradingDiaryYearlyPrice": m11,
     "tryAgainButtonLabel": MessageLookupByLibrary.simpleMessage("Try Again"),
     "underMaintenanceDescription": MessageLookupByLibrary.simpleMessage(
       "Our platform is currently under maintenance to bring you a better experience. We\'ll be back shortly - thank you for your patience!",
@@ -418,7 +527,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updateAvailableDescription": MessageLookupByLibrary.simpleMessage(
       "We have added lots of new feature and fixed some bugs to make your experience smooth.",
     ),
-    "updateAvailableTitle": m11,
+    "updateAvailableTitle": m12,
     "updateLaterButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Update later",
     ),
