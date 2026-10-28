@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_invest_app/src/app/routes/routes.dart';
-import 'package:money_invest_app/src/core/base/progress_status.dart';
 import 'package:money_invest_app/src/data/data.dart';
-import 'package:money_invest_app/src/data/model/auth_navigation_data_model.dart';
+import 'package:money_invest_app/src/core/core.dart';
+import 'package:money_invest_app/src/presentation/components/alert_message.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/resources/constraints.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
@@ -22,19 +22,41 @@ class ForgotPasswordScreen extends StatelessWidget {
     if (state.status case ProgressStatusSuccess<ForgotPasswordResponse>(
       result: ForgotPasswordResponse response,
     )) {
+      final isMobile = isOnlyDigit(state.emailMobileInput.value);
       context.go(
         '${context.currentPath}/verify-otp',
         extra: AuthNavigationDataModel(
-          type: response.type,
+          type: isMobile ? 1 : 2,
           token: response.token,
           verifyType: response.verifyType,
-          resetByMobile: isOnlyDigit(state.emailMobileInput.value),
-          emailMobileInput: isOnlyDigit(state.emailMobileInput.value)
+          resetByMobile: isMobile,
+          emailMobileInput: isMobile
               ? '+${state.emailMobileInput.phoneDetail?.code} ${state.emailMobileInput.value}'
               : state.emailMobileInput.value,
         ),
       );
+    } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
+      showErrorMessage(context: context, content: _getErrorMessage(error));
     }
+  }
+
+  String _getErrorMessage(Object? error) {
+    if (error is InvalidResponseException) {
+      if (error.errors != null && error.errors!.isNotEmpty) {
+        final firstError = error.errors!.values.first;
+        if (firstError is List && firstError.isNotEmpty) {
+          return firstError.first.toString();
+        }
+        return firstError.toString();
+      }
+      if (error.message != null && error.message!.isNotEmpty) {
+        return error.message!;
+      }
+    }
+    if (error is String && error.isNotEmpty) {
+      return error;
+    }
+    return error?.toString() ?? 'Something went wrong';
   }
 
   @override

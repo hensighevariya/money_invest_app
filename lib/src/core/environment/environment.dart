@@ -29,7 +29,7 @@ class AppEnvironment {
 
   factory AppEnvironment.development({
     String baseUrl =
-        'https://7d9c-2402-a00-162-20fd-e8a0-fd73-9997-32b.ngrok-free.app/',
+        'https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/',
     String? apiBaseUrl,
     String? tradeUrl,
     String? socketUrl,
@@ -97,7 +97,7 @@ class AppEnvironment {
 
     final defaultBase = isProd
         ? 'https://api.moneyinvest.com/'
-        : 'https://7d9c-2402-a00-162-20fd-e8a0-fd73-9997-32b.ngrok-free.app/';
+        : 'https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/';
 
     final rawBaseUrl = const String.fromEnvironment('env.baseUrl');
     final baseUrl = rawBaseUrl.isNotEmpty ? rawBaseUrl : defaultBase;

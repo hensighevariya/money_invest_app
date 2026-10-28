@@ -12,6 +12,7 @@ class RegisterRequest extends Equatable {
     required this.phoneNumber,
     required this.password,
     required this.confirmPassword,
+    this.countryId,
     required this.stateId,
     required this.cityId,
     required this.address,
@@ -28,6 +29,7 @@ class RegisterRequest extends Equatable {
   final String phoneNumber;
   final String password;
   final String confirmPassword;
+  final String? countryId;
   final String stateId;
   final String cityId;
   final String address;
@@ -44,6 +46,7 @@ class RegisterRequest extends Equatable {
     phoneNumber,
     password,
     confirmPassword,
+    countryId,
     stateId,
     cityId,
     address,

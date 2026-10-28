@@ -1,4 +1,5 @@
 export 'model/app_version_model.dart';
+export 'model/auth_navigation_data_model.dart';
 export 'model/location_model.dart';
 export 'model/user_model.dart';
 export 'repository/auth_repository.dart';

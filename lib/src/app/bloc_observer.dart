@@ -75,14 +75,12 @@ class AppBlocObserver extends BlocObserver {
     final context = navigatorKey.currentContext;
     final localizations = AppLocalizations.current;
 
-    final overlayContext = navigatorKey.currentState?.overlay?.context;
-    assert(
-      overlayContext != null,
-      'Navigator key is not assigned with any `Navigator` widget!',
-    );
+    final overlayContext =
+        navigatorKey.currentState?.overlay?.context ?? context;
+    if (overlayContext == null) return;
 
     // Check that context contains material widget to properly show error widgets.
-    debugCheckHasMaterialLocalizations(overlayContext!);
+    debugCheckHasMaterialLocalizations(overlayContext);
 
     switch (error) {
       case NetworkConnectionException():

@@ -29,25 +29,25 @@ base class ForgotPasswordCubit extends BaseCubit<ForgotPasswordState> {
 
     emit(state.copyWith(status: const ProgressStatus.processing()));
     try {
+      final value = state.emailMobileInput.value.trim();
+      final isMobile = isOnlyDigit(value);
+      final phoneCode = state.emailMobileInput.phoneDetail?.code ?? '91';
+      final cleanPhone = value.replaceAll(' ', '');
+      final identifier = isMobile
+          ? (cleanPhone.startsWith('+') ? cleanPhone : '+$phoneCode$cleanPhone')
+          : value;
+
       final result = await processRequest(
-        () => _authRepository.forgotPassword(
-          emailAddress: (!isOnlyDigit(state.emailMobileInput.value))
-              ? state.emailMobileInput.value
-              : null,
-          mobile: isOnlyDigit(state.emailMobileInput.value)
-              ? '+${state.emailMobileInput.phoneDetail?.code} ${state.emailMobileInput.value}'
-              : null,
-          type: (isOnlyDigit(state.emailMobileInput.value)) ? 1 : 2,
-        ),
+        () => _authRepository.forgotPassword(identifier: identifier),
         loadingHandler: _loadingHandler.handleLoading,
+        throwOnError: true,
       );
 
       if (result != null) {
         emit(state.copyWith(status: ProgressStatus.success(result)));
       }
-    } catch (error, stackTrace) {
+    } catch (error) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
-      handleError(error, stackTrace);
     }
   }
 }

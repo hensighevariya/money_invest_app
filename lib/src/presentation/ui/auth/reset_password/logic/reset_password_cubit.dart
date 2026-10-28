@@ -38,19 +38,18 @@ base class ResetPasswordCubit extends BaseCubit<ResetPasswordState> {
     try {
       final result = await processRequest(
         () => _authRepository.resetPassword(
-          token: verificationToken,
-          password: state.passwordInput.value,
+          resetToken: verificationToken,
+          newPassword: state.passwordInput.value,
           confirmPassword: state.confirmPasswordInput.value,
-          type: type,
         ),
         loadingHandler: _loadingHandler.handleLoading,
+        throwOnError: true,
       );
       if (result ?? false) {
         emit(state.copyWith(status: const ProgressStatus.success(true)));
       }
-    } catch (error, stackTrace) {
+    } catch (error) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
-      handleError(error, stackTrace);
     }
   }
 }

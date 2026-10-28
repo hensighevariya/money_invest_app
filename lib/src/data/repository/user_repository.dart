@@ -36,7 +36,8 @@ final class UserRepository extends BaseRepository {
   }
 
   bool isUserAuthorized() {
-    return _localStorageService.sessionToken != null;
+    return _localStorageService.isLoggedIn &&
+        (_localStorageService.sessionToken?.isNotEmpty ?? false);
   }
 
   UserData? getCurrentUser() {

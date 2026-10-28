@@ -27,29 +27,29 @@ Map<String, dynamic> _$AuthSuccessResponseToJson(
   'token': instance.token,
 };
 
-ForgotPasswordResponse _$ForgotPasswordResponseFromJson(
-  Map<String, dynamic> json,
-) => ForgotPasswordResponse(
-  token: json['token'] as String,
-  verifyType: (json['verifyType'] as num).toInt(),
-  type: (json['type'] as num).toInt(),
-);
-
 Map<String, dynamic> _$ForgotPasswordResponseToJson(
   ForgotPasswordResponse instance,
 ) => <String, dynamic>{
+  'stringify': instance.stringify,
+  'hashCode': instance.hashCode,
   'token': instance.token,
   'verifyType': instance.verifyType,
   'type': instance.type,
+  'message': instance.message,
+  'resetToken': instance.resetToken,
+  'props': instance.props,
 };
-
-ForgotPasswordVerifyResponse _$ForgotPasswordVerifyResponseFromJson(
-  Map<String, dynamic> json,
-) => ForgotPasswordVerifyResponse(token: json['token'] as String);
 
 Map<String, dynamic> _$ForgotPasswordVerifyResponseToJson(
   ForgotPasswordVerifyResponse instance,
-) => <String, dynamic>{'token': instance.token};
+) => <String, dynamic>{
+  'stringify': instance.stringify,
+  'hashCode': instance.hashCode,
+  'token': instance.token,
+  'resetToken': instance.resetToken,
+  'message': instance.message,
+  'props': instance.props,
+};
 
 VerifyOtpRequest _$VerifyOtpRequestFromJson(Map<String, dynamic> json) =>
     VerifyOtpRequest(
@@ -74,17 +74,10 @@ Map<String, dynamic> _$VerifyOtpRequestToJson(VerifyOtpRequest instance) =>
 ResetPasswordRequest _$ResetPasswordRequestFromJson(
   Map<String, dynamic> json,
 ) => ResetPasswordRequest(
-  type: (json['type'] as num?)?.toInt() ?? 1,
-  token: json['token'] as String,
-  password: json['password'] as String,
+  resetToken: json['resetToken'] as String,
+  newPassword: json['newPassword'] as String,
   confirmPassword: json['confirmPassword'] as String,
+  token: json['token'] as String?,
+  password: json['password'] as String?,
+  type: (json['type'] as num?)?.toInt(),
 );
-
-Map<String, dynamic> _$ResetPasswordRequestToJson(
-  ResetPasswordRequest instance,
-) => <String, dynamic>{
-  'type': instance.type,
-  'token': instance.token,
-  'password': instance.password,
-  'confirmPassword': instance.confirmPassword,
-};

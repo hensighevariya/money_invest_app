@@ -45,23 +45,26 @@ base class LoginCubit extends BaseCubit<LoginState> {
     }
     emit(state.copyWith(status: const ProgressStatus.processing()));
     try {
-      final result = await processRequest(() async {
-        final email = state.emailMobileInput.value.trim();
-        final password = state.passwordInput.value;
-        final authResponse = await _authRepository.login(
-          email: email,
-          password: password,
-        );
+      final result = await processRequest(
+        () async {
+          final email = state.emailMobileInput.value.trim();
+          final password = state.passwordInput.value;
+          final authResponse = await _authRepository.login(
+            email: email,
+            password: password,
+          );
 
-        return authResponse?.user;
-      }, loadingHandler: _loadingHandler.handleLoading);
+          return authResponse?.user;
+        },
+        loadingHandler: _loadingHandler.handleLoading,
+        throwOnError: true,
+      );
 
       if (result == null) return;
 
       emit(state.copyWith(status: ProgressStatus.success(result)));
-    } catch (error, stackTrace) {
+    } catch (error) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
-      handleError(error, stackTrace);
     }
   }
 }

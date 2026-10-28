@@ -1,7 +1,10 @@
 import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
+import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/resources/assets.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
 
@@ -17,7 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
+      if (!mounted) return;
+      final userRepository = RepositoryProvider.of<UserRepository>(context);
+      if (userRepository.isUserAuthorized()) {
+        context.read<UserProfileBloc>().add(const FetchUserProfile());
+        context.go('/home');
+      } else {
         context.go('/login');
       }
     });

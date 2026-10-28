@@ -74,6 +74,7 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     UserLoggedIn event,
     Emitter<UserProfileState> emit,
   ) async {
+    _localStorageService.isLoggedIn = true;
     emit(
       state.copyWith(
         isUserAuthorized: true,
@@ -81,12 +82,14 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
         loading: false,
       ),
     );
+    add(const FetchUserProfile());
   }
 
   FutureOr<void> _onUserLoggedOut(
     UserLoggedOut event,
     Emitter<UserProfileState> emit,
   ) async {
+    _localStorageService.isLoggedIn = false;
     HydratedBloc.storage.clear();
     await processRequest<void>(_userRepository.userUnauthorized);
     emit(const UserProfileState(isUserAuthorized: false));
@@ -95,8 +98,7 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
   @override
   UserProfileState? fromJson(Map<String, dynamic> json) {
     try {
-      if (json.containsKey('userIdentifier') &&
-          json.containsKey('isUserAuthorized')) {
+      if (json.containsKey('isUserAuthorized')) {
         UserData? userData;
         if (json case {'user': Map<String, dynamic> userJson}) {
           userData = UserData.fromJson(userJson);

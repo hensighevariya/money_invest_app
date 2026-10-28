@@ -74,6 +74,25 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
+  Widget _buildDropdownSuffix(BuildContext context, {required bool isLoading}) {
+    if (isLoading) {
+      return SizedBox(
+        width: 48,
+        height: 40,
+        child: Center(
+          child: SizedBox.square(
+            dimension: 18,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              color: context.colorScheme.primary,
+            ),
+          ),
+        ),
+      );
+    }
+    return SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20);
+  }
+
   @override
   Widget build(BuildContext context) {
     final localizations = context.localizations;
@@ -183,16 +202,15 @@ class _RegisterFormState extends State<RegisterForm> {
                           hintText: state.isLoadingCountries
                               ? localizations.loadingCountries
                               : localizations.registerCountryHint,
-                          suffixIcon: state.isLoadingCountries
-                              ? const SizedBox(
-                                  height: 18,
-                                  width: 18,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12),
-                                    child: CircularProgressIndicator(strokeWidth: 2),
-                                  ),
-                                )
-                              : SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
+                          suffixIcon: _buildDropdownSuffix(
+                            context,
+                            isLoading: state.isLoadingCountries,
+                          ),
+                          suffixIconConstraints: const BoxConstraints(
+                            minWidth: 48,
+                            maxWidth: 48,
+                            maxHeight: 40,
+                          ),
                         ),
                       ),
                     );
@@ -249,16 +267,15 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: _stateController,
                           readOnly: true,
                           hintText: hintText,
-                          suffixIcon: state.isLoadingStates
-                              ? const SizedBox(
-                                  height: 18,
-                                  width: 18,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12),
-                                    child: CircularProgressIndicator(strokeWidth: 2),
-                                  ),
-                                )
-                              : SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
+                          suffixIcon: _buildDropdownSuffix(
+                            context,
+                            isLoading: state.isLoadingStates,
+                          ),
+                          suffixIconConstraints: const BoxConstraints(
+                            minWidth: 48,
+                            maxWidth: 48,
+                            maxHeight: 40,
+                          ),
                         ),
                       ),
                     );
@@ -321,16 +338,15 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: _cityController,
                           readOnly: true,
                           hintText: hintText,
-                          suffixIcon: state.isLoadingCities
-                              ? const SizedBox(
-                                  height: 18,
-                                  width: 18,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(12),
-                                    child: CircularProgressIndicator(strokeWidth: 2),
-                                  ),
-                                )
-                              : SvgImageFromAsset.square(SvgIcons.arrowDown, size: 20),
+                          suffixIcon: _buildDropdownSuffix(
+                            context,
+                            isLoading: state.isLoadingCities,
+                          ),
+                          suffixIconConstraints: const BoxConstraints(
+                            minWidth: 48,
+                            maxWidth: 48,
+                            maxHeight: 40,
+                          ),
                         ),
                       ),
                     );

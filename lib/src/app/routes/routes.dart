@@ -1,7 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:money_invest_app/src/data/model/auth_navigation_data_model.dart';
 import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/register/register_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/register/register_otp_screen.dart';
@@ -30,9 +29,13 @@ class AppRoutes with ChangeNotifier {
   final GlobalKey<NavigatorState> navigatorKey;
   bool _userAuthorized;
 
+  bool get userAuthorized => _userAuthorized;
+
   set userAuthorized(bool value) {
-    _userAuthorized = value;
-    notifyListeners();
+    if (_userAuthorized != value) {
+      _userAuthorized = value;
+      notifyListeners();
+    }
   }
 
   bool _hasForceUpdate;
@@ -51,19 +54,6 @@ class AppRoutes with ChangeNotifier {
 
   RouterConfig<Object> get routerConfig => _goRouter;
 
-  FutureOr<String?> _checkAuthRedirect(
-    BuildContext context,
-    GoRouterState state,
-  ) {
-    if (_userAuthorized) return '/';
-    return null;
-  }
-
-  String? _checkUserAuthorized(BuildContext context, GoRouterState state) {
-    if (_userAuthorized) return null;
-    return '/login';
-  }
-
   late final GoRouter _goRouter = GoRouter(
     navigatorKey: navigatorKey,
     debugLogDiagnostics: true,
@@ -71,6 +61,28 @@ class AppRoutes with ChangeNotifier {
     redirect: (context, state) {
       if (_hasForceUpdate) return '/force-update';
       if (_isUnderMaintenance) return '/maintenance';
+
+      final path = state.uri.path;
+      final isAuthPath = path == '/login' ||
+          path.startsWith('/login/') ||
+          path == '/forgot-password' ||
+          path.startsWith('/forgot-password/');
+
+      // If user is authorized and on an auth screen, redirect to home
+      if (_userAuthorized && isAuthPath) {
+        return '/home';
+      }
+
+      // If user is NOT authorized and trying to access a protected route, redirect to login
+      final isPublicPath = path == '/' ||
+          isAuthPath ||
+          path == '/force-update' ||
+          path == '/maintenance';
+
+      if (!_userAuthorized && !isPublicPath) {
+        return '/login';
+      }
+
       return null;
     },
     initialLocation: '/',
@@ -109,12 +121,15 @@ class AppRoutes with ChangeNotifier {
                 routes: [
                   GoRoute(
                     path: 'verify-otp',
-                    builder: (context, state) => const OtpVerificationScreen(),
+                    builder: (context, state) => OtpVerificationScreen(
+                      data: state.extra as AuthNavigationDataModel?,
+                    ),
                     routes: [
                       GoRoute(
                         path: 'reset-password',
-                        builder: (context, state) =>
-                            const ResetPasswordScreen(),
+                        builder: (context, state) => ResetPasswordScreen(
+                          data: state.extra as AuthNavigationDataModel?,
+                        ),
                       ),
                     ],
                   ),

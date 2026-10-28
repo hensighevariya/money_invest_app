@@ -8,10 +8,10 @@ import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/common_divider.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
+import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
+import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/presentation/resources/size.dart';
-import 'package:money_invest_app/src/presentation/ui/profile/logic/profile_bloc.dart';
-import 'package:money_invest_app/src/presentation/ui/profile/logic/profile_event.dart';
 import 'package:ui_components/ui_components.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,6 +19,20 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = context.select<UserProfileBloc, UserData?>(
+      (bloc) => bloc.state.data,
+    );
+    final displayName = (userData?.fullName.isNotEmpty ?? false)
+        ? userData!.fullName
+        : ((userData?.firstName?.isNotEmpty ?? false)
+            ? '${userData!.firstName} ${userData.lastName ?? ''}'.trim()
+            : 'Rahul Patel');
+    final displayContact = (userData?.phoneNumber?.isNotEmpty ?? false)
+        ? userData!.phoneNumber!
+        : ((userData?.email.isNotEmpty ?? false)
+            ? userData!.email
+            : '+91 98765 43210');
+
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
       appBar: CustomAppBar(
@@ -47,14 +61,14 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Rahul Patel",
+                          displayName,
                           style: context.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const Gap(Spacing.xSmall),
                         Text(
-                          "+91 98765 43210",
+                          displayContact,
                           style: context.textTheme.bodyMedium?.copyWith(
                             color: context.colorScheme.onSurfaceVariant,
                           ),
@@ -134,9 +148,18 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () {
                     logout(
                       context,
-                      onTap: () => context.read<ProfileBloc>().add(
-                        UserLogoutRequested(),
-                      ),
+                      onTap: () async {
+                        final authRepo =
+                            RepositoryProvider.of<AuthRepository>(context);
+                        try {
+                          await authRepo.userLogout();
+                        } catch (_) {}
+                        if (context.mounted) {
+                          context
+                              .read<UserProfileBloc>()
+                              .add(const UserLoggedOut());
+                        }
+                      },
                     );
                   },
                   isNotification: true,
@@ -151,19 +174,47 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-Future<void> logout(BuildContext context, {required VoidCallback onTap}) async {
+Future<void> logout(
+  BuildContext context, {
+  required Future<void> Function() onTap,
+}) async {
   await showDialog<void>(
     context: context,
-    builder: (context) {
-      return CustomAlertDialog(
-        icon: LottieBuilder.asset(LottieFiles.logout, fit: BoxFit.cover),
-        title: context.localizations.profileLogout,
-        description: context.localizations.logoutDesc,
-        action: ElevatedButton(
-          onPressed: onTap,
-          style: ElevatedButtonPrimaryStyle(context),
-          child: Text(context.localizations.profileLogout),
-        ),
+    builder: (dialogContext) {
+      var isLoading = false;
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return CustomAlertDialog(
+            icon: LottieBuilder.asset(LottieFiles.logout, fit: BoxFit.cover),
+            title: context.localizations.profileLogout,
+            description: context.localizations.logoutDesc,
+            action: ElevatedButton(
+              onPressed: isLoading
+                  ? null
+                  : () async {
+                      setState(() => isLoading = true);
+                      try {
+                        await onTap();
+                      } finally {
+                        if (dialogContext.mounted) {
+                          Navigator.of(dialogContext).pop();
+                        }
+                      }
+                    },
+              style: ElevatedButtonPrimaryStyle(context),
+              child: isLoading
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : Text(context.localizations.profileLogout),
+            ),
+          );
+        },
       );
     },
   );

@@ -18,6 +18,17 @@ class LocalStorageService {
 
     this.showIntro = showIntro;
     this.languageCode = languageCode;
+    isLoggedIn = false;
+  }
+
+  static const String _isLoggedInKey = 'is_logged_in';
+
+  bool get isLoggedIn =>
+      _preferences.getBool(_isLoggedInKey) ??
+      (sessionToken != null && sessionToken!.isNotEmpty);
+
+  set isLoggedIn(bool value) {
+    _preferences.setBool(_isLoggedInKey, value);
   }
 
   bool get showIntro => _preferences.getBool('show_intro') ?? true;

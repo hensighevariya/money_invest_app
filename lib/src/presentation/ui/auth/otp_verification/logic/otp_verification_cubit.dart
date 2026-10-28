@@ -66,42 +66,55 @@ base class OtpVerificationCubit extends BaseCubit<OtpVerificationState> {
   Future<void> resendOtpCode() async {
     _startTimer();
     try {
+      final typeStr = resetByMobile ? 'mobile' : 'email';
       final result = await processRequest(
-        () => _authRepository.resendOtp(token: state.token, type: type),
+        () => _authRepository.resendForgotPasswordOtp(
+          token: state.token,
+          type: typeStr,
+        ),
         loadingHandler: _loadingHandler.handleLoading,
+        throwOnError: true,
       );
-      if (result != null) {
+      if (result != null && result.isNotEmpty) {
         emit(state.copyWith(token: result));
       }
-    } catch (error, stackTrace) {
-      handleError(error, stackTrace);
+    } catch (error) {
+      emit(state.copyWith(status: ProgressStatus.failed(error)));
     }
   }
 
   Future<void> onContinue() async {
-    if (state.isNotValid) return;
+    if (state.isNotValid) {
+      if (state.otpCodeInput.value.isEmpty) {
+        emit(state.copyWith(
+          status: const ProgressStatus.failed('Please enter verification code'),
+        ));
+      } else if (state.otpCodeInput.value.length < 6) {
+        emit(state.copyWith(
+          status: const ProgressStatus.failed('Please enter complete 6-digit verification code'),
+        ));
+      }
+      return;
+    }
 
     emit(state.copyWith(status: const ProgressStatus.processing()));
     try {
-      OtpVerificationStatusData? statusData;
+      final typeStr = resetByMobile ? 'mobile' : 'email';
       final result = await processRequest(
         () => _authRepository.verifyForgotPasswordOtp(
           otpCode: state.otpCodeInput.value,
           token: state.token,
-          verifyType: verifyType,
-          type: type,
+          type: typeStr,
         ),
         loadingHandler: _loadingHandler.handleLoading,
+        throwOnError: true,
       );
       if (result != null) {
-        statusData = OtpVerificationStatusData.token(result, type, verifyType);
-      }
-      if (statusData != null) {
+        final statusData = OtpVerificationStatusData.token(result, type, verifyType);
         emit(state.copyWith(status: ProgressStatus.success(statusData)));
       }
-    } catch (error, stackTrace) {
+    } catch (error) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
-      handleError(error, stackTrace);
     }
   }
 }

@@ -1,9 +1,9 @@
 {
   "env.name": "development",
-  "env.baseUrl": "https://7d9c-2402-a00-162-20fd-e8a0-fd73-9997-32b.ngrok-free.app/",
-  "env.apiBaseUrl": "https://7d9c-2402-a00-162-20fd-e8a0-fd73-9997-32b.ngrok-free.app/",
-  "env.tradeUrl": "https://7d9c-2402-a00-162-20fd-e8a0-fd73-9997-32b.ngrok-free.app/",
-  "env.socketUrl": "https://7d9c-2402-a00-162-20fd-e8a0-fd73-9997-32b.ngrok-free.app/",
+  "env.baseUrl": "https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/",
+  "env.apiBaseUrl": "https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/",
+  "env.tradeUrl": "https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/",
+  "env.socketUrl": "https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/",
   "env.apiEncryptionKey": "",
   "env.apiDecryptionKey": "",
   "env.apiEncryptionIvKey": "",

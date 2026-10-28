@@ -31,24 +31,6 @@ final class AuthRepository extends BaseRepository {
     return pushToken;
   }
 
-  Future<String> _getDeviceId() async {
-    final deviceInfoPlugin = DeviceInfoPlugin();
-    if (kIsWeb) {
-      final webInfo = await deviceInfoPlugin.webBrowserInfo;
-      return webInfo.userAgent ?? 'web_browser';
-    } else if (Platform.isAndroid) {
-      final androidInfo = await deviceInfoPlugin.androidInfo;
-      return androidInfo.id;
-    } else if (Platform.isIOS) {
-      final iosInfo = await deviceInfoPlugin.iosInfo;
-      return iosInfo.identifierForVendor ?? iosInfo.modelName;
-    } else if (Platform.isMacOS) {
-      final macInfo = await deviceInfoPlugin.macOsInfo;
-      return macInfo.systemGUID ?? 'mac_device';
-    } else {
-      return 'device_${DateTime.now().millisecondsSinceEpoch}';
-    }
-  }
 
   Future<Map<String, String>> _getDeviceHeaders() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
@@ -98,6 +80,7 @@ final class AuthRepository extends BaseRepository {
     _localStorageService.sessionToken = response.accessToken ?? response.token;
     _localStorageService.refreshSessionToken = response.refreshToken;
     _localStorageService.userData = response.user;
+    _localStorageService.isLoggedIn = true;
   }
 
   Future<AuthSuccessResponse?> login({
@@ -127,30 +110,29 @@ final class AuthRepository extends BaseRepository {
 
   Future<bool> userLogout() async {
     try {
-      await _apiClientService.userLogout({'deviceId': await _getDeviceId()});
+      await _apiClientService.userLogout();
       return true;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);
+    } finally {
+      await Future.wait<void>([
+        _firebaseService.deleteToken(),
+        _localStorageService.clearData(),
+      ]);
     }
   }
 
   Future<ForgotPasswordResponse> forgotPassword({
+    String? identifier,
     String? emailAddress,
     String? mobile,
-    required int type,
+    int? type,
   }) async {
-    Map<String, dynamic> data = {};
-
-    if (mobile != null) {
-      data['mobile'] = mobile;
-    }
-    if (emailAddress != null) {
-      data['email'] = emailAddress;
-    }
-    data['type'] = type;
-
+    final cleanIdentifier = identifier ?? emailAddress ?? mobile ?? '';
     try {
-      final responseData = await _apiClientService.forgotPassword(data);
+      final responseData = await _apiClientService.forgotPassword(
+        {'identifier': cleanIdentifier},
+      );
       return responseData;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);
@@ -160,19 +142,31 @@ final class AuthRepository extends BaseRepository {
   Future<String> verifyForgotPasswordOtp({
     required String otpCode,
     required String token,
-    required int verifyType,
-    required int type,
+    dynamic type,
+    int? verifyType,
     int? loginUserType,
   }) async {
+    final typeStr = type is String ? type : (type == 1 ? 'mobile' : 'email');
     try {
       final responseData = await _apiClientService.verifyForgotPasswordOtp(
-        VerifyOtpRequest(
-          otp: otpCode,
-          token: token,
-          verifyType: verifyType,
-          type: type,
-          loginUserType: loginUserType,
-        ),
+        token: token,
+        otp: otpCode,
+        type: typeStr,
+      );
+      return responseData.resetToken ?? responseData.token;
+    } catch (error, stackTrace) {
+      throw transformError(error, stackTrace);
+    }
+  }
+
+  Future<String> resendForgotPasswordOtp({
+    required String token,
+    required String type,
+  }) async {
+    try {
+      final responseData = await _apiClientService.resendForgotPasswordOtp(
+        token: token,
+        type: type,
       );
       return responseData.token;
     } catch (error, stackTrace) {
@@ -180,30 +174,30 @@ final class AuthRepository extends BaseRepository {
     }
   }
 
-  Future<String> resendOtp({required String token, required int type}) async {
-    try {
-      final responseData = await _apiClientService.resendOtp(
-        VerifyOtpRequest(preToken: token, type: type),
-      );
-      return responseData.token;
-    } catch (error, stackTrace) {
-      throw transformError(error, stackTrace);
-    }
+  Future<String> resendOtp({
+    required String token,
+    required dynamic type,
+  }) async {
+    final typeStr = type is String ? type : (type == 1 ? 'mobile' : 'email');
+    return resendForgotPasswordOtp(token: token, type: typeStr);
   }
 
   Future<bool> resetPassword({
-    required String password,
+    required String resetToken,
+    required String newPassword,
     required String confirmPassword,
-    required String token,
-    required int type,
+    String? token,
+    String? password,
+    int? type,
   }) async {
+    final effectiveResetToken = resetToken.isNotEmpty ? resetToken : (token ?? '');
+    final effectivePassword = newPassword.isNotEmpty ? newPassword : (password ?? '');
     try {
       await _apiClientService.resetPassword(
         ResetPasswordRequest(
-          password: password,
+          resetToken: effectiveResetToken,
+          newPassword: effectivePassword,
           confirmPassword: confirmPassword,
-          token: token,
-          type: type,
         ),
       );
       return true;
@@ -281,6 +275,7 @@ final class AuthRepository extends BaseRepository {
     required String phoneNumber,
     required String password,
     required String confirmPassword,
+    String? countryId,
     required String stateId,
     required String cityId,
     required String address,
@@ -295,6 +290,7 @@ final class AuthRepository extends BaseRepository {
         phoneNumber: phoneNumber,
         password: password,
         confirmPassword: confirmPassword,
+        countryId: countryId,
         stateId: stateId,
         cityId: cityId,
         address: address,

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/utils/log.dart';
 import 'network/request/user.dart';
@@ -96,6 +97,16 @@ class ApiClientService {
       },
       options: Options(headers: deviceHeaders),
     );
+    final rawData = response.data;
+    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
+      throw InvalidResponseException(
+        statusCode: response.statusCode ?? 200,
+        message: rawData['message'] as String? ?? 'Failed to login',
+        errors: rawData['errors'] is Map<String, dynamic>
+            ? rawData['errors'] as Map<String, dynamic>
+            : null,
+      );
+    }
     return _parseResponseData(
       response,
       (responseData) {
@@ -117,62 +128,92 @@ class ApiClientService {
     );
   }
 
-  Future<void> userLogout(Map<String, dynamic> request) async {
-    await _dioClient.patch<dynamic>(
-      '/user/auth/log-out',
-      queryParameters: request,
+  Future<void> userLogout() async {
+    final response = await _dioClient.patch<dynamic>(
+      '/api/auth/logout',
+      options: Options(
+        headers: {
+          'Accept-Language': 'en',
+        },
+      ),
     );
+    final rawData = response.data;
+    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
+      throw InvalidResponseException(
+        statusCode: response.statusCode ?? 200,
+        message: rawData['message'] as String? ?? 'Failed to logout',
+        errors: rawData['errors'] is Map<String, dynamic>
+            ? rawData['errors'] as Map<String, dynamic>
+            : null,
+      );
+    }
   }
 
-  ///forgot-password
-  Future<ForgotPasswordResponse> forgotPassword(
-    Map<String, dynamic> request,
-  ) async {
+  /// 1. Forgot Password: POST /api/auth/forgot-password
+  Future<ForgotPasswordResponse> forgotPassword(dynamic request) async {
+    final Map<String, dynamic> data = request is Map<String, dynamic>
+        ? request
+        : {'identifier': request.toString()};
     final response = await _dioClient.post<dynamic>(
-      '/user/auth/forgot-password',
-      data: request,
+      '/api/auth/forgot-password',
+      data: data,
     );
     return _parseResponseData(response, (responseData) {
-      return ForgotPasswordResponse.fromJson(
-        responseData as Map<String, dynamic>,
-      );
+      return ForgotPasswordResponse.fromData(responseData);
     });
   }
 
-  ///forgot-verify-otp
-  Future<ForgotPasswordVerifyResponse> verifyForgotPasswordOtp(
-    VerifyOtpRequest request,
-  ) async {
+  /// 2. Verify OTP: POST /api/auth/forgot-password/verify-otp
+  Future<ForgotPasswordVerifyResponse> verifyForgotPasswordOtp({
+    required String token,
+    required String otp,
+    required String type,
+  }) async {
     final response = await _dioClient.post<dynamic>(
-      '/user/auth/verify-otp',
-      data: request.toJson(),
+      '/api/auth/forgot-password/verify-otp',
+      data: {
+        'token': token,
+        'otp': otp,
+        'type': type,
+      },
     );
     return _parseResponseData(
       response,
-      (responseData) => ForgotPasswordVerifyResponse.fromJson(
-        responseData as Map<String, dynamic>,
-      ),
+      (responseData) => ForgotPasswordVerifyResponse.fromData(responseData),
+    );
+  }
+
+  /// 3. Resend OTP: POST /api/auth/forgot-password/resend-otp
+  Future<ForgotPasswordVerifyResponse> resendForgotPasswordOtp({
+    required String token,
+    required String type,
+  }) async {
+    final response = await _dioClient.post<dynamic>(
+      '/api/auth/forgot-password/resend-otp',
+      data: {
+        'token': token,
+        'type': type,
+      },
+    );
+    return _parseResponseData(
+      response,
+      (responseData) => ForgotPasswordVerifyResponse.fromData(responseData),
     );
   }
 
   Future<ForgotPasswordVerifyResponse> resendOtp(
     VerifyOtpRequest request,
   ) async {
-    final response = await _dioClient.post<dynamic>(
-      '/user/auth/resend-otp',
-      data: request.toJson(),
-    );
-    return _parseResponseData(
-      response,
-      (responseData) => ForgotPasswordVerifyResponse.fromJson(
-        responseData as Map<String, dynamic>,
-      ),
+    return resendForgotPasswordOtp(
+      token: request.token ?? request.preToken ?? '',
+      type: request.type == 1 ? 'mobile' : 'email',
     );
   }
 
+  /// 4. Reset Password: POST /api/auth/reset-password
   Future<void> resetPassword(ResetPasswordRequest request) async {
     await _dioClient.post<dynamic>(
-      '/user/auth/reset-password',
+      '/api/auth/reset-password',
       data: request.toJson(),
     );
   }
@@ -221,11 +262,26 @@ class ApiClientService {
 
   Future<UserData> getUserProfile() async {
     final response = await _dioClient.get<dynamic>(
-      '/user/auth/get-user-profile',
+      '/api/auth/me',
     );
+    final rawData = response.data;
+    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
+      throw InvalidResponseException(
+        statusCode: response.statusCode ?? 200,
+        message: rawData['message'] as String? ?? 'Failed to get profile',
+        errors: rawData['errors'] is Map<String, dynamic>
+            ? rawData['errors'] as Map<String, dynamic>
+            : null,
+      );
+    }
     return _parseResponseData(
       response,
-      (responseData) => UserData.fromJson(responseData as Map<String, dynamic>),
+      (responseData) {
+        if (responseData is Map<String, dynamic>) {
+          return UserData.fromJson(responseData);
+        }
+        return const UserData(id: '');
+      },
     );
   }
 
@@ -317,6 +373,16 @@ class ApiClientService {
       },
       options: Options(headers: deviceHeaders),
     );
+    final rawData = response.data;
+    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
+      throw InvalidResponseException(
+        statusCode: response.statusCode ?? 200,
+        message: rawData['message'] as String? ?? 'Invalid or expired OTP',
+        errors: rawData['errors'] is Map<String, dynamic>
+            ? rawData['errors'] as Map<String, dynamic>
+            : null,
+      );
+    }
     return _parseResponseData(response, (responseData) {
       final msg = response.data is Map<String, dynamic>
           ? (response.data as Map)['message'] as String?
@@ -344,6 +410,16 @@ class ApiClientService {
         'type': type,
       },
     );
+    final rawData = response.data;
+    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
+      throw InvalidResponseException(
+        statusCode: response.statusCode ?? 200,
+        message: rawData['message'] as String? ?? 'Failed to resend OTP',
+        errors: rawData['errors'] is Map<String, dynamic>
+            ? rawData['errors'] as Map<String, dynamic>
+            : null,
+      );
+    }
     return _parseResponseData(response, (responseData) {
       if (responseData is Map<String, dynamic> &&
           response.data is Map<String, dynamic>) {

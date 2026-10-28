@@ -182,17 +182,29 @@ class ApiInterceptor extends QueuedInterceptorsWrapper {
     }
 
     if (err.response?.statusCode == 401) {
-      if (err.requestOptions.path.contains('/api/auth/refresh-token')) {
-        return super.onError(_invalidSessionError(err), handler);
-      }
+      final path = err.requestOptions.path;
+      final isAuthEndpoint = path.contains('/api/auth/login') ||
+          path.contains('/api/auth/register') ||
+          path.contains('/api/auth/verify-otp') ||
+          path.contains('/api/auth/forgot-password') ||
+          path.contains('/api/auth/reset-password');
 
-      final sessionToken = localStorageService.sessionToken;
       final requestToken = err
           .requestOptions
           .headers[io.HttpHeaders.authorizationHeader]
           ?.toString()
           .split(' ')
           .last;
+
+      if (isAuthEndpoint || requestToken == null || requestToken.isEmpty) {
+        return super.onError(err, handler);
+      }
+
+      if (err.requestOptions.path.contains('/api/auth/refresh-token')) {
+        return super.onError(_invalidSessionError(err), handler);
+      }
+
+      final sessionToken = localStorageService.sessionToken;
 
       if (sessionToken != null &&
           sessionToken.isNotEmpty &&

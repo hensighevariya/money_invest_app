@@ -19,6 +19,7 @@ class OtpInputField extends StatelessWidget {
     this.onChanged,
     this.onCompleted,
     this.errorText,
+    this.length = 6,
   });
 
   final TextEditingController? controller;
@@ -28,6 +29,7 @@ class OtpInputField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onCompleted;
   final String? errorText;
+  final int length;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,12 @@ class OtpInputField extends StatelessWidget {
         fontWeight: FontWeight.w600,
         height: 1.5,
       ),
-      constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+      width: length > 4 ? 46 : 56,
+      height: 52,
+      constraints: BoxConstraints(
+        minWidth: length > 4 ? 42 : 48,
+        minHeight: 48,
+      ),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
         borderRadius: ShapeBorderRadius.small,
@@ -56,9 +63,10 @@ class OtpInputField extends StatelessWidget {
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       textInputAction: inputAction,
-      length: 4,
+      length: length,
       autofillHints: const {AutofillHints.oneTimeCode},
-      separatorBuilder: (index) => const Gap(Spacing.normal),
+      separatorBuilder: (index) =>
+          Gap(length > 4 ? Spacing.small : Spacing.normal),
       defaultPinTheme: decoration.copyBorderWith(
         border: Border.all(color: colorScheme.primary, width: 2),
       ),

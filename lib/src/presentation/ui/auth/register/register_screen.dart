@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:money_invest_app/src/app/routes/routes.dart';
-import 'package:money_invest_app/src/core/base/progress_status.dart';
+import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/alert_message.dart';
@@ -39,12 +39,27 @@ class RegisterScreen extends StatelessWidget {
         },
       );
     } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
-      if (error is String) {
-        showErrorMessage(context: context, content: error);
-      } else {
-        showErrorMessage(context: context, content: error.toString());
+      showErrorMessage(context: context, content: _getErrorMessage(error));
+    }
+  }
+
+  String _getErrorMessage(Object? error) {
+    if (error is InvalidResponseException) {
+      if (error.errors != null && error.errors!.isNotEmpty) {
+        final firstError = error.errors!.values.first;
+        if (firstError is List && firstError.isNotEmpty) {
+          return firstError.first.toString();
+        }
+        return firstError.toString();
+      }
+      if (error.message != null && error.message!.isNotEmpty) {
+        return error.message!;
       }
     }
+    if (error is String && error.isNotEmpty) {
+      return error;
+    }
+    return error?.toString() ?? 'Something went wrong';
   }
 
   @override

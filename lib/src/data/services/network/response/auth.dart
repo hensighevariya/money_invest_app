@@ -39,38 +39,89 @@ class AuthSuccessResponse extends Equatable {
   Map<String, dynamic> toJson() => _$AuthSuccessResponseToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class ForgotPasswordResponse extends Equatable {
   const ForgotPasswordResponse({
-    required this.token,
-    required this.verifyType,
-    required this.type,
+    this.token = '',
+    this.verifyType = 0,
+    this.type = 0,
+    this.message,
+    this.resetToken,
   });
 
-  factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) =>
-      _$ForgotPasswordResponseFromJson(json);
+  factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) {
+    final token = (json['token'] ?? json['resetToken'] ?? json['verificationToken'] ?? '').toString();
+    final message = json['message']?.toString();
+    final verifyType = json['verifyType'] is int
+        ? json['verifyType'] as int
+        : int.tryParse(json['verifyType']?.toString() ?? '') ?? 0;
+    final type = json['type'] is int
+        ? json['type'] as int
+        : int.tryParse(json['type']?.toString() ?? '') ?? 0;
+    return ForgotPasswordResponse(
+      token: token,
+      verifyType: verifyType,
+      type: type,
+      message: message,
+      resetToken: json['resetToken']?.toString(),
+    );
+  }
+
+  factory ForgotPasswordResponse.fromData(dynamic data) {
+    if (data is String) {
+      return ForgotPasswordResponse(token: data);
+    }
+    if (data is Map<String, dynamic>) {
+      return ForgotPasswordResponse.fromJson(data);
+    }
+    return const ForgotPasswordResponse();
+  }
 
   final String token;
   final int verifyType;
   final int type;
+  final String? message;
+  final String? resetToken;
 
   @override
-  List<Object?> get props => [token, verifyType, type];
+  List<Object?> get props => [token, verifyType, type, message, resetToken];
 
   Map<String, dynamic> toJson() => _$ForgotPasswordResponseToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(createFactory: false)
 class ForgotPasswordVerifyResponse extends Equatable {
-  const ForgotPasswordVerifyResponse({required this.token});
+  const ForgotPasswordVerifyResponse({
+    required this.token,
+    this.resetToken,
+    this.message,
+  });
 
-  factory ForgotPasswordVerifyResponse.fromJson(Map<String, dynamic> json) =>
-      _$ForgotPasswordVerifyResponseFromJson(json);
+  factory ForgotPasswordVerifyResponse.fromJson(Map<String, dynamic> json) {
+    final resetToken = (json['resetToken'] ?? json['token'] ?? '').toString();
+    return ForgotPasswordVerifyResponse(
+      token: (json['token'] ?? resetToken).toString(),
+      resetToken: resetToken.isNotEmpty ? resetToken : null,
+      message: json['message']?.toString(),
+    );
+  }
+
+  factory ForgotPasswordVerifyResponse.fromData(dynamic data) {
+    if (data is String) {
+      return ForgotPasswordVerifyResponse(token: data, resetToken: data);
+    }
+    if (data is Map<String, dynamic>) {
+      return ForgotPasswordVerifyResponse.fromJson(data);
+    }
+    return const ForgotPasswordVerifyResponse(token: '');
+  }
 
   final String token;
+  final String? resetToken;
+  final String? message;
 
   @override
-  List<Object?> get props => [token];
+  List<Object?> get props => [token, resetToken, message];
 
   Map<String, dynamic> toJson() => _$ForgotPasswordVerifyResponseToJson(this);
 }
@@ -109,25 +160,40 @@ class VerifyOtpRequest extends Equatable {
   Map<String, dynamic> toJson() => _$VerifyOtpRequestToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false, createToJson: false)
 class ResetPasswordRequest extends Equatable {
   const ResetPasswordRequest({
-    this.type = 1,
-    required this.token,
-    required this.password,
+    required this.resetToken,
+    required this.newPassword,
     required this.confirmPassword,
+    this.token,
+    this.password,
+    this.type,
   });
 
   factory ResetPasswordRequest.fromJson(Map<String, dynamic> json) =>
       _$ResetPasswordRequestFromJson(json);
 
-  final int type;
-  final String token;
-  final String password;
+  final String resetToken;
+  final String newPassword;
   final String confirmPassword;
+  final String? token;
+  final String? password;
+  final int? type;
 
   @override
-  List<Object?> get props => [type, token, password, confirmPassword];
+  List<Object?> get props => [
+    resetToken,
+    newPassword,
+    confirmPassword,
+    token,
+    password,
+    type,
+  ];
 
-  Map<String, dynamic> toJson() => _$ResetPasswordRequestToJson(this);
+  Map<String, dynamic> toJson() => {
+    'resetToken': resetToken,
+    'newPassword': newPassword,
+    'confirmPassword': confirmPassword,
+  };
 }

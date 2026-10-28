@@ -13,7 +13,12 @@ class FirebaseService {
   final Completer<bool> _initializeCompleter = Completer();
 
   Future<void> initialize() async {
-    return;
+    if (options == null) {
+      if (!_initializeCompleter.isCompleted) {
+        _initializeCompleter.complete(false);
+      }
+      return;
+    }
     try {
       await Firebase.initializeApp(options: options);
       await FirebaseRemoteConfig.instance.ensureInitialized();
@@ -41,16 +46,19 @@ class FirebaseService {
   /*region ---------------------------------------- Messaging ---------------------------------------- */
 
   Future<String?> getToken() async {
+    if (!_initializeCompleter.isCompleted) return null;
     await _initializeCompleter.future;
     return FirebaseMessaging.instance.getToken();
   }
 
   Future<void> deleteToken() async {
+    if (!_initializeCompleter.isCompleted) return;
     await _initializeCompleter.future;
     return FirebaseMessaging.instance.deleteToken();
   }
 
   Future<RemoteMessage?> getInitialMessage() async {
+    if (!_initializeCompleter.isCompleted) return null;
     await _initializeCompleter.future;
     return FirebaseMessaging.instance.getInitialMessage();
   }
@@ -68,6 +76,7 @@ class FirebaseService {
   /*region ---------------------------------------- Remote Config ---------------------------------------- */
 
   Future<String> getConfigString(String key) async {
+    if (!_initializeCompleter.isCompleted) return '';
     await _initializeCompleter.future;
     return FirebaseRemoteConfig.instance.getString(key);
   }

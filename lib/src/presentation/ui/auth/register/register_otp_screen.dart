@@ -3,10 +3,13 @@ import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:money_invest_app/src/data/repository/auth_repository.dart';
+import 'package:money_invest_app/src/core/core.dart';
+import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
+import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/components/alert_message.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/common_input_field.dart';
@@ -122,6 +125,9 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
       final serverMsg = responseData.message;
 
       if (isCompleted) {
+        final user = responseData.user ?? const UserData(id: '');
+        context.read<UserProfileBloc>().add(UserLoggedIn(user));
+        context.read<UserProfileBloc>().add(const FetchUserProfile());
         showSuccessMessage(
           context: context,
           content: serverMsg ?? context.localizations.otpVerifiedSuccessfully,
@@ -149,7 +155,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
       }
     } catch (error) {
       if (!mounted) return;
-      showErrorMessage(context: context, content: error.toString());
+      showErrorMessage(context: context, content: _getErrorMessage(error));
     } finally {
       if (mounted) {
         setState(() => _isVerifying = false);
@@ -196,7 +202,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
       _startTimer(isMobile: isMobile);
     } catch (error) {
       if (!mounted) return;
-      showErrorMessage(context: context, content: error.toString());
+      showErrorMessage(context: context, content: _getErrorMessage(error));
     } finally {
       if (mounted) {
         setState(() {
@@ -208,6 +214,41 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
         });
       }
     }
+  }
+
+  String _getErrorMessage(Object error) {
+    if (error is InvalidResponseException) {
+      if (error.message != null && error.message!.isNotEmpty) {
+        return error.message!;
+      }
+      if (error.errors != null && error.errors!.isNotEmpty) {
+        final firstVal = error.errors!.values.first;
+        if (firstVal is List && firstVal.isNotEmpty) {
+          return firstVal.first.toString();
+        }
+        return firstVal.toString();
+      }
+      return context.localizations.unknownErrorDescription;
+    } else if (error is RequestProcessingException) {
+      return error.message;
+    } else if (error is NetworkConnectionException) {
+      return context.localizations.internetErrorDescription;
+    } else if (error is InternalServerException) {
+      return context.localizations.serverErrorDescription;
+    } else if (error is RequestTimeoutException) {
+      return context.localizations.timeoutErrorMessage;
+    } else if (error is DioException) {
+      final responseData = error.response?.data;
+      if (responseData is Map<String, dynamic> &&
+          responseData['message'] is String &&
+          (responseData['message'] as String).isNotEmpty) {
+        return responseData['message'] as String;
+      }
+    } else if (error is String) {
+      return error;
+    }
+    final str = error.toString();
+    return str.startsWith('Exception: ') ? str.substring(11) : str;
   }
 
   void _startTimer({required bool isMobile}) {
@@ -315,30 +356,30 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                     ],
                     hintText: localizations.mobileVerificationCode,
                     suffixIconConstraints: const BoxConstraints(
-                      minWidth: 80,
+                      minWidth: 48,
+                      maxWidth: 100,
                       maxHeight: 48,
                     ),
                     suffixIcon: _isMobileVerified
                         ? const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(horizontal: 12),
                             child: Icon(
                               Icons.check_circle_rounded,
                               color: Colors.green,
                             ),
                           )
                         : _isResendingMobile
-                        ? const SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: Padding(
-                              padding: EdgeInsets.all(12),
+                        ? const Center(
+                            child: SizedBox.square(
+                              dimension: 18,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             ),
                           )
                         : _mobileRemainingSeconds > 0
                         ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Center(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Align(
+                              alignment: Alignment.centerRight,
                               child: Text(
                                 '${_mobileRemainingSeconds}s',
                                 style: TextStyle(
@@ -382,30 +423,30 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                     ],
                     hintText: localizations.emailVerificationCode,
                     suffixIconConstraints: const BoxConstraints(
-                      minWidth: 80,
+                      minWidth: 48,
+                      maxWidth: 100,
                       maxHeight: 48,
                     ),
                     suffixIcon: _isEmailVerified
                         ? const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            padding: EdgeInsets.symmetric(horizontal: 12),
                             child: Icon(
                               Icons.check_circle_rounded,
                               color: Colors.green,
                             ),
                           )
                         : _isResendingEmail
-                        ? const SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: Padding(
-                              padding: EdgeInsets.all(12),
+                        ? const Center(
+                            child: SizedBox.square(
+                              dimension: 18,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             ),
                           )
                         : _emailRemainingSeconds > 0
                         ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Center(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Align(
+                              alignment: Alignment.centerRight,
                               child: Text(
                                 '${_emailRemainingSeconds}s',
                                 style: TextStyle(

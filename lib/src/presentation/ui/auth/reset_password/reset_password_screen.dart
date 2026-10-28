@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:money_invest_app/src/core/base/progress_status.dart';
+import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/model/auth_navigation_data_model.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
@@ -33,7 +33,28 @@ class ResetPasswordScreen extends StatelessWidget {
       if (context.mounted) {
         context.go('/login');
       }
+    } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
+      showErrorMessage(context: context, content: _getErrorMessage(error));
     }
+  }
+
+  String _getErrorMessage(Object? error) {
+    if (error is InvalidResponseException) {
+      if (error.errors != null && error.errors!.isNotEmpty) {
+        final firstError = error.errors!.values.first;
+        if (firstError is List && firstError.isNotEmpty) {
+          return firstError.first.toString();
+        }
+        return firstError.toString();
+      }
+      if (error.message != null && error.message!.isNotEmpty) {
+        return error.message!;
+      }
+    }
+    if (error is String && error.isNotEmpty) {
+      return error;
+    }
+    return error?.toString() ?? 'Something went wrong';
   }
 
   @override

@@ -50,7 +50,7 @@ final class InvalidResponseException extends BaseException {
 
   @override
   String toString() {
-    return 'ApiResponseError { message: $message, statusCode: $statusCode, errors: $errors }';
+    return message ?? 'Request failed with status $statusCode';
   }
 }
 
@@ -61,7 +61,7 @@ final class RequestProcessingException extends BaseException {
 
   @override
   String toString() {
-    return 'RequestProcessingException { message: $message }';
+    return message;
   }
 }
 

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:common_extensions/common_extensions.dart';
@@ -35,10 +36,33 @@ base class BaseRepository {
             if (statusCode != null) {
               switch (statusCode) {
                 case 401:
+                  dynamic responseData401 = error.response?.data;
+                  if (responseData401 is String &&
+                      responseData401.isNotEmpty) {
+                    try {
+                      responseData401 = jsonDecode(responseData401);
+                    } catch (_) {}
+                  }
+                  if (responseData401 is Map<String, dynamic> &&
+                      responseData401['message'] is String &&
+                      (responseData401['message'] as String).isNotEmpty) {
+                    return InvalidResponseException(
+                      statusCode: statusCode,
+                      message: responseData401['message'] as String,
+                      errors: responseData401['errors'] is Map<String, dynamic>
+                          ? responseData401['errors'] as Map<String, dynamic>
+                          : null,
+                    );
+                  }
                   return const SessionExpiredException();
 
                 case >= 400 && <= 499:
-                  final responseData = error.response?.data;
+                  dynamic responseData = error.response?.data;
+                  if (responseData is String && responseData.isNotEmpty) {
+                    try {
+                      responseData = jsonDecode(responseData);
+                    } catch (_) {}
+                  }
                   if (responseData is Map<String, dynamic>) {
                     return InvalidResponseException(
                       statusCode: statusCode,
