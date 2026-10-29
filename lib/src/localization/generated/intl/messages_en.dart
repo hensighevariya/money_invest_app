@@ -62,13 +62,37 @@ class MessageLookup extends MessageLookupByLibrary {
     "andLabel": MessageLookupByLibrary.simpleMessage(" and "),
     "appName": MessageLookupByLibrary.simpleMessage("Security Saas"),
     "cameraPermissionLabel": MessageLookupByLibrary.simpleMessage("Camera"),
+    "changePasswordDesc": MessageLookupByLibrary.simpleMessage(
+      "Enter your current password and choose a new one to keep your account secure.",
+    ),
+    "changePasswordScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Change Password",
+    ),
+    "changePasswordSuccessDescription": MessageLookupByLibrary.simpleMessage(
+      "Your password has been updated successfully.",
+    ),
+    "changePasswordSuccessTitle": MessageLookupByLibrary.simpleMessage(
+      "Password Updated",
+    ),
     "codeWillBeSentTo": m0,
+    "confirmPasswordFieldHint": MessageLookupByLibrary.simpleMessage(
+      "Enter your confirm password...",
+    ),
+    "confirmPasswordFieldLabel": MessageLookupByLibrary.simpleMessage(
+      "Confirm Password",
+    ),
     "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
       "Confirm Password",
     ),
     "continueButtonLabel": MessageLookupByLibrary.simpleMessage("Continue"),
     "copiedToClipboardHint": MessageLookupByLibrary.simpleMessage(
       "Copied to Clipboard",
+    ),
+    "currentPasswordFieldHint": MessageLookupByLibrary.simpleMessage(
+      "Enter your current password...",
+    ),
+    "currentPasswordFieldLabel": MessageLookupByLibrary.simpleMessage(
+      "Current Password",
     ),
     "dataNotFound": MessageLookupByLibrary.simpleMessage("Data Not Found"),
     "didntReceivedCode": MessageLookupByLibrary.simpleMessage(
@@ -116,6 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorMobileInvalidFormat": MessageLookupByLibrary.simpleMessage(
       "Please enter valid mobile number!",
+    ),
+    "errorNewPasswordSameAsCurrent": MessageLookupByLibrary.simpleMessage(
+      "New password must be different from the current password",
     ),
     "errorOtpCodeInvalid": MessageLookupByLibrary.simpleMessage(
       "Please enter valid otp code!",
@@ -319,6 +346,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "myInvestmentsMonthlyReturn": m3,
     "myInvestmentsTitle": MessageLookupByLibrary.simpleMessage(
       "My Investments",
+    ),
+    "newPasswordFieldHint": MessageLookupByLibrary.simpleMessage(
+      "Enter your new password...",
+    ),
+    "newPasswordFieldLabel": MessageLookupByLibrary.simpleMessage(
+      "New Password",
     ),
     "newPasswordHint": MessageLookupByLibrary.simpleMessage("New Password"),
     "noCitiesAvailable": MessageLookupByLibrary.simpleMessage(

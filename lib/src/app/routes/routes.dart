@@ -8,6 +8,7 @@ import 'package:money_invest_app/src/presentation/ui/home/home_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/profile_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/edit_profile_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/profile/kyc_screen.dart';
+import 'package:money_invest_app/src/presentation/ui/profile/change_password/change_password_view.dart';
 import 'package:money_invest_app/src/presentation/ui/investment/new_investment_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/investment/payment_gateway_screen.dart';
 import 'package:money_invest_app/src/presentation/ui/investment/payment_success_screen.dart';
@@ -152,6 +153,10 @@ class AppRoutes with ChangeNotifier {
                   GoRoute(
                     path: 'kyc',
                     builder: (context, state) => const KycScreen(),
+                  ),
+                  GoRoute(
+                    path: 'change-password',
+                    builder: (context, state) => const ChangePasswordView(),
                   ),
                 ],
               ),

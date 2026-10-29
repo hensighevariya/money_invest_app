@@ -266,10 +266,11 @@ class ApiClientService {
   }
 
   Future<void> changeUserPassword(ChangePasswordRequest request) async {
-    await _dioClient.post<dynamic>(
-      '/user/auth/change-password',
+    final response = await _dioClient.post<dynamic>(
+      '/api/users/change-password',
       data: request.toJson(),
     );
+    _parseResponseData(response, (responseData) => null);
   }
 
   //endregion ---------------------------------------- User ----------------------------------------

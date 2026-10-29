@@ -6,7 +6,6 @@ import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/common_input_field.dart';
 import 'package:money_invest_app/src/presentation/components/mobile_number_field.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
-import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/forgot_password/logic/forgot_password_cubit.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/forgot_password/logic/forgot_password_state.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/widgets/auth_title.dart';

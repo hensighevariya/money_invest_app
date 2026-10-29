@@ -3,6 +3,7 @@ enum EnvironmentType {
   production;
 
   bool get isDevelopment => this == EnvironmentType.development;
+
   bool get isProduction => this == EnvironmentType.production;
 }
 
@@ -23,13 +24,13 @@ class AppEnvironment {
   });
 
   static AppEnvironment? _current;
-  static AppEnvironment get current =>
-      _current ??= AppEnvironment.fromDartEnvironment();
+
+  static AppEnvironment get current => _current ??= AppEnvironment.fromDartEnvironment();
+
   static set current(AppEnvironment env) => _current = env;
 
   factory AppEnvironment.development({
-    String baseUrl =
-        'https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/',
+    String baseUrl = 'https://73fa-2402-a00-162-20fd-74ff-1314-3260-ebf.ngrok-free.app/',
     String? apiBaseUrl,
     String? tradeUrl,
     String? socketUrl,
@@ -89,18 +90,11 @@ class AppEnvironment {
   }
 
   factory AppEnvironment.fromDartEnvironment() {
-    final envName = const String.fromEnvironment(
-      'env.name',
-      defaultValue: 'development',
-    ).toLowerCase();
+    final envName = const String.fromEnvironment('env.name', defaultValue: 'development').toLowerCase();
     final isProd = envName == 'production' || envName == 'prod';
 
-    final defaultBase = isProd
-        ? 'https://api.moneyinvest.com/'
-        : 'https://b4f7-2402-a00-162-20fd-10be-fad-180c-cd57.ngrok-free.app/';
-
     final rawBaseUrl = const String.fromEnvironment('env.baseUrl');
-    final baseUrl = rawBaseUrl.isNotEmpty ? rawBaseUrl : defaultBase;
+    final baseUrl = rawBaseUrl;
 
     final rawApiBaseUrl = const String.fromEnvironment('env.apiBaseUrl');
     final apiBaseUrl = rawApiBaseUrl.isNotEmpty ? rawApiBaseUrl : baseUrl;
@@ -112,23 +106,16 @@ class AppEnvironment {
     final socketUrl = rawSocketUrl.isNotEmpty ? rawSocketUrl : baseUrl;
 
     return AppEnvironment(
-      environmentType:
-          isProd ? EnvironmentType.production : EnvironmentType.development,
+      environmentType: isProd ? EnvironmentType.production : EnvironmentType.development,
       baseUrl: baseUrl.endsWith('/') ? baseUrl : '$baseUrl/',
       apiBaseUrl: apiBaseUrl.endsWith('/') ? apiBaseUrl : '$apiBaseUrl/',
       tradeUrl: tradeUrl.endsWith('/') ? tradeUrl : '$tradeUrl/',
       socketUrl: socketUrl,
       apiEncryptionKey: const String.fromEnvironment('env.apiEncryptionKey'),
       apiDecryptionKey: const String.fromEnvironment('env.apiDecryptionKey'),
-      googleServerClientId: const String.fromEnvironment(
-        'env.googleServerClientId',
-      ),
-      apiEncryptionIvKey: const String.fromEnvironment(
-        'env.apiEncryptionIvKey',
-      ),
-      apiDecryptionIvKey: const String.fromEnvironment(
-        'env.apiDecryptionIvKey',
-      ),
+      googleServerClientId: const String.fromEnvironment('env.googleServerClientId'),
+      apiEncryptionIvKey: const String.fromEnvironment('env.apiEncryptionIvKey'),
+      apiDecryptionIvKey: const String.fromEnvironment('env.apiDecryptionIvKey'),
       bucketName: const String.fromEnvironment('env.bucketName'),
       region: const String.fromEnvironment('env.region'),
     );
@@ -148,6 +135,7 @@ class AppEnvironment {
   final String region;
 
   bool get isDevelopment => environmentType.isDevelopment;
+
   bool get isProduction => environmentType.isProduction;
 
   String get imageBaseUrl => awsImageUrl;

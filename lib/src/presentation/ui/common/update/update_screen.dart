@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
-import 'package:money_invest_app/src/presentation/resources/resources.dart';
+import 'package:money_invest_app/src/presentation/resources/constraints.dart';
 import 'package:ui_components/ui_components.dart';
 
+import '../../../resources/styles/button.dart';
 import 'widgets/update_details.dart';
 
 class ForceUpdateScreen extends StatelessWidget {

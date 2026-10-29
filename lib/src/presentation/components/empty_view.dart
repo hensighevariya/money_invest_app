@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
-import 'package:money_invest_app/src/presentation/resources/resources.dart';
+import 'package:money_invest_app/src/presentation/resources/assets.dart';
+import 'package:money_invest_app/src/presentation/resources/constraints.dart';
 
 import 'loading_indicator.dart';
 

@@ -10,7 +10,6 @@ import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/alert_message.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
-import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/widgets/auth_title.dart';
 import 'package:money_invest_app/src/utils/loading_dialog_handler.dart';
 

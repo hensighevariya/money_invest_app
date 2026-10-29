@@ -2163,6 +2163,116 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Change Password`
+  String get changePasswordScreenTitle {
+    return Intl.message(
+      'Change Password',
+      name: 'changePasswordScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your current password and choose a new one to keep your account secure.`
+  String get changePasswordDesc {
+    return Intl.message(
+      'Enter your current password and choose a new one to keep your account secure.',
+      name: 'changePasswordDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Password`
+  String get currentPasswordFieldLabel {
+    return Intl.message(
+      'Current Password',
+      name: 'currentPasswordFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your current password...`
+  String get currentPasswordFieldHint {
+    return Intl.message(
+      'Enter your current password...',
+      name: 'currentPasswordFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get newPasswordFieldLabel {
+    return Intl.message(
+      'New Password',
+      name: 'newPasswordFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your new password...`
+  String get newPasswordFieldHint {
+    return Intl.message(
+      'Enter your new password...',
+      name: 'newPasswordFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Password`
+  String get confirmPasswordFieldLabel {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPasswordFieldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your confirm password...`
+  String get confirmPasswordFieldHint {
+    return Intl.message(
+      'Enter your confirm password...',
+      name: 'confirmPasswordFieldHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password Updated`
+  String get changePasswordSuccessTitle {
+    return Intl.message(
+      'Password Updated',
+      name: 'changePasswordSuccessTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password has been updated successfully.`
+  String get changePasswordSuccessDescription {
+    return Intl.message(
+      'Your password has been updated successfully.',
+      name: 'changePasswordSuccessDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password must be different from the current password`
+  String get errorNewPasswordSameAsCurrent {
+    return Intl.message(
+      'New password must be different from the current password',
+      name: 'errorNewPasswordSameAsCurrent',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

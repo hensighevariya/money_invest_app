@@ -11,7 +11,6 @@ import 'package:money_invest_app/src/presentation/components/components.dart';
 import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
 import 'package:money_invest_app/src/data/data.dart';
-import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:ui_components/ui_components.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -105,7 +104,7 @@ class ProfileScreen extends StatelessWidget {
                 MenuListWidget(
                   title: context.localizations.profileChangePassword,
                   icon: SvgIcons.icnLock,
-                  onTap: () {},
+                  onTap: () => context.go('/home/profile/change-password'),
                 ),
                 CommonDivider(paddingSize: Spacing.xMedium),
                 MenuListWidget(

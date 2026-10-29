@@ -227,5 +227,16 @@
   "pleaseEnterEmailOtp": "Please enter 6-digit email verification code",
   "mobileVerified": "Mobile number verified successfully",
   "emailVerified": "Email verified successfully",
-  "accountCreatedSuccessfully": "Account created successfully!"
+  "accountCreatedSuccessfully": "Account created successfully!",
+  "changePasswordScreenTitle": "Change Password",
+  "changePasswordDesc": "Enter your current password and choose a new one to keep your account secure.",
+  "currentPasswordFieldLabel": "Current Password",
+  "currentPasswordFieldHint": "Enter your current password...",
+  "newPasswordFieldLabel": "New Password",
+  "newPasswordFieldHint": "Enter your new password...",
+  "confirmPasswordFieldLabel": "Confirm Password",
+  "confirmPasswordFieldHint": "Enter your confirm password...",
+  "changePasswordSuccessTitle": "Password Updated",
+  "changePasswordSuccessDescription": "Your password has been updated successfully.",
+  "errorNewPasswordSameAsCurrent": "New password must be different from the current password"
 }

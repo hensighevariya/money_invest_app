@@ -10,7 +10,6 @@ import 'package:money_invest_app/src/presentation/components/common_input_field.
 import 'package:money_invest_app/src/presentation/components/image.dart';
 import 'package:money_invest_app/src/presentation/components/mobile_number_field.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
-import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:ui_components/ui_components.dart';
 
 class EditProfileScreen extends StatefulWidget {

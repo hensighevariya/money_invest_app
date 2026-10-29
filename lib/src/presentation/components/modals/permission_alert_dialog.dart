@@ -1,7 +1,7 @@
 import 'package:adaptive_layout/adaptive_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
-import 'package:money_invest_app/src/presentation/resources/resources.dart';
+import 'package:money_invest_app/src/presentation/resources/constraints.dart';
 
 class PermissionAlertDialog extends StatelessWidget {
   const PermissionAlertDialog({
