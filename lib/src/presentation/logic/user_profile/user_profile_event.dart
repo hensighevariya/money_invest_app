@@ -29,3 +29,9 @@ class UserLoggedOut extends UserProfileEvent {
 class GetCurrentUser extends UserProfileEvent {
   const GetCurrentUser();
 }
+
+class UpdateNotificationStatus extends UserProfileEvent {
+  const UpdateNotificationStatus(this.isNotification);
+
+  final bool isNotification;
+}

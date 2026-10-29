@@ -273,6 +273,20 @@ class ApiClientService {
     _parseResponseData(response, (responseData) => null);
   }
 
+  Future<void> updateNotificationStatus({
+    required bool isNotification,
+    required String pushToken,
+  }) async {
+    final response = await _dioClient.patch<dynamic>(
+      '/api/users/notification',
+      data: {
+        'isNotification': isNotification,
+        'pushToken': pushToken,
+      },
+    );
+    _parseResponseData(response, (responseData) => null);
+  }
+
   //endregion ---------------------------------------- User ----------------------------------------
 
   // region ---------------------------------------- Common ----------------------------------------

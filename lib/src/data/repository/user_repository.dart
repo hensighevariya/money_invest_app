@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:money_invest_app/src/core/base/repository.dart';
 import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/utils/log.dart';
@@ -72,6 +73,38 @@ final class UserRepository extends BaseRepository {
           confirmPassword: confirmPassword,
         ),
       );
+      return true;
+    } catch (error, stackTrace) {
+      throw transformError(error, stackTrace);
+    }
+  }
+
+  Future<bool> updateNotificationStatus({
+    required bool isNotification,
+    String? pushToken,
+  }) async {
+    try {
+      String? token = pushToken;
+      if (token == null || token.isEmpty) {
+        try {
+          if (Firebase.apps.isNotEmpty) {
+            token = await _firebaseService.getToken();
+          }
+        } catch (_) {}
+      }
+      final effectiveToken = (token != null && token.isNotEmpty)
+          ? token
+          : 'fcm_token_sample_1234567890abcdef';
+
+      await _apiClientService.updateNotificationStatus(
+        isNotification: isNotification,
+        pushToken: effectiveToken,
+      );
+
+      final currentUser = getCurrentUser();
+      if (currentUser != null) {
+        _updateUserData(currentUser.copyWith(isNotification: isNotification));
+      }
       return true;
     } catch (error, stackTrace) {
       throw transformError(error, stackTrace);

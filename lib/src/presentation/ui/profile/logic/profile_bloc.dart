@@ -15,14 +15,44 @@ base class ProfileBloc extends BaseBloc<ProfileEvent, ProfileState> {
     required UserRepository userRepository,
     required LocalStorageService localStorageService,
     required SocketClientService socketClientService,
-  }) : userData = userRepository.getCurrentUser(),
-       super(const ProfileState()) {
+  }) : _userRepository = userRepository,
+       userData = userRepository.getCurrentUser(),
+       super(
+         ProfileState(
+           isNotification:
+               userRepository.getCurrentUser()?.isNotification ?? false,
+         ),
+       ) {
     on<UserLogoutRequested>(_onUserLogoutRequested, transformer: droppable());
+    on<NotificationStatusChanged>(
+      _onNotificationStatusChanged,
+      transformer: sequential(),
+    );
   }
 
   final AuthRepository _authRepository;
+  final UserRepository _userRepository;
   final LoadingHandler _loadingHandler;
   final UserData? userData;
+
+  Future<void> _onNotificationStatusChanged(
+    NotificationStatusChanged event,
+    Emitter<ProfileState> emit,
+  ) async {
+    final previousStatus = state.isNotification;
+    emit(state.copyWith(isNotification: event.isNotification));
+    try {
+      final success = await _userRepository.updateNotificationStatus(
+        isNotification: event.isNotification,
+      );
+      if (!success) {
+        emit(state.copyWith(isNotification: previousStatus));
+      }
+    } catch (error, stackTrace) {
+      emit(state.copyWith(isNotification: previousStatus));
+      handleError(error, stackTrace);
+    }
+  }
 
   Future<void> _onUserLogoutRequested(
     UserLogoutRequested event,

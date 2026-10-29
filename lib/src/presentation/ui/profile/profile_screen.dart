@@ -110,9 +110,21 @@ class ProfileScreen extends StatelessWidget {
                 MenuListWidget(
                   title: context.localizations.profileNotificationSettings,
                   icon: SvgIcons.icnNotification,
-                  onTap: () {},
+                  onTap: () {
+                    final currentStatus = userData?.isNotification ?? false;
+                    context.read<UserProfileBloc>().add(
+                      UpdateNotificationStatus(!currentStatus),
+                    );
+                  },
                   isNotification: true,
-                  widget: Switch(value: true, onChanged: (value) {}),
+                  widget: Switch(
+                    value: userData?.isNotification ?? false,
+                    onChanged: (value) {
+                      context.read<UserProfileBloc>().add(
+                        UpdateNotificationStatus(value),
+                      );
+                    },
+                  ),
                 ),
                 CommonDivider(paddingSize: Spacing.xMedium),
                 MenuListWidget(

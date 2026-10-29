@@ -27,6 +27,10 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     on<UserLoggedIn>(_onUserLoggedIn, transformer: droppable());
     on<UserLoggedOut>(_onUserLoggedOut, transformer: droppable());
     on<GetCurrentUser>(_getCurrentUser, transformer: droppable());
+    on<UpdateNotificationStatus>(
+      _onUpdateNotificationStatus,
+      transformer: sequential(),
+    );
 
     addAllSubscriptions([
       _userRepository.userStream.listen((event) {
@@ -83,6 +87,33 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
       ),
     );
     add(const FetchUserProfile());
+  }
+
+  FutureOr<void> _onUpdateNotificationStatus(
+    UpdateNotificationStatus event,
+    Emitter<UserProfileState> emit,
+  ) async {
+    final previousData = state.data;
+    if (previousData != null) {
+      emit(
+        state.copyWith(
+          data: previousData.copyWith(isNotification: event.isNotification),
+        ),
+      );
+    }
+    try {
+      final success = await _userRepository.updateNotificationStatus(
+        isNotification: event.isNotification,
+      );
+      if (!success && previousData != null) {
+        emit(state.copyWith(data: previousData));
+      }
+    } catch (error, stackTrace) {
+      if (previousData != null) {
+        emit(state.copyWith(data: previousData));
+      }
+      handleError(error, stackTrace);
+    }
   }
 
   FutureOr<void> _onUserLoggedOut(
