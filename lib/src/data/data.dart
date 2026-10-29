@@ -1,3 +1,4 @@
+export 'json_fields.dart';
 export 'model/app_version_model.dart';
 export 'model/auth_navigation_data_model.dart';
 export 'model/location_model.dart';
@@ -8,7 +9,6 @@ export 'repository/user_repository.dart';
 export 'services/api_client_service.dart';
 export 'services/firebase_service.dart';
 export 'services/local_storage_service.dart';
-export 'services/network/api_logger_interceptor.dart';
 export 'services/network/request/auth.dart';
 export 'services/network/request/register_request.dart';
 export 'services/network/response/auth.dart';

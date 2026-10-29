@@ -106,6 +106,14 @@ class AppBlocObserver extends BlocObserver {
       case InvalidSessionException():
         context?.read<UserProfileBloc>().add(const UserLoggedOut());
         break;
+      case AccountInactiveError():
+        showErrorMessage(
+          context: overlayContext,
+          content:
+              'Your account is currently inactive. Please contact support to reactivate your account or for further assistance',
+        );
+        context?.read<UserProfileBloc>().add(const UserLoggedOut());
+        break;
       case ResponseDecryptionException():
         break;
       case InvalidResponseException(
@@ -113,19 +121,45 @@ class AppBlocObserver extends BlocObserver {
         message: String? message,
       ):
         if (errors != null && errors.isNotEmpty) {
-          /*String error = errors.entries.fold('', (previousValue, element) => '$previousValue• ${element.value}\n');
-          showErrorDialog(
-            context: context,
-            title: l10n.errorTitle,
-            content: error,
-            button: ModalButton(label: l10n.okayButtonLabel, onPressed: null),
-          );*/
+          final errorValues = <String>[];
+          for (final val in errors.values) {
+            if (val == null) continue;
+            if (val is Iterable) {
+              for (final item in val) {
+                final str = item.toString().trim();
+                if (str.isNotEmpty) errorValues.add(str);
+              }
+            } else {
+              final str = val.toString().trim();
+              if (str.isNotEmpty) errorValues.add(str);
+            }
+          }
+
+          if (errorValues.length == 1) {
+            showErrorMessage(
+              context: overlayContext,
+              content: errorValues.first,
+            );
+          } else if (errorValues.length > 1) {
+            final formattedError = errorValues.map((e) => '• $e').join('\n');
+            showErrorMessage(
+              context: overlayContext,
+              content: formattedError,
+            );
+          } else if (message != null && message.isNotEmpty) {
+            showErrorMessage(context: overlayContext, content: message);
+          } else {
+            showErrorMessage(
+              context: overlayContext,
+              content: localizations.unknownErrorTitle,
+            );
+          }
         } else if (message != null && message.isNotEmpty) {
           showErrorMessage(context: overlayContext, content: message);
         } else {
           showErrorMessage(
             context: overlayContext,
-            content: 'Something went wrong!',
+            content: localizations.unknownErrorTitle,
           );
         }
         break;

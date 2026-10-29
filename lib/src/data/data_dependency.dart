@@ -54,31 +54,19 @@ abstract class DataDependency {
     final refreshDioClient = Dio(baseOptions);
     if (kDebugMode) {
       refreshDioClient.interceptors.add(
-        ApiLoggerInterceptor(
-          requestHeader: true,
-          requestBody: true,
-          responseHeader: true,
-          responseBody: true,
-        ),
+        LogInterceptor(requestBody: true, responseBody: true),
       );
     }
 
     dioClient.interceptors.addAll([
       ApiInterceptor(
-        logEnabled: false,
+        logEnabled: kDebugMode,
         localStorageService: localStorageService,
         dioClient: refreshDioClient,
         encryptionKey: environment.apiEncryptionKey,
         decryptionKey: environment.apiDecryptionKey,
         encryptionIvKey: environment.apiEncryptionIvKey,
         decryptionIvKey: environment.apiDecryptionIvKey,
-      ),
-      ApiLoggerInterceptor(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
       ),
     ]);
 
@@ -87,8 +75,9 @@ abstract class DataDependency {
 
   @lazySingleton
   FirebaseService providesFirebaseService() {
-    return FirebaseService(/*options: DefaultFirebaseOptions.currentPlatform*/)
-      ..initialize();
+    return FirebaseService(
+      // options: DefaultFirebaseOptions.currentPlatform
+    )..initialize();
   }
 
   @lazySingleton

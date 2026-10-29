@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 @immutable
-sealed class BaseException implements Exception {
+class BaseException implements Exception {
   const BaseException();
 
   @override
@@ -14,6 +14,10 @@ final class NetworkConnectionException extends BaseException {
 
 final class InternalServerException extends BaseException {
   const InternalServerException();
+}
+
+final class AccountInactiveError extends BaseException {
+  const AccountInactiveError();
 }
 
 final class RequestTimeoutException extends BaseException {
@@ -38,11 +42,7 @@ final class ResponseDecryptionException extends BaseException {
 }
 
 final class InvalidResponseException extends BaseException {
-  const InvalidResponseException({
-    required this.message,
-    required this.statusCode,
-    this.errors,
-  });
+  const InvalidResponseException({required this.message, required this.statusCode, this.errors});
 
   final String? message;
   final int statusCode;
@@ -50,7 +50,7 @@ final class InvalidResponseException extends BaseException {
 
   @override
   String toString() {
-    return message ?? 'Request failed with status $statusCode';
+    return 'ApiResponseError { message: $message, statusCode: $statusCode, errors: $errors }';
   }
 }
 
@@ -61,7 +61,7 @@ final class RequestProcessingException extends BaseException {
 
   @override
   String toString() {
-    return message;
+    return 'RequestProcessingException { message: $message }';
   }
 }
 

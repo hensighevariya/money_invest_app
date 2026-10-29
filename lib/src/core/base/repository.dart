@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:common_extensions/common_extensions.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:money_invest_app/src/utils/log.dart';
@@ -27,7 +26,8 @@ base class BaseRepository {
         switch (error.type) {
           case DioExceptionType.connectionTimeout ||
               DioExceptionType.receiveTimeout ||
-              DioExceptionType.sendTimeout:
+              DioExceptionType.sendTimeout ||
+              DioExceptionType.transformTimeout:
             return const RequestTimeoutException();
 
           case DioExceptionType.badResponse:
@@ -36,25 +36,9 @@ base class BaseRepository {
             if (statusCode != null) {
               switch (statusCode) {
                 case 401:
-                  dynamic responseData401 = error.response?.data;
-                  if (responseData401 is String &&
-                      responseData401.isNotEmpty) {
-                    try {
-                      responseData401 = jsonDecode(responseData401);
-                    } catch (_) {}
-                  }
-                  if (responseData401 is Map<String, dynamic> &&
-                      responseData401['message'] is String &&
-                      (responseData401['message'] as String).isNotEmpty) {
-                    return InvalidResponseException(
-                      statusCode: statusCode,
-                      message: responseData401['message'] as String,
-                      errors: responseData401['errors'] is Map<String, dynamic>
-                          ? responseData401['errors'] as Map<String, dynamic>
-                          : null,
-                    );
-                  }
                   return const SessionExpiredException();
+                case 403:
+                  return const AccountInactiveError();
 
                 case >= 400 && <= 499:
                   dynamic responseData = error.response?.data;
@@ -64,15 +48,22 @@ base class BaseRepository {
                     } catch (_) {}
                   }
                   if (responseData is Map<String, dynamic>) {
+                    final errorVal = responseData['error'];
+                    final messageVal = responseData['message'];
+                    final errorsVal = responseData['errors'];
+
+                    final message = errorVal is String
+                        ? errorVal
+                        : (messageVal is String ? messageVal : null);
+
+                    final errors = errorsVal is Map<String, dynamic>
+                        ? errorsVal
+                        : (errorVal is Map<String, dynamic> ? errorVal : null);
+
                     return InvalidResponseException(
                       statusCode: statusCode,
-                      message: (responseData['message'] as Object?)?.also(
-                        (message) => message is String ? message : null,
-                      ),
-                      errors: (responseData['errors'] as Object?)?.also(
-                        (errors) =>
-                            errors is Map<String, dynamic> ? errors : null,
-                      ),
+                      message: message,
+                      errors: errors,
                     );
                   }
                 case >= 500 && <= 599:
@@ -90,14 +81,10 @@ base class BaseRepository {
           case DioExceptionType.badCertificate:
             break;
           case DioExceptionType.unknown:
-            if (error.error is HttpException ||
-                error.error is SocketException) {
+            if (error.error is HttpException || error.error is SocketException) {
               return const NetworkConnectionException();
             }
             break;
-          case DioExceptionType.transformTimeout:
-            // TODO: Handle this case.
-            throw UnimplementedError();
         }
       case HttpException():
       case SocketException():

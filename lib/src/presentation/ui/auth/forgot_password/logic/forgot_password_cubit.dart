@@ -46,8 +46,9 @@ base class ForgotPasswordCubit extends BaseCubit<ForgotPasswordState> {
       if (result != null) {
         emit(state.copyWith(status: ProgressStatus.success(result)));
       }
-    } catch (error) {
+    } catch (error, stackTrace) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
+      handleError(error, stackTrace);
     }
   }
 }

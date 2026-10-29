@@ -11,7 +11,7 @@ enum EmailMobileInputError { required, invalidMobileFormat, invalidEmailFormat }
 
 /// Class for validating a form field that accepts either an email or a phone number.
 class EmailMobileInput extends FormzInput<String, EmailMobileInputError>
-    with EquatableMixin {
+    with Equatable {
   final PhoneDetail? phoneDetail;
 
   const EmailMobileInput.pure([super.value = '', this.phoneDetail])

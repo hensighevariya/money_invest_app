@@ -3,14 +3,13 @@ import 'package:common_extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/presentation.dart';
 import 'package:money_invest_app/src/presentation/components/alert_message.dart';
+import 'package:money_invest_app/src/utils/helper_functions.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/common_input_field.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
@@ -216,40 +215,8 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
     }
   }
 
-  String _getErrorMessage(Object error) {
-    if (error is InvalidResponseException) {
-      if (error.message != null && error.message!.isNotEmpty) {
-        return error.message!;
-      }
-      if (error.errors != null && error.errors!.isNotEmpty) {
-        final firstVal = error.errors!.values.first;
-        if (firstVal is List && firstVal.isNotEmpty) {
-          return firstVal.first.toString();
-        }
-        return firstVal.toString();
-      }
-      return context.localizations.unknownErrorDescription;
-    } else if (error is RequestProcessingException) {
-      return error.message;
-    } else if (error is NetworkConnectionException) {
-      return context.localizations.internetErrorDescription;
-    } else if (error is InternalServerException) {
-      return context.localizations.serverErrorDescription;
-    } else if (error is RequestTimeoutException) {
-      return context.localizations.timeoutErrorMessage;
-    } else if (error is DioException) {
-      final responseData = error.response?.data;
-      if (responseData is Map<String, dynamic> &&
-          responseData['message'] is String &&
-          (responseData['message'] as String).isNotEmpty) {
-        return responseData['message'] as String;
-      }
-    } else if (error is String) {
-      return error;
-    }
-    final str = error.toString();
-    return str.startsWith('Exception: ') ? str.substring(11) : str;
-  }
+  String _getErrorMessage(Object error) =>
+      formatErrorMessage(error, context.localizations);
 
   void _startTimer({required bool isMobile}) {
     if (isMobile) {

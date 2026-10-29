@@ -48,8 +48,9 @@ base class ResetPasswordCubit extends BaseCubit<ResetPasswordState> {
       if (result ?? false) {
         emit(state.copyWith(status: const ProgressStatus.success(true)));
       }
-    } catch (error) {
+    } catch (error, stackTrace) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
+      handleError(error, stackTrace);
     }
   }
 }

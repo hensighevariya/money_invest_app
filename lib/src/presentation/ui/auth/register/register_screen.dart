@@ -39,27 +39,10 @@ class RegisterScreen extends StatelessWidget {
         },
       );
     } else if (state.status case ProgressStatusFailed<Object>(:final error)) {
-      showErrorMessage(context: context, content: _getErrorMessage(error));
-    }
-  }
-
-  String _getErrorMessage(Object? error) {
-    if (error is InvalidResponseException) {
-      if (error.errors != null && error.errors!.isNotEmpty) {
-        final firstError = error.errors!.values.first;
-        if (firstError is List && firstError.isNotEmpty) {
-          return firstError.first.toString();
-        }
-        return firstError.toString();
-      }
-      if (error.message != null && error.message!.isNotEmpty) {
-        return error.message!;
+      if (error is String) {
+        showErrorMessage(context: context, content: error);
       }
     }
-    if (error is String && error.isNotEmpty) {
-      return error;
-    }
-    return error?.toString() ?? 'Something went wrong';
   }
 
   @override

@@ -45,7 +45,7 @@ String? toUtcDateTimeStringNullable(DateTime? value) {
   return value == null ? null : _utcDateTimeFormat.format(value);
 }
 
-abstract base class BaseEntity with EquatableMixin {
+abstract base class BaseEntity with Equatable {
   const BaseEntity({required this.id});
 
   @idField

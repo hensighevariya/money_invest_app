@@ -78,8 +78,9 @@ base class OtpVerificationCubit extends BaseCubit<OtpVerificationState> {
       if (result != null && result.isNotEmpty) {
         emit(state.copyWith(token: result));
       }
-    } catch (error) {
+    } catch (error, stackTrace) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
+      handleError(error, stackTrace);
     }
   }
 
@@ -113,8 +114,9 @@ base class OtpVerificationCubit extends BaseCubit<OtpVerificationState> {
         final statusData = OtpVerificationStatusData.token(result, type, verifyType);
         emit(state.copyWith(status: ProgressStatus.success(statusData)));
       }
-    } catch (error) {
+    } catch (error, stackTrace) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
+      handleError(error, stackTrace);
     }
   }
 }

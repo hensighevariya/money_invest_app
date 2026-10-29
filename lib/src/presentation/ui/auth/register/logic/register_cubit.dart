@@ -219,8 +219,9 @@ base class RegisterCubit extends BaseCubit<RegisterState> {
 
       if (result == null) return;
       emit(state.copyWith(status: ProgressStatus.success(result)));
-    } catch (error) {
+    } catch (error, stackTrace) {
       emit(state.copyWith(status: ProgressStatus.failed(error)));
+      handleError(error, stackTrace);
     }
   }
 }

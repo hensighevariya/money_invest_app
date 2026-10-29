@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:money_invest_app/src/core/core.dart';
 import 'package:money_invest_app/src/data/data.dart';
 import 'package:money_invest_app/src/utils/log.dart';
@@ -15,8 +14,8 @@ List<T> _parseList<T>(
   if (value is String && value.isNotEmpty) {
     try {
       value = jsonDecode(value);
-    } catch (error) {
-      Log.error('_parseList => $error');
+    } catch (e) {
+      return [];
     }
   }
   if (value is Map<String, dynamic>) {
@@ -36,7 +35,7 @@ List<T> _parseList<T>(
   final List<T> list = <T>[];
   for (final element in value) {
     try {
-      list.add(parser(element as Map<String, dynamic>));
+      list.add(parser(Map<String, dynamic>.from(element as Map)));
     } catch (error, stackTrace) {
       Log.error('_parseList => $error');
       Log.error('_parseList => $stackTrace');
@@ -54,14 +53,21 @@ class ApiClientService {
     Response<dynamic> response,
     T Function(dynamic responseData) parser,
   ) {
-    return compute((message) {
-      final dynamic raw = message is Map<String, dynamic> &&
-              message.containsKey('data') &&
-              message['data'] != null
-          ? message['data']
-          : message;
-      return parser(raw);
-    }, response.data);
+    final message = response.data;
+    if (message is Map<String, dynamic> && message['success'] == false) {
+      throw InvalidResponseException(
+        statusCode: response.statusCode ?? 200,
+        message: (message['message'] ?? message['error']) as String?,
+        errors: message['errors'] is Map<String, dynamic>
+            ? message['errors'] as Map<String, dynamic>
+            : (message['error'] is Map<String, dynamic>
+                ? message['error'] as Map<String, dynamic>
+                : null),
+      );
+    }
+    return (message is Map<String, dynamic> && message['data'] != null)
+        ? parser(message['data'])
+        : parser(message);
   }
 
   //region ---------------------------------------- Auth ----------------------------------------
@@ -97,39 +103,28 @@ class ApiClientService {
       },
       options: Options(headers: deviceHeaders),
     );
-    final rawData = response.data;
-    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
-      throw InvalidResponseException(
-        statusCode: response.statusCode ?? 200,
-        message: rawData['message'] as String? ?? 'Failed to login',
-        errors: rawData['errors'] is Map<String, dynamic>
-            ? rawData['errors'] as Map<String, dynamic>
-            : null,
-      );
-    }
     return _parseResponseData(
       response,
       (responseData) {
-        if (responseData is Map<String, dynamic> &&
-            response.data is Map<String, dynamic>) {
-          final resMap = response.data as Map<String, dynamic>;
-          if (resMap.containsKey('message') &&
-              !responseData.containsKey('message')) {
-            return AuthSuccessResponse.fromJson({
-              ...responseData,
-              'message': resMap['message'],
-            });
-          }
+        if (responseData is Map<String, dynamic>) {
+          final resMap = response.data is Map<String, dynamic>
+              ? response.data as Map<String, dynamic>
+              : null;
+          final msg = resMap?['message'] as String?;
+          final payload = {
+            ...responseData,
+            if (msg != null && !responseData.containsKey('message'))
+              'message': msg,
+          };
+          return AuthSuccessResponse.fromJson(payload);
         }
-        return AuthSuccessResponse.fromJson(
-          responseData as Map<String, dynamic>,
-        );
+        return const AuthSuccessResponse();
       },
     );
   }
 
   Future<void> userLogout() async {
-    final response = await _dioClient.patch<dynamic>(
+    await _dioClient.patch<dynamic>(
       '/api/auth/logout',
       options: Options(
         headers: {
@@ -137,16 +132,6 @@ class ApiClientService {
         },
       ),
     );
-    final rawData = response.data;
-    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
-      throw InvalidResponseException(
-        statusCode: response.statusCode ?? 200,
-        message: rawData['message'] as String? ?? 'Failed to logout',
-        errors: rawData['errors'] is Map<String, dynamic>
-            ? rawData['errors'] as Map<String, dynamic>
-            : null,
-      );
-    }
   }
 
   /// 1. Forgot Password: POST /api/auth/forgot-password
@@ -261,19 +246,7 @@ class ApiClientService {
   //region ---------------------------------------- User ----------------------------------------
 
   Future<UserData> getUserProfile() async {
-    final response = await _dioClient.get<dynamic>(
-      '/api/auth/me',
-    );
-    final rawData = response.data;
-    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
-      throw InvalidResponseException(
-        statusCode: response.statusCode ?? 200,
-        message: rawData['message'] as String? ?? 'Failed to get profile',
-        errors: rawData['errors'] is Map<String, dynamic>
-            ? rawData['errors'] as Map<String, dynamic>
-            : null,
-      );
-    }
+    final response = await _dioClient.get<dynamic>('/api/auth/me');
     return _parseResponseData(
       response,
       (responseData) {
@@ -321,10 +294,10 @@ class ApiClientService {
 
   Future<List<LocationCountry>> getCountries() async {
     final response = await _dioClient.get<dynamic>('/api/locations/countries');
-    return compute(
-      (dynamic message) =>
-          _parseList<LocationCountry>(message, LocationCountry.fromJson),
-      response.data,
+    return _parseResponseData(
+      response,
+      (responseData) =>
+          _parseList<LocationCountry>(responseData, LocationCountry.fromJson),
     );
   }
 
@@ -333,10 +306,10 @@ class ApiClientService {
       '/api/locations/states',
       queryParameters: {'countryId': countryId},
     );
-    return compute(
-      (dynamic message) =>
-          _parseList<LocationState>(message, LocationState.fromJson),
-      response.data,
+    return _parseResponseData(
+      response,
+      (responseData) =>
+          _parseList<LocationState>(responseData, LocationState.fromJson),
     );
   }
 
@@ -348,16 +321,17 @@ class ApiClientService {
       '/api/locations/cities',
       queryParameters: {'countryId': countryId, 'stateId': stateId},
     );
-    return compute(
-      (dynamic message) =>
-          _parseList<LocationCity>(message, LocationCity.fromJson),
-      response.data,
+    return _parseResponseData(
+      response,
+      (responseData) =>
+          _parseList<LocationCity>(responseData, LocationCity.fromJson),
     );
   }
 
   //endregion ---------------------------------------- Locations ----------------------------------------
 
   //region ---------------------------------------- Registration OTP ----------------------------------------
+
   Future<VerifyOtpData> verifyRegistrationOtp({
     required String token,
     required String otp,
@@ -373,16 +347,6 @@ class ApiClientService {
       },
       options: Options(headers: deviceHeaders),
     );
-    final rawData = response.data;
-    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
-      throw InvalidResponseException(
-        statusCode: response.statusCode ?? 200,
-        message: rawData['message'] as String? ?? 'Invalid or expired OTP',
-        errors: rawData['errors'] is Map<String, dynamic>
-            ? rawData['errors'] as Map<String, dynamic>
-            : null,
-      );
-    }
     return _parseResponseData(response, (responseData) {
       final msg = response.data is Map<String, dynamic>
           ? (response.data as Map)['message'] as String?
@@ -410,16 +374,6 @@ class ApiClientService {
         'type': type,
       },
     );
-    final rawData = response.data;
-    if (rawData is Map<String, dynamic> && rawData['success'] == false) {
-      throw InvalidResponseException(
-        statusCode: response.statusCode ?? 200,
-        message: rawData['message'] as String? ?? 'Failed to resend OTP',
-        errors: rawData['errors'] is Map<String, dynamic>
-            ? rawData['errors'] as Map<String, dynamic>
-            : null,
-      );
-    }
     return _parseResponseData(response, (responseData) {
       if (responseData is Map<String, dynamic> &&
           response.data is Map<String, dynamic>) {
@@ -437,6 +391,6 @@ class ApiClientService {
       return responseData;
     });
   }
+
   //endregion ---------------------------------------- Registration OTP ----------------------------------------
 }
-
