@@ -39,8 +39,12 @@ abstract class DataDependency {
     AppEnvironment environment,
     LocalStorageService localStorageService,
   ) {
+    var apiUrl = environment.apiBaseUrl.trim();
+    if (apiUrl.isEmpty || apiUrl == '/') {
+      apiUrl = 'https://73fa-2402-a00-162-20fd-74ff-1314-3260-ebf.ngrok-free.app/';
+    }
     final BaseOptions baseOptions = BaseOptions(
-      baseUrl: environment.apiBaseUrl,
+      baseUrl: apiUrl,
       connectTimeout: const Duration(minutes: 1),
       receiveTimeout: const Duration(minutes: 1),
       sendTimeout: const Duration(minutes: 1),
@@ -82,6 +86,10 @@ abstract class DataDependency {
 
   @lazySingleton
   SocketClientService providesSocketClientService(AppEnvironment environment) {
-    return SocketClientService(url: environment.socketUrl);
+    var socketUrl = environment.socketUrl.trim();
+    if (socketUrl.isEmpty || socketUrl == '/') {
+      socketUrl = 'https://73fa-2402-a00-162-20fd-74ff-1314-3260-ebf.ngrok-free.app/';
+    }
+    return SocketClientService(url: socketUrl);
   }
 }

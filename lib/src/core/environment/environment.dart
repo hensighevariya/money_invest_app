@@ -42,7 +42,9 @@ class AppEnvironment {
     String bucketName = '',
     String region = '',
   }) {
-    final base = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/';
+    const defaultBase = 'https://73fa-2402-a00-162-20fd-74ff-1314-3260-ebf.ngrok-free.app/';
+    final effectiveBase = baseUrl.trim().isNotEmpty ? baseUrl.trim() : defaultBase;
+    final base = effectiveBase.endsWith('/') ? effectiveBase : '$effectiveBase/';
     return AppEnvironment(
       environmentType: EnvironmentType.development,
       baseUrl: base,
@@ -72,7 +74,9 @@ class AppEnvironment {
     String bucketName = '',
     String region = '',
   }) {
-    final base = baseUrl.endsWith('/') ? baseUrl : '$baseUrl/';
+    const defaultBase = 'https://api.moneyinvest.com/';
+    final effectiveBase = baseUrl.trim().isNotEmpty ? baseUrl.trim() : defaultBase;
+    final base = effectiveBase.endsWith('/') ? effectiveBase : '$effectiveBase/';
     return AppEnvironment(
       environmentType: EnvironmentType.production,
       baseUrl: base,
@@ -93,24 +97,34 @@ class AppEnvironment {
     final envName = const String.fromEnvironment('env.name', defaultValue: 'development').toLowerCase();
     final isProd = envName == 'production' || envName == 'prod';
 
+    final defaultBase = isProd
+        ? 'https://api.moneyinvest.com/'
+        : 'https://73fa-2402-a00-162-20fd-74ff-1314-3260-ebf.ngrok-free.app/';
+
     final rawBaseUrl = const String.fromEnvironment('env.baseUrl');
-    final baseUrl = rawBaseUrl;
+    final baseUrl = rawBaseUrl.trim().isNotEmpty ? rawBaseUrl.trim() : defaultBase;
 
     final rawApiBaseUrl = const String.fromEnvironment('env.apiBaseUrl');
-    final apiBaseUrl = rawApiBaseUrl.isNotEmpty ? rawApiBaseUrl : baseUrl;
+    final apiBaseUrl = rawApiBaseUrl.trim().isNotEmpty ? rawApiBaseUrl.trim() : baseUrl;
 
     final rawTradeUrl = const String.fromEnvironment('env.tradeUrl');
-    final tradeUrl = rawTradeUrl.isNotEmpty ? rawTradeUrl : baseUrl;
+    final tradeUrl = rawTradeUrl.trim().isNotEmpty ? rawTradeUrl.trim() : baseUrl;
 
     final rawSocketUrl = const String.fromEnvironment('env.socketUrl');
-    final socketUrl = rawSocketUrl.isNotEmpty ? rawSocketUrl : baseUrl;
+    final socketUrl = rawSocketUrl.trim().isNotEmpty ? rawSocketUrl.trim() : baseUrl;
+
+    String formatUrl(String url) {
+      final trimmed = url.trim();
+      if (trimmed.isEmpty) return defaultBase;
+      return trimmed.endsWith('/') ? trimmed : '$trimmed/';
+    }
 
     return AppEnvironment(
       environmentType: isProd ? EnvironmentType.production : EnvironmentType.development,
-      baseUrl: baseUrl.endsWith('/') ? baseUrl : '$baseUrl/',
-      apiBaseUrl: apiBaseUrl.endsWith('/') ? apiBaseUrl : '$apiBaseUrl/',
-      tradeUrl: tradeUrl.endsWith('/') ? tradeUrl : '$tradeUrl/',
-      socketUrl: socketUrl,
+      baseUrl: formatUrl(baseUrl),
+      apiBaseUrl: formatUrl(apiBaseUrl),
+      tradeUrl: formatUrl(tradeUrl),
+      socketUrl: formatUrl(socketUrl),
       apiEncryptionKey: const String.fromEnvironment('env.apiEncryptionKey'),
       apiDecryptionKey: const String.fromEnvironment('env.apiDecryptionKey'),
       googleServerClientId: const String.fromEnvironment('env.googleServerClientId'),
