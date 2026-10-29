@@ -13,7 +13,6 @@ import 'package:money_invest_app/src/utils/helper_functions.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/common_input_field.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
-import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/widgets/auth_title.dart';
 
 class RegisterOtpScreen extends StatefulWidget {
@@ -92,10 +91,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
     final token = isMobile ? widget.mobileToken : widget.emailToken;
 
     if (token.isEmpty) {
-      showErrorMessage(
-        context: context,
-        content: "Session token is missing. Please register again.",
-      );
+      showErrorMessage(context: context, content: "Session token is missing. Please register again.");
       return;
     }
 
@@ -104,11 +100,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
 
     try {
       final authRepo = RepositoryProvider.of<AuthRepository>(context);
-      final responseData = await authRepo.verifyRegistrationOtp(
-        token: token,
-        otp: otp,
-        type: type,
-      );
+      final responseData = await authRepo.verifyRegistrationOtp(token: token, otp: otp, type: type);
 
       if (!mounted) return;
 
@@ -127,28 +119,18 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
         final user = responseData.user ?? const UserData(id: '');
         context.read<UserProfileBloc>().add(UserLoggedIn(user));
         context.read<UserProfileBloc>().add(const FetchUserProfile());
-        showSuccessMessage(
-          context: context,
-          content: serverMsg ?? context.localizations.otpVerifiedSuccessfully,
-        );
+        showSuccessMessage(context: context, content: serverMsg ?? context.localizations.otpVerifiedSuccessfully);
         context.go('/home');
       } else {
         showSuccessMessage(
           context: context,
-          content: serverMsg ??
-              (isMobile
-                  ? context.localizations.mobileVerified
-                  : context.localizations.emailVerified),
+          content: serverMsg ?? (isMobile ? context.localizations.mobileVerified : context.localizations.emailVerified),
         );
 
         // If the other field already has 6 digits, proceed to verify it automatically!
-        if (isMobile &&
-            !_isEmailVerified &&
-            _emailOtpController.text.trim().length == 6) {
+        if (isMobile && !_isEmailVerified && _emailOtpController.text.trim().length == 6) {
           _verifyOtp(type: 'email', otp: _emailOtpController.text.trim());
-        } else if (!isMobile &&
-            !_isMobileVerified &&
-            _mobileOtpController.text.trim().length == 6) {
+        } else if (!isMobile && !_isMobileVerified && _mobileOtpController.text.trim().length == 6) {
           _verifyOtp(type: 'mobile', otp: _mobileOtpController.text.trim());
         }
       }
@@ -169,10 +151,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
 
     final token = isMobile ? widget.mobileToken : widget.emailToken;
     if (token.isEmpty) {
-      showErrorMessage(
-        context: context,
-        content: "Session token is missing. Please register again.",
-      );
+      showErrorMessage(context: context, content: "Session token is missing. Please register again.");
       return;
     }
 
@@ -186,17 +165,11 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
 
     try {
       final authRepo = RepositoryProvider.of<AuthRepository>(context);
-      final responseData =
-          await authRepo.resendRegistrationOtp(token: token, type: type);
+      final responseData = await authRepo.resendRegistrationOtp(token: token, type: type);
 
       if (!mounted) return;
-      final serverMsg = responseData is Map<String, dynamic>
-          ? responseData['message'] as String?
-          : null;
-      showSuccessMessage(
-        context: context,
-        content: serverMsg ?? context.localizations.successfullyResentCode,
-      );
+      final serverMsg = responseData is Map<String, dynamic> ? responseData['message'] as String? : null;
+      showSuccessMessage(context: context, content: serverMsg ?? context.localizations.successfullyResentCode);
 
       _startTimer(isMobile: isMobile);
     } catch (error) {
@@ -215,8 +188,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
     }
   }
 
-  String _getErrorMessage(Object error) =>
-      formatErrorMessage(error, context.localizations);
+  String _getErrorMessage(Object error) => formatErrorMessage(error, context.localizations);
 
   void _startTimer({required bool isMobile}) {
     if (isMobile) {
@@ -259,18 +231,12 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
     final emailOtp = _emailOtpController.text.trim();
 
     if (!_isMobileVerified && mobileOtp.length != 6) {
-      showErrorMessage(
-        context: context,
-        content: context.localizations.pleaseEnterMobileOtp,
-      );
+      showErrorMessage(context: context, content: context.localizations.pleaseEnterMobileOtp);
       return;
     }
 
     if (!_isEmailVerified && emailOtp.length != 6) {
-      showErrorMessage(
-        context: context,
-        content: context.localizations.pleaseEnterEmailOtp,
-      );
+      showErrorMessage(context: context, content: context.localizations.pleaseEnterEmailOtp);
       return;
     }
 
@@ -287,10 +253,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
 
     return Scaffold(
       backgroundColor: context.colorScheme.surface,
-      appBar: CustomAppBar(
-        showLeading: true,
-        color: context.colorScheme.surface,
-      ),
+      appBar: CustomAppBar(showLeading: true, color: context.colorScheme.surface),
       body: CustomScrollView(
         slivers: [
           SliverSafeArea(
@@ -306,9 +269,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                   // Mobile OTP Section
                   Text(
                     localizations.codeWillBeSentTo(widget.mobile),
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
+                    style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceVariant),
                   ),
                   const Gap(Spacing.small),
                   CommonTextField(
@@ -317,30 +278,17 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                     readOnly: _isMobileVerified,
                     maxLength: 6,
                     counterText: '',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(6),
-                    ],
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(6)],
                     hintText: localizations.mobileVerificationCode,
-                    suffixIconConstraints: const BoxConstraints(
-                      minWidth: 48,
-                      maxWidth: 100,
-                      maxHeight: 48,
-                    ),
+                    suffixIconConstraints: const BoxConstraints(minWidth: 48, maxWidth: 100, maxHeight: 48),
                     suffixIcon: _isMobileVerified
                         ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12),
-                            child: Icon(
-                              Icons.check_circle_rounded,
-                              color: Colors.green,
-                            ),
+                            child: Icon(Icons.check_circle_rounded, color: Colors.green),
                           )
                         : _isResendingMobile
                         ? const Center(
-                            child: SizedBox.square(
-                              dimension: 18,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            ),
+                            child: SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2)),
                           )
                         : _mobileRemainingSeconds > 0
                         ? Padding(
@@ -349,10 +297,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 '${_mobileRemainingSeconds}s',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: context.colorScheme.primary,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold, color: context.colorScheme.primary),
                               ),
                             ),
                           )
@@ -360,10 +305,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                             onPressed: () => _resendOtp(type: 'mobile'),
                             child: Text(
                               localizations.resendLabel,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: context.colorScheme.primary,
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.bold, color: context.colorScheme.primary),
                             ),
                           ),
                   ),
@@ -373,9 +315,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                   // Email OTP Section
                   Text(
                     localizations.codeWillBeSentTo(widget.email),
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
+                    style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.onSurfaceVariant),
                   ),
                   const Gap(Spacing.small),
                   CommonTextField(
@@ -384,30 +324,17 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                     readOnly: _isEmailVerified,
                     maxLength: 6,
                     counterText: '',
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(6),
-                    ],
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(6)],
                     hintText: localizations.emailVerificationCode,
-                    suffixIconConstraints: const BoxConstraints(
-                      minWidth: 48,
-                      maxWidth: 100,
-                      maxHeight: 48,
-                    ),
+                    suffixIconConstraints: const BoxConstraints(minWidth: 48, maxWidth: 100, maxHeight: 48),
                     suffixIcon: _isEmailVerified
                         ? const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12),
-                            child: Icon(
-                              Icons.check_circle_rounded,
-                              color: Colors.green,
-                            ),
+                            child: Icon(Icons.check_circle_rounded, color: Colors.green),
                           )
                         : _isResendingEmail
                         ? const Center(
-                            child: SizedBox.square(
-                              dimension: 18,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            ),
+                            child: SizedBox.square(dimension: 18, child: CircularProgressIndicator(strokeWidth: 2)),
                           )
                         : _emailRemainingSeconds > 0
                         ? Padding(
@@ -416,10 +343,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 '${_emailRemainingSeconds}s',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: context.colorScheme.primary,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold, color: context.colorScheme.primary),
                               ),
                             ),
                           )
@@ -427,10 +351,7 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                             onPressed: () => _resendOtp(type: 'email'),
                             child: Text(
                               localizations.resendLabel,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: context.colorScheme.primary,
-                              ),
+                              style: TextStyle(fontWeight: FontWeight.bold, color: context.colorScheme.primary),
                             ),
                           ),
                   ),
@@ -441,19 +362,13 @@ class _RegisterOtpScreenState extends State<RegisterOtpScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ElevatedButtonPrimaryStyle(
-                        context,
-                        buttonColor: context.colorScheme.primary,
-                      ),
+                      style: ElevatedButtonPrimaryStyle(context, buttonColor: context.colorScheme.primary),
                       onPressed: _isVerifying ? null : _onVerifyPressed,
                       child: _isVerifying
                           ? const SizedBox(
                               height: 20,
                               width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
+                              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
                             )
                           : Text(localizations.verifyButtonLabel),
                     ),

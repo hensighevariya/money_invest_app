@@ -82,6 +82,16 @@ class LocalStorageService {
     _preferences.setString('user', jsonEncode(value.toJson()));
   }
 
+  String? get address => _preferences.getString('user_address');
+
+  set address(String? value) {
+    if (value == null) {
+      _preferences.remove('user_address');
+    } else {
+      _preferences.setString('user_address', value);
+    }
+  }
+
   ThemeMode get themeMode {
     final value = _preferences.getString('theme_mode');
     switch (value) {

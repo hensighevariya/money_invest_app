@@ -35,3 +35,35 @@ class UpdateNotificationStatus extends UserProfileEvent {
 
   final bool isNotification;
 }
+
+class UpdateUserProfile extends UserProfileEvent {
+  const UpdateUserProfile({
+    this.firstName,
+    this.lastName,
+    this.fullName,
+    this.phoneNumber,
+    this.email,
+    this.address,
+    this.pincode,
+    this.countryId,
+    this.countryName,
+    this.stateId,
+    this.stateName,
+    this.cityId,
+    this.cityName,
+  });
+
+  final String? firstName;
+  final String? lastName;
+  final String? fullName;
+  final String? phoneNumber;
+  final String? email;
+  final String? address;
+  final String? pincode;
+  final String? countryId;
+  final String? countryName;
+  final String? stateId;
+  final String? stateName;
+  final String? cityId;
+  final String? cityName;
+}

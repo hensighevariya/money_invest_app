@@ -259,10 +259,11 @@ class ApiClientService {
   }
 
   Future<void> updateUserProfile(UpdateProfileRequest request) async {
-    await _dioClient.put<dynamic>(
-      '/user/auth/edit-user-profile',
+    final response = await _dioClient.patch<dynamic>(
+      '/api/users/profile',
       data: request.toJson(),
     );
+    _parseResponseData(response, (responseData) => null);
   }
 
   Future<void> changeUserPassword(ChangePasswordRequest request) async {
@@ -282,6 +283,16 @@ class ApiClientService {
       data: {
         'isNotification': isNotification,
         'pushToken': pushToken,
+      },
+    );
+    _parseResponseData(response, (responseData) => null);
+  }
+
+  Future<void> deleteAccount({String deleteReason = 'No longer needed'}) async {
+    final response = await _dioClient.delete<dynamic>(
+      '/api/users/account',
+      data: {
+        'deleteReason': deleteReason,
       },
     );
     _parseResponseData(response, (responseData) => null);

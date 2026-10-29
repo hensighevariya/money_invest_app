@@ -6,18 +6,36 @@ part 'user.g.dart';
 @JsonSerializable()
 class UpdateProfileRequest extends Equatable {
   const UpdateProfileRequest({
-    required this.fullName,
-    required this.dateOfBirth,
+    required this.firstName,
+    required this.lastName,
+    this.countryId,
+    this.stateId,
+    this.cityId,
+    this.address,
+    this.pincode,
   });
 
   factory UpdateProfileRequest.fromJson(Map<String, dynamic> json) =>
       _$UpdateProfileRequestFromJson(json);
 
-  final String fullName;
-  final String? dateOfBirth;
+  final String firstName;
+  final String lastName;
+  final String? countryId;
+  final String? stateId;
+  final String? cityId;
+  final String? address;
+  final String? pincode;
 
   @override
-  List<Object?> get props => [fullName, dateOfBirth];
+  List<Object?> get props => [
+    firstName,
+    lastName,
+    countryId,
+    stateId,
+    cityId,
+    address,
+    pincode,
+  ];
 
   Map<String, dynamic> toJson() => _$UpdateProfileRequestToJson(this);
 }

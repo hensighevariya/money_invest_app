@@ -9,16 +9,29 @@ part of 'user.dart';
 UpdateProfileRequest _$UpdateProfileRequestFromJson(
   Map<String, dynamic> json,
 ) => UpdateProfileRequest(
-  fullName: json['fullName'] as String,
-  dateOfBirth: json['dateOfBirth'] as String?,
+  firstName: json['firstName'] as String? ?? '',
+  lastName: json['lastName'] as String? ?? '',
+  countryId: json['countryId'] as String?,
+  stateId: json['stateId'] as String?,
+  cityId: json['cityId'] as String?,
+  address: json['address'] as String?,
+  pincode: json['pincode'] as String?,
 );
 
 Map<String, dynamic> _$UpdateProfileRequestToJson(
   UpdateProfileRequest instance,
-) => <String, dynamic>{
-  'fullName': instance.fullName,
-  'dateOfBirth': instance.dateOfBirth,
-};
+) {
+  final val = <String, dynamic>{
+    'firstName': instance.firstName,
+    'lastName': instance.lastName,
+  };
+  if (instance.countryId != null) val['countryId'] = instance.countryId;
+  if (instance.stateId != null) val['stateId'] = instance.stateId;
+  if (instance.cityId != null) val['cityId'] = instance.cityId;
+  if (instance.address != null) val['address'] = instance.address;
+  if (instance.pincode != null) val['pincode'] = instance.pincode;
+  return val;
+}
 
 ChangePasswordRequest _$ChangePasswordRequestFromJson(
   Map<String, dynamic> json,

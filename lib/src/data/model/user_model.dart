@@ -21,6 +21,14 @@ final class UserData extends BaseEntity {
     this.firstName,
     this.lastName,
     this.phoneNumber,
+    this.address,
+    this.pincode,
+    this.countryId,
+    this.countryName,
+    this.stateId,
+    this.stateName,
+    this.cityId,
+    this.cityName,
     this.isNotification = false,
     this.role,
     this.isKyc = 0,
@@ -31,9 +39,46 @@ final class UserData extends BaseEntity {
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     final id = (json['_id'] ?? json['id'] ?? '').toString();
+
+    String? countryId = json['countryId'] as String?;
+    String? countryName;
+    if (json['country'] is Map) {
+      final cMap = json['country'] as Map;
+      countryId ??= (cMap['id'] ?? cMap['_id'])?.toString();
+      countryName = cMap['name']?.toString();
+    } else if (json['country'] is String) {
+      countryId ??= json['country'] as String;
+    }
+
+    String? stateId = json['stateId'] as String?;
+    String? stateName;
+    if (json['state'] is Map) {
+      final sMap = json['state'] as Map;
+      stateId ??= (sMap['id'] ?? sMap['_id'])?.toString();
+      stateName = sMap['name']?.toString();
+    } else if (json['state'] is String) {
+      stateId ??= json['state'] as String;
+    }
+
+    String? cityId = json['cityId'] as String?;
+    String? cityName;
+    if (json['city'] is Map) {
+      final cMap = json['city'] as Map;
+      cityId ??= (cMap['id'] ?? cMap['_id'])?.toString();
+      cityName = cMap['name']?.toString();
+    } else if (json['city'] is String) {
+      cityId ??= json['city'] as String;
+    }
+
     final map = {
       ...json,
       '_id': id,
+      'countryId': countryId,
+      if (countryName != null) 'countryName': countryName,
+      'stateId': stateId,
+      if (stateName != null) 'stateName': stateName,
+      'cityId': cityId,
+      if (cityName != null) 'cityName': cityName,
     };
     return _$UserDataFromJson(map);
   }
@@ -53,6 +98,14 @@ final class UserData extends BaseEntity {
   final String? firstName;
   final String? lastName;
   final String? phoneNumber;
+  final String? address;
+  final String? pincode;
+  final String? countryId;
+  final String? countryName;
+  final String? stateId;
+  final String? stateName;
+  final String? cityId;
+  final String? cityName;
   final bool isNotification;
   final String? role;
   final num isKyc;
@@ -76,6 +129,14 @@ final class UserData extends BaseEntity {
     firstName,
     lastName,
     phoneNumber,
+    address,
+    pincode,
+    countryId,
+    countryName,
+    stateId,
+    stateName,
+    cityId,
+    cityName,
     isNotification,
     role,
     isKyc,
@@ -100,6 +161,14 @@ final class UserData extends BaseEntity {
     String? firstName,
     String? lastName,
     String? phoneNumber,
+    String? address,
+    String? pincode,
+    String? countryId,
+    String? countryName,
+    String? stateId,
+    String? stateName,
+    String? cityId,
+    String? cityName,
     bool? isNotification,
     String? role,
     num? isKyc,
@@ -122,6 +191,14 @@ final class UserData extends BaseEntity {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      address: address ?? this.address,
+      pincode: pincode ?? this.pincode,
+      countryId: countryId ?? this.countryId,
+      countryName: countryName ?? this.countryName,
+      stateId: stateId ?? this.stateId,
+      stateName: stateName ?? this.stateName,
+      cityId: cityId ?? this.cityId,
+      cityName: cityName ?? this.cityName,
       isNotification: isNotification ?? this.isNotification,
       role: role ?? this.role,
       isKyc: isKyc ?? this.isKyc,

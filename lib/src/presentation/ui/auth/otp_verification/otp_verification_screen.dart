@@ -10,7 +10,6 @@ import 'package:money_invest_app/src/localization/localization.dart';
 import 'package:money_invest_app/src/presentation/components/appbar.dart';
 import 'package:money_invest_app/src/presentation/components/components.dart';
 import 'package:money_invest_app/src/presentation/resources/resources.dart';
-import 'package:money_invest_app/src/presentation/resources/size.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/otp_verification/logic/otp_verification_cubit.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/otp_verification/logic/otp_verification_state.dart';
 import 'package:money_invest_app/src/presentation/ui/auth/otp_verification/widgets/otp_widgets.dart';

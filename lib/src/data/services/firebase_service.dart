@@ -46,29 +46,62 @@ class FirebaseService {
   /*region ---------------------------------------- Messaging ---------------------------------------- */
 
   Future<String?> getToken() async {
-    if (!_initializeCompleter.isCompleted) return null;
-    await _initializeCompleter.future;
-    return FirebaseMessaging.instance.getToken();
+    try {
+      if (Firebase.apps.isEmpty) return null;
+      if (!_initializeCompleter.isCompleted) return null;
+      final initialized = await _initializeCompleter.future;
+      if (!initialized) return null;
+      return await FirebaseMessaging.instance.getToken();
+    } catch (error, stackTrace) {
+      Log.error(error);
+      Log.error(stackTrace);
+      return null;
+    }
   }
 
   Future<void> deleteToken() async {
-    if (!_initializeCompleter.isCompleted) return;
-    await _initializeCompleter.future;
-    return FirebaseMessaging.instance.deleteToken();
+    try {
+      if (Firebase.apps.isEmpty) return;
+      if (!_initializeCompleter.isCompleted) return;
+      final initialized = await _initializeCompleter.future;
+      if (!initialized) return;
+      await FirebaseMessaging.instance.deleteToken();
+    } catch (error, stackTrace) {
+      Log.error(error);
+      Log.error(stackTrace);
+    }
   }
 
   Future<RemoteMessage?> getInitialMessage() async {
-    if (!_initializeCompleter.isCompleted) return null;
-    await _initializeCompleter.future;
-    return FirebaseMessaging.instance.getInitialMessage();
+    try {
+      if (Firebase.apps.isEmpty) return null;
+      if (!_initializeCompleter.isCompleted) return null;
+      final initialized = await _initializeCompleter.future;
+      if (!initialized) return null;
+      return await FirebaseMessaging.instance.getInitialMessage();
+    } catch (error, stackTrace) {
+      Log.error(error);
+      Log.error(stackTrace);
+      return null;
+    }
   }
 
   Stream<RemoteMessage> getOnMessageStream() {
-    return FirebaseMessaging.onMessage;
+    try {
+      if (Firebase.apps.isEmpty) return const Stream.empty();
+      return FirebaseMessaging.onMessage;
+    } catch (_) {
+      return const Stream.empty();
+    }
   }
 
   Stream<RemoteMessage> getOnMessageOpenedAppStream() {
-    return FirebaseMessaging.onMessageOpenedApp;
+    try {
+      if (Firebase.apps.isEmpty) return const Stream.empty();
+      return FirebaseMessaging.onMessageOpenedApp;
+    } catch (_) {
+      return const Stream.empty();
+    }
   }
 
   //endregion
@@ -76,9 +109,17 @@ class FirebaseService {
   /*region ---------------------------------------- Remote Config ---------------------------------------- */
 
   Future<String> getConfigString(String key) async {
-    if (!_initializeCompleter.isCompleted) return '';
-    await _initializeCompleter.future;
-    return FirebaseRemoteConfig.instance.getString(key);
+    try {
+      if (Firebase.apps.isEmpty) return '';
+      if (!_initializeCompleter.isCompleted) return '';
+      final initialized = await _initializeCompleter.future;
+      if (!initialized) return '';
+      return FirebaseRemoteConfig.instance.getString(key);
+    } catch (error, stackTrace) {
+      Log.error(error);
+      Log.error(stackTrace);
+      return '';
+    }
   }
 
   //endregion

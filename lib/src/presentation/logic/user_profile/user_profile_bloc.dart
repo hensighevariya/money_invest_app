@@ -11,26 +11,19 @@ import 'user_profile_state.dart';
 
 final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     with HydratedMixin, StreamSubscriptionMixin {
-  UserProfileBloc({
-    required UserRepository userRepository,
-    required this._localStorageService,
-  }) : _userRepository = userRepository,
-       super(
-         UserProfileState(
-           isUserAuthorized: userRepository.isUserAuthorized(),
-           data: userRepository.getCurrentUser(),
-         ),
-       ) {
+  UserProfileBloc({required UserRepository userRepository, required this._localStorageService})
+    : _userRepository = userRepository,
+      super(
+        UserProfileState(isUserAuthorized: userRepository.isUserAuthorized(), data: userRepository.getCurrentUser()),
+      ) {
     hydrate();
     on<FetchUserProfile>(_onFetchUserProfile, transformer: droppable());
     on<UserProfileUpdated>(_onUserProfileUpdated, transformer: sequential());
     on<UserLoggedIn>(_onUserLoggedIn, transformer: droppable());
     on<UserLoggedOut>(_onUserLoggedOut, transformer: droppable());
     on<GetCurrentUser>(_getCurrentUser, transformer: droppable());
-    on<UpdateNotificationStatus>(
-      _onUpdateNotificationStatus,
-      transformer: sequential(),
-    );
+    on<UpdateNotificationStatus>(_onUpdateNotificationStatus, transformer: sequential());
+    on<UpdateUserProfile>(_onUpdateUserProfile, transformer: sequential());
 
     addAllSubscriptions([
       _userRepository.userStream.listen((event) {
@@ -52,59 +45,34 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     emit(state.copyWith(data: _userRepository.getCurrentUser()));
   }
 
-  FutureOr<void> _onFetchUserProfile(
-    FetchUserProfile event,
-    Emitter<UserProfileState> emit,
-  ) async {
+  FutureOr<void> _onFetchUserProfile(FetchUserProfile event, Emitter<UserProfileState> emit) async {
     final result = await processRequest(
       _userRepository.getProfile,
       loadingHandler: (value) => emit(state.copyWith(loading: value)),
-      errorHandler: (error, [stackTrace]) =>
-          emit(state.copyWith(loading: false, error: error)),
+      errorHandler: (error, [stackTrace]) => emit(state.copyWith(loading: false, error: error)),
     );
     if (result != null) {
       emit(state.copyWith(data: result, loading: false));
     }
   }
 
-  FutureOr<void> _onUserProfileUpdated(
-    UserProfileUpdated event,
-    Emitter<UserProfileState> emit,
-  ) async {
+  FutureOr<void> _onUserProfileUpdated(UserProfileUpdated event, Emitter<UserProfileState> emit) async {
     emit(state.copyWith(data: event.userData, loading: false));
   }
 
-  FutureOr<void> _onUserLoggedIn(
-    UserLoggedIn event,
-    Emitter<UserProfileState> emit,
-  ) async {
+  FutureOr<void> _onUserLoggedIn(UserLoggedIn event, Emitter<UserProfileState> emit) async {
     _localStorageService.isLoggedIn = true;
-    emit(
-      state.copyWith(
-        isUserAuthorized: true,
-        data: event.userData,
-        loading: false,
-      ),
-    );
+    emit(state.copyWith(isUserAuthorized: true, data: event.userData, loading: false));
     add(const FetchUserProfile());
   }
 
-  FutureOr<void> _onUpdateNotificationStatus(
-    UpdateNotificationStatus event,
-    Emitter<UserProfileState> emit,
-  ) async {
+  FutureOr<void> _onUpdateNotificationStatus(UpdateNotificationStatus event, Emitter<UserProfileState> emit) async {
     final previousData = state.data;
     if (previousData != null) {
-      emit(
-        state.copyWith(
-          data: previousData.copyWith(isNotification: event.isNotification),
-        ),
-      );
+      emit(state.copyWith(data: previousData.copyWith(isNotification: event.isNotification)));
     }
     try {
-      final success = await _userRepository.updateNotificationStatus(
-        isNotification: event.isNotification,
-      );
+      final success = await _userRepository.updateNotificationStatus(isNotification: event.isNotification);
       if (!success && previousData != null) {
         emit(state.copyWith(data: previousData));
       }
@@ -116,10 +84,63 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
     }
   }
 
-  FutureOr<void> _onUserLoggedOut(
-    UserLoggedOut event,
-    Emitter<UserProfileState> emit,
-  ) async {
+  FutureOr<void> _onUpdateUserProfile(UpdateUserProfile event, Emitter<UserProfileState> emit) async {
+    final previousData = state.data;
+    if (previousData != null) {
+      final newFirstName = event.firstName ?? previousData.firstName;
+      final newLastName = event.lastName ?? previousData.lastName;
+      final combinedFullName = event.fullName ??
+          ((newFirstName != null && newFirstName.isNotEmpty)
+              ? '$newFirstName ${newLastName ?? ''}'.trim()
+              : previousData.fullName);
+
+      emit(
+        state.copyWith(
+          data: previousData.copyWith(
+            firstName: newFirstName,
+            lastName: newLastName,
+            fullName: combinedFullName,
+            phoneNumber: event.phoneNumber ?? previousData.phoneNumber,
+            email: event.email ?? previousData.email,
+            address: event.address ?? previousData.address,
+            pincode: event.pincode ?? previousData.pincode,
+            countryId: event.countryId ?? previousData.countryId,
+            countryName: event.countryName ?? previousData.countryName,
+            stateId: event.stateId ?? previousData.stateId,
+            stateName: event.stateName ?? previousData.stateName,
+            cityId: event.cityId ?? previousData.cityId,
+            cityName: event.cityName ?? previousData.cityName,
+          ),
+        ),
+      );
+    }
+    try {
+      final success = await _userRepository.updateProfile(
+        firstName: event.firstName,
+        lastName: event.lastName,
+        fullName: event.fullName,
+        phoneNumber: event.phoneNumber,
+        email: event.email,
+        address: event.address,
+        pincode: event.pincode,
+        countryId: event.countryId,
+        stateId: event.stateId,
+        cityId: event.cityId,
+      );
+      if (success) {
+        add(const FetchUserProfile());
+      } else if (!success && previousData != null) {
+        emit(state.copyWith(data: previousData));
+      }
+    } catch (error, stackTrace) {
+      if (previousData != null) {
+        emit(state.copyWith(data: previousData));
+      }
+      handleError(error, stackTrace);
+    }
+  }
+
+  FutureOr<void> _onUserLoggedOut(UserLoggedOut event, Emitter<UserProfileState> emit) async {
     _localStorageService.isLoggedIn = false;
     HydratedBloc.storage.clear();
     await processRequest<void>(_userRepository.userUnauthorized);
@@ -135,10 +156,7 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
           userData = UserData.fromJson(userJson);
         }
 
-        return UserProfileState(
-          isUserAuthorized: json['isUserAuthorized'] == true,
-          data: userData,
-        );
+        return UserProfileState(isUserAuthorized: json['isUserAuthorized'] == true, data: userData);
       }
       return null;
     } catch (_) {
@@ -148,9 +166,6 @@ final class UserProfileBloc extends BaseBloc<UserProfileEvent, UserProfileState>
 
   @override
   Map<String, dynamic>? toJson(UserProfileState state) {
-    return {
-      'isUserAuthorized': state.isUserAuthorized,
-      'user': state.data?.toJson(),
-    };
+    return {'isUserAuthorized': state.isUserAuthorized, 'user': state.data?.toJson()};
   }
 }

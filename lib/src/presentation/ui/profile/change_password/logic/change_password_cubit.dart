@@ -9,12 +9,8 @@ import 'package:money_invest_app/src/utils/form_inputs.dart';
 import 'change_password_state.dart';
 
 base class ChangePasswordCubit extends BaseCubit<ChangePasswordState> {
-  ChangePasswordCubit({
-    required UserRepository userRepository,
-    required LoadingHandler loadingHandler,
-  })  : _userRepository = userRepository,
-        _loadingHandler = loadingHandler,
-        super(const ChangePasswordState());
+  ChangePasswordCubit({required this._userRepository, required this._loadingHandler})
+    : super(const ChangePasswordState());
 
   final UserRepository _userRepository;
   final LoadingHandler _loadingHandler;
@@ -28,11 +24,7 @@ base class ChangePasswordCubit extends BaseCubit<ChangePasswordState> {
   }
 
   void onConfirmPasswordChanged(String value) {
-    emit(
-      state.copyWith(
-        confirmPasswordInput: ConfirmPasswordInput.dirty(value),
-      ),
-    );
+    emit(state.copyWith(confirmPasswordInput: ConfirmPasswordInput.dirty(value)));
   }
 
   Future<void> onSubmit() async {
@@ -60,4 +52,3 @@ base class ChangePasswordCubit extends BaseCubit<ChangePasswordState> {
     }
   }
 }
-
